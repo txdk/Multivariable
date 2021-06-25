@@ -1,0 +1,302 @@
+%Preliminaries chapter
+
+\chapter{Preliminaries}
+\section{Vector Spaces}
+Our end goal is to do \emph{multivariable} calculus. That is, we want to differentiate and integrate (real) vector-valued functions of several variables. To this end, we'll need to rigourlously understand what a vector is so that we can comfortably manipulate them (beyond the highschool `definition' of `a vector is a quantity with both a magnitude and a direction'). Thus, we'll begin with a lightning review of basic concepts from linear algebra, beginning with the \emph{real} definition of a vector. A vector is simply an element of a structure called a \emph{vector space}, which we define below:
+\begin{definition}
+  A \textbf{vector space} over the field \( \mathbb{K} \) is a set \( V \), together with the operations of `vector addition' \( f:V\cross V\to V \) and `scalar multiplication' \(g:\mathbb{K}\cross V\to V  \), typically denoted by \(f(x,y)=x+y  \) and \( g(\alpha,x)=\alpha x \), which satisfy the following axioms:
+  \begin{enumerate}[label=(\alph*)]
+  \item \( V \) is an abelian group with respect to the binary operation of vector addition.
+  \item Associativity of scalar multiplication: For every \( v\in V \) and \( a,b\in\mathbb{K} \), \( (ab)v=a(bv) \).
+  \item Distributivity of scalar multiplication: For every \( v\in V \) and \( a,b\in\mathbb{K} \), \( (a+b)v=av+bv \).
+  \item Distributivity of scalar multiplication over vector addition: For every \( v,w\in V \) and \( a\in\mathbb{K} \), \( a(v+w)=av+aw \).
+  \item Multiplicative identity: For every \( v\in V \), \( 1v=v \).
+  \end{enumerate}
+\end{definition}
+
+We will only consider vector spaces over the field of real numbers; from now on we will let the field \( \mathbb{K} \) be \( \R \), and herein when we say `vector space' we are really referring to a \emph{real} vector space. The prototypical example of a vector space is the very first vector space that we all worked with before we even heard the term `vector space': namely, \( n \)-tuples of real numbers, \( \R^n \). Indeed, this will basically be the only vector space we will care about, as we will later see.
+
+\vspace{3mm}
+
+We'll now fly through some standard linear algebra concepts. Let \( V \) be a vector space. A \textbf{subspace} is a subset \( S\subset V \) if \( S \) is itself a vector space under the same vector addition and scalar multiplication operations, restricted to \( S \). Fortunately, to check that a subset of a vector space is a subspace, one does not actually have to check every single one of the vector space axioms. A necessary and sufficient condition for this is simply for the subset to be closed under vector addition and scalar multiplication, i.e for all \( x,y\in S \) and \( a\in\R \), \( x+y\in S \) and \( ax\in S \).
+
+\vspace{3mm}
+
+A mapping \( f:S\to T \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e for all \( x,y\in S \) we have \( f(x+y)=f(x)+f(y) \) and for all \( a\in\R \) we have \( f(ax)=af(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same properties.
+
+\vspace{3mm}
+
+Let \( f:S\to T \) be a vector space homomorphism. The set \( \ker f=\qty{x\in S\mid f(x)=0} \) is called the \textbf{kernel} of \( f \), and the set \( \mathcal{R}(f)=\qty{f(x)\mid x\in S} \) is called the \textbf{range} of \( f \). It can be easily shown that \( \ker f \) is a subspace of \( S \) and \( \mathcal{R}(f) \) is a subspace of \( T \). Another useful fact worth noting is that a linear map \( f \) is injective if and only if its kernel is trivial (i.e \( \ker f=\qty{0} \)). Hence, \( f \) is an isomorphism if and only if \( \ker f=\qty{0} \) and \( \mathcal{R}(f)=T \).
+
+\vspace{3mm}
+
+A particularly important way that we use to classify vector spaces is the notion of dimension, which intuitively speaking is the `number of degrees of freedom' it possesses. We will proceed to formalise this below. To find out how many degrees of freedom a vector space has, we essentially need to find the minimum number of fixed vectors required to write any arbitrary vector from the space as some weighted sum of these fixed vectors. We call such weighted sums of vectors \textbf{linear combinations}; a linear combination of the vectors in the subset \( A \) is a sum \( \sum_{x\in A}c_x x \). The \textbf{span} of a subset \( A \) is the set of all possible linear combinations of vectors in \( A \). Hence, in order to describe the entire vector space in terms of sums of vectors from one of its subsets \( A \), we require that \( V=\text{span } A \).
+
+\vspace{3mm}
+
+However, even if we are able to identify a (proper) subset \( A \) of \( V \) such that \( V=\text{span } A \), it is possible that we are able to find a smaller subset that does the trick, which suggests that \( A \) may contain redundant information. The way we describe this redundancy is through the concept of linear dependence:
+
+\begin{definition}
+  Let \( V \) be a vector space. A subset \( A\subset V \) is \textbf{linearly independent} if for every finite subset \( \qty{v_1,\dots, v_n} \) of \( A \), we have that \(a_1v_1+\dots +a_nv_n=0  \) for scalars \( a_1,\dots, a_n\in\mathbb{K} \) implies that \( a_1=\dots =a_n=0 \).
+
+  \vspace{3mm}
+
+  If \( A \) is not linearly independent, then it is \textbf{linearly dependent}.
+\end{definition}
+
+At last, we arrive at our desired criteria for a subset of a vector space to summarise all of the information of \( V \) in the most minimalistic way possible:
+
+\begin{definition}
+  Let \( V \) be a vector space. A \textbf{basis} for \( V \) is a linearly independent subset \( A\subset V \) such that \( V=\text{span }A \).
+\end{definition}
+
+\emph{Fun remark:} The definition we provide above is that of a \emph{Hamel} basis. There are other types of bases. However, this distinction is not relevant for us in the finite dimensional setting, which we will be exclusively working in.
+
+\vspace{3mm}
+
+Given a basis \( \qty{v_1,\dots,v_n} \) for a vector space \( V \), the representation of a vector \( v\in V \) in that basis is unique. That is, if \( v=a_1v_1+\dots+a_nv_n \) and \( v=b_1v_1+\dots+b_nv_n \) for constants \( a_i,b_i\in\R \) for \( i=1,\dots, n \), we have that \( a_i=b_i \) for each \( i \). This fact follows from the linear independence of the basis vectors.
+
+\vspace{3mm}
+
+So, we would like to say that the number of elements in a basis quantifies the number of degrees of freedom that the vector space possesses. However, one concern that arises is whether in our definition above that there is a possibility that there are bases with different numbers of elements. Fortunately, the answer is no, as we will now show:
+\begin{theorem}
+  Let \( V \) be a vector space. Then every basis of \( V \) has the same number of elements, or are all infinite.
+\end{theorem}
+\begin{proof}
+  Suppose \( \qty{v_1,\dots ,v_n} \) is a basis for \( V \) and suppose for a contradiction that \( \qty{x_1,\dots, x_{n+1}} \) is a linearly independent subset of \( V \). We can write \( x_1 \) as a linear combination of the basis elements:
+  \[ x_1=a_{11}v_1+\dots a_{1n}v_n \]
+  where \( a_{1i}\in\R \) for all \( i=1,\dots, n \). Since \(\qty{x_1,\dots, x_{n+1}}  \) is a linearly independent set, then \( x_1\neq 0 \), so that not all of the \( a_{1i} \)'s are zero. Without loss of generality, suppose that \( a_{11}\neq 0 \) (else swap its label with one of the \( a_{1i} \)'s that is nonzero, and also exchange the indices of the corresponding basis vectors accordingly). Then we can rearrange the above expression to solve for \( v_1 \):
+  \[ v_1=\frac{1}{a_{11}}\qty(x_1-a_{12}v_2-\dots-a_{1n}v_n) \]
+  It follows that the set \( \qty{x_1,v_2,\dots v_n} \) is a basis for \( V \). To see this, let \( y\in V \). Then \( y=c_1v_1+\dots +c_nv_n \) for constants \( c_1,\dots,c_n\in\R \) (since the \( v_i \)'s form a basis for \( V \)). Thus, we have that:
+  \[ y=\frac{c_1}{a_{11}}x_1+\qty(c_2-\frac{a_{12}}{a_{11}})v_2+\dots+\qty(c_n-\frac{a_{1n}}{a_{11}})v_n \]
+  So \( y \) can be written as a linear combination of the vectors \( x_1,v_2,\dots,v_n \), i.e \( y\in\text{span}\qty{x_1,v_2,\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, we have that \( V=\text{span}\qty{x_1,v_2,\dots,v_n} \). Linear independence of this set follows from the linear independence of the original basis. Indeed, consider the following vector equation:
+  \[ k_1x_1+k_2v_2+\dots+k_nv_n=0 \]
+  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_1 \) in terms of the original basis gives:
+  \begin{align*}
+    0&= k_1\qty(a_{11}v_1+\dots a_{1n}v_n)+k_2v_2+\dots+k_nv_n\\
+    &= k_1a_{11}v_1+\qty(k_1a_{12}+k_2)v_2+\dots+\qty(k_1a_{1n}+k_n)v_n
+  \end{align*}
+  Now, by linear independence of \( \qty{v_1,\dots,v_n} \), all of the coefficients in the above equation must vanish. In particular, we see that \( k_1a_{11}=0 \), which implies that \( k_1=0 \) since \( a_{11}\neq 0 \) by assumption. Then, since \( k_1a_{1i}+k_i=0 \) for all \( i=2,\dots, n \), we must have that \( k_i=0 \) as well. Hence, \( \qty{x_1,v_2,\dots, v_n} \) is linearly independent, and our claim is proven.
+
+  \vspace{3mm}
+
+  What have we achieved? We have just replaced one of the basis vectors (namely \( v_1 \)) with one of the vectors from the linearly independent set (namely \( x_1 \)), and after the dust cleared we still have a basis for \( V \). We will continue this process, gradually replacing all of the \( v_i \)'s with an \( x_i \) until we have a basis consisting of only \( x_i \)'s. We will prove that this process will work via induction.
+
+  \vspace{3mm}
+
+  Suppose we have replaced \( j \) of the basis vectors, and we have that \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) is a basis for \( V \) (after possibly some relabelling of the vectors). We will show that we will obtain a basis by replacing one of the remaining \( v_i \)'s with \( x_{j+1} \). The argument will follow quite similarly to our first replacement process. Write \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \):
+  \[ x_{j+1}=a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n \]
+  Since \( x_{j+1}\neq 0 \), then not all of the coefficients \( a_{j+1,i} \) are zero. In fact, we must have that \( a_{j+1,i}\neq 0 \) for some \( i\geq j+1 \) (if this were not the case, then it follows that \( x_{j+1} \) is a linear combination of the vectors \( x_1,\dots, x_j \), which contradicts the linear independence of the \( x_i \)'s). Without loss of generality, we'll take \( a_{j+1,j+1}\neq 0 \). Hence, we can write:
+  \[ v_{j+1}=\frac{1}{a_{j+1,j+1}}\qty(x_{j+1}-a_{j+1,1}x_1-\dots -a_{j+1,j}x_j-a_{j+1,j+2}v_{j+2}-\dots a_{j+1,n}v_n) \]
+  We'll now demonstrate that \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \) is a basis for \( V \). Let \( y\in V \). Writing \( y \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields:
+  \[ y=c_1x_1+\dots+c_jx_j+c_{j+1}v_{j+1}+\dots+c_nv_n \]
+  for some constants \( c_1,\dots,c_n\in\R \). Substituting in our expression for \( v_{j+1} \) gives:
+  \[ y=\qty(c_1-\frac{a_{j+1,1}}{a_{j+1,j+1}})x_1+\dots\qty(c_j-\frac{a_{j+1,j}}{a_{j+1,j+1}})x_j+\frac{c_{j+1}}{a_{j+1,j+1}}x_{j+1}+\qty(c_{j+2}-\frac{a_{j+1,j+2}}{a_{j+1,j+1}})v_{j+2}+\dots+\qty(c_n-\frac{a_{j+1,n}}{a_{j+1,j+1}})v_n \]
+  Hence \( y\in\text{span}\qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, it follows that \( V=\text{span}\qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \).
+
+  \vspace{3mm}
+
+  Now we'll demonstrate linear independence. Consider the following vector equation:
+  \[ k_1x_1+\dots+k_{j+1}x_{j+1}+k_{j+2}v_{j+2}+\dots+k_nv_n=0 \]
+  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields:
+  \begin{align*}
+    0&= k_1x_1+\dots+k_{j+1}\qty(a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n)+k_{j+2}v_{j+2}+\dots+k_nv_n\\
+    &= \qty(k_1+k_{j+1}a_{j+1,1})x_1+\dots+\qty(k_j+k_{j+1}a_{j+1,j})x_j+k_{j+1}a_{j+1,j+1}v_{j+1}+\qty(k_{j+2}+k_{j+1}a_{j+1,j+2})v_{j+2}+\\
+    &\hspace{6mm}\dots+\qty(k_n+k_{j+1}a_{j+1,n})v_n
+  \end{align*}
+
+  By linear independence of \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \), all of the above coefficients must vanish. In particular, consider the \( j+1 \) coefficient: \( k_{j+1}a_{j+1,j+1}=0 \). From this, we conclude that \( k_{j+1}=0 \) since \( a_{j+1,j+1}\neq 0 \), and hence looking at the remaining coefficients we must have \( k_i=0 \) for all \( i=1,\dots, n \), thus demonstrating the linear independence of \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \), and hence proving that it is a basis for \( V \).
+
+  \vspace{3mm}
+
+  By induction on the finite set \( \qty{1,\dots,n} \), we can carry out our replacement procedure and end up with the fact that \( \qty{x_1,\dots,x_n} \) forms a basis for \( V \). Now, since \( x_{n+1}\in V \), we can write it as a nonzero linear combination of the basis vectors \( x_1,\dots,x_n \). However, this contradicts the linear independence of the set \( \qty{x_1,\dots,x_{n+1}} \). We conclude that no linearly independent set can have any more vectors than any basis of \( V \), if there exists a finite basis for \( V \). Since bases are linearly independent sets, then no finite basis can have any more vectors than any other basis. So if there exists a finite basis for \( V \), then every basis for \( V \) must also be finite and have the same number of elements. The only other possibility is that every basis of \( V \) contains infinitely many elements.
+\end{proof}
+
+This justifies the following definition:
+\begin{definition}
+  Let \( V \) be a vector space. The \textbf{dimension} of \( V \), denoted \( \dim V \), is the number of elements in any basis of \( V \) if they are finite, or \( \infty \) otherwise.
+\end{definition}
+
+We will only consider finite dimensional vector spaces. Doing calculus on infinite dimensional vector spaces crosses into the realm of functional analysis, but we won't stray in that direction in the scope of these notes.
+
+\vspace{3mm}
+
+One key advantage of working in finite dimensional spaces is that things all turn out to be significantly simpler. For one, there actually aren't `that many' different types of finite dimensional vector spaces for each dimension \( n\in\N \) to study; we can easily completely classify every real finite dimensional vector space up to isomorphism - even better: they are all structurally identical to \( \R^n \)!
+
+\begin{theorem}
+  Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is isomorphic to \( \R^n \).
+\end{theorem}
+\begin{proof}
+  Let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Define the mapping \( \phi:V\to\R^n \) to act on \( v=a_1v_1+\dots+a_nv_n \) by:
+  \begin{align*}
+    \phi(v)&=\phi(a_1v_1+\dots+a_nv_n)\\
+    &= (a_1,\dots,a_n)^T
+  \end{align*}
+
+  So \( \phi \) is the canonical map that maps a vector \( v\in V \) to an \( n \)-tuple of real numbers, which are simply the coordinates of \( v \) with respect to a certain basis of \( V \). We will show that \( \phi \) is an isomorphism.
+
+  \vspace{3mm}
+
+  Note that the elements mapped by \( \phi \) to \( 0\in\R^n \) must have zero coefficients when expanded in terms of the basis \( \qty{v_1,\dots, v_n} \), and thus can only be the zero vector. This shows that \( \ker\phi=\qty{0} \) and hence that \( \phi \) is injective.
+
+  \vspace{3mm}
+
+  Let \( x\in\R^n \). Then \( x=(a_1,\dots,a_n)^T \) for some \( a_1,\dots,a_n\in\R \). Thus, it is easy to see that the element \( v=a_1v_1+\dots+a_nv_n\in V \) is mapped to \( x \) by \( \phi \). Since the choice of \( x\in\R^n \) was arbitrary, it follows that \( \phi \) is surjective.
+
+  \vspace{3mm}
+
+  Let \( v=a_1v_1+\dots+a_nv_n\in V \) and \( w=b_1v_1+\dots+b_nv_n\in V \). Then:
+  \begin{align*}
+    \phi(v+w)&= (a_1+b_1,\dots,a_n+b_n)\\
+    &= (a_1,\dots,a_n)+(b_1,\dots,b_n)\\
+    &= \phi(v)+\phi(w)
+  \end{align*}
+
+  Let \( v\in V \) be as above and let \( k\in\R \). Then:
+  \begin{align*}
+    \phi(kv)&= (ka_1,\dots,ka_n)\\
+    &= k(a_1,\dots,a_n)\\
+    &= k\phi(v)
+  \end{align*}
+
+  Thus, \( \phi \) is a vector space homomorphism. Together with the fact that \( \phi \) is bijective, we have hence shown that \( \phi \) is an isomorphism.
+\end{proof}
+
+So any two \( n \)-dimensional vector spaces are isomorphic. This is what we meant when we said that the only \( n \)-dimensional vector space we will care about is \( \R^n \) - all other instances of an \( n \)-dimensional vector space are algebraically equivalent, so we may as well just consider this simple example as being \emph{the} \( n \)-dimensional vector space.
+
+\section{Euclidean Space}
+Now that we have formulated all of the algebraic structure of the multidimensional spaces we will be working in, we will need to endow some further structure onto these spaces in order to do calculus. Of great importance is the ability to measure distances between points/vectors in our space. At the heart of analysis/calculus is the notion of \emph{limits} and \emph{convergence}. We will also frequently want to find bounds and estimates for quantities that may very well be vector-valued. So what we ultimately want is to prescribe some notion of `length' for vectors, which will in turn naturally define a distance between two vectors (simply take the length of the difference of the two vectors). This is captured by the concept of a vector \emph{norm}.
+
+\begin{definition}
+  Let \( V \) be a vector space. A norm on \( V \) is a function \( \norm{-}:V\to\R \) satisfying:
+  \begin{enumerate}[label=(\alph*)]
+  \item Positivity: For all \( x\in V \) \( \norm{x}\geq 0 \). Furthermore, \( \norm{x}=0 \) if and only if \( x=0 \).
+  \item Homogeneity of degree 1: For all \( x\in V \) and \( a\in\R \), \( \norm{ax}=\abs{a}\norm{x} \).
+  \item Triangle inequality: for all \( x,y\in V \), \( \norm{x+y}\leq \norm{x}+\norm{y} \).
+  \end{enumerate}
+  A vector space together with a norm is called a \textbf{normed vector space}.
+\end{definition}
+
+Another useful concept from coordinate geometry is the notion of angles. This will lend us the ability to define properties such as orthogonality, and perform operations such as projecting a vector onto a subspace. This structure is given rise to by an \emph{inner product}, which we define below:
+\begin{definition}
+  Let \( V \) be a vector space. A (real) \textbf{inner product} on \( V \) is a function \( \ev{-,-}:V\cross V\to\R \) satisfying:
+  \begin{enumerate}[label=(\alph*)]
+  \item Symmetry: for all \( x,y\in V \), \( \ev{x,y}=\ev{y,x} \).
+  \item Distributivity: for all \( x,y,z\in V \), \( \ev{x+y,z}=\ev{x,z}+\ev{y,z} \).
+  \item Homogeneity of degree 1: For all \( x,y\in V \) and \( a\in\R \), \( \ev{ax,y}=a\ev{x,y} \).
+  \item Positivity: For all \( x\in V \), \( \ev{x,x}\geq 0 \). Moreover, \( \ev{x,x}=0 \) if and only if \( x=0 \).
+  \end{enumerate}
+  A vector space together with an inner product is called an \textbf{inner product space}.
+\end{definition}
+
+By symmetry of the inner product, we can deduce from the definition that \( \ev{x,ay}=a\ev{x,y} \) and \( \ev{x,y+z}=\ev{x,z}+\ev{y,z} \). Hence, an inner product on a vector space is simply a bilinear function (i.e it becomes a linear function of one variable if we fix the value of the other input variable).
+
+\vspace{3mm}
+
+You are likely already quite familiar with an inner product on \( \R^n \) from coordinate geometry, more commonly known as the dot product or scalar product. Given elements \( x=(x_1,\dots,x_n)^T\in\R^n \) and \( y=(y_1,\dots,y_n)^T\in\R^n \), we define the dot product as:
+\[ \ev{x,y}=\sum_{i=1}^nx_iy_i \]
+The notation \( x\cdot y \) is more commonly used instead of \( \ev{x,y} \) in this context. It is not too hard to see that the dot product is indeed an inner product on \( \R^n \).
+
+\vspace{3mm}
+
+One powerful fact about inner products is that they can be used to define a norm in a very natural way. Let \( V \) be an inner product space. Then for any \( x\in V \), we set the norm of \( x \) to be given by \( \norm{x}=\ev{x,x}^{\frac{1}{2}} \). We say that the inner product `induces' a norm on \( V \). So in some sense, once we had defined the notion of angles on our vector space, we have already implicitly fixed some compatible notion of distance as well for free. The positivity and homogeneity properties of the norm follow readily from the properties of the inner product and from the definition of the induced norm. Proving the triangle inequality will take a little more work, and will rely on an identity known as the \emph{Schwarz inequality}:
+
+\begin{theorem}
+  (Schwarz Inequality) Let \( V \) be an inner product space. For every \( x,y\in V \), we have:
+  \[ \ev{x,y}\leq \norm{x}\norm{y} \]
+\end{theorem}
+\begin{proof}
+  Let \( x,y\in V \) and let \( t\in\R \). By positivity of the inner product, we have that \( \ev{x-ty,x-ty}\geq 0 \). This can be rewritten as:
+  \begin{align*}
+    0&\leq \ev{x-ty,x-ty}\\
+    &= \ev{x,x}-t\ev{x,y}-t\ev{y,x}+t^2\ev{y,y}\\
+    &= \norm{x}^2-2t\ev{x,y}+t^2\norm{y}^2
+  \end{align*}
+  So we have a real quadratic equation in the variable \( t \). The quadratic can have at most a single zero, since \( \ev{x-ty,x-ty}=0 \) if and only if \( x-ty=0 \), i.e \( x=ty \). Hence, the discriminant of the quadratic must be either 0 (which corresponds to the single zero) or negative (no real zeros). The discriminant of the quadratic is:
+  \[ 4\ev{x,y}^2-4\norm{x}^2\norm{y}^2 \]
+  Putting this all together, we conclude that:
+  \begin{align*}
+    4\ev{x,y}^2-4\norm{x}^2\norm{y}^2&\leq 0\\
+    \ev{x,y}&\leq\norm{x}\norm{y}
+  \end{align*}
+\end{proof}
+
+From the above proof, we note that equality occurs in the Schwarz inequality if and only if \( x=ty \) (i.e the vectors are scalar multiples of each other).
+
+\vspace{3mm}
+
+We are now ready to tackle the proof that the inner product gives rise to a vector norm:
+
+\begin{theorem}
+  Let \( V \) be an inner product space. The function \( \norm{-}:V\to\R \) defined by \( \norm{x}=\ev{x,x}^{\frac{1}{2}} \) is a norm on \( V \).
+\end{theorem}
+\begin{proof}
+  \emph{Positivity:} Let \( x\in V \). We have that \( \norm{x}^2=\ev{x,x}\geq 0 \), and hence \( \norm{x}\geq 0 \). Now, from \( \norm{x}^2=\ev{x,x} \), we can easily see that \( \norm{x}=0 \) if and only if \( x=0 \), by positivity of the inner product.
+
+  \vspace{3mm}
+
+  \emph{Homoegenity of degree 1:} Let \( x\in V \) and \( a\in\R \). Then \( \norm{ax}^2=\ev{ax,ax}=a^2\ev{x,x}=a^2\norm{x}^2 \). Taking square roots gives \( \norm{ax}=\abs{a}\norm{x} \).
+
+  \vspace{3mm}
+
+  \emph{Triangle inequality:} Let \( x,y\in V \). Then:
+  \begin{align*}
+    \norm{x+y}^2&= \ev{x+y,x+y}\\
+    &= \ev{x,x}+2\ev{x,y}+\ev{y,y}\\
+    &= \norm{x}^2+2\ev{x,y}+\norm{y}^2\\
+    &\leq \norm{x}^2+2\norm{x}\norm{y}+\norm{y}^2 &(\text{by the Schwarz inequality})\\
+    &= \qty(\norm{x}+\norm{y})^2
+  \end{align*}
+  Taking square roots gives the desired result: \( \norm{x+y}\leq\norm{x}+\norm{y} \).
+\end{proof}
+
+Finally, we need to formalise the notion of measuring distance in our vector space. The idea of distance is captured by a `metric', which intuitively speaking is a distance-measuring function.
+
+\begin{definition}
+  Let \( X \) be a set. A \textbf{metric} on \( X \) is a function \( d:X\cross X\to\R \) satisfying:
+  \begin{enumerate}[label=(\alph*)]
+  \item Positivity: for all \( x,y\in X \), \( d(x,y)\geq 0 \). Moreover, \( d(x,y)=0 \) if and only if \( x=y \).
+  \item Symmetry: for all \( x,y\in X\), \( d(x,y)=d(y,x) \).
+  \item Triangle inequality: for all \( x,y,z\in X \), \( d(x,z)\leq d(x,y)+d(y,z) \).
+  \end{enumerate}
+  A set together with a metric is called a \textbf{metric space}.
+\end{definition}
+
+We mentioned earlier that once we had a norm on a vector space, this was sufficient to define a notion of distance. Specifically, we claimed that to measure the distance between two vectors \( x \) and \( y \), we simply need to compute the length of the vector \( x-y \) using the vector norm. Thus, we claim that the norm naturally induces a metric on the vector space.
+
+\begin{theorem}
+  Let \( V \) be a normed vector space. The function \( d:V\cross V\to\R \) defined by \( d(x,y)=\norm{x-y} \) is a metric on \( V \).
+\end{theorem}
+\begin{proof}
+  \emph{Positivity:} Let \( x,y\in V \). Then \( d(x,y)=\norm{x-y}\geq 0 \) by positivity of the norm. Furthermore, \( d(x,y)=0 \) if and only if \( x-y=0 \), i.e \( x=y \).
+
+  \vspace{3mm}
+
+  \emph{Symmetry} Let \( x,y\in V \). Then \( d(x,y)=\norm{x-y}=\norm{-(y-x)}=\abs{-1}\norm{y-x}=d(y,x) \), which follows from the homogeneity of the norm.
+
+  \vspace{3mm}
+
+  \emph{Triangle inequality:} Let \( x,y,z\in V \). Then:
+  \begin{align*}
+    d(x,z)&= \norm{x-z}\\
+    &= \norm{(x-y)+(y-z)}\\
+    &\leq \norm{x-y}+\norm{y-z} &(\text{since the norm obeys the triangle inequality})\\
+    &= d(x,y)+d(y,z)
+  \end{align*}
+\end{proof}
+
+In summary, by defining an inner product on our vector space, the inner product induces a norm, which in turn induces a metric. So we get the geometric concepts of angle, length and distance all at once via an inner product. Hence, we call an \( n \)-dimensional vector space with an inner product \textbf{Euclidean \( n \)-space}; where `Euclidean' refers to the fact that we have a means to measure distances in our space.
+
+\vspace{3mm}
+
+Returning to the example of \( \R^n \), we see that \( \R^n \) together with the dot product defines a Euclidean \( n \)-space. In fact, it is interesting to note that the metric induced by the dot product is simply the function that returns the Euclidean distance between two points in \( \R^n \) (i.e the Euclidean metric \( d_2 \)):
+\[ d_2(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2} \]
+
+In the previous section, we showed that all \( n \)-dimensional vector spaces are isomorphic to each other, and in particular, \( \R^n \), so we can just talk about \( \R^n \) without any loss of generality. Even better, it is the case that all \( n \)-dimensional inner product spaces are isomorphic, and moreover the inner product is preserved by the isomorphism. Thus, there is essentially only one Euclidean \( n \)-space up to isomorphism: namely, \( \R^n \) with the dot product. The proof of this will be the subject of the following section.
+
+\section{Orthonormal Basis}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "multivar"
+%%% End:
