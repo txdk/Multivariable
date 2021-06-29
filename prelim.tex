@@ -2,7 +2,7 @@
 
 \chapter{Preliminaries}
 \section{Vector Spaces}
-Our end goal is to do \emph{multivariable} calculus. That is, we want to differentiate and integrate (real) vector-valued functions of several variables. To this end, we'll need to rigourlously understand what a vector is so that we can comfortably manipulate them (beyond the highschool `definition' of `a vector is a quantity with both a magnitude and a direction'). Thus, we'll begin with a lightning review of basic concepts from linear algebra, beginning with the \emph{real} definition of a vector. A vector is simply an element of a structure called a \emph{vector space}, which we define below:
+Our end goal is to do \emph{multivariable} calculus. That is, we want to differentiate and integrate (real) vector-valued functions of several variables. To this end, we'll need to rigourlously understand what a vector is so that we can comfortably manipulate them (beyond the highschool `definition' of `a vector is a quantity with both a magnitude and a direction'). Thus, we'll begin with a lightning review of basic concepts from linear algebra, beginning with the \emph{actual} definition of a vector. A vector is simply an element of a structure called a \emph{vector space}, which we define below:
 \begin{definition}
   A \textbf{vector space} over the field \( \mathbb{K} \) is a set \( V \), together with the operations of `vector addition' \( f:V\cross V\to V \) and `scalar multiplication' \(g:\mathbb{K}\cross V\to V  \), typically denoted by \(f(x,y)=x+y  \) and \( g(\alpha,x)=\alpha x \), which satisfy the following axioms:
   \begin{enumerate}[label=(\alph*)]
@@ -117,13 +117,22 @@ This justifies the following definition:
   Let \( V \) be a vector space. The \textbf{dimension} of \( V \), denoted \( \dim V \), is the number of elements in any basis of \( V \) if they are finite, or \( \infty \) otherwise.
 \end{definition}
 
-We will only consider finite dimensional vector spaces. Doing calculus on infinite dimensional vector spaces crosses into the realm of functional analysis, but we won't stray in that direction in the scope of these notes.
+We will only consider finite dimensional vector spaces, that is, vector spaces in which there exists a basis with finitely many elements. Doing calculus on infinite dimensional vector spaces crosses into the realm of functional analysis, but we won't stray in that direction in the scope of these notes.
 
 \vspace{3mm}
 
-One key advantage of working in finite dimensional spaces is that things all turn out to be significantly simpler. For one, there actually aren't `that many' different types of finite dimensional vector spaces for each dimension \( n\in\N \) to study; we can easily completely classify every real finite dimensional vector space up to isomorphism - even better: they are all structurally identical to \( \R^n \)!
+One key advantage of working in finite dimensional spaces is that things all turn out to be significantly simpler. One easy consequence of the previous theorem is that in an \( n \)-dimensional vector space, if we have a linearly independent set consisting of \( n \) elements, it must actually span the entire space and is thus automatically a basis.
+\begin{corollary}
+  Let \( V \) be an \( n \)-dimensional vector space and let \( \qty{v_1,\dots,v_n} \) be a linearly independent set. Then \( \qty{v_1,\dots,v_n} \) is a basis for \( V \).
+\end{corollary}
+\begin{proof}
+  Suppose for a contradiction that \( \text{span}\qty{v_1,\dots,v_n}\neq V \). So there exists a \( x\in V \) such that \( x \) is not a linear combination of the \( v_i \)'s. Hence, \( \qty{v_1,\dots,v_n,x} \) is a linearly independent set. So we have a linearly independent set consisting of \( n+1 \) elements in an \( n \)-dimensional space. This is impossible, since every basis of \( V \) must contain \( n \) elements and no linearly independent set can have more elements than any basis of \( V \). We must conclude that \( V=\text{span}\qty{v_1,\dots,v_n} \), and hence \( \qty{v_1,\dots,v_n} \) is a basis for \( V \).
+\end{proof}
+
+Another simplification in the finite dimensional setting is that there actually aren't `that many' different types of finite dimensional vector spaces for each dimension \( n\in\N \) to study; we can easily completely classify every real finite dimensional vector space up to isomorphism - even better: they are all structurally identical to \( \R^n \)!
 
 \begin{theorem}
+  \label{thm:iso}
   Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is isomorphic to \( \R^n \).
 \end{theorem}
 \begin{proof}
@@ -295,6 +304,186 @@ Returning to the example of \( \R^n \), we see that \( \R^n \) together with the
 In the previous section, we showed that all \( n \)-dimensional vector spaces are isomorphic to each other, and in particular, \( \R^n \), so we can just talk about \( \R^n \) without any loss of generality. Even better, it is the case that all \( n \)-dimensional inner product spaces are isomorphic, and moreover the inner product is preserved by the isomorphism. Thus, there is essentially only one Euclidean \( n \)-space up to isomorphism: namely, \( \R^n \) with the dot product. The proof of this will be the subject of the following section.
 
 \section{Orthonormal Basis}
+Most of the time when we are working with vector spaces, it is very useful to pick a basis and represent all vectors in terms of that basis. Some bases are more convenient to work with than others. Indeed, in a Euclidean space, now that we have some notion of angles provided by the inner product, we can define what it means for two vectors to be orthogonal (the generalisation of perpendicularity from coordinate geometry). Hence, we could try to find bases that are \emph{orthonormal}; the basis vectors are orthogonal and normalised. We'll define these concepts below:
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. Two elements \( x,y\in E \) are \textbf{orthogonal} if \( \ev{x,y}=0 \).
+
+  \vspace{3mm}
+  
+  A subset \( A\subset E \) is said to be orthogonal if every pair of distinct elements from \( A \) are orthogonal.
+\end{definition}
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. A set \( A\subset E \) is \textbf{orthonormal} if \( A \) is orthogonal and \( \norm{x}=1 \) for all \( x\in A \).
+\end{definition}
+
+Orthonormality is a powerful condition. One immediate consequence of the orthonormality of a set is linear independence:
+\begin{proposition}
+  Every orthonormal set in a Euclidean \( n \)-space is linearly independent.
+\end{proposition}
+\begin{proof}
+  Suppose \( \qty{e_1,\dots,e_m} \) is an orthonormal set in a Euclidean \( n \)-space \( E \) (\( m\leq n \)). Consider the vector equation \( a_1e_1+\dots+a_me_m=0 \) for constants \( a_1,\dots,a_n\in\R \). Taking the inner product of \( e_i \), \( i=1,\dots,m \) with the above equation yields:
+  \begin{align*}
+    0&= \ev{e_i,\sum_{j=1}^ma_je_j}\\
+    &=\sum_{j=1}^ma_j\ev{e_i,e_j}\\
+    &= \sum_{j=1}^ma_j\delta_{ij}\\
+    &= a_i
+  \end{align*}
+  where we have made use of the Kronecker delta symbol \( \delta_{ij} \), which returns \( 1 \) if \( i=j \) and 0 otherwise.
+
+  \vspace{3mm}
+
+  
+  So \( a_1=0 \) for all \( i=1,\dots, m \). This proves the linear independence of the finite set \( \qty{e_1,\dots,e_m} \).
+
+  \vspace{3mm}
+
+  Now suppose for a contradiction there exists an orthonormal set \( A\subset E \) with more than \( n \) elements. Pick \( n \) elements from \( A \) to form the orthonormal set \( \qty{e_1,\dots,e_n} \), which is linearly independent from what we have just proven. Hence, it forms a basis for \( E \). Pick another \emph{distinct} element \( e_{n+1}\in A \), and write it as a linear combination of the basis elements:
+  \[ e_{n+1}=k_1e_1+\dots+k_ne_n \]
+  Now take the inner product of the above equation with \( e_{n+1} \):
+  \begin{align*}
+    \ev{e_{n+1},e_{n+1}}&= \ev{e_{n+1},\sum_{j=1}^nk_je_j}\\
+    &= \sum_{j=1}^nk_j\ev{e_{n+1},e_j}\\
+    &= 0
+  \end{align*}
+  However, \( \ev{e_{n+1},e_{n+1}}=\norm{e_{n+1}}^2=1 \), so we have that \( 1=0 \); a contradiction. It follows that there cannot exist an orthonormal set in \( E \) with more than \( n \) elements. Since we have proven that every orthonormal set with \( m\leq n \) elements is linearly independent, then we thus conclude that every orthonormal set in \( E \) is linearly independent.
+\end{proof}
+
+One interesting consequence of the above proof is the following. Suppose we could write a vector \( x \) from a Euclidean space \( E \) as a linear combination of orthonormal vectors \( x=a_1e_1+\dots+a_ne_n \). Then we can define a mapping \( \pi_i:E\to\R \) for \( i=1,\dots, n \) by \( \pi_i(x)=\ev{x,e_i}=a_i \). This illustrates another advantage of using an orthonormal basis to represent vectors: finding the coefficients becomes a straightforward task - one simply needs to calculate \( \pi_i(x) \) to find the \( i^{\text{th}} \) coefficient. We call the mapping \( \pi_i \) a \emph{projection operator}; essentially \( \pi_i \) is projecting the vector \( x \) onto the subspace spanned by the \( i^{\text{th}} \) basis vector and picking out the amplitude of the vector projection.
+
+\vspace{3mm}
+
+Now that we are sufficiently hyped up about orthonormal bases, the next natural question to ask is whether it is always possible to find an orthonormal basis for any Euclidean \( n \)-space. We know from the previous result that every orthonormal set is linearly independent. Combined with the fact that in an \( n \)-dimensional space, any linearly independent set consisting of \( n \) elements is automatically a basis, all we need to do is prove the existence of an orthonormal set consisting of \( n \) elements. Spoiler alert: yes, this is certainly possible. Better yet, the proof of this result will be constructive, it illustrates a standard algorithm called the `Gram-Schmidt' process which transforms an arbitrary basis into an orthonormal basis.
+
+\begin{proposition}
+  Let \( E \) be a Euclidean \( n \)-space. Then there exists an orthonormal subset \( A\subset E \) consisting of \( n \) elements.
+\end{proposition}
+\begin{proof}
+  Let \( \qty{v_1,\dots,v_n} \) be a linearly independent set in \( E \). It is worth pointing out that none of the vectors are 0 due to linear independence. Thus, we can create an orthonormal set of one element by taking the first element from the set and normalising it: define \( e_1=\flatfrac{v_1}{\norm{v_1}} \). Then \( \qty{e_1} \) is an orthonormal set, and e.g \( \qty{e_1,v_2} \) is a linearly independent set (since \( e_1 \) is simply a scalar multiple of \( v_1 \)). This sets us up to prove the inductive step.
+
+  \vspace{3mm}
+
+  Suppose that we had that \( \qty{e_1,\dots,e_k} \) is an orthonormal set (\( k<n \)) and that \( \qty{e_1,\dots,e_k,v_{k+1}} \) is a linearly independent set. Define:
+  \[ y_{k+1}=v_{k+1}-\sum_{j=1}^k\ev{v_{k+1},e_j}e_j \]
+  It follows that \( y_{k+1}\neq 0 \) since \( y_{k+1} \) is a linear combination of \( e_1,\dots,e_k,v_{k+1} \), which is a linearly independent set - and so the only way for such a linear combination to yield the zero vector is if all of the coefficients are 0, which is not the case here. Hence, \( \norm{y_{k+1}}\neq 0 \), and so we can safely define:
+  \[ e_{k+1}=\frac{y_{k+1}}{\norm{y_{k+1}}} \]
+
+  So \( \norm{e_{k+1}}=1 \), and for all \( i=1,\dots,k \):
+  \begin{align*}
+    \ev{e_{k+1},e_i}&=\ev{\frac{1}{\norm{y_{k+1}}}\qty(v_{k+1}-\sum_{j=1}^k\ev{v_{k+1},e_j}e_j),e_i}\\
+    &= \frac{1}{\norm{y_{k+1}}}\qty(\ev{v_{k+1},e_i}-\sum_{j=1}^k\ev{v_{k+1},e_i}\ev{e_j,e_i})\\
+    &= \frac{1}{\norm{y_{k+1}}}\qty(\ev{v_{k+1},e_i}-\sum_{j=1}^k\ev{v_{k+1},e_j}\delta_{ij})\\
+    &= \frac{1}{\norm{y_{k+1}}}\qty(\ev{v_{k+1},e_i}-\ev{v_{k+1},e_i})\\
+    &= 0
+  \end{align*}
+
+  Hence, \( \qty{e_1,\dots,e_{k+1}} \) is an orthonormal set. If \( k+1<n \), then there is still an element \( v_{k+2} \) that cannot be written as a linear combination of the orthonormal set \( \qty{e_1,\dots,e_{k+1}} \), since the \( e_i \)'s are simply linear combinations of \( v_1,\dots,v_{k+1} \), but \( \qty{v_1,\dots,v_{k+2}} \) is a linearly independent set. It follows that \( \qty{e_1,\dots,e_{k+1},v_{k+2}} \) is a linearly independent set. We can then proceed via induction to deduce that we can produce an orthonormal set \( \qty{e_1,\dots, e_n} \).
+\end{proof}
+
+The previous two results together imply the following:
+\begin{theorem}
+  Every Euclidean \( n \)-space has an orthonormal basis.
+\end{theorem}
+
+Let us return to the original problem that we wished to address in this section: that there is only one Euclidean \( n \)-space up to isomorphism. Since we have already proven that the vector space structure of two Euclidean \( n \)-spaces are equivalent, we simply need to prove that the `extra structure' of the Euclidean space is also preserved under a vector space isomorphism. Let's first make explicit what `extra stuff' needs to be preserved:
+
+\begin{definition}
+  Let \( E \) and \( F \) be Euclidean spaces. We say that \( E \) and \( F \) are \textbf{isomorphic} if there exists a mapping \( \phi:E\to F \) such that \( \phi \) is a vector space isomorphism that also preserves the inner product, i.e for all \( x,y\in E \), \( \ev{x,y}=\ev{\phi(x),\phi(y)} \).
+\end{definition}
+
+So we require that just the inner product needs to be preserved by the isomorphism. But what about the corresponding norm and metric? Well, if the inner product between Euclidean spaces \( E \) and \( F \) is preserved by an isomorphism \( \phi:E\to F \), it follows that \( \phi \) also preserves the induced norms and metrics on these spaces. To see this, let \( x\in E \) and notice that \( \norm{x}^2=\ev{x,x}=\ev{\phi(x),\phi(x)}=\norm{\phi(x)}^2 \). Now that we have shown that \( \phi \) is norm-preserving, the fact that distances are preserved follows easily. For any \( x,y\in E \) we have that \( d(x,y)=\norm{x-y}=\norm{\phi(x-y)}=\norm{\phi(x)-\phi(y)}=d(\phi(x),\phi(y)) \). Hence, we see that \( \phi \) is an isometry (a distance preserving function).
+
+\vspace{3mm}
+
+Recall from our proof that every \( n \)-dimensional vector space is isomorphic (to \( \R^n \)) (Theorem \ref{thm:iso}), we constructed a function that essentially mapped one basis onto another. In order to preserve the inner product of the Euclidean spaces, the isomorphisms that we will construct in the following proof will be a subset of the isomorphisms that did the trick in the more general vector space case. Specifically, the isomorphisms between Euclidean spaces will, loosely speaking, send \emph{orthonormal bases to orthonormal bases}.
+
+\begin{theorem}
+  Let \( E \) and \( F \) be Euclidean \( n \)-spaces. Then \( E \) and \( F \) are isomorphic.
+\end{theorem}
+\begin{proof}
+  Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis in \( E \), and \( \qty{\overline{e_1},\dots,\overline{e_n}} \) an orthonormal basis in \( F \) (we know that orthonormal bases for Euclidean spaces exist by the previous theorem which we have just proven). We can express any \( x\in E \) as a linear combination of the basis vectors: \( x=a_1e_1+\dots+a_ne_n \). We can hence define the map \( \phi:E\to F \) by:
+  \[ \phi(x)=a_1\overline{e_1}+\dots+a_n\overline{e_n} \]
+  The form of \( \phi \) is exactly that of the isomorphism which we have constructed in the proof of Theorem \ref{thm:iso}, i.e a map that sends a vector represented in a given basis to a vector in the other space with the same coordinates/coefficients but with respect to a basis in the target space\footnote{Specifically, we mapped a basis from an \( n \)-dimensional vector space to the standard basis in \( \R^n \) in that proof.}. Thus, we already have that \( \phi \) is a vector space isomorphism. We thus simply need to demonstrate that \( \phi \) preserves the inner product. Let \( x\in E \) as above and let \( y=b_1e_1+\dots+b_ne_n\in E \). Then:
+  \begin{align*}
+    \ev{x,y}&= \ev{\sum_{i=1}^na_ie_i,\sum_{j=1}^nb_je_j}\\
+    &= \sum_{i=1}^na_i\ev{e_i,\sum_{j=1}^nb_je_j}\\
+    &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\ev{e_i,e_j}\\
+    &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\delta_{ij}&(\text{by orthonormality of the basis vectors})\\
+    &= \sum_{i=1}^na_ib_i
+  \end{align*}
+
+  But we also have that:
+  \begin{align*}
+    \ev{\phi(x),\phi(y)}&= \ev{\sum_{i=1}^na_i\overline{e_i},\sum_{j=1}^nb_j\overline{e_j}}\\
+    &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\ev{\overline{e_i},\overline{e_j}}\\
+    &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\delta_{ij}&(\text{by orthonormality of the basis vectors})\\
+    &= \sum_{i=1}^na_ib_i
+  \end{align*}
+
+  So \( \ev{x,y}=\ev{\phi(x),\phi(y)} \), and so the inner product is preserved. Hence, \( \phi \) is an isomorphism of Euclidean spaces.
+\end{proof}
+
+Hence, every Euclidean \( n \)-space is `the same' from a structural point of view, so we might as well work with the easiest example of it we can think of: i.e \( \R^n \) with the dot product.
+
+\vspace{3mm}
+
+While on the topic of orthonormal bases, we'll conclude this section with a fun digression. Let \( E \) be a Euclidean \( n \)-space, and suppose we had two orthonormal bases in \( E \): \( \qty{e_1,\dots,e_n} \) and \( \qty{\overline{e_1},\dots,\overline{e_n}} \). We can write the barred basis vectors \( \overline{e_i} \) in terms of the basis vectors \( e_j \):
+\[ \overline{e_i}=\sum_{j=1}^na_{ij}e_j \quad i=1,\dots,n \]
+The \( n^2 \) constants \( a_{ij}\in\R \) form a \( n\times n \) matrix \( O \), which represents the linear map \( \phi:E\to E \) defined by \( \phi(a_1e_1+\dots+a_ne_n)=a_1\overline{e_1}+\dots+a_n\overline{e_n} \), which we know from above to be an automorphism of Euclidean spaces. So if we wrote the components of a vector \( x\in E \) with respect to the orthonormal basis \( \qty{e_1,\dots,e_n} \) as a column vector, then \( \phi(x)=Ox \), where the components of \( \phi(x) \) are also expressed in a column vector. What properties does the matrix \( O \) have? Well, since \( \ev{\overline{e_i},\overline{e_j}}=\delta_{ij} \) by orthonormality, we can substitute our expression for the barred basis vectors in terms of the unbarred basis vectors to obtain:
+\begin{align*}
+  \delta_{ij}&= \ev{\sum_{k=1}^na_{ik}e_k,\sum_{l=1}^na_{jl}e_l}\\
+  &= \sum_{k=1}^n\sum_{l=1}^na_{ik}a_{jl}\ev{e_k,e_l}\\
+  &= \sum_{k=1}^n\sum_{l=1}^na_{ik}a_{jl}\delta_{kl}\\
+  &= \sum_{k=1}^na_{ik}a_{jk}
+\end{align*}
+
+Suppose that \( b_{ij} \) are the components of the matrix \( O^T \) (the matrix transpose of \( O \)). Then \( b_{kj}=a_{jk} \), so that we have that \( \delta_{ij}=\sum_{k=1}^n a_{ik}b_{kj} \). Since \( \delta_{ij} \) are the components of the \( n\times n \) identity matrix \( I_n \), we can write the above equation in the following matrix form:
+\[ I_n=OO^T \]
+
+Since \( O \) is the matrix representation of a vector space automorphism, it is invertible, and hence by premultiplying both sides of the above equation by \( O^{-1} \), we arrive at:
+\[ O^{-1}=O^T \]
+i.e the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal transformations between Euclidean spaces are simply the ones that map orthonormal bases to orthonormal bases.
+
+\section{Dual Space}
+\begin{definition}
+  Let \( V \) be an \( n \)-dimensional vector space. A \textbf{linear functional} on \( V \) is a linear mapping \( f:V\to\R \).
+\end{definition}
+
+\begin{definition}
+  Let \( V \) be an \( n \)-dimensional vector space. The \textbf{dual space} \( V^* \) is the set of all linear functionals on \( V \).
+\end{definition}
+
+  The dual space of a vector space is itself a vector space under the operations of addition and scalar multiplication of real-valued functions.
+
+\begin{proposition}
+  Let \( V \) be an \( n \)-dimensional vector space and let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Then: 
+  \begin{enumerate}[label=(\alph*)]
+  \item Every linear functional \( f\in V^* \) is completely determined by its values at \( v_1,\dots,v_n \).
+  \item For any real numbers \( a_1,\dots, a_n\in\R \) there exists an \( f\in V^* \) such that \( f(v_i)=a_i \) for all \( i=1,\dots,n \).
+  \end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+  Let \( V \) be an \( n \)-dimensional vector space. Then its dual space \( V^* \) is also an \( n \)-dimensional vector space.
+\end{theorem}
+
+\begin{theorem}
+  Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is isomorphic to its second dual \( V^{**} \).
+\end{theorem}
+
+\begin{proposition}
+  Let \( V \) be an \( n \)-dimensional normed vector space. Then \( V^* \) is a normed space, with norm given by:
+  \[ \norm{f}=\sup\qty{\norm{f(x)}\mid x\in V, \norm{x}= 1} \]
+\end{proposition}
+
+\begin{theorem}
+  Let \( E \) be a Euclidean \( n \)-space. Then its dual space \( E^* \) is also a Euclidean \( n \)-space.
+\end{theorem}
+\section{The Space \( L(E,F) \)}
+\section{Topology of Euclidean Space}
+\section{Completeness}
+\section{Compactness}
+\section{Equivalence of Norms}
 
 %%% Local Variables: 
 %%% mode: latex
