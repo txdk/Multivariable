@@ -30,11 +30,11 @@ Let \( f:S\to T \) be a vector space homomorphism. The set \( \ker f=\qty{x\in S
 
 \vspace{3mm}
 
-A particularly important way that we use to classify vector spaces is the notion of dimension, which intuitively speaking is the `number of degrees of freedom' it possesses. We will proceed to formalise this below. To find out how many degrees of freedom a vector space has, we essentially need to find the minimum number of fixed vectors required to write any arbitrary vector from the space as some weighted sum of these fixed vectors. We call such weighted sums of vectors \textbf{linear combinations}; a linear combination of the vectors in the subset \( A \) is a sum \( \sum_{x\in A}c_x x \). The \textbf{span} of a subset \( A \) is the set of all possible linear combinations of vectors in \( A \). Hence, in order to describe the entire vector space in terms of sums of vectors from one of its subsets \( A \), we require that \( V=\text{span } A \).
+A particularly important way that we use to classify vector spaces is the notion of dimension, which intuitively speaking is the `number of degrees of freedom' it possesses. We will proceed to formalise this below. To find out how many degrees of freedom a vector space has, we essentially need to find the minimum number of fixed vectors required to write any arbitrary vector from the space as some weighted sum of these fixed vectors. We call such weighted sums of vectors \textbf{linear combinations}; a linear combination of the vectors in the subset \( \qty{v_1,\dots,v_n} \) is a sum \( \sum_{i=1}^nc_iv_i \) for some constants \( c_i\in\R \). The \textbf{span} of a subset \( \qty{v_1,\dots,v_n} \) is the set of all possible linear combinations of vectors in the set. Hence, in order to describe the entire vector space in terms of sums of vectors from one of its subsets \( \qty{v_1,\dots,v_n} \), we require that \( V=\text{span}\qty{v_1,\dots,v_n} \).
 
 \vspace{3mm}
 
-However, even if we are able to identify a (proper) subset \( A \) of \( V \) such that \( V=\text{span } A \), it is possible that we are able to find a smaller subset that does the trick, which suggests that \( A \) may contain redundant information. The way we describe this redundancy is through the concept of linear dependence:
+However, even if we are able to identify a finite subset \( \qty{v_1,\dots,v_n} \) of \( V \) such that \( V=\text{span}\qty{v_1,\dots,v_n} \), it is possible that we are able to find a smaller subset that does the trick, which suggests that the original subset may contain redundant information. The way we describe this redundancy is through the concept of linear dependence:
 
 \begin{definition}
   Let \( V \) be a vector space. A subset \( A\subset V \) is \textbf{linearly independent} if for every finite subset \( \qty{v_1,\dots, v_n} \) of \( A \), we have that \(a_1v_1+\dots +a_nv_n=0  \) for scalars \( a_1,\dots, a_n\in\mathbb{K} \) implies that \( a_1=\dots =a_n=0 \).
@@ -60,6 +60,7 @@ Given a basis \( \qty{v_1,\dots,v_n} \) for a vector space \( V \), the represen
 
 So, we would like to say that the number of elements in a basis quantifies the number of degrees of freedom that the vector space possesses. However, one concern that arises is whether in our definition above that there is a possibility that there are bases with different numbers of elements. Fortunately, the answer is no, as we will now show:
 \begin{theorem}
+  \label{thm:dim}
   Let \( V \) be a vector space. Then every basis of \( V \) has the same number of elements, or are all infinite.
 \end{theorem}
 \begin{proof}
@@ -172,6 +173,39 @@ Another simplification in the finite dimensional setting is that there actually 
 \end{proof}
 
 So any two \( n \)-dimensional vector spaces are isomorphic. This is what we meant when we said that the only \( n \)-dimensional vector space we will care about is \( \R^n \) - all other instances of an \( n \)-dimensional vector space are algebraically equivalent, so we may as well just consider this simple example as being \emph{the} \( n \)-dimensional vector space.
+
+\vspace{3mm}
+
+One more tidbit that we should address is to show that two vector spaces of different dimensions cannot be isomorphic, so that finite dimensional vector spaces are isomorphic if and only if their dimensions are equal (i.e dimension is a vector space property that is preserved by isomorphism). This fact would imply that we have completely classified every single finite dimensional vector space: there is only one unique vector space for each dimension \( n\in\N \) - namely \( \R^n \), and \( \R^n\simeq\R^m \) if and only if \( m=n \).
+
+\begin{theorem}
+  Let \( V \) and \( W \) be finite dimensional vector spaces. If \( V \) and \( W \) are isomorphic, then \( \dim V=\dim W \).
+\end{theorem}
+\begin{proof}
+  Let \( n=\dim V \) and let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Let \( \phi:V\to W \) be a vector space isomorphism. We will show that \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is a basis for \( W \).
+
+  \vspace{3mm}
+
+  First, we prove linear independence. Consider the following vector equation:
+  \[ a_1\phi(v_1)+\dots+a_n\phi(v_n)=0 \]
+  where \( a_i\in\R \) for \( i=1,\dots, n \). By linearity of the mapping \( \phi \), this is equivalent to:
+  \[ \phi(a_1v_1+\dots+a_nv_n)=0 \]
+  So \( a_1v_1+\dots+a_nv_n\in\ker\phi \). However, since \( \phi \) is injective, \( \ker\phi=\qty{0} \). It follows that:
+  \[ a_1v_1+\dots+a_nv_n=0 \]
+  By linear independence of \( \qty{v_1,\dots,v_n} \), it follows that \( a_i=0 \) for all \( i=1,\dots,n \). Hence, \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is linearly independent.
+
+  \vspace{3mm}
+
+  Let \( w\in W \). Since \( \phi \) is surjective, there exists a \( v\in V \) such that \( w=\phi(v) \). Express \( v \) in terms of the basis \( \qty{v_1,\dots,v_n} \):
+  \[ v=c_1v_1+\dots+c_nv_n \]
+  Then:
+  \begin{align*}
+    w&= \phi(v)\\
+    &= \phi(c_1v_1+\dots+c_nv_n)\\
+    &= c_1\phi(v_1)+\dots+c_n\phi(v_n) &(\text{by linearity of }\phi)
+  \end{align*}
+  Hence, \( w\in\text{span}\qty{\phi(v_1),\dots,\phi(v_n)} \). Since the choice of \( w\in W \) is arbitrary, it follows that \( W=\text{span}\qty{\phi(v_1),\dots,\phi(v_n)} \). This shows that \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is a basis for \( W \), which has \( n \) elements. By definition, this implies that \( \dim W=n=\dim V \).
+\end{proof}
 
 \section{Euclidean Space}
 Now that we have formulated all of the algebraic structure of the multidimensional spaces we will be working in, we will need to endow some further structure onto these spaces in order to do calculus. Of great importance is the ability to measure distances between points/vectors in our space. At the heart of analysis/calculus is the notion of \emph{limits} and \emph{convergence}. We will also frequently want to find bounds and estimates for quantities that may very well be vector-valued. So what we ultimately want is to prescribe some notion of `length' for vectors, which will in turn naturally define a distance between two vectors (simply take the length of the difference of the two vectors). This is captured by the concept of a vector \emph{norm}.
@@ -442,9 +476,10 @@ Suppose that \( b_{ij} \) are the components of the matrix \( O^T \) (the matrix
 
 Since \( O \) is the matrix representation of a vector space automorphism, it is invertible, and hence by premultiplying both sides of the above equation by \( O^{-1} \), we arrive at:
 \[ O^{-1}=O^T \]
-i.e the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal transformations between Euclidean spaces are simply the ones that map orthonormal bases to orthonormal bases.
+i.e the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal transformations on Euclidean spaces are simply the ones that map orthonormal bases to orthonormal bases.
 
 \section{Dual Space}
+In this section, we study a very special type of vector space mapping. Namely, the linear maps that take a vector as an input and returns a scalar. Such maps are called \textbf{linear functionals}.
 \begin{definition}
   Let \( V \) be an \( n \)-dimensional vector space. A \textbf{linear functional} on \( V \) is a linear mapping \( f:V\to\R \).
 \end{definition}
@@ -453,37 +488,198 @@ i.e the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal tra
   Let \( V \) be an \( n \)-dimensional vector space. The \textbf{dual space} \( V^* \) is the set of all linear functionals on \( V \).
 \end{definition}
 
-  The dual space of a vector space is itself a vector space under the operations of addition and scalar multiplication of real-valued functions.
+The dual space of a vector space is itself a vector space under the operations of addition and scalar multiplication of real-valued functions. Elements of the dual space are sometimes also referred to as \emph{covectors}.
 
-\begin{proposition}
+\vspace{3mm}
+
+There are many important linear functionals that are central to analysis. To name a few: the vector norm \( \norm{-} \), integral operators, scalar potentials, density functions. It is therefore quite valuable to study them in a general setting.
+
+\vspace{3mm}
+
+In the finite dimensional setting, the study of linear functionals and the dual space is quite simple. In the following proposition, we show that every linear functional on a finite dimensional vector space can be completely characterised simply by knowing what values it takes at finitely many points (specifically, at the basis vectors), and that we can essentially cook up a linear functional to behave in `any way we want' (i.e take specific values at certain desired points).
+  \begin{proposition}
+    \label{thm:dualprops}
   Let \( V \) be an \( n \)-dimensional vector space and let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Then: 
   \begin{enumerate}[label=(\alph*)]
   \item Every linear functional \( f\in V^* \) is completely determined by its values at \( v_1,\dots,v_n \).
   \item For any real numbers \( a_1,\dots, a_n\in\R \) there exists an \( f\in V^* \) such that \( f(v_i)=a_i \) for all \( i=1,\dots,n \).
   \end{enumerate}
 \end{proposition}
+\begin{proof}
+  (a) Let \( f\in V^* \) and let \( x=k_1v_1+\dots+k_nv_n\in V \). Then:
+  \begin{align*}
+    f(x)&= f(k_1v_1+\dots+k_nv_n)\\
+    &= k_1f(v_1)+\dots+k_nf(v_n) &(\text{by linearity of }f)
+  \end{align*}
+  One sees from the above expression that \( f(x) \) can be computed using only the knowledge of the values \( f(v_1),\dots,f(v_n) \). Moreover, this \emph{uniquely} identifies the linear functional. Suppose \( g\in V^* \) agrees with \( f \) at each of the basis vectors, i.e \( f(v_i)=g(v_i) \) for all \( i=1,\dots,n \). Then for any \( x\in V \) with representation as above, we have that:
+  \begin{align*}
+    g(x)&= g(k_1v_1+\dots+k_nv_n)\\
+    &= k_1g(v_1)+\dots+k_ng(v_n)\\
+    &= k_1f(v_1)+\dots+k_nf(v_n)\\
+    &= f(x)
+  \end{align*}
+
+  \vspace{3mm}
+
+  (b) Let \( a_1,\dots, a_n\in\R \). For \( x=k_1v_1+\dots+k_nv_n\in V \), define the mapping \( f:V\to\R \) by:
+  \[ f(x)=k_1a_1+\dots+k_na_n \]
+  Then \( f(v_i)=a_i \) for all \( i=1,\dots,n \), as required. We'll now set about to show that \( f \) is linear.
+
+  \vspace{3mm}
+
+  Let \( x\in V \) as above and let \( y=l_1v_1+\dots l_nv_n\in V \). Then:
+  \begin{align*}
+    f(x+y)&= (k_1+l_1)a_1+\dots+(k_n+l_n)a_n\\
+    &= k_1a_1+\dots+k_na_n+l_1a_1+\dots+l_na_n\\
+    &= f(x)+f(y)
+  \end{align*}
+
+  Let \( c\in\R \). Then:
+  \begin{align*}
+    f(cx)&= ck_1v_1+\dots+ck_nv_n\\
+    &= c(k_1v_1+\dots+k_nv_n)\\
+    &= cf(x)
+  \end{align*}
+  This proves that \( f \) is a linear map, so that \( f\in V^* \).
+\end{proof}
+
+Given a vector space, how big is its dual space? In the infinite dimensional case, it can be shown via the axiom of choice that the dual space is always `bigger' than the original space. In the finite dimensional case however, again we have it easy: the dimensional of the dual space is the same as that of original space, so that they are isomorphic.
 
 \begin{theorem}
+  \label{thm:ndual}
   Let \( V \) be an \( n \)-dimensional vector space. Then its dual space \( V^* \) is also an \( n \)-dimensional vector space.
 \end{theorem}
+\begin{proof}
+  We will prove that \( V^* \) is isomorphic to \( \R^n \) as vector spaces, which will imply that \( V^* \) has the same dimension as \( \R^n \), which is \( n \).
+
+  \vspace{3mm}
+
+  We first need to construct the function between \( V^* \) and \( \R^n \) which will serve as the candidate for what we hope will be the isomorphism. Fix a basis \( \qty{v_1,\dots,v_n} \) for \( V \). Let \( f\in V^* \). Define \( \psi:V^*\to\R^n \) by:
+  \[ \psi(f)=(f(v_1),\dots,f(v_n))^T \]
+
+  Let \( f,g\in V^* \). Then:
+  \begin{align*}
+    \psi(f+g)&= (f(v_1)+g(v_1),\dots,f(v_n)+g(v_n))^T\\
+    &= (f(v_1),\dots,f(v_n))^T+(g(v_1),\dots,g(v_n))^T\\
+    &= \psi(f)+\psi(g)
+  \end{align*}
+
+  Let \( a\in\R \). Then:
+  \begin{align*}
+    \psi(af)&=(af(v_1),\dots,af(v_n))^T\\
+    &= a(f(v_1),\dots,f(v_n))^T\\
+    &= a\psi(f)
+  \end{align*}
+
+  Thus, \( \psi \) is a linear map. We now proceed to show that \( \psi \) is a bijection.
+
+  \vspace{3mm}
+
+  Suppose \( \psi(f)=\psi(g) \). Then \( (f(v_1),\dots,f(v_n))^T=(g(v_1),\dots,g(v_n))^T \), i.e \( f \) and \( g \) agree at each of the basis vectors. By part (a) Proposition \ref{thm:dualprops}, this implies that \( f=g \), thus proving the injectivity of \( \psi \).
+
+  \vspace{3mm}
+
+  Now let \( x=(a_1,\dots,a_n)^T\in\R^n \). By part (b) of Proposition \ref{thm:dualprops}, there exists an \( f\in V^* \) such that \( f(v_i)=a_i \) for all \( i=1,\dots, n \). It follows that \( \psi(f)=x \). Since the choice of \( x\in\R^n \) was arbitrary, it follows that \( \mathcal{R}(\psi)=\R^n \), thus proving surjectivity of \( \psi \). Putting all of this together shows that \( \psi \) is a bijective linear function, i.e a vector space isomorphism.
+\end{proof}
+
+Let \( V \) be an \( n \)-dimensional vector space. Since the dual space \( V^* \) is \( n \)-dimensional, it has a basis consisting of \( n \) elements. Given a basis \( \qty{v_1,\dots,v_n} \) for \( V \), there is a particular nice choice for a basis on \( V^* \). For each \( i=1,\dots,n \), define the linear functional \( v^*_i:V\to\R \) by:
+\[ v^*_i(v_j)=\delta_{ij}, \quad\text{for }j=1,\dots,n \]
+
+So the linear functionals \( v^*_i \) satisfy a `bi-orthogonality property'. The fact that such linear functionals exist again comes from Proposition \ref{thm:dualprops}. The set \( \qty{v^*_1,\dots,v^*_n} \) is a linearly independent set in \( V^* \). To see this, let \( x=a_1v_1+\dots+a_nv_n\in V \) be arbitrary and consider the following vector equation:
+\begin{align*}
+  0&= \sum_{i=1}^nc_iv^*_i(x)\\
+  &= \sum_{i=1}^nc_iv^*_i\qty(\sum_{j=1}^na_jv_j)\\
+  &= \sum_{i=1}^n\sum_{j=1}^nc_ia_jv^*_i(v_j)\\
+  &= \sum_{i=1}^n\sum_{j=1}^nc_ia_j\delta_{ij}\\
+  &= \sum_{i=1}^n c_ia_i
+\end{align*}
+
+Since the above equation must hold for all \( x\in V \), choosing \( x=v_k \) for each \( k=1,\dots,n \) means that \( a_i=\delta_{ik} \) in the above expression, which gives \( c_k=0 \). This demonstrates the linear independence of the \( v^*_i \)'s. Since we have shown that \( V^* \) is an \( n \)-dimensional vector space, and we have that \( \qty{v^*_1,\dots,v^*_n} \) is a linearly independent set in \( V^* \) consisting of \( n \) elements, we know automatically that this must be a basis for \( V^* \). We call this special basis the \textbf{dual basis}.
+
+\vspace{3mm}
+
+Now, since the dual space \( V^* \) is itself a vector space, we can consider its dual space \( V^{**} \), called the \textbf{second dual}. We know that \( V^{**} \) must also be a vector space with the same dimension as \( V \), so they are isomorphic. Better yet, there is a natural identification of elements from \( V \) with elements from \( V^{**} \), so that the isomorphism is canonical.
 
 \begin{theorem}
-  Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is isomorphic to its second dual \( V^{**} \).
+  Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is canonically isomorphic to its second dual \( V^{**} \).
 \end{theorem}
+\begin{proof}
+  For each \( x\in V \), define the mapping \( \phi_x:V^*\to\R \) by:
+  \[ \phi_x(f)=f(x) \]
+  i.e \( \phi_x \) is an evaluation map. Given a linear functional on \( V^* \), it returns a scalar by evaluating it at the fixed point \( x \). We will show that \( \phi_x\) is a linear map.
 
-\begin{proposition}
-  Let \( V \) be an \( n \)-dimensional normed vector space. Then \( V^* \) is a normed space, with norm given by:
-  \[ \norm{f}=\sup\qty{\norm{f(x)}\mid x\in V, \norm{x}= 1} \]
-\end{proposition}
+  \vspace{3mm}
 
-\begin{theorem}
-  Let \( E \) be a Euclidean \( n \)-space. Then its dual space \( E^* \) is also a Euclidean \( n \)-space.
-\end{theorem}
-\section{The Space \( L(E,F) \)}
+  Let \( f,g\in V^* \). Then \( \phi_x(f+g)=(f+g)(x)=f(x)+g(x)=\phi_x(f)+\phi_x(g) \).
+
+  Let \( a\in\R \). Then \( \phi_x(af)=af(x)=a\phi_x(f) \).
+
+  \vspace{3mm}
+
+  Thus, \( \phi_x \) is a linear functional on \( V^* \), so \( \phi_x\in V^{**} \). We can hence define the mapping \( \psi:V\to V^{**} \) by \( \psi(x)=\phi_x \). We will show that \( \psi \) is a vector space homomorphism. Let \( x,y\in V \) and let \( f\in V^*\). Then:
+  \begin{align*}
+    (\psi(x+y))(f)&= \phi_{x+y}(f)\\
+    &= f(x+y)\\
+    &= f(x)+f(y)\\
+    &= \phi_x(f)+\phi_y(f)\\
+    &= (\psi(x))(f)+(\psi(y))(f)
+  \end{align*}
+  Since the choice of \( f\in V^* \) was arbitrary, this shows that \( \psi(x+y)=\psi(x)+\psi(y) \).
+
+  \vspace{3mm}
+
+  Let \( a\in\R \). Then:
+  \begin{align*}
+    (\psi(ax))(f)&= \phi_{ax}(f)\\
+    &= f(ax)\\
+    &= af(x)\\
+    &= a\phi_x(f)\\
+    &= a(\psi(x))(f)
+  \end{align*}
+  Thus, \( \psi(ax)=a\psi(x) \). This proves that \( \psi \) is a vector space homomorphism.
+
+  \vspace{3mm}
+
+  To show the injectivity of \( \psi \), we will prove that its kernel is trivial. Suppose \( x\in\ker\psi \), so \( \psi(x)=0 \). This means that for all \( f\in V^* \), \( f(x)=0 \). If \( x\neq 0 \), then with respect to some basis \( \qty{v_1,\dots,v_n} \) of \( V \), \( x \) can be written as a nontrivial linear combination of the basis vectors: \( x=a_1v_1+\dots+a_nv_n \), where at least one of the \( a_i \)'s are nonzero. Pick a nonzero coefficient and call it \( a_k \). Then by part (b) of Proposition \ref{thm:dualprops}, there exists a \( g\in V^* \) such that \( g(v_k)=1 \) and \( g(v_i)=0 \) for all \( i\neq k \). Then:
+  \begin{align*}
+    g(x)&=g(a_1v_1+\dots+a_nv_n)\\
+        &= a_1g(v_1)+\dots+a_kg(v_k)+\dots+a_ng(v_n)\\
+        &= a_k\\
+        &\neq 0
+  \end{align*}
+  This is a contradiction. Hence, \( x=0 \), which shows that \( \ker\psi=\qty{0} \), and hence \( \psi \) is injective.
+
+  \vspace{3mm}
+
+  Finally, we show that \( \psi \) is surjective. Let \( \chi\in V^{**} \). Let \( \qty{v^*_1,\dots,v^*_n} \) be the dual basis for \( \qty{v_1,\dots,v_n} \). Take \( a_i=\chi(V^*_i) \) for \( i=1,\dots,n \), and thus construct the element \( x=a_1v_1+\dots+a_nv_n\in V \). We claim that \( \chi=\phi_x \). Let \( f\in V^* \), and expand it in terms of the dual basis:
+  \[ f=\sum_{i=1}^nc_iv^*_i \]
+
+  Then we have:
+  \begin{align*}
+    \phi_x(f)&= f(x)\\
+    &= \sum_{i=1}^nc_iv^*_i(x)\\
+    &= \sum_{i=1}^nc_iv^*_i\qty(\sum_{j=1}^na_jv_j)\\
+    &= \sum_{i=1}^n\sum_{j=1}^nc_ia_jv^*_i(v_j)\\
+    &= \sum_{i=1}^n\sum_{j=1}^nc_ia_j\delta_{ij}\\
+    &= \sum_{i=1}^nc_ia_i\\
+    &= \sum_{i=1}^n c_i\chi(v^*_i)\\
+    &= \chi\qty(\sum_{i=1}^nc_iv^*_i) &(\text{by linearity of }\chi)\\
+    &= \chi(f)
+  \end{align*}
+
+  The above argument holds for all \( f\in V^* \), and thus we conclude that \( \chi=\phi_x=\psi(x) \). This proves that \( \psi \) is surjective, and hence a bijection, and hence an isomorphism.
+\end{proof}
+
+The property that a vector space is naturally isomorphic to its second dual is referred to as \emph{algebraic reflexivity}. This is another property that is guaranteed to hold in the finite dimensional setting, but not in the infinite dimensional case. There is always a natural monomorphism (injective homomorphism) from a vector space to its second dual, however it is an isomorphism if and only if the vector space is finite dimensional.
+
+\vspace{3mm}
+
+Naturally, we can keep playing the game of successively finding the dual space of a dual space, but the results in this section show that this is not necessary. It turns out in the finite dimensional setting that a vector space and its dual are of equal dimension, and are isomorphic. So the study of the dual space of a finite dimensional vector space reduces to the study of the vector space itself.
 \section{Topology of Euclidean Space}
 \section{Completeness}
 \section{Compactness}
 \section{Equivalence of Norms}
+\section{The Space \( L(E,F) \)}
 
 %%% Local Variables: 
 %%% mode: latex
