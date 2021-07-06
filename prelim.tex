@@ -178,9 +178,9 @@ So any two \( n \)-dimensional vector spaces are isomorphic. This is what we mea
 
 One more tidbit that we should address is to show that two vector spaces of different dimensions cannot be isomorphic, so that finite dimensional vector spaces are isomorphic if and only if their dimensions are equal (i.e dimension is a vector space property that is preserved by isomorphism). This fact would imply that we have completely classified every single finite dimensional vector space: there is only one unique vector space for each dimension \( n\in\N \) - namely \( \R^n \), and \( \R^n\simeq\R^m \) if and only if \( m=n \).
 
-\begin{theorem}
+\begin{proposition}
   Let \( V \) and \( W \) be finite dimensional vector spaces. If \( V \) and \( W \) are isomorphic, then \( \dim V=\dim W \).
-\end{theorem}
+\end{proposition}
 \begin{proof}
   Let \( n=\dim V \) and let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Let \( \phi:V\to W \) be a vector space isomorphism. We will show that \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is a basis for \( W \).
 
@@ -206,6 +206,11 @@ One more tidbit that we should address is to show that two vector spaces of diff
   \end{align*}
   Hence, \( w\in\text{span}\qty{\phi(v_1),\dots,\phi(v_n)} \). Since the choice of \( w\in W \) is arbitrary, it follows that \( W=\text{span}\qty{\phi(v_1),\dots,\phi(v_n)} \). This shows that \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is a basis for \( W \), which has \( n \) elements. By definition, this implies that \( \dim W=n=\dim V \).
 \end{proof}
+
+In summary, we have proven the following very important result about finite dimensional vector spaces:
+\begin{theorem}
+  Let \( V \) and \( W \) be finite dimensional vector spaces. Then \( V \) and \( W \) are isomorphic if and only if \( \dim V=\dim W \).
+\end{theorem}
 
 \section{Euclidean Space}
 Now that we have formulated all of the algebraic structure of the multidimensional spaces we will be working in, we will need to endow some further structure onto these spaces in order to do calculus. Of great importance is the ability to measure distances between points/vectors in our space. At the heart of analysis/calculus is the notion of \emph{limits} and \emph{convergence}. We will also frequently want to find bounds and estimates for quantities that may very well be vector-valued. So what we ultimately want is to prescribe some notion of `length' for vectors, which will in turn naturally define a distance between two vectors (simply take the length of the difference of the two vectors). This is captured by the concept of a vector \emph{norm}.
@@ -675,8 +680,162 @@ The property that a vector space is naturally isomorphic to its second dual is r
 \vspace{3mm}
 
 Naturally, we can keep playing the game of successively finding the dual space of a dual space, but the results in this section show that this is not necessary. It turns out in the finite dimensional setting that a vector space and its dual are of equal dimension, and are isomorphic. So the study of the dual space of a finite dimensional vector space reduces to the study of the vector space itself.
+
 \section{Topology of Euclidean Space}
+So far, we have mostly concerned ourselves with the algebraic properties of Euclidean space. We will now consider the structure of Euclidean space that makes it amiable to do calculus on. Recall that the Euclidean inner product induces a vector norm, which in turn induces a metric. To add to this already lengthy chain of implications, the metric induces a \emph{topology} on our Euclidean space. A topological space is the most general setting in which one can define the notion of continuity, which is certainly something we would like to have in a calculus setting!
+
+\vspace{3mm}
+
+Since the topology of Euclidean space is the metric topology (where the metric is the Euclidean metric \( d_2 \)), we will define the open sets via the notion of \emph{open balls}. We have already described the Euclidean metric for \( \R^n \). To generalise it to Euclidean \( n \)-space \( E \), take an orthonormal basis \( \qty{e_1,\dots,e_n} \) of \( E \). Then for any \( x=x_1e_1+\dots+x_ne_n\in E \), the Euclidean norm is given by:
+\[ \norm{x}=\sqrt{\sum_{i=1}^nx_i^2} \]
+with corresponding Euclidean metric:
+\[ d_2(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2} \]
+where \( y=y_1e_1+\dots+y_ne_n \).
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. An \textbf{open ball} of centre \( x\in E \) and radius \( r>0 \) is the set \( B(x,r)=\qty{y\in E\mid d_2(x,y)<r}=\qty{y\in E\mid \norm{x-y}<r} \).
+
+  \vspace{3mm}
+
+  The \textbf{closed ball} of centre \( x \) and radius \( r \) is the set \( \overline{B}(x,r)=\qty{y\in E\mid d_2(x,y)\leq r}=\qty{y\in E\mid \norm{x-y}\leq r} \).
+\end{definition}
+
+An open ball centered at a point \( x\in E \) with radius \( r \) simply consists of all of the points that are within a distance \( r \) of \( x \). The closed ball also includes those points that are exactly a distance of \( r \) away from \( x \) (as measured using the Euclidean metric).
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. A set \( U\subset E \) is said to be \textbf{open} if for every \( x\in U \), there exists an \( r>0 \) such that \( B(x,r)\subset U \).
+\end{definition}
+
+Some trivial examples of open sets include the empty set, and the whole space \( E \). Open balls themselves are also open sets. An open rectangle, which is simply the Cartesian product of open intervals in \( \R \), is an open set in \( \R^n \).
+
+\vspace{3mm}
+
+Now we address the age-old question of: `once we have a bunch of open sets, how do we make new open sets from old?' This is answered by:
+
+\begin{proposition}
+  \label{thm:newopenfromold}
+  Let \( E \) be a Euclidean \( n \)-space. Then:
+  \begin{enumerate}[label=(\alph*)]
+  \item If \( U_\alpha\subset E \) is open for each \( \alpha\in A \), then the union
+    \[ U=\bigcup_{\alpha\in A}U_\alpha \]
+    is open in \( E \).
+  \item If \( U_1,\dots,U_k \) are open subsets of \( E \), then the intersection
+    \[ U=U_1\cap \dots \cap U_k \]
+    is open in \( E \).
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (a) Let \( U_\alpha\subset E \) be open for each \( \alpha\in A \), and consider the set \( U=\bigcup_{\alpha\in A}U_\alpha \). Let \( x\in U \). Then there exists a \( \beta\in A \) such that \( x\in U_\beta \). Since \( U_\beta \) is open, there exists an \( r>0 \) such that \( B(x,r)\subset U_\beta\subset U \). Thus, \( U \) is open.
+
+  \vspace{3mm}
+
+  (b) Let \( U_1,\dots,U_k \) be open, and consider the set \( U=U_1\cap\dots\cap U_k \). Let \( x\in U \). For each \( i=1,\dots,k \), \( x\in U_i \), so there exists an \( r_i>0 \) such that \( B(x,r_i)\subset U_i \). Choose \( r=\min\qty{r_1,\dots,r_k}>0 \). Then \( B(x,r)\subset U_i \) for all \( i=1,\dots, k \). Thus, \( B(x,r)\subset U \), and hence \( U \) is open.
+\end{proof}
+
+So arbitrary unions of open sets are open, and \emph{finite} intersections of open sets are open. Infinite intersections of open sets are not necessarily open. For example, consider \( I_n=\qty(-\frac{1}{n},\frac{1}{n}) \), which is an open set in \( \R \) for each \( n\in\N \). But:
+\[ \bigcap_{n=1}^\infty I_n=\qty{0} \]
+which is \emph{not} open in \( \R \).
+
+\vspace{3mm}
+
+Proposition \ref{thm:newopenfromold} above, in combination with the fact that \( \emptyset \) and \( E \) are open, shows that the collection of open sets in a Euclidean space \( E \) forms a \emph{topology} on \( E \). This fact did not appeal to anything particular about Euclidean space other than its underlying metric space structure.
+
+\vspace{3mm}
+
+We will later want to define the notions of limits and continuity, which both involve the idea of points being forced to being `really close to each other'. Frequently in analysis we will also allow for our variables to vary in a `sufficiently small amount'. To make formal these ideas, we use the topologcal concept of `closeness' in terms of \emph{neighbourhoods} of points:
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space and let \( x\in E \). A \textbf{neighbourhood} of \( x \) is a subset \( U\subset E \) such that there exists an open subset \( V\subset U \) that contains \( x \).
+\end{definition}
+
+Note that in the metric topology, an open set containing a point \( x\in E \) must contain an open ball \( B(x,r) \) for some \( r>0 \), so that we can also state our definition of a neighbourhood of a point \( x \) as simply `a set which contains an open ball centred at \( x \)'. Hence, the topological notion of `wiggling around \( x \) in an arbitrarily small amount' (constrained the variation to smaller and smaller neighbourhoods) equates to the metric notion of small movement (constrained the variation to smaller and smaller open balls).
+
+\vspace{3mm}
+
+Thus, an alternative way to characterise open sets is the statement that `a set is open if and only if it is a neighbourhood of all of its points', which follows immediately from the definition. We can also rephrase this in terms of \emph{interior points}, which we define below:
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. An \textbf{interior point} of a set \( S\subset E \) is an \( x\in S \) such that there exists an \( r>0 \) such that \( B(x,r)\subset S \).
+\end{definition}
+
+One sees immediately from the definition above and from the definition of an open set that a set is open if and only if it all of its points are interior points. So if a set \( S \) has any points that are not interior points, it cannot be open. However, if we consider the subset of \( S \) comprising of only the interior points of \( S \), then we get an open subset of \( S \). In fact, this is the largest open subset contained in \( S \), which we call the \emph{interior} of \( S \).
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space and let \( S\subset E \). The \textbf{interior} of \( S \), denoted \( S^\circ \), is the union of all open subsets of \( S \).
+\end{definition}
+
+Our definition of the interior above formulates it as the largest open subset contained in \( S \), but it can be readily shown that the interior is simply the set of interior points of \( S \). This means that a set is open if and only if it is equal to its interior.
+
+\vspace{3mm}
+
+Also equally important in a topological space is the notion of a \emph{closed} set:
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. A set \( C\subset E \) is said to be \textbf{closed} if it is the complement of an open set, i.e \( C=E\backslash U \) for some open set \( U\subset E \).
+\end{definition}
+
+One should be careful that a set being closed is \emph{not} the negation of a set being open. There are sets that are neither open nor closed (e.g the half-open interval in \( \R \): \( [a,b) \)), and sets that are \emph{both} open and closed (the empty set and the entire space).
+
+\vspace{3mm}
+
+Closed balls are a simple example of closed sets. Cartesian products of closed intervals in \( \R \) are closed sets in \( \R^n \). An important example of closed sets in Euclidean space are vector subspaces. Complementary to Proposition \ref{thm:newopenfromold}, we now list the ways one can combine closed sets to make new closed sets:
+
+\begin{proposition}
+  Let \( E \) be a Euclidean \( n \)-space. Then:
+  \begin{enumerate}[label=(\alph*)]
+  \item If \( C_\alpha\subset E \) is closed for each \( \alpha\in A \), then the intersection
+    \[ C=\bigcap_{\alpha\in A}C_\alpha \]
+    is closed in \( E \).
+  \item If \( C_1,\dots,C_k \) are closed subsets of \( E \), then the union
+    \[ C=C_1\cup\dots\cup C_k \]
+    is closed in \( E \).
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  (a) Let \( C_\alpha\subset E \) be closed for each \( \alpha\in A \). Then \( E\backslash C_\alpha \) is open for all \( \alpha\in A \). Hence, \( \bigcup_{\alpha\in A}(E\backslash C_\alpha) \) is an open set, since arbitrary unions of open sets are open. But by de Morgan's Laws, we have that:
+  \[ \bigcup_{\alpha\in A}(E\backslash C_\alpha)=E\,\backslash\qty(\bigcap_{\alpha\in A}C_\alpha) \]
+  We thus see that \( C=\bigcap_{\alpha\in A}C_\alpha \) is closed.
+
+  \vspace{3mm}
+
+  (b) Let \( C_1,\dots, C_k \) be closed. Then \( E\backslash C_i \) is open for all \( i=1,\dots,k \). Thus, \( (E\backslash C_1)\cap\dots\cap(E\backslash C_k) \) is open since finite intersections of open sets are open. But by de Morgan's Laws, we have that:
+  \[ (E\backslash C_1)\cap\dots\cap(E\backslash C_k)=E\backslash\qty(C_1\cup\dots\cup C_k) \]
+  It immediately follows that \( C_1\cup\dots\cup C_k \) is closed.
+\end{proof}
+
+One way to study closed sets, and the degree at which a set fails to be closed is via the notion of \emph{limit points}:
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space and let \( S\subset E \). A \textbf{limit point} of \( S \) is a point \( x\in E \) such that for every \( r>0 \), \( S\cap (B(x,r)\backslash\qty{x})\neq\emptyset \).
+\end{definition}
+
+The motivation for the name `limit point' arises from the fact you can approach a limit point of a set and get arbitrarily close to it even whilst remaining completely within the set. That is, it is the limit of a nonconstant sequence consisting entirely of points from the set.
+
+\vspace{3mm}
+
+One important fact about closed sets is that the limit of a sequence consisting of points from the set must stay inside the set. From the above discussion, it is then clear that a closed set must contain all of its limit points. This turns out to be both a necessary and sufficient criteria for a set to be closed.
+
+\begin{proposition}
+  Let \( E \) be a Euclidean \( n \)-space. A set is closed in \( E \) if and only if it contains all of its limit points.
+\end{proposition}
+\begin{proof}
+  \( (\implies) \) Suppose \( S\subset E \) is closed, but assume for a contradiction that \( S \) does not contain all of its limit points. Let \( x\in E \) be a limit point of \( S \) but \( x\notin S \). Then \( x\in E\backslash S \). However, we know that \( E\backslash S \) is an open set (since \( S \) is closed), so there exists an \( r>0 \) such that \( B(x,r)\subset E\backslash S \). But since \( x \) is a limit point of \( S \), then there exists a \( y\in  S\cap (B(x,r)\backslash\qty{x}) \), so that \( y\in S\cap E\backslash S \), which is impossible. Thus, \( S \) must contain all of its limit points.
+
+  \vspace{3mm}
+
+  \( (\impliedby) \) Suppose \( S \) contains all of its limit points. Let \( x\in E\backslash S \), so that \( x \) is not a limit point of \( S \). Therefore, there exists an \( r>0 \) such that \( S\cap (B(x,r)\backslash\qty{x})=\emptyset \). Hence, \( B(x,r)\subset E\backslash S \). This proves that \( E\backslash S \) is open, and hence that \( S \) is closed.
+\end{proof}
+
+Given a set \( S \) that is not necessarily closed, we can `add' points to it until we obtain a closed set. The smallest set that results after we add the minimum amount of points required to make the set closed is called the closure of the set:
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space and let \( S\subset E \). The \textbf{closure} of \( S \), denoted \( \overline{S} \), is the intersection of all closed sets containing \( S \).
+\end{definition}
+
+It is clear from the above definition that the closure of \( S\subset E \) is the smallest closed set containing \( S \), consistent with our above discussion. In fact, the additional points that we need to add to \( S \) to make it closed are simply the limit points of \( S \) which it does not already contain. Hence, the closure of \( S \) is simply the union of \( S \) with its set of limit points.
+
 \section{Completeness}
+\section{Continuity}
 \section{Compactness}
 \section{Equivalence of Norms}
 \section{The Space \( L(E,F) \)}
