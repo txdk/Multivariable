@@ -835,6 +835,132 @@ Given a set \( S \) that is not necessarily closed, we can `add' points to it un
 It is clear from the above definition that the closure of \( S\subset E \) is the smallest closed set containing \( S \), consistent with our above discussion. In fact, the additional points that we need to add to \( S \) to make it closed are simply the limit points of \( S \) which it does not already contain. Hence, the closure of \( S \) is simply the union of \( S \) with its set of limit points.
 
 \section{Completeness}
+In calculus, we will be working with limits \emph{quite a bit}. In particular, we want to be taking limits of functions. First, as is typical, we will define the limit of a sequence, since limits of functions can be studied by considering limits of sequences:
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. A sequence \( (x_k)_{k=1}^\infty \) in \( E \) is said to \textbf{converge} to \( L\in E \) if for all \( \epsilon>0 \), there exists an \( N\in\N \) such that for all \( k\geq N \), \( \norm{x_k-L}<\epsilon \).
+\end{definition}
+
+The usual notation to denote the limit of a convergent sequence is \( x_k\to L \) as \( k\to\infty \), or \( \lim_{k\to\infty}x_k=L \). We will use both interchangably.
+
+\vspace{3mm}
+
+The metric structure on Euclidean space gives us all of the expected desriable properties about limits and convergence that we know and love from \( \R \). If a sequence is convergent, the limit is unique. Since we have the algebraic structure of a vector space as well, we have some algebraic limit laws: the limit of a sum of sequences is equal to the sum of the limits, and we can pull scalars through limits.
+
+\vspace{3mm}
+
+One might notice from the definition of convergence of a sequence that in order to prove directly that a sequence is convergent one must already secretly know what the limit ought to be, so that one can show that the distance between terms in the sequence and the candidate for the limit become arbitrarily small. Guessing what the limit ought to be isn't always a straightforward task, and so fortunately there is another way to show the convergence of a sequence, which relies upon the notion of \emph{completeness}. In a complete metric space, a necessary and sufficient condition for a sequence to be convergent is for the sequence to be \emph{Cauchy}; that is, the terms the sequence progressively become aribtrarily close to \emph{each other}.
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. A sequence \( (x_k)_{k=1}^\infty \) in \( E \) is said to be \textbf{Cauchy} if for all \( \epsilon>0 \), there exists an \( N\in\N \) such that for all \( j,k\geq N \), \( \norm{x_j-x_k}<\epsilon \).
+\end{definition}
+
+Intuitively, if the terms in the sequence are gradually varying in distance to a lesser and lesser extent as time goes on, then they must eventually be getting closer to some fixed point, provided they are not clumping around a `gap'. A complete metric space is one in which there are `no gaps', much like you would have heard that \( \R \) has no gaps.
+
+\begin{definition}
+  Let \( (X,d) \) be a metric space. We say that \( X \) is \textbf{complete} with respect to the metric \( d \) if every Cauchy sequence in \( X \) converges.
+\end{definition}
+
+So the big advantage of completeness is that instead of having to find a candidate limit in order to prove a sequence that you suspect converges actually does so, you can just show that the sequence is Cauchy, i.e the terms just eventually clump up together. Completeness guarantees that the sequence then has a limit. We will now demonstrate the completeness of Euclidean space with respect to the Euclidean metric. The proof is primarily based on the fact that \( \R \) is complete, and that Euclidean space is finite-dimensional.
+
+\begin{theorem}
+  Let \( E \) be a Euclidean \( n \)-space. Then \( E \) is complete with respect to the Euclidean metric \( d_2 \).
+\end{theorem}
+\begin{proof}
+  Let \( (x_k)_{k=1}^\infty \) be a Cauchy sequence in \( E \). Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis for \( E \). We can hence express each term of the sequence in terms of the orthonormal basis:
+  \[ x_k=a_{1k}e_1+\dots+a_{nk}e_n \]
+  We claim that, for each \( i=1,\dots,n \), the coefficients sequence \( (a_{ik})_{k=1}^\infty \) is Cauchy in \( \R \). To see this, note that:
+  \begin{align*}
+    \abs{a_{ij}-a_{ik}}&=\sqrt{\qty(a_{ij}-a_{ik})^2}\\
+    &\leq \sqrt{\sum_{l=1}^n (a_{lj}-a_{lk})^2} &(\text{since the square root function is a real increasing function})\\
+    &= \norm{x_j-x_k}
+  \end{align*}
+
+  Let \( \epsilon>0 \). Choose \( N\in\N \) such that for all \( j,k\geq N \), \( \norm{x_j-x_k}<\epsilon \). Such a choice of \( N \) is possible since \( (x_k)_{k=1}^\infty \) is a Cauchy sequence. Then for all \( j,k\geq N \), \( \abs{a_{ij}-a_{ik}}<\epsilon \). This proves our claim.
+
+  \vspace{3mm}
+
+  Now, by completeness of \( \R \), the sequence \( (a_{ik})_{k=1}^\infty \) converges to, say, \( a_i\in\R \). Define \( x=a_1e_1+\dots+a_ne_n \). We will show that \( x_k\to x \) as \(k\to\infty  \). First, observe that:
+  \begin{align*}
+    \norm{x_k-x}&= \sqrt{\sum_{i=1}^n(a_{ik}-a_i)^2}\\
+    &\leq \sqrt{n\max_{i=1,\dots,n}(a_{ik}-a_i)^2}\\
+    &= \sqrt{n}\max_{i=1,\dots,n}\abs{a_{ik}-a_i}\\
+    &<\sqrt{n}\qty(\sum_{i=1}^n\abs{a_{ik}-a_i})
+  \end{align*}
+
+  Let \( \epsilon>0 \). For each \( i=1,\dots,n \), choose \( N_i\in\N \) such that for all \( k\geq N_i \), \( \abs{a_{ik}-a_i}<\frac{\epsilon}{n\sqrt{n}} \). Such a choice of \( N_i \) is possible since \( a_{ik}\to a_i \) as \( k\to\infty \). Choose \( N=\max{N_1,\dots,N_n} \). Then for all \( k\geq N \), we have:
+  \[ \norm{x_k-x}<\sqrt{n}\sum_{i=1}^n\frac{\epsilon}{n\sqrt{n}}=\epsilon \]
+  Hence, \( x_k\to x \) as \( k\to\infty \). This shows that \( E \) is complete with respect to the Euclidean metric.
+\end{proof}
+
+From the above proof, we can take away a few useful facts. Namely, a sequence in Euclidean space is Cauchy if and only if all of its (real) component sequences are Cauchy, and a sequence in Euclidean space is convergent if and only if all of its (real) component sequences are convergent. Moreover, the components of the limit of the sequence in Euclidean space will simply be the limits of the individual component sequences.
+
+\vspace{3mm}
+
+Now we'll consider a few consequences of the completeness of Euclidean space. In fact, most of these properties that we'll look at have corresponding analogues in \( \R \). Firstly, we have the Nested Interval Property for Euclidean space, which talks about a nested sequence of closed intervals. By a \emph{closed interval} in Euclidean space, we mean sets of the form \( \qty{c_1e_1+\dots+c_ne_n\mid c_i\in\qty[a_i,b_i] \;\forall\,i=1,\dots,n}  \), where \( \qty{e_1,\dots,e_n} \) is an orthonormal basis.
+
+\begin{theorem}
+  \label{thm:NIP}
+  (Nested Interval Property) Let \( E \) be a Euclidean \( n \)-space. Let \( I_1\supset I_2\supset\dots\supset I_k\supset\dots \) be a decreasing sequence of nonempty closed intervals in \( E \). Then:
+  \[ \bigcap_{k=1}^\infty I_k\neq\emptyset \]
+\end{theorem}
+\begin{proof}
+  Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis for \( E \), and thus denote the interval \( I_k \) by:
+  \[ I_k=\qty{c_1e_1+\dots +c_ne_n\in E\mid c_i\in \qty[a_{ik},b_{ik}]\;\forall\,i=1,\dots n} \]
+  Since \( I_1\supset I_2\supset\dots I_k\supset\dots \) is a decreasing sequence of closed intervals, we have that for all \( i=1,\dots,n \), \( (a_{ik})_{k=1}^\infty \) is an increasing sequence of real numbers. Furthermore, the sequence is bounded above by \( b_{i1}\in\R \). Hence, we have a bounded, monotonic sequence of real numbers. By the Monotone Convergence Theorem in \( \R \), the sequence converges: so \( a_{ik}\to a_i \) as \( k\to\infty \). We will hence show that \( x=a_1e_1+\dots+a_ne_n\in\bigcap_{k=1}^\infty I_k \).
+
+  \vspace{3mm}
+
+  Let \( m\in\N \). Fix \( i\in\qty{1,\dots,n} \). Since \( (a_{ik})_{k=1}^\infty \) is an increasing sequence, then \( a_{im}\leq a_i \). Additionally, since \( a_{ik}\leq b_{im} \) for all \( k\in\N \), then \( a_i\leq b_{im} \), since limits preserve inequalities. Hence, we have that \( a_i\in\qty[a_{im},b_{im}] \). Since this holds for each \( i \), this shows that \( x\in I_m \). Since the choice of \( m\in\N \) is arbitrary, then \( x \) is in every closed interval \( I_m \), and thus in the intersection of all of them.
+\end{proof}
+
+The Nested Interval Property is an immediate consequence of the completeness of Euclidean space. However, one may glance at our above proof and wonder where we used the completeness of Euclidean space in the argument? Secretly, we kind of cheated: rather than appealing to completeness of Euclidean space directly in the proof, we made use of the completeness of \( \R \) (in the form of the Monotone Convergence Theorem) and the finite-dimensionality of Euclidean space, which were the two key facts exploited in the completeness proof. One could certainly prove the Nested Interval Property directly from the completeness of Euclidean space, but we thought the above proof was quite simple and a further demonstration of how simple things are in a finite dimensional setting.
+
+\vspace{3mm}
+
+Next up, we'll look at another key consequence of completeness: the Bolzano-Weierstrass Theorem. This theorem states that every bounded sequence has a convergent subsequence. First, let's define what it means for a set to be bounded in Euclidean space:
+
+\begin{definition}
+  Let \( E \) be a Euclidean \( n \)-space. A subset \( A\subset E \) is \textbf{bounded} if there exists an \( M>0 \) such that for all \( x\in A \), \( \norm{x}\leq M \).
+\end{definition}
+
+A bounded sequence in \( E \) would thus be a sequence \((x_k)_{k=1}^\infty  \) in which the set of its terms \( \qty{x_k\in E\mid k\in\N} \) is bounded. First, let's prove a slightly rephrased version of the Bolzano-Weierstrass Theorem, which makes use of the Nested Interval Property.
+
+\begin{proposition}
+  \label{thm:boundedlim}
+  Every bounded infinite set in Euclidean \( n \)-space has at least one limit point.
+\end{proposition}
+\begin{proof}
+  Let \( E \) be a Euclidean \( n \)-space and let \( A\subset E \) be a bounded infinite set. Then there exists an \( M>0 \) such that for all \( x\in A \), \( \norm{x}\leq M \). Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis in \( E \). Define the closed interval \( I_1=\qty{a_1e_1+\dots+a_ne_n\in E\mid a_i\in[-M,M]\; \forall\, i=1,\dots n} \). Clearly, \( A\subset I_1 \). Then partition \( I_1 \) into \( 2^n \) closed intervals of side length \( \frac{M}{2} \). Choose \( I_2 \) to be one of the subintervals that contains infinitely many points of \( A \).
+
+  \vspace{3mm}
+
+  Continue in this fashion: given the closed interval \( I_k \), partition it into \( 2^n \) subintervals of side length \( \frac{M}{2^{k}} \) and choose \( I_{k+1} \) to be a subinterval which contains infinitely many points of \( A \). This process constructs a decreasing sequence \( I_1\supset I_2\supset\dots\supset I_k\supset\dots \) of nonempty closed intervals. Hence, by the Nested Interval Property, \( \bigcap_{k=1}^\infty I_k\neq\emptyset \). Let \( x\in\bigcap_{k=1}^\infty I_k \). We will show that \( x \) is a limit point of \( A \).
+
+  \vspace{3mm}
+
+  Let \( \epsilon>0 \). Choose \( k\in\N \) such that \( \frac{1}{k}<\frac{\epsilon}{M\sqrt{n}} \). Such a choice of \( k \) is possible since \( \R \) satisfies the Archimedean property. Choose \( a\in A \) such that \( a\in I_k \), which is possible since \( I_k \) contains infinitely many points of \( A \). Since we also have that \( x\in I_k \), then the (Euclidean) distance between \( x \) and \( a \) must be less than or equal to the largest possible distance between two points in the closed interval. For a closed cubical interval of equal side lengths \( r>0 \), the greatest distance is \( \sqrt{nr^2}=r\sqrt{n} \). Hence, we have that:
+  \[ \norm{x-a}\leq\frac{M}{2^{k-1}}\sqrt{n}\leq\frac{M}{k}\sqrt{n}<\epsilon \]
+  Hence, from the above expression we have that \( a\in A\cap\qty(B(x,\epsilon)\backslash\qty{x}) \). Since this is true for all \( \epsilon>0 \), it follows that \( x \) is a limit point of \( A \).
+\end{proof}
+
+Now the \emph{actual} Bolzano-Weierstrass Theorem follows as an easy consequence of the above result:
+
+\begin{theorem}
+  (Bolzano-Weierstrass Theorem) Every bounded sequence in Euclidean \( n \)-space has a convergent subsequence.
+\end{theorem}
+\begin{proof}
+  Let \( E \) be a Euclidean \( n \)-space and let \( (x_k)_{k=1}^\infty \) be a bounded sequence in \( E \). Then there exists an \( M>0 \) such that \( \norm{x_k}\leq M \) for all \( k\in\N \). Thus, the set \( \qty{x_k\in E\mid k\in\N} \) is a bounded subset of \( E \). Thus, by Proposition \ref{thm:boundedlim}, it has a limit point, say \( x\in E \).
+
+  \vspace{3mm}
+
+  Since \( x \) is a limit point of the set \( \qty{x_k\in E\mid k\in\N} \), then for every \( m\in\N \), pick an \( x_{k_m}\in \qty{x_k\in E\mid k\in\N}\cap\qty(B\qty(x,\frac{1}{m})\backslash\qty{x}) \) such that \( k_m>k_{m'} \) for all \( m'<m \). This constructs the subsequence \( (x_{k_m})_{m=1}^\infty \), which converges to \( x \) as we will now show.
+
+  \vspace{3mm}
+
+  Let \( \epsilon>0 \). Choose \( N\in\N \) such that \( \frac{1}{N}<\epsilon \). Such a choice of \( N \) is possible since \( \R \) satisfies the Archimedean property. Then for all \( m\geq N \), we have:
+  \[ \norm{x_{k_m}-x}<\frac{1}{m}<\frac{1}{N}<\epsilon \]
+  Thus, \( x_{k_m}\to x \) as \( m\to\infty \).
+\end{proof}
 \section{Continuity}
 \section{Compactness}
 \section{Equivalence of Norms}
