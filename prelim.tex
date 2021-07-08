@@ -961,7 +961,96 @@ Now the \emph{actual} Bolzano-Weierstrass Theorem follows as an easy consequence
   \[ \norm{x_{k_m}-x}<\frac{1}{m}<\frac{1}{N}<\epsilon \]
   Thus, \( x_{k_m}\to x \) as \( m\to\infty \).
 \end{proof}
+
 \section{Continuity}
+We will now finally define the notion of limits of functions between Euclidean spaces, which will also give us the necessary framework to talk about continuous functions.
+\begin{definition}
+  Let \( E, F \) be Euclidean spaces, \( U\subset E \) a subset of \( E \), \( x_0\in E \) a limit point of \( U \) and \( f:U\to F \) a function. The limit of \( f \) as \( x \) approaches \( x_0 \) is the point \( y_0\in F \) such that for all \( \epsilon>0 \), there exists a \( \delta>0 \) such that for all \( x\in U\backslash\qty{x_o} \) with \( \norm{x-x_0}<\delta \) we have \( \norm{f(x)-y_0}<\epsilon \), if such a point \( y_0 \) exists. Else, we say that the limit does not exist.
+\end{definition}
+
+The notations \( f(x)\to y_0 \) as \( x\to x_0 \) and \( \lim_{x\to x_0}f(x)=y_0 \) are common - we will employ both throughout this text.
+
+\vspace{3mm}
+
+The astute reader might notice that we are being somewhat sloppy, as we are using \( \norm{-} \) to denote both the Euclidean norms in \( E \) and \( F \). However, it should be fairly clear from the context which norm is being used.
+
+\vspace{3mm}
+
+A very useful fact is that limits of functions can be characterised in terms of limits of sequences, the latter of which are usually much simpler to deal with (we can use all of our facts about limits of sequences and apply them to limits of functions).
+
+\begin{proposition}
+  \label{thm:limseq}
+   Let \( E, F \) be Euclidean spaces, \( U\subset E \) a subset of \( E \), \( x_0\in E \) a limit point of \( U \) and \( f:U\to F \) a function. Then \( \lim_{x\to x_0}f(x)=y_0 \) if and only if for every sequence \( (x_k)_{k=1}^\infty \) in \( U\backslash\qty{x_0} \) with \( x_k\to x_0 \) as \( k\to\infty \), we have that \( f(x_k)\to y_0 \) as \( k\to\infty \).
+ \end{proposition}
+ \begin{proof}
+   \( (\implies) \) Suppose \( \lim_{x\to x_0}f(x)=y_0 \). Let \( (x_k)_{k=1}^\infty \) be a sequence in \( U\backslash\qty{x_0} \) with \( x_k\to x_0 \) as \( k\to\infty \). Consider the sequence \( (f(x_k))_{k=1}^\infty \) in \( F \). We will show that \( f(x_k)\to y_0 \) as \( k\to\infty \).
+
+   \vspace{3mm}
+
+   Let \( \epsilon>0 \). Choose \( \delta>0 \) such that for all \( x\in U\backslash\qty{x_0} \) with \( \norm{x-x_0}<\delta \) we have \( \norm{f(x)-y_0}<\epsilon \). Such a choice of \( \delta \) is possible since \( \lim_{x\to x_0}f(x)=y_0 \).  Choose \( N\in\N \) such that for all \( k\geq N \), \( \norm{x_k-x_0}<\delta \). Such a choice of \( N \) is possible since \( (x_k)_{k=1}^\infty \) converges to \( x_0 \). Then for all \( k\geq N \), we have that \( \norm{f(x_k)-y_0}<\epsilon \). This proves that \( f(x_k)\to y_0 \) as \( k\to\infty \).
+
+   \vspace{3mm}
+
+   \( (\impliedby) \) Suppose that for every sequence \( (x_k)_{k=1}^\infty \) in \( U\backslash\qty{x_0} \) with \( x_k\to x_0 \) as \( k\to\infty \), we have that \( f(x_k)\to y_0 \) as \( k\to\infty \). Assume for a contradiction that \( \lim_{x\to x_0}f(x)\neq y_0 \). Then there exists an \( \epsilon>0 \) such that for all \( k\in\N \), there exists an \( x_k\in U\backslash\qty{x_0} \) with \( \norm{x_k-x_0}<\frac{1}{k} \) but \( \norm{f(x_k)-y_0}\geq \epsilon \). This constructs a sequence \( (x_k)_{k=1}^\infty \) in \( U\backslash\qty{x_0} \).
+
+   \vspace{3mm}
+
+   Clearly, \( x_k\to x_0 \) as \( k\to\infty \). Hence, \( f(x_k)\to y_0 \) as \( k\to\infty \). This means that there exists an \( N\in\N \) such that for all \( k\geq N \), we have that \( \epsilon\leq \norm{f(x_k)-y_0}<\epsilon \). This is impossible, so we are forced to conclude that \( \lim_{x\to x_0}f(x)= y_0 \).
+ \end{proof}
+
+ We can thus easily derive the algebraic limit laws of functions from the above result and the corresponding facts for sequences: the limit of a sum of functions is the sum of the limits, and you can pull scalars through limits.
+
+ \vspace{3mm}
+
+ We will now introduce the notion of a continuous function between Euclidean spaces. Intuitively, the idea is that sufficiently small variations in the domain result in arbitrarily small variations in the image of the function.
+
+ \begin{definition}
+   Let \( E, F \) be Euclidean spaces, \( U\subset E \) a subset of \( E \) and \( f:U\to F \) a function. We say that \( f \) is \textbf{continuous} at \( x_0\in E \) if for all \( \epsilon>0 \), there exists a \( \delta>0 \) such that for all \( x\in U \) with \( \norm{x-x_0}<\delta \), we have \( \norm{f(x)-f(x_0)}<\epsilon \).
+
+   \vspace{3mm}
+
+   If \( f \) is continuous at all \( x\in U \), then we say that \( f \) is continuous on \( U \).
+ \end{definition}
+
+ One should notice that the above definition closely resembles that of the limit of a function, instead that the limit of the function as you approach a point is equal to the function evaluated at that particuar point, if it is continuous there. This is why people often like to say that a function \( f:U\to F \) is continuous at \( x_0\in U \) if \( \lim_{x\to x_0}f(x)=f(x_0) \). As continuity can be formulated in terms of a limit, we can obtain an analogous result to Proposition \ref{thm:limseq}, where we can formulate continuity via limits of sequences. The proof follows the same argument as Proposition \ref{thm:limseq}.
+
+ \begin{proposition}
+   \label{thm:seqcont}
+   Let \( E, F \) be Euclidean spaces, \( U\subset E \) a subset of \( E \) and \( f:U\to F \) a function. Then \( f \) is continuous at \( x_0\in U \) if and only if for all sequences \( (x_k)_{k=1}^\infty \) in \( U \) with \( x_k\to x_0 \) as \( k\to\infty \), we have that \( f(x_k)\to f(x_0) \) as \( k\to\infty \).
+ \end{proposition}
+
+ Thus, by the algebraic limit laws, the sum of continuous functions is continuous, and scalar multiples of continuous functions are continuous.
+
+ \vspace{3mm}
+
+ We conclude this section with a fun fact: linear maps between Euclidean spaces are automatically continuous. So linear maps are really, really nice to work with! This is another consequence of the finite dimensionality of the spaces we are working in.
+
+ \begin{theorem}
+   Let \( f:E\to F \) be a linear mapping between Euclidean spaces. Then \( f \) is continuous.
+ \end{theorem}
+ \begin{proof}
+   Let \( \qty{e_1,\dots, e_n} \) be an orthonormal basis for \( E \). Let \( x_0\in E \), and let \( (x_k)_{k=1}^\infty \) be a sequence in \( E \) such that \( x_k\to x_0 \) as \( k\to\infty \). We can write each term of the sequence as a linear combination of the basis vectors:
+   \[ x_k=a_{1k}e_1+\dots+a_{nk}e_n \]
+
+   Let's also expand \( x_0 \) in terms of the basis vectors:
+   \[ x_0=a_1e_1+\dots+a_ne_n \]
+
+   Now, we know that \( x_k\to x_0 \) as \( k\to\infty \) if and only if all of the real component sequences \( (a_{ik})_{k=1}^\infty \) converge to the corresponding component \( a_i \) of \( x_0 \), i.e we have that \( a_{ik}\to a_i \) as \( k\to\infty \) for each \( i=1,\dots,n \).
+
+   \vspace{3mm}
+
+   Finally, by the linearity of \( f \), we have that:
+   \begin{align*}
+     \lim_{k\to\infty}f(x_k)&= \lim_{k\to\infty}\sum_{i=1}^n a_{ik}f(e_i)\\
+     &= \sum_{i=1}^n f(e_i)\lim_{k\to\infty} a_{ik} &(\text{by linearity of limits})\\
+     &= \sum_{i=1}^n a_i f(e_i)\\
+     &= f\qty(\sum_{i=1}^n a_ie_i) &(\text{by linearity of }f)\\
+     &= f(x_0)
+   \end{align*}
+
+   By Proposition \ref{thm:seqcont}, this shows that \( f \) is continuous at \( x_0 \). Since the choice of \( x_0\in E \) was arbitrary, it follows that \( f \) is continuous on all of \( E \).
+ \end{proof}
+
 \section{Compactness}
 \section{Equivalence of Norms}
 \section{The Space \( L(E,F) \)}
