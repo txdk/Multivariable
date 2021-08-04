@@ -249,10 +249,10 @@ The notation \( x\cdot y \) is more commonly used instead of \( \ev{x,y} \) in t
 
 One powerful fact about inner products is that they can be used to define a norm in a very natural way. Let \( V \) be an inner product space. Then for any \( x\in V \), we set the norm of \( x \) to be given by \( \norm{x}=\ev{x,x}^{\frac{1}{2}} \). We say that the inner product `induces' a norm on \( V \). So in some sense, once we had defined the notion of angles on our vector space, we have already implicitly fixed some compatible notion of distance as well for free. The positivity and homogeneity properties of the norm follow readily from the properties of the inner product and from the definition of the induced norm. Proving the triangle inequality will take a little more work, and will rely on an identity known as the \emph{Schwarz inequality}:
 
-\begin{theorem}
+\begin{proposition}
   (Schwarz Inequality) Let \( V \) be an inner product space. For every \( x,y\in V \), we have:
   \[ \ev{x,y}\leq \norm{x}\norm{y} \]
-\end{theorem}
+\end{proposition}
 \begin{proof}
   Let \( x,y\in V \) and let \( t\in\R \). By positivity of the inner product, we have that \( \ev{x-ty,x-ty}\geq 0 \). This can be rewritten as:
   \begin{align*}
@@ -373,7 +373,7 @@ Orthonormality is a powerful condition. One immediate consequence of the orthono
   \vspace{3mm}
 
   
-  So \( a_1=0 \) for all \( i=1,\dots, m \). This proves the linear independence of the finite set \( \qty{e_1,\dots,e_m} \).
+  So \( a_i=0 \) for all \( i=1,\dots, m \). This proves the linear independence of the finite set \( \qty{e_1,\dots,e_m} \).
 
   \vspace{3mm}
 
@@ -913,7 +913,7 @@ Now we'll consider a few consequences of the completeness of Euclidean space. In
   Let \( m\in\N \). Fix \( i\in\qty{1,\dots,n} \). Since \( (a_{ik})_{k=1}^\infty \) is an increasing sequence, then \( a_{im}\leq a_i \). Additionally, since \( a_{ik}\leq b_{im} \) for all \( k\in\N \), then \( a_i\leq b_{im} \), since limits preserve inequalities. Hence, we have that \( a_i\in\qty[a_{im},b_{im}] \). Since this holds for each \( i \), this shows that \( x\in I_m \). Since the choice of \( m\in\N \) is arbitrary, then \( x \) is in every closed interval \( I_m \), and thus in the intersection of all of them.
 \end{proof}
 
-The Nested Interval Property is an immediate consequence of the completeness of Euclidean space. However, one may glance at our above proof and wonder where we used the completeness of Euclidean space in the argument? Secretly, we kind of cheated: rather than appealing to completeness of Euclidean space directly in the proof, we made use of the completeness of \( \R \) (in the form of the Monotone Convergence Theorem) and the finite-dimensionality of Euclidean space, which were the two key facts exploited in the completeness proof. One could certainly prove the Nested Interval Property directly from the completeness of Euclidean space, but we thought the above proof was quite simple and a further demonstration of how simple things are in a finite dimensional setting.
+The Nested Interval Property is an immediate consequence of the completeness of Euclidean space. However, one may glance at our above proof and wonder where we used the completeness of Euclidean space in the argument? Secretly, we kind of cheated: rather than appealing to completeness of Euclidean space directly in the proof, we made use of the completeness of \( \R \) (in the form of the Monotone Convergence Theorem) and the finite-dimensionality of Euclidean space, which were the two key facts exploited in the completeness proof. One could certainly prove the Nested Interval Property directly from the completeness of Euclidean space, but we thought the above proof was quite simple and a further demonstration of how easy things are in a finite dimensional setting.
 
 \vspace{3mm}
 
@@ -998,7 +998,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    Clearly, \( x_k\to x_0 \) as \( k\to\infty \). Hence, \( f(x_k)\to y_0 \) as \( k\to\infty \). This means that there exists an \( N\in\N \) such that for all \( k\geq N \), we have that \( \epsilon\leq \norm{f(x_k)-y_0}<\epsilon \). This is impossible, so we are forced to conclude that \( \lim_{x\to x_0}f(x)= y_0 \).
  \end{proof}
 
- We can thus easily derive the algebraic limit laws of functions from the above result and the corresponding facts for sequences: the limit of a sum of functions is the sum of the limits, and you can pull scalars through limits.
+ We can thus easily derive the algebraic limit laws of functions from the above result and the corresponding facts for sequences: the limit of a sum of functions is the sum of the limits, and you can pull scalars through limits. Moreover, limits behave 'nicely' with composition of functions: given \( f:E\to F \) and \( g:F\to G \) and \( a\in E \), if \( f(x)\to L\in F \) as \( x\to a \) and \( g(y)\to M \) as \( y\to L \), then \( g\circ f(x)\to M \) as \( x\to a \).
 
  \vspace{3mm}
 
@@ -1019,7 +1019,11 @@ A very useful fact is that limits of functions can be characterised in terms of 
    Let \( E, F \) be Euclidean spaces, \( U\subset E \) a subset of \( E \) and \( f:U\to F \) a function. Then \( f \) is continuous at \( x_0\in U \) if and only if for all sequences \( (x_k)_{k=1}^\infty \) in \( U \) with \( x_k\to x_0 \) as \( k\to\infty \), we have that \( f(x_k)\to f(x_0) \) as \( k\to\infty \).
  \end{proposition}
 
- Thus, by the algebraic limit laws, the sum of continuous functions is continuous, and scalar multiples of continuous functions are continuous.
+ Thus, by the algebraic limit laws, the sum of continuous functions is continuous, and scalar multiples of continuous functions are continuous. Additionally, the composition of continuous functions is continuous.
+
+ \vspace{3mm}
+
+ Let \( E \) be a Euclidean \( n \)-space and \( F \) a Euclidean \( m \)-space. Let \( \overline{e}_1,\dots,\overline{e}_m \) be a basis for \( F \). A multivariable function \( f:E\to F \) can be studied in terms of its real-valued component functions with respect to the basis in \( F \): \( f(x)=f_1(x)\overline{e}_1+\dots+f_m(x)\overline{e}_m \). One nice fact is that \( f \) is continuous if and only if each of the component functions \( f_i:E\to\R \), \( i=1,\dots, m \), are continuous, so that we can simply deal with real-valued functions.
 
  \vspace{3mm}
 
@@ -1051,9 +1055,176 @@ A very useful fact is that limits of functions can be characterised in terms of 
    By Proposition \ref{thm:seqcont}, this shows that \( f \) is continuous at \( x_0 \). Since the choice of \( x_0\in E \) was arbitrary, it follows that \( f \) is continuous on all of \( E \).
  \end{proof}
 
-\section{Compactness}
-\section{Equivalence of Norms}
-\section{The Space \( L(E,F) \)}
+ \section{Compactness}
+ Here we introduce a property of subsets of Euclidean space called \emph{compactness}. In some sense, it is an extension of the notion of finiteness of sets. While a compact set does not necessarily have finitely many elements, in a way it can always be described with a `finite amount of information'. The most general setting in which one can define compactness is in a topological space, in which the notion of a set being compact is basically that the set is `topologically finite':
+ \begin{definition}
+   Let \( X \) be a topological space. A subset \( A\subset X \) is \textbf{compact} if for every collection of open sets \( \mathcal{U}=\qty{U_\alpha\mid \alpha\in I} \) satisfying \( A\subset\bigcup_{\alpha\in I}U_\alpha \), there exists a finite subset \( \qty{U_1,\dots,U_r}\subset\mathcal{U} \) such that \( A\subset U_1\cup\dots\cup U_r \).
+ \end{definition}
+
+ A collection of open sets \( \mathcal{U} \) in the definition above is called an \textbf{open cover} of the set \( A \). Thus, we can more concisely recite the above definition by stating that a set is compact if every open cover has a finite subcover. So if we try to write down a compact set as a union of infinitely many open sets, we will always have `redundant information', and so we can afford to throw away most of the sets from the union until finitely many remain.
+
+ \vspace{3mm}
+
+ Any finite subset of a topological space is compact. This is in alignment with our introductory spiel that compactness generalises the notion of finiteness for sets.
+
+ \vspace{3mm}
+
+ Since Euclidean space is also a metric space, there exists a different notion of compactness that is phrased in terms of convergence of sequences, called \emph{sequential compactness}.
+
+ \begin{definition}
+   Let \( X \) be a metric space. A subset \( A\subset X \) is \textbf{sequentially compact} if every sequence in \( A \) has a convergent subsequence whose limit is contained in \( A \).
+ \end{definition}
+
+ We also have that every finite subset of a metric space is sequentially compact. Any sequence whose terms are taken from a finite set must take on at least one of the values from the set infinitely many times, and so we can construct from it a constant subsequence, which is obviously convergent within the set. So sequential compactness is another possibility for extending the notion of finiteness in a metric space setting.
+
+ \vspace{3mm}
+
+ Since every metric space can also be considered as a topological space using the metric topology, one can define both the notions of compactness and sequential compactness on a metric space. The remarkable fact that we will proceed to show is that these notions actually coincide.
+
+ \vspace{3mm}
+
+ Before we tackle the proof, we will require a useful auxillary result that we will use in order to construct a finite subcover of a given open cover of a sequentially compact set.
+
+ \begin{lemma}
+   (Lebesgue's number lemma) Let \( A\subset E \) be a sequentially compact subset of a metric space \( X \) and let \( \mathcal{U} \) be an open cover of \( A \). Then there exists a \( \delta>0 \) such that for all \( x\in A \), there exists a \( U\in\mathcal{U} \) such that \( B(x,\delta)\subset U \).
+ \end{lemma}
+ \begin{proof}
+   Assume for a contradiction that for all \( \delta>0 \), there exists an \( x\in A \) such that \( B(x,\delta)\cap (X\backslash U)\neq\emptyset \) for all \( U\in\mathcal{U} \). Then for each \( n\in\N \), pick an \( x_n\in A \) such that \( B\qty(x_n,\frac{1}{n})\cap (X\backslash U)\neq\emptyset \) for all \( U\in\mathcal{U} \).
+
+   \vspace{3mm}
+
+   This defines a sequence \( (x_n)_{n=1}^\infty \) in \( A \), which has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) since \( A \) is sequentially compact. Suppose that \( x_{n_k}\to a \) as \( k\to\infty \). Since \( a\in A \), then \( a\in V \) for some open set \( V\in\mathcal{U} \), since \( \mathcal{U} \) is an open cover of \( A \). This means that there exists an \( \epsilon>0 \) such that \( B(a,\epsilon)\subset V \). But by convergence of the subsequence \( (x_{n_k})_{k=1}^\infty \), there exists an \( N_1\in\N \) such that for all \( k\geq N_1 \) \( d(x_{n_k},a)<\frac{\epsilon}{2} \). Additionally, by the Archimedean property, there exists an \( N_2\in\N \) such that for all \( k\geq N_2 \), \( \frac{1}{k}<\frac{\epsilon}{2} \). Choose \( N=\max\qty{N_1,N_2} \). Then for all \( k\geq N \), we have that for any \( y\in B\qty(x_{n_k},\frac{1}{k}) \):
+   \[ d(y,a)\leq d(y,x_{n_k})+d(x_{n_k},a)<\frac{1}{k}+\frac{\epsilon}{2}<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon \]
+
+   So \( y\in B(a,\epsilon) \), and hence \( B\qty(x_{n_k},\frac{1}{k})\subset B(a,\epsilon)\subset V \), which contradicts the choice of \( x_{n_k} \).
+ \end{proof}
+ The positive constant \( \delta>0 \) in the lemma above is called a \emph{Lebesgue number} for the open cover \( \mathcal{U} \).
+
+ \begin{theorem}
+   Let \( X \) be a metric space and let \( A\subset X \). Then \( A \) is compact if and only if it is sequentially compact.
+ \end{theorem}
+ \begin{proof}
+   (\( \implies \)) We prove the contrapositive. Let \((x_n)_{n=1}^\infty  \) be a sequence in \( A \) with no convergent subsequence, and denote by \( S=\qty{x_n\in A\mid n\in\N} \) to be the set of terms in the sequence. Then any \( a\in A \) cannot be a limit point of \( S \), else one could construct a subsequence of \( (x_n)_{n=1}^\infty \) that converges to \( a \). Thus, for all \( a\in A \), there exists an \( r_a>0 \) such that \( \qty(B(a,r_a)\backslash\qty{a})\cap S=\emptyset \), that is, the ball \( B(a,r_a) \) contains no points in the sequence \( (x_n)_{n=1}^\infty \), except possibly \( a \) itself. Clearly, we have that \( \mathcal{U}=\bigcup_{a\in A}B(a,r_a) \) is an open cover of \( A \). The open cover \( \mathcal{U} \) cannot have a finite subcover, since any finite subset of \( \mathcal{U} \) can only contain finitely many terms of the sequence \( (x_n)_{n=1}^\infty \), all of which are points belonging to \( A \). We have thus proven that if \( A \) is \emph{not} sequentially compact, then it is \emph{not} compact.
+
+   \vspace{3mm}
+
+   (\( \impliedby \)) Suppose \( A \) is sequentially compact. Let \( \mathcal{U} \) be an open cover of \( A \). By Lebesgue's number lemma, there exists a \( \delta>0 \) such that for all \( x\in A \), there exists an open set \( U\in\mathcal{U} \) such that \( B(x,\delta)\subset U \). We will use this property to construct a finite subcover of \( \mathcal{U} \).
+
+   \vspace{3mm}
+
+   Pick any \( U_1\in\mathcal{U} \). If \( A\subset U_1 \), then we are done (\( U_1 \) would be a finite subcover of \( \mathcal{U} \)). Else, pick any \( x_1\in A\backslash U_1 \). By Lebesgue's number lemma, we can pick \( U_2\in\mathcal{U} \) such that \( B(x_1,\delta)\subset U_2 \). If \( A\subset U_1\cup U_2 \), we are done. Else, pick an \( x_2\in A\backslash\qty(U_1\cup U_2) \) and \( U_3\in\mathcal{U} \) satisfying \( B(x_2,\delta)\subset U_3 \). Notice that since \( x_2\notin U_1\cup U_2 \), then \( x_2\notin B(x_1,\delta) \), so that \( d(x_1,x_2)\geq\delta \).
+
+   \vspace{3mm}
+
+   Continue the process in the following fashion. Suppose we had a finite collection of open sets \( U_1,\dots U_n\in\mathcal{U} \) that was \emph{not} a subcover of \( \mathcal{U} \) and a finite subset \( \qty{x_1,\dots,x_{n-1}}\subset A \) such that \( d(x_i,x_j)\geq\delta \) for each \( i,j=1,\dots,n-1 \) with \( i\neq j \). Pick \( x_n\in A\backslash\qty(U_1\cup\dots\cup U_n) \) and \( U_{n+1}\in\mathcal{U} \) satisfying \( B(x_n,\delta)\subset U_{n+1} \). Since \( x_n\notin (U_1\cup\dots\cup U_n) \), then \( x_n\notin U_i \) for each \( i=1,\dots,n-1 \), and hence \( x_n\notin B(x_i,\delta) \) so that \( d(x_n,x_i)\geq\delta \).
+
+   \vspace{3mm}
+
+   Suppose that this process did \emph{not} terminate. That is, there does not exist an \( n\in\N \) such that \( A\subset U_1\cup\dots\cup U_n \). Then by induction on \( \N \), we obtain a sequence \( (x_n)_{n=1}^\infty \) in \( A \) with \( d(x_i,x_j)\geq\delta \) for all \( i,j\in\N \) with \( i\neq j \). By sequential compactness of \( A \), this sequence has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) with limit \( x\in A \). Hence, there exists an \( N\in\N \) such that for all \( k\geq N \), \( d(x_{n_k},x)<\frac{\delta}{2} \). But by construction, we have that \( x_{n_l}\notin B(x_k,\delta) \) for all \( l\geq k \), so \( d(x_{n_k},x_{n_l})\geq\delta \). Taking \( l\to\infty \), by continuity of the metric we have that \( d(x_{n_k},x)\geq\delta \). This is a contradiction, and so we must have that there exists an \( n\in\N \) such that \( A\subset U_1\cup\dots\cup U_n \), so that \( \mathcal{U} \) has a finite subcover.
+ \end{proof}
+
+ In light of the above result, we will simply use the term `compactness' to refer to both topological compactness and sequential compactness in the context of subsets of Euclidean space. In practice, most of the time when we invoke the property of compactness for a subset of Euclidean space, we will use sequential compactness because sequences are easier to work with, owing to the rich theory of sequences and convergence in a metric space.
+
+ \vspace{3mm}
+
+ Even better, the conditions for compactness become significantly simpler in a finite dimensional setting. This is the celebrated \emph{Heine-Borel Theorem}, which states that the compact subsets of Euclidean space are exactly the closed and bounded subsets. In general, for a metric space, every compact set is closed and bounded, but in Euclidean space, this becomes a sufficient condition for compactness.
+
+ \begin{theorem}
+   (Heine-Borel Theorem) Let \( E \) be a Euclidean space and let \( A\subset E \). Then \( A \) is compact if and only if it is closed and bounded.
+ \end{theorem}
+ \begin{proof}
+   (\( \implies \)) Suppose \( A\subset E \) is compact. To see that \( A \) is closed, let \( (a_n)_{n=1}^\infty \) be a sequence in \( A \) with limit \( a\in E \). Since \( A \) is (sequentially) compact, there exists a convergent subsequence \( (a_{n_k})_{k=1}^\infty \) with limit \( x\in A \). However, since the original sequence \( (a_n)_{n=1}^\infty \) is convergent, then the limits of any of its subsequences must be equal to \( a \). Hence, we see that \( a=x \), so that \( a\in A \). This shows that \( A \) is \emph{sequentially closed}, and hence closed.
+
+   \vspace{3mm}
+
+   Now, suppose for a contradiction that \( A \) was unbounded. Then for each \( n\in\N \), we can choose an \( x_n\in A \) such that \( \norm{x_n}>n \). This constructs a sequence \( (x_n)_{n=1}^\infty \) in \( A \). By (sequential) compactness of \( A \), this sequence has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) with limit \( x\in A \). However, taking \( N=\lceil\norm{x}+1\rceil \), we have for all \( k\geq N \) that \( \norm{x_{n_k}-x}\geq\abs{\norm{x_{n_k}}-\norm{x}}\geq 1 \) by the reverse triangle inequality, which contradicts the fact that \( x_{n_k}\to x \) as \( k\to\infty \). Hence, we must have that \( A \) is bounded.
+
+   \vspace{3mm}
+
+   (\( \impliedby \)) Suppose \( A\subset E \) is closed and bounded. Let \( (a_n)_{n=1}^\infty \) be a sequence in \( A \). Thus, \( (a_n)_{n=1}^\infty \) is a bounded sequence. By the Bolzano-Weierstrass Theorem, there exists a convergent subsequence \( (a_{n_k})_{k=1}^\infty \) with limit \( a\in E \). However, since \( A \) is closed, we must have that the limit is contained in \( A \), i.e \( a\in A \). This proves the (sequential) compactness of \( A \).
+ \end{proof}
+
+ Now that we have seen the various ways we can characterise a compact set in Euclidean space, we will now spend some time looking at why compact sets are nice to work with. In particular, compact sets interact nicely with continuous functions. The first fact we will look at is that if a continuous real-valued function defined on a compact set is always positive, then it does not get arbitrarily close to 0, that is, the function is bounded below by a positive constant.
+
+ \begin{proposition}
+   Let \( E \) be a Euclidean space, \( A\subset E \) a compact set, and \( f:A\to\R \) a continuous function with \( f(x)>0 \) for all \( x\in A \). Then there exists an \( \alpha>0 \) such that \( f(x)>\alpha \) for all \( x\in A \).
+ \end{proposition}
+ \begin{proof}
+   Suppose for a contradiction that for all \( \epsilon>0 \), there exists an \( x\in A \) such that \( f(x)\leq\epsilon \). Then for each \( n\in\N \), choose an \( x_n\in A \) such that \( f(x_n)\leq \frac{1}{n} \). This defines a sequence \( (x_n)_{n=1}^\infty \) in \( A \). By compactness of \( A \), there exists a subsequence \( (x_{n_k})_{k=1}^\infty \) that converges to \( a\in A \). By continuity of \( f \), we thus have that \( f(x_{n_k})\to f(a) \) as \( k\to\infty \). But:
+   \begin{align*}
+     \lim_{k\to\infty}f(x_{n_k})&\leq \lim_{k\to\infty}\frac{1}{n_k}\\
+     \therefore f(a)&\leq 0
+   \end{align*}
+
+   This contradicts the fact that \( f(x)>0 \) for all \( x\in A \).
+ \end{proof}
+
+ We will make use of the above result in the following section.
+
+ \vspace{3mm}
+
+ Compact sets are preserved by continuous functions. That is, the image of a compact set under a continuous function is itself a compact set:
+
+ \begin{proposition}
+   \label{thm:cptimage}
+   Let \( f:E\to F \) be a continuous mapping between Euclidean spaces and let \( A\subset E \) be a compact set. Then \( f(A) \) is a compact subset of \( F \).
+ \end{proposition}
+ \begin{proof}
+   Let \( (y_n)_{n=1}^\infty \) be a sequence in \( f(A) \). Then for each \( n\in\N \), there exists an \( x_n\in A \) such that \( y_n=f(x_n) \). Consider the sequence \( (x_n)_{n=1}^\infty \) in \( A \). By compactness of \( A \), this sequence has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) with limit \( x\in A \). By continuity of \( f \), we have that \( f(x_{n_k})\to f(x) \) as \( k\to\infty \), i.e \( y_{n_k}\to f(x)\in f(A) \) as \( k\to\infty \). So \( (y_{n_k})_{k=1}^\infty \) is a convergent subsequence of \( (y_n)_{n=1}^\infty \) whose limit is contained in \( f(A) \). Hence, \( f(A) \) is compact.
+ \end{proof}
+
+ An immediate application of the above fact is the \emph{Extreme Value Theorem}. This is an existence result that guarantees that a continuous real-valued function defined on a compact set achieves global extrema on its domain. Since one of the main goals of differential calculus is optimisation, it is a good first step to know that global extrema exist somewhere so it makes sense to look for them in the first place!
+ \begin{theorem}
+   (Extreme Value Theorem) Let \( E \) be a Euclidean space, \( A\subset E \) a compact set and \( f:A\to\R \) a continuous function. Then \( f \) attains a maximum and a minimum on \( A \).
+ \end{theorem}
+ \begin{proof}
+   By Proposition \ref{thm:cptimage}, we have that \( f(A) \) is a compact set. By the Heine-Borel Theorem, this implies that \( f(A) \) is a closed and bounded subset of \( \R \). The boundedness of \( f(A) \) implies that \( \sup f(A)<\infty \) and \( \inf f(A)>-\infty \). For each \( n\in\N \), choose \( x_n,y_n\in A \) such that \( \sup f(A)-\frac{1}{n}<f(x_n)\leq\sup f(A) \) and \( \inf f(A)\leq f(y_n)<\inf f(A)+\frac{1}{n} \). By taking limits as \( n\to\infty \) and applying the Squeeze Theorem, we see that \( f(x_n)\to\sup f(A) \) and \( f(y_n)\to\inf f(A) \) as \( n\to\infty \). By closedness of \( f(A) \), we have that \( \sup f(A)\in f(A) \) and \( \inf f(A)\in f(A) \), so there exists \( x_0,x_1\in A \) satisfying \( f(x_0)=\sup f(A) \) and \( f(x_1)=\inf f(A) \), i.e \( f \) attains a maximum at \( x_0 \) and a minimum at \( x_1 \).
+ \end{proof}
+ 
+ \section{Equivalence of Norms}
+ \begin{definition}
+   Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be norms on \( V \). We say that the norms \( \norm{-}_1 \) and \( \norm{-}_2 \) are \textbf{strongly equivalent} if there exists constants \( C,D>0 \) such that \( C\norm{x}_1\leq \norm{x}_2\leq D\norm{x}_1 \) for all \( x\in V \).
+ \end{definition}
+
+ \begin{theorem}
+   Let \( E \) be a Euclidean \( n \)-space. Then any two norms on \( E \) are strongly equivalent.
+ \end{theorem}
+
+ \begin{proposition}
+   Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be strongly equivalent norms on \( V \). Then a subset \( U\subset V \) is open with respect to the norm \( \norm{-}_1 \) if and only if \( U \) is open with respect to the norm \( \norm{-}_2 \).
+ \end{proposition}
+ 
+ \begin{proposition}
+   Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be strongly equivalent norms on \( V \). Let \( (x_n)_{n=1}^\infty \) be a sequence in \( V \). Then:
+   \begin{enumerate}[label=(\alph*)]
+   \item \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_1 \) if and only if \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_2 \).
+   \item \( \norm{x_n-x}_1\to 0 \) if and only if \( \norm{x_n-x}_2\to 0 \).
+   \end{enumerate}
+ \end{proposition}
+
+ \begin{proposition}
+   Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be strongly equivalent norms on \( V \). Then \( V \) is complete with respect to \( \norm{-}_1 \) if and only if \( V \) is complete with respect to \( \norm{-}_2 \).
+ \end{proposition}
+
+ Discussion on p-norms.
+ 
+ \section{The Space \( L(E,F) \)}
+ \begin{theorem}
+   Let \( E,F \) be vector spaces with \( \dim E=n \) and \( \dim F=m \). Then \( L(E,F) \) is an \( mn \)-dimensional vector space.
+ \end{theorem}
+
+ \begin{theorem}
+   Let \( E,F \) be normed vector spaces. Then \( L(E,F) \) is a normed vector space, with norm given by:
+   \[ \norm{f}=\sup_{\norm{x}=1}\qty{\norm{f(x)}\mid x\in E} \]
+ \end{theorem}
+
+ The norm defined on \( L(E,F) \) is often referred to as the `operator norm'.
+
+ \begin{theorem}
+   Let \( E,F \) be normed vector spaces. If \( F \) is complete, then \( L(E,F) \) is complete with respect to the operator norm.
+ \end{theorem}
+
+ An easy consequence of the above theorem is that the dual space \( E^*=L(E,\R) \) of any normed vector space \( E \) is complete since \( \R \) is complete. This is true regardless of whether \( E \) is complete or not.
 
 %%% Local Variables: 
 %%% mode: latex
