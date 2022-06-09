@@ -2,9 +2,9 @@
 
 \chapter{Preliminaries}
 \section{Vector Spaces}
-Our end goal is to do \emph{multivariable} calculus. That is, we want to differentiate and integrate (real) vector-valued functions of several variables. To this end, we'll need to rigourlously understand what a vector is so that we can comfortably manipulate them (beyond the highschool `definition' of `a vector is a quantity with both a magnitude and a direction'). Thus, we'll begin with a lightning review of basic concepts from linear algebra, beginning with the \emph{actual} definition of a vector. A vector is simply an element of a structure called a \emph{vector space}, which we define below:
+Our end goal is to do \emph{multivariable} calculus. That is, we want to differentiate and integrate (real) vector-valued functions of several variables. To this end, we'll need to rigourously understand what a vector is so that we can comfortably manipulate them (beyond the highschool `definition' of `a vector is a quantity with both a magnitude and a direction'). Thus, we'll begin with a lightning review of basic concepts from linear algebra, beginning with the \emph{actual} definition of a vector. A vector is simply an element of a structure called a \emph{vector space}, which we define below:
 \begin{definition}
-  A \textbf{vector space} over the field \( \mathbb{K} \) is a set \( V \), together with the operations of `vector addition' \( f:V\cross V\to V \) and `scalar multiplication' \(g:\mathbb{K}\cross V\to V  \), typically denoted by \(f(x,y)=x+y  \) and \( g(\alpha,x)=\alpha x \), which satisfy the following axioms:
+  A \textbf{vector space} over a field \( \mathbb{K} \) is a set \( V \), together with the operations of `vector addition' \( f:V\cross V\to V \) and `scalar multiplication' \(g:\mathbb{K}\cross V\to V  \), typically denoted by \(f(x,y)=x+y  \) and \( g(\alpha,x)=\alpha x \), which satisfy the following axioms:
   \begin{enumerate}[label=(\alph*)]
   \item \( V \) is an abelian group with respect to the binary operation of vector addition.
   \item Associativity of scalar multiplication: For every \( v\in V \) and \( a,b\in\mathbb{K} \), \( (ab)v=a(bv) \).
@@ -14,19 +14,19 @@ Our end goal is to do \emph{multivariable} calculus. That is, we want to differe
   \end{enumerate}
 \end{definition}
 
-We will only consider vector spaces over the field of real numbers; from now on we will let the field \( \mathbb{K} \) be \( \R \), and herein when we say `vector space' we are really referring to a \emph{real} vector space. The prototypical example of a vector space is the very first vector space that we all worked with before we even heard the term `vector space': namely, \( n \)-tuples of real numbers, \( \R^n \). Indeed, this will basically be the only vector space we will care about, as we will later see.
+We will only consider vector spaces over the field of real numbers; from now on we will let the arbitrary field \( \mathbb{K} \) be \( \R \), and herein when we say `vector space' we are implicitly referring to a \emph{real} vector space. The prototypical example of a vector space is the very first vector space that we all worked with before we even heard the term `vector space': namely, \( n \)-tuples of real numbers, \( \R^n \). Indeed, this will basically be the only vector space we will care about, as we will later see.
 
 \vspace{3mm}
 
-We'll now fly through some standard linear algebra concepts. Let \( V \) be a vector space. A \textbf{subspace} is a subset \( S\subset V \) if \( S \) is itself a vector space under the same vector addition and scalar multiplication operations, restricted to \( S \). Fortunately, to check that a subset of a vector space is a subspace, one does not actually have to check every single one of the vector space axioms. A necessary and sufficient condition for this is simply for the subset to be closed under vector addition and scalar multiplication, i.e for all \( x,y\in S \) and \( a\in\R \), \( x+y\in S \) and \( ax\in S \).
+We'll now fly through some standard linear algebra concepts. Let \( V \) be a vector space. A \textbf{subspace} is a subset \( S\subset V \) such that \( S \) is itself a vector space under the same vector addition and scalar multiplication operations, restricted to \( S \). Fortunately, to check that a subset of a vector space is a subspace, one does not actually have to check every single one of the vector space axioms. A necessary and sufficient condition for this is simply for the subset to be closed under vector addition and scalar multiplication, i.e.\ for all \( x,y\in S \) and \( a\in\R \), \( x+y\in S \) and \( ax\in S \).
 
 \vspace{3mm}
 
-A mapping \( f:S\to T \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e for all \( x,y\in S \) we have \( f(x+y)=f(x)+f(y) \) and for all \( a\in\R \) we have \( f(ax)=af(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same properties.
+A mapping \( f:S\to T \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e.\ for all \( x,y\in S \) we have \( f(x+y)=f(x)+f(y) \) and for all \( a\in\R \) we have \( f(ax)=af(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same algebraic properties.
 
 \vspace{3mm}
 
-Let \( f:S\to T \) be a vector space homomorphism. The set \( \ker f=\qty{x\in S\mid f(x)=0} \) is called the \textbf{kernel} of \( f \), and the set \( \mathcal{R}(f)=\qty{f(x)\mid x\in S} \) is called the \textbf{range} of \( f \). It can be easily shown that \( \ker f \) is a subspace of \( S \) and \( \mathcal{R}(f) \) is a subspace of \( T \). Another useful fact worth noting is that a linear map \( f \) is injective if and only if its kernel is trivial (i.e \( \ker f=\qty{0} \)). Hence, \( f \) is an isomorphism if and only if \( \ker f=\qty{0} \) and \( \mathcal{R}(f)=T \).
+Let \( f:S\to T \) be a vector space homomorphism. The set \( \ker f=\qty{x\in S\mid f(x)=0} \) is called the \textbf{kernel} of \( f \), and the set \( \mathcal{R}(f)=\qty{f(x)\mid x\in S} \) is called the \textbf{range} of \( f \). It can be easily shown that \( \ker f \) is a subspace of \( S \) and \( \mathcal{R}(f) \) is a subspace of \( T \). Another useful fact worth noting is that a linear map \( f \) is injective if and only if its kernel is trivial (i.e.\ \( \ker f=\qty{0} \)). Hence, \( f \) is an isomorphism if and only if \( \ker f=\qty{0} \) and \( \mathcal{R}(f)=T \).
 
 \vspace{3mm}
 
@@ -50,7 +50,7 @@ At last, we arrive at our desired criteria for a subset of a vector space to sum
   Let \( V \) be a vector space. A \textbf{basis} for \( V \) is a linearly independent subset \( A\subset V \) such that \( V=\text{span }A \).
 \end{definition}
 
-\emph{Fun remark:} The definition we provide above is that of a \emph{Hamel} basis. There are other types of bases. However, this distinction is not relevant for us in the finite dimensional setting, which we will be exclusively working in.
+\emph{`Fun' remark:} The definition we provide above is that of a \emph{Hamel} basis. There are other types of bases. However, this distinction is not relevant for us in the finite dimensional setting, which we will be exclusively working in.
 
 \vspace{3mm}
 
@@ -64,19 +64,22 @@ So, we would like to say that the number of elements in a basis quantifies the n
   Let \( V \) be a vector space. Then every basis of \( V \) has the same number of elements, or are all infinite.
 \end{theorem}
 \begin{proof}
-  Suppose \( \qty{v_1,\dots ,v_n} \) is a basis for \( V \) and suppose for a contradiction that \( \qty{x_1,\dots, x_{n+1}} \) is a linearly independent subset of \( V \). We can write \( x_1 \) as a linear combination of the basis elements:
+  Suppose \( \qty{v_1,\dots ,v_n} \) is a basis for \( V \) and suppose for a contradiction that \( \qty{x_1,\dots, x_{n+1}} \) is a linearly independent subset of \( V \). We can write \( x_1 \) as a linear combination of the basis elements
   \[ x_1=a_{11}v_1+\dots a_{1n}v_n \]
-  where \( a_{1i}\in\R \) for all \( i=1,\dots, n \). Since \(\qty{x_1,\dots, x_{n+1}}  \) is a linearly independent set, then \( x_1\neq 0 \), so that not all of the \( a_{1i} \)'s are zero. Without loss of generality, suppose that \( a_{11}\neq 0 \) (else swap its label with one of the \( a_{1i} \)'s that is nonzero, and also exchange the indices of the corresponding basis vectors accordingly). Then we can rearrange the above expression to solve for \( v_1 \):
-  \[ v_1=\frac{1}{a_{11}}\qty(x_1-a_{12}v_2-\dots-a_{1n}v_n) \]
-  It follows that the set \( \qty{x_1,v_2,\dots v_n} \) is a basis for \( V \). To see this, let \( y\in V \). Then \( y=c_1v_1+\dots +c_nv_n \) for constants \( c_1,\dots,c_n\in\R \) (since the \( v_i \)'s form a basis for \( V \)). Thus, we have that:
-  \[ y=\frac{c_1}{a_{11}}x_1+\qty(c_2-\frac{a_{12}}{a_{11}})v_2+\dots+\qty(c_n-\frac{a_{1n}}{a_{11}})v_n \]
-  So \( y \) can be written as a linear combination of the vectors \( x_1,v_2,\dots,v_n \), i.e \( y\in\text{span}\qty{x_1,v_2,\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, we have that \( V=\text{span}\qty{x_1,v_2,\dots,v_n} \). Linear independence of this set follows from the linear independence of the original basis. Indeed, consider the following vector equation:
+  where \( a_{1i}\in\R \) for all \( i=1,\dots, n \). Since \(\qty{x_1,\dots, x_{n+1}}  \) is a linearly independent set, then \( x_1\neq 0 \), so that not all of the \( a_{1i} \)'s are zero. Without loss of generality, suppose that \( a_{11}\neq 0 \) (else swap its label with one of the \( a_{1i} \)'s that is nonzero, and also exchange the indices of the corresponding basis vectors accordingly). Then we can rearrange the above expression to solve for \( v_1 \)
+  \[ v_1=\frac{1}{a_{11}}\qty(x_1-a_{12}v_2-\dots-a_{1n}v_n)\fstop \]
+  
+  It follows that the set \( \qty{x_1,v_2,\dots v_n} \) is a basis for \( V \). To see this, let \( y\in V \). Then \( y=c_1v_1+\dots +c_nv_n \) for constants \( c_1,\dots,c_n\in\R \) (since the \( v_i \)'s form a basis for \( V \)). Thus, we have that
+  \[ y=\frac{c_1}{a_{11}}x_1+\qty(c_2-\frac{a_{12}}{a_{11}})v_2+\dots+\qty(c_n-\frac{a_{1n}}{a_{11}})v_n\fstop \]
+  
+  So \( y \) can be written as a linear combination of the vectors \( x_1,v_2,\dots,v_n \), i.e.\ \( y\in\text{span}\qty{x_1,v_2,\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, we have that \( V=\text{span}\qty{x_1,v_2,\dots,v_n} \). Linear independence of this set follows from the linear independence of the original basis. Indeed, consider the following vector equation
   \[ k_1x_1+k_2v_2+\dots+k_nv_n=0 \]
-  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_1 \) in terms of the original basis gives:
+  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_1 \) in terms of the original basis gives
   \begin{align*}
     0&= k_1\qty(a_{11}v_1+\dots a_{1n}v_n)+k_2v_2+\dots+k_nv_n\\
-    &= k_1a_{11}v_1+\qty(k_1a_{12}+k_2)v_2+\dots+\qty(k_1a_{1n}+k_n)v_n
+    &= k_1a_{11}v_1+\qty(k_1a_{12}+k_2)v_2+\dots+\qty(k_1a_{1n}+k_n)v_n\fstop
   \end{align*}
+  
   Now, by linear independence of \( \qty{v_1,\dots,v_n} \), all of the coefficients in the above equation must vanish. In particular, we see that \( k_1a_{11}=0 \), which implies that \( k_1=0 \) since \( a_{11}\neq 0 \) by assumption. Then, since \( k_1a_{1i}+k_i=0 \) for all \( i=2,\dots, n \), we must have that \( k_i=0 \) as well. Hence, \( \qty{x_1,v_2,\dots, v_n} \) is linearly independent, and our claim is proven.
 
   \vspace{3mm}
@@ -85,25 +88,28 @@ So, we would like to say that the number of elements in a basis quantifies the n
 
   \vspace{3mm}
 
-  Suppose we have replaced \( j \) of the basis vectors, and we have that \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) is a basis for \( V \) (after possibly some relabelling of the vectors). We will show that we will obtain a basis by replacing one of the remaining \( v_i \)'s with \( x_{j+1} \). The argument will follow quite similarly to our first replacement process. Write \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \):
-  \[ x_{j+1}=a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n \]
-  Since \( x_{j+1}\neq 0 \), then not all of the coefficients \( a_{j+1,i} \) are zero. In fact, we must have that \( a_{j+1,i}\neq 0 \) for some \( i\geq j+1 \) (if this were not the case, then it follows that \( x_{j+1} \) is a linear combination of the vectors \( x_1,\dots, x_j \), which contradicts the linear independence of the \( x_i \)'s). Without loss of generality, we'll take \( a_{j+1,j+1}\neq 0 \). Hence, we can write:
-  \[ v_{j+1}=\frac{1}{a_{j+1,j+1}}\qty(x_{j+1}-a_{j+1,1}x_1-\dots -a_{j+1,j}x_j-a_{j+1,j+2}v_{j+2}-\dots a_{j+1,n}v_n) \]
-  We'll now demonstrate that \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \) is a basis for \( V \). Let \( y\in V \). Writing \( y \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields:
+  Suppose we have replaced \( j \) of the basis vectors, and we have that \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) is a basis for \( V \) (after possibly some relabelling of the vectors). We will show that we will obtain a basis by replacing one of the remaining \( v_i \)'s with \( x_{j+1} \). The argument will follow quite similarly to our first replacement process. Write \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \)
+  \[ x_{j+1}=a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n\fstop \]
+  
+  Since \( x_{j+1}\neq 0 \), then not all of the coefficients \( a_{j+1,i} \) are zero. In fact, we must have that \( a_{j+1,i}\neq 0 \) for some \( i\geq j+1 \) (if this were not the case, then it follows that \( x_{j+1} \) is a linear combination of the vectors \( x_1,\dots, x_j \), which contradicts the linear independence of the \( x_i \)'s). Without loss of generality, we'll take \( a_{j+1,j+1}\neq 0 \). Hence, we can write
+  \[ v_{j+1}=\frac{1}{a_{j+1,j+1}}\qty(x_{j+1}-a_{j+1,1}x_1-\dots -a_{j+1,j}x_j-a_{j+1,j+2}v_{j+2}-\dots a_{j+1,n}v_n)\fstop \]
+  
+  We'll now demonstrate that \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \) is a basis for \( V \). Let \( y\in V \). Writing \( y \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields
   \[ y=c_1x_1+\dots+c_jx_j+c_{j+1}v_{j+1}+\dots+c_nv_n \]
-  for some constants \( c_1,\dots,c_n\in\R \). Substituting in our expression for \( v_{j+1} \) gives:
-  \[ y=\qty(c_1-\frac{a_{j+1,1}}{a_{j+1,j+1}})x_1+\dots\qty(c_j-\frac{a_{j+1,j}}{a_{j+1,j+1}})x_j+\frac{c_{j+1}}{a_{j+1,j+1}}x_{j+1}+\qty(c_{j+2}-\frac{a_{j+1,j+2}}{a_{j+1,j+1}})v_{j+2}+\dots+\qty(c_n-\frac{a_{j+1,n}}{a_{j+1,j+1}})v_n \]
+  for some constants \( c_1,\dots,c_n\in\R \). Substituting in our expression for \( v_{j+1} \) gives
+  \[ y=\qty(c_1-\frac{a_{j+1,1}}{a_{j+1,j+1}})x_1+\dots\qty(c_j-\frac{a_{j+1,j}}{a_{j+1,j+1}})x_j+\frac{c_{j+1}}{a_{j+1,j+1}}x_{j+1}+\qty(c_{j+2}-\frac{a_{j+1,j+2}}{a_{j+1,j+1}})v_{j+2}+\dots+\qty(c_n-\frac{a_{j+1,n}}{a_{j+1,j+1}})v_n\fstop \]
+  
   Hence \( y\in\text{span}\qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, it follows that \( V=\text{span}\qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \).
 
   \vspace{3mm}
 
   Now we'll demonstrate linear independence. Consider the following vector equation:
   \[ k_1x_1+\dots+k_{j+1}x_{j+1}+k_{j+2}v_{j+2}+\dots+k_nv_n=0 \]
-  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields:
+  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields
   \begin{align*}
     0&= k_1x_1+\dots+k_{j+1}\qty(a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n)+k_{j+2}v_{j+2}+\dots+k_nv_n\\
     &= \qty(k_1+k_{j+1}a_{j+1,1})x_1+\dots+\qty(k_j+k_{j+1}a_{j+1,j})x_j+k_{j+1}a_{j+1,j+1}v_{j+1}+\qty(k_{j+2}+k_{j+1}a_{j+1,j+2})v_{j+2}+\\
-    &\hspace{6mm}\dots+\qty(k_n+k_{j+1}a_{j+1,n})v_n
+    &\hspace{6mm}\dots+\qty(k_n+k_{j+1}a_{j+1,n})v_n\fstop
   \end{align*}
 
   By linear independence of \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \), all of the above coefficients must vanish. In particular, consider the \( j+1 \) coefficient: \( k_{j+1}a_{j+1,j+1}=0 \). From this, we conclude that \( k_{j+1}=0 \) since \( a_{j+1,j+1}\neq 0 \), and hence looking at the remaining coefficients we must have \( k_i=0 \) for all \( i=1,\dots, n \), thus demonstrating the linear independence of \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \), and hence proving that it is a basis for \( V \).
@@ -137,10 +143,10 @@ Another simplification in the finite dimensional setting is that there actually 
   Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is isomorphic to \( \R^n \).
 \end{theorem}
 \begin{proof}
-  Let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Define the mapping \( \phi:V\to\R^n \) to act on \( v=a_1v_1+\dots+a_nv_n \) by:
+  Let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Define the mapping \( \phi:V\to\R^n \) to act on \( v=a_1v_1+\dots+a_nv_n \) by
   \begin{align*}
     \phi(v)&=\phi(a_1v_1+\dots+a_nv_n)\\
-    &= (a_1,\dots,a_n)^T
+    &= (a_1,\dots,a_n)^T\fstop
   \end{align*}
 
   So \( \phi \) is the canonical map that maps a vector \( v\in V \) to an \( n \)-tuple of real numbers, which are simply the coordinates of \( v \) with respect to a certain basis of \( V \). We will show that \( \phi \) is an isomorphism.
@@ -155,18 +161,18 @@ Another simplification in the finite dimensional setting is that there actually 
 
   \vspace{3mm}
 
-  Let \( v=a_1v_1+\dots+a_nv_n\in V \) and \( w=b_1v_1+\dots+b_nv_n\in V \). Then:
+  Let \( v=a_1v_1+\dots+a_nv_n\in V \) and \( w=b_1v_1+\dots+b_nv_n\in V \). Then
   \begin{align*}
     \phi(v+w)&= (a_1+b_1,\dots,a_n+b_n)\\
     &= (a_1,\dots,a_n)+(b_1,\dots,b_n)\\
-    &= \phi(v)+\phi(w)
+    &= \phi(v)+\phi(w)\fstop
   \end{align*}
 
-  Let \( v\in V \) be as above and let \( k\in\R \). Then:
+  Let \( v\in V \) be as above and let \( k\in\R \). Then
   \begin{align*}
     \phi(kv)&= (ka_1,\dots,ka_n)\\
     &= k(a_1,\dots,a_n)\\
-    &= k\phi(v)
+    &= k\phi(v)\fstop
   \end{align*}
 
   Thus, \( \phi \) is a vector space homomorphism. Together with the fact that \( \phi \) is bijective, we have hence shown that \( \phi \) is an isomorphism.
@@ -176,7 +182,7 @@ So any two \( n \)-dimensional vector spaces are isomorphic. This is what we mea
 
 \vspace{3mm}
 
-One more tidbit that we should address is to show that two vector spaces of different dimensions cannot be isomorphic, so that finite dimensional vector spaces are isomorphic if and only if their dimensions are equal (i.e dimension is a vector space property that is preserved by isomorphism). This fact would imply that we have completely classified every single finite dimensional vector space: there is only one unique vector space for each dimension \( n\in\N \) - namely \( \R^n \), and \( \R^n\simeq\R^m \) if and only if \( m=n \).
+One more tidbit that we should address is to show that two vector spaces of different dimensions cannot be isomorphic, so that finite dimensional vector spaces are isomorphic if and only if their dimensions are equal (i.e.\ dimension is a vector space property that is preserved by isomorphism). This fact would imply that we have completely classified every single finite dimensional vector space: there is only one unique vector space for each dimension \( n\in\N \) - namely \( \R^n \), and \( \R^n\simeq\R^m \) if and only if \( m=n \).
 
 \begin{proposition}
   Let \( V \) and \( W \) be finite dimensional vector spaces. If \( V \) and \( W \) are isomorphic, then \( \dim V=\dim W \).
@@ -189,21 +195,25 @@ One more tidbit that we should address is to show that two vector spaces of diff
   First, we prove linear independence. Consider the following vector equation:
   \[ a_1\phi(v_1)+\dots+a_n\phi(v_n)=0 \]
   where \( a_i\in\R \) for \( i=1,\dots, n \). By linearity of the mapping \( \phi \), this is equivalent to:
-  \[ \phi(a_1v_1+\dots+a_nv_n)=0 \]
+  \[ \phi(a_1v_1+\dots+a_nv_n)=0\fstop \]
+  
   So \( a_1v_1+\dots+a_nv_n\in\ker\phi \). However, since \( \phi \) is injective, \( \ker\phi=\qty{0} \). It follows that:
-  \[ a_1v_1+\dots+a_nv_n=0 \]
+  \[ a_1v_1+\dots+a_nv_n=0\fstop \]
+  
   By linear independence of \( \qty{v_1,\dots,v_n} \), it follows that \( a_i=0 \) for all \( i=1,\dots,n \). Hence, \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is linearly independent.
 
   \vspace{3mm}
 
   Let \( w\in W \). Since \( \phi \) is surjective, there exists a \( v\in V \) such that \( w=\phi(v) \). Express \( v \) in terms of the basis \( \qty{v_1,\dots,v_n} \):
-  \[ v=c_1v_1+\dots+c_nv_n \]
+  \[ v=c_1v_1+\dots+c_nv_n\fstop \]
+  
   Then:
   \begin{align*}
     w&= \phi(v)\\
     &= \phi(c_1v_1+\dots+c_nv_n)\\
-    &= c_1\phi(v_1)+\dots+c_n\phi(v_n) &(\text{by linearity of }\phi)
+    &= c_1\phi(v_1)+\dots+c_n\phi(v_n) &(\text{by linearity of }\phi)\fstop
   \end{align*}
+  
   Hence, \( w\in\text{span}\qty{\phi(v_1),\dots,\phi(v_n)} \). Since the choice of \( w\in W \) is arbitrary, it follows that \( W=\text{span}\qty{\phi(v_1),\dots,\phi(v_n)} \). This shows that \( \qty{\phi(v_1),\dots,\phi(v_n)} \) is a basis for \( W \), which has \( n \) elements. By definition, this implies that \( \dim W=n=\dim V \).
 \end{proof}
 
@@ -213,6 +223,7 @@ In summary, we have proven the following very important result about finite dime
 \end{theorem}
 
 \section{Euclidean Space}
+\label{sec:EuclidSpace}
 Now that we have formulated all of the algebraic structure of the multidimensional spaces we will be working in, we will need to endow some further structure onto these spaces in order to do calculus. Of great importance is the ability to measure distances between points/vectors in our space. At the heart of analysis/calculus is the notion of \emph{limits} and \emph{convergence}. We will also frequently want to find bounds and estimates for quantities that may very well be vector-valued. So what we ultimately want is to prescribe some notion of `length' for vectors, which will in turn naturally define a distance between two vectors (simply take the length of the difference of the two vectors). This is captured by the concept of a vector \emph{norm}.
 
 \begin{definition}
@@ -237,12 +248,13 @@ Another useful concept from coordinate geometry is the notion of angles. This wi
   A vector space together with an inner product is called an \textbf{inner product space}.
 \end{definition}
 
-By symmetry of the inner product, we can deduce from the definition that \( \ev{x,ay}=a\ev{x,y} \) and \( \ev{x,y+z}=\ev{x,z}+\ev{y,z} \). Hence, an inner product on a vector space is simply a bilinear function (i.e it becomes a linear function of one variable if we fix the value of the other input variable).
+By symmetry of the inner product, we can deduce from the definition that \( \ev{x,ay}=a\ev{x,y} \) and \( \ev{x,y+z}=\ev{x,z}+\ev{y,z} \). Hence, an inner product on a vector space is simply a bilinear function (i.e.\ it becomes a linear function of one variable if we fix the value of the other input variable).
 
 \vspace{3mm}
 
 You are likely already quite familiar with an inner product on \( \R^n \) from coordinate geometry, more commonly known as the dot product or scalar product. Given elements \( x=(x_1,\dots,x_n)^T\in\R^n \) and \( y=(y_1,\dots,y_n)^T\in\R^n \), we define the dot product as:
-\[ \ev{x,y}=\sum_{i=1}^nx_iy_i \]
+\[ \ev{x,y}=\sum_{i=1}^nx_iy_i\fstop \]
+
 The notation \( x\cdot y \) is more commonly used instead of \( \ev{x,y} \) in this context. It is not too hard to see that the dot product is indeed an inner product on \( \R^n \).
 
 \vspace{3mm}
@@ -250,26 +262,28 @@ The notation \( x\cdot y \) is more commonly used instead of \( \ev{x,y} \) in t
 One powerful fact about inner products is that they can be used to define a norm in a very natural way. Let \( V \) be an inner product space. Then for any \( x\in V \), we set the norm of \( x \) to be given by \( \norm{x}=\ev{x,x}^{\frac{1}{2}} \). We say that the inner product `induces' a norm on \( V \). So in some sense, once we had defined the notion of angles on our vector space, we have already implicitly fixed some compatible notion of distance as well for free. The positivity and homogeneity properties of the norm follow readily from the properties of the inner product and from the definition of the induced norm. Proving the triangle inequality will take a little more work, and will rely on an identity known as the \emph{Schwarz inequality}:
 
 \begin{proposition}
-  (Schwarz Inequality) Let \( V \) be an inner product space. For every \( x,y\in V \), we have:
-  \[ \ev{x,y}\leq \norm{x}\norm{y} \]
+  (Schwarz Inequality) Let \( V \) be an inner product space. For every \( x,y\in V \), we have
+  \[ \ev{x,y}\leq \norm{x}\norm{y}\fstop \]
 \end{proposition}
 \begin{proof}
-  Let \( x,y\in V \) and let \( t\in\R \). By positivity of the inner product, we have that \( \ev{x-ty,x-ty}\geq 0 \). This can be rewritten as:
+  Let \( x,y\in V \) and let \( t\in\R \). By positivity of the inner product, we have that \( \ev{x-ty,x-ty}\geq 0 \). This can be rewritten as
   \begin{align*}
     0&\leq \ev{x-ty,x-ty}\\
     &= \ev{x,x}-t\ev{x,y}-t\ev{y,x}+t^2\ev{y,y}\\
-    &= \norm{x}^2-2t\ev{x,y}+t^2\norm{y}^2
+    &= \norm{x}^2-2t\ev{x,y}+t^2\norm{y}^2\fstop
   \end{align*}
-  So we have a real quadratic equation in the variable \( t \). The quadratic can have at most a single zero, since \( \ev{x-ty,x-ty}=0 \) if and only if \( x-ty=0 \), i.e \( x=ty \). Hence, the discriminant of the quadratic must be either 0 (which corresponds to the single zero) or negative (no real zeros). The discriminant of the quadratic is:
-  \[ 4\ev{x,y}^2-4\norm{x}^2\norm{y}^2 \]
-  Putting this all together, we conclude that:
+  
+  So we have a real quadratic equation in the variable \( t \). The quadratic can have at most a single zero, since \( \ev{x-ty,x-ty}=0 \) if and only if \( x-ty=0 \), i.e.\ \( x=ty \). Hence, the discriminant of the quadratic must be either 0 (which corresponds to the single zero) or negative (no real zeros). The discriminant of the quadratic is
+  \[ 4\ev{x,y}^2-4\norm{x}^2\norm{y}^2\fstop \]
+  
+  Putting this all together, we conclude that
   \begin{align*}
     4\ev{x,y}^2-4\norm{x}^2\norm{y}^2&\leq 0\\
-    \ev{x,y}&\leq\norm{x}\norm{y}
+    \ev{x,y}&\leq\norm{x}\norm{y}\fstop
   \end{align*}
 \end{proof}
 
-From the above proof, we note that equality occurs in the Schwarz inequality if and only if \( x=ty \) (i.e the vectors are scalar multiples of each other).
+From the above proof, we note that equality occurs in the Schwarz inequality if and only if \( x=ty \) (i.e.\ the vectors are scalar multiples of each other).
 
 \vspace{3mm}
 
@@ -293,8 +307,9 @@ We are now ready to tackle the proof that the inner product gives rise to a vect
     &= \ev{x,x}+2\ev{x,y}+\ev{y,y}\\
     &= \norm{x}^2+2\ev{x,y}+\norm{y}^2\\
     &\leq \norm{x}^2+2\norm{x}\norm{y}+\norm{y}^2 &(\text{by the Schwarz inequality})\\
-    &= \qty(\norm{x}+\norm{y})^2
+    &= \qty(\norm{x}+\norm{y})^2\fstop
   \end{align*}
+  
   Taking square roots gives the desired result: \( \norm{x+y}\leq\norm{x}+\norm{y} \).
 \end{proof}
 
@@ -316,7 +331,7 @@ We mentioned earlier that once we had a norm on a vector space, this was suffici
   Let \( V \) be a normed vector space. The function \( d:V\cross V\to\R \) defined by \( d(x,y)=\norm{x-y} \) is a metric on \( V \).
 \end{theorem}
 \begin{proof}
-  \emph{Positivity:} Let \( x,y\in V \). Then \( d(x,y)=\norm{x-y}\geq 0 \) by positivity of the norm. Furthermore, \( d(x,y)=0 \) if and only if \( x-y=0 \), i.e \( x=y \).
+  \emph{Positivity:} Let \( x,y\in V \). Then \( d(x,y)=\norm{x-y}\geq 0 \) by positivity of the norm. Furthermore, \( d(x,y)=0 \) if and only if \( x-y=0 \), i.e.\ \( x=y \).
 
   \vspace{3mm}
 
@@ -329,7 +344,7 @@ We mentioned earlier that once we had a norm on a vector space, this was suffici
     d(x,z)&= \norm{x-z}\\
     &= \norm{(x-y)+(y-z)}\\
     &\leq \norm{x-y}+\norm{y-z} &(\text{since the norm obeys the triangle inequality})\\
-    &= d(x,y)+d(y,z)
+    &= d(x,y)+d(y,z)\fstop
   \end{align*}
 \end{proof}
 
@@ -337,8 +352,8 @@ In summary, by defining an inner product on our vector space, the inner product 
 
 \vspace{3mm}
 
-Returning to the example of \( \R^n \), we see that \( \R^n \) together with the dot product defines a Euclidean \( n \)-space. In fact, it is interesting to note that the metric induced by the dot product is simply the function that returns the Euclidean distance between two points in \( \R^n \) (i.e the Euclidean metric \( d_2 \)):
-\[ d_2(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2} \]
+Returning to the example of \( \R^n \), we see that \( \R^n \) together with the dot product defines a Euclidean \( n \)-space. In fact, it is interesting to note that the metric induced by the dot product is simply the function that returns the Euclidean distance between two points in \( \R^n \) (i.e.\ the Euclidean metric \( d_2 \)):
+\[ d_2(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2}\fstop \]
 
 In the previous section, we showed that all \( n \)-dimensional vector spaces are isomorphic to each other, and in particular, \( \R^n \), so we can just talk about \( \R^n \) without any loss of generality. Even better, it is the case that all \( n \)-dimensional inner product spaces are isomorphic, and moreover the inner product is preserved by the isomorphism. Thus, there is essentially only one Euclidean \( n \)-space up to isomorphism: namely, \( \R^n \) with the dot product. The proof of this will be the subject of the following section.
 
@@ -378,13 +393,15 @@ Orthonormality is a powerful condition. One immediate consequence of the orthono
   \vspace{3mm}
 
   Now suppose for a contradiction there exists an orthonormal set \( A\subset E \) with more than \( n \) elements. Pick \( n \) elements from \( A \) to form the orthonormal set \( \qty{e_1,\dots,e_n} \), which is linearly independent from what we have just proven. Hence, it forms a basis for \( E \). Pick another \emph{distinct} element \( e_{n+1}\in A \), and write it as a linear combination of the basis elements:
-  \[ e_{n+1}=k_1e_1+\dots+k_ne_n \]
+  \[ e_{n+1}=k_1e_1+\dots+k_ne_n\fstop \]
+  
   Now take the inner product of the above equation with \( e_{n+1} \):
   \begin{align*}
     \ev{e_{n+1},e_{n+1}}&= \ev{e_{n+1},\sum_{j=1}^nk_je_j}\\
     &= \sum_{j=1}^nk_j\ev{e_{n+1},e_j}\\
-    &= 0
+    &= 0\fstop
   \end{align*}
+  
   However, \( \ev{e_{n+1},e_{n+1}}=\norm{e_{n+1}}^2=1 \), so we have that \( 1=0 \); a contradiction. It follows that there cannot exist an orthonormal set in \( E \) with more than \( n \) elements. Since we have proven that every orthonormal set with \( m\leq n \) elements is linearly independent, then we thus conclude that every orthonormal set in \( E \) is linearly independent.
 \end{proof}
 
@@ -398,14 +415,15 @@ Now that we are sufficiently hyped up about orthonormal bases, the next natural 
   Let \( E \) be a Euclidean \( n \)-space. Then there exists an orthonormal subset \( A\subset E \) consisting of \( n \) elements.
 \end{proposition}
 \begin{proof}
-  Let \( \qty{v_1,\dots,v_n} \) be a linearly independent set in \( E \). It is worth pointing out that none of the vectors are 0 due to linear independence. Thus, we can create an orthonormal set of one element by taking the first element from the set and normalising it: define \( e_1=\flatfrac{v_1}{\norm{v_1}} \). Then \( \qty{e_1} \) is an orthonormal set, and e.g \( \qty{e_1,v_2} \) is a linearly independent set (since \( e_1 \) is simply a scalar multiple of \( v_1 \)). This sets us up to prove the inductive step.
+  Let \( \qty{v_1,\dots,v_n} \) be a linearly independent set in \( E \). It is worth pointing out that none of the vectors are 0 due to linear independence. Thus, we can create an orthonormal set of one element by taking the first element from the set and normalising it: define \( e_1=\flatfrac{v_1}{\norm{v_1}} \). Then \( \qty{e_1} \) is an orthonormal set, and e.g.\ \( \qty{e_1,v_2} \) is a linearly independent set (since \( e_1 \) is simply a scalar multiple of \( v_1 \)). This sets us up to prove the inductive step.
 
   \vspace{3mm}
 
   Suppose that we had that \( \qty{e_1,\dots,e_k} \) is an orthonormal set (\( k<n \)) and that \( \qty{e_1,\dots,e_k,v_{k+1}} \) is a linearly independent set. Define:
-  \[ y_{k+1}=v_{k+1}-\sum_{j=1}^k\ev{v_{k+1},e_j}e_j \]
+  \[ y_{k+1}=v_{k+1}-\sum_{j=1}^k\ev{v_{k+1},e_j}e_j\fstop \]
+  
   It follows that \( y_{k+1}\neq 0 \) since \( y_{k+1} \) is a linear combination of \( e_1,\dots,e_k,v_{k+1} \), which is a linearly independent set - and so the only way for such a linear combination to yield the zero vector is if all of the coefficients are 0, which is not the case here. Hence, \( \norm{y_{k+1}}\neq 0 \), and so we can safely define:
-  \[ e_{k+1}=\frac{y_{k+1}}{\norm{y_{k+1}}} \]
+  \[ e_{k+1}=\frac{y_{k+1}}{\norm{y_{k+1}}}\fstop \]
 
   So \( \norm{e_{k+1}}=1 \), and for all \( i=1,\dots,k \):
   \begin{align*}
@@ -413,7 +431,7 @@ Now that we are sufficiently hyped up about orthonormal bases, the next natural 
     &= \frac{1}{\norm{y_{k+1}}}\qty(\ev{v_{k+1},e_i}-\sum_{j=1}^k\ev{v_{k+1},e_i}\ev{e_j,e_i})\\
     &= \frac{1}{\norm{y_{k+1}}}\qty(\ev{v_{k+1},e_i}-\sum_{j=1}^k\ev{v_{k+1},e_j}\delta_{ij})\\
     &= \frac{1}{\norm{y_{k+1}}}\qty(\ev{v_{k+1},e_i}-\ev{v_{k+1},e_i})\\
-    &= 0
+    &= 0\fstop
   \end{align*}
 
   Hence, \( \qty{e_1,\dots,e_{k+1}} \) is an orthonormal set. If \( k+1<n \), then there is still an element \( v_{k+2} \) that cannot be written as a linear combination of the orthonormal set \( \qty{e_1,\dots,e_{k+1}} \), since the \( e_i \)'s are simply linear combinations of \( v_1,\dots,v_{k+1} \), but \( \qty{v_1,\dots,v_{k+2}} \) is a linearly independent set. It follows that \( \qty{e_1,\dots,e_{k+1},v_{k+2}} \) is a linearly independent set. We can then proceed via induction to deduce that we can produce an orthonormal set \( \qty{e_1,\dots, e_n} \).
@@ -427,7 +445,7 @@ The previous two results together imply the following:
 Let us return to the original problem that we wished to address in this section: that there is only one Euclidean \( n \)-space up to isomorphism. Since we have already proven that the vector space structure of two Euclidean \( n \)-spaces are equivalent, we simply need to prove that the `extra structure' of the Euclidean space is also preserved under a vector space isomorphism. Let's first make explicit what `extra stuff' needs to be preserved:
 
 \begin{definition}
-  Let \( E \) and \( F \) be Euclidean spaces. We say that \( E \) and \( F \) are \textbf{isomorphic} if there exists a mapping \( \phi:E\to F \) such that \( \phi \) is a vector space isomorphism that also preserves the inner product, i.e for all \( x,y\in E \), \( \ev{x,y}=\ev{\phi(x),\phi(y)} \).
+  Let \( E \) and \( F \) be Euclidean spaces. We say that \( E \) and \( F \) are \textbf{isomorphic} if there exists a mapping \( \phi:E\to F \) such that \( \phi \) is a vector space isomorphism that also preserves the inner product, i.e.\ for all \( x,y\in E \), \( \ev{x,y}=\ev{\phi(x),\phi(y)} \).
 \end{definition}
 
 So we require that just the inner product needs to be preserved by the isomorphism. But what about the corresponding norm and metric? Well, if the inner product between Euclidean spaces \( E \) and \( F \) is preserved by an isomorphism \( \phi:E\to F \), it follows that \( \phi \) also preserves the induced norms and metrics on these spaces. To see this, let \( x\in E \) and notice that \( \norm{x}^2=\ev{x,x}=\ev{\phi(x),\phi(x)}=\norm{\phi(x)}^2 \). Now that we have shown that \( \phi \) is norm-preserving, the fact that distances are preserved follows easily. For any \( x,y\in E \) we have that \( d(x,y)=\norm{x-y}=\norm{\phi(x-y)}=\norm{\phi(x)-\phi(y)}=d(\phi(x),\phi(y)) \). Hence, we see that \( \phi \) is an isometry (a distance preserving function).
@@ -440,48 +458,50 @@ Recall from our proof that every \( n \)-dimensional vector space is isomorphic 
   Let \( E \) and \( F \) be Euclidean \( n \)-spaces. Then \( E \) and \( F \) are isomorphic.
 \end{theorem}
 \begin{proof}
-  Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis in \( E \), and \( \qty{\overline{e_1},\dots,\overline{e_n}} \) an orthonormal basis in \( F \) (we know that orthonormal bases for Euclidean spaces exist by the previous theorem which we have just proven). We can express any \( x\in E \) as a linear combination of the basis vectors: \( x=a_1e_1+\dots+a_ne_n \). We can hence define the map \( \phi:E\to F \) by:
-  \[ \phi(x)=a_1\overline{e_1}+\dots+a_n\overline{e_n} \]
-  The form of \( \phi \) is exactly that of the isomorphism which we have constructed in the proof of Theorem \ref{thm:iso}, i.e a map that sends a vector represented in a given basis to a vector in the other space with the same coordinates/coefficients but with respect to a basis in the target space\footnote{Specifically, we mapped a basis from an \( n \)-dimensional vector space to the standard basis in \( \R^n \) in that proof.}. Thus, we already have that \( \phi \) is a vector space isomorphism. We thus simply need to demonstrate that \( \phi \) preserves the inner product. Let \( x\in E \) as above and let \( y=b_1e_1+\dots+b_ne_n\in E \). Then:
+  Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis in \( E \), and \( \qty{\overline{e_1},\dots,\overline{e_n}} \) an orthonormal basis in \( F \) (we know that orthonormal bases for Euclidean spaces exist by the previous theorem which we have just proven). We can express any \( x\in E \) as a linear combination of the basis vectors: \( x=a_1e_1+\dots+a_ne_n \). We can hence define the map \( \phi:E\to F \) by
+  \[ \phi(x)=a_1\overline{e_1}+\dots+a_n\overline{e_n}\fstop \]
+  
+  The form of \( \phi \) is exactly that of the isomorphism which we have constructed in the proof of Theorem \ref{thm:iso}, i.e.\ a map that sends a vector represented in a given basis to a vector in the other space with the same coordinates/coefficients but with respect to a basis in the target space\footnote{Specifically, we mapped a basis from an \( n \)-dimensional vector space to the standard basis in \( \R^n \) in that proof.}. Thus, we already have that \( \phi \) is a vector space isomorphism. We thus simply need to demonstrate that \( \phi \) preserves the inner product. Let \( x\in E \) as above and let \( y=b_1e_1+\dots+b_ne_n\in E \). Then
   \begin{align*}
     \ev{x,y}&= \ev{\sum_{i=1}^na_ie_i,\sum_{j=1}^nb_je_j}\\
     &= \sum_{i=1}^na_i\ev{e_i,\sum_{j=1}^nb_je_j}\\
     &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\ev{e_i,e_j}\\
     &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\delta_{ij}&(\text{by orthonormality of the basis vectors})\\
-    &= \sum_{i=1}^na_ib_i
+    &= \sum_{i=1}^na_ib_i\fstop
   \end{align*}
 
-  But we also have that:
+  But we also have that
   \begin{align*}
     \ev{\phi(x),\phi(y)}&= \ev{\sum_{i=1}^na_i\overline{e_i},\sum_{j=1}^nb_j\overline{e_j}}\\
     &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\ev{\overline{e_i},\overline{e_j}}\\
     &= \sum_{i=1}^n\sum_{j=1}^na_ib_j\delta_{ij}&(\text{by orthonormality of the basis vectors})\\
-    &= \sum_{i=1}^na_ib_i
+    &= \sum_{i=1}^na_ib_i\fstop
   \end{align*}
 
   So \( \ev{x,y}=\ev{\phi(x),\phi(y)} \), and so the inner product is preserved. Hence, \( \phi \) is an isomorphism of Euclidean spaces.
 \end{proof}
 
-Hence, every Euclidean \( n \)-space is `the same' from a structural point of view, so we might as well work with the easiest example of it we can think of: i.e \( \R^n \) with the dot product.
+Hence, every Euclidean \( n \)-space is `the same' from a structural point of view, so we might as well work with the easiest example of it we can think of: i.e.\ \( \R^n \) with the dot product.
 
 \vspace{3mm}
 
 While on the topic of orthonormal bases, we'll conclude this section with a fun digression. Let \( E \) be a Euclidean \( n \)-space, and suppose we had two orthonormal bases in \( E \): \( \qty{e_1,\dots,e_n} \) and \( \qty{\overline{e_1},\dots,\overline{e_n}} \). We can write the barred basis vectors \( \overline{e_i} \) in terms of the basis vectors \( e_j \):
-\[ \overline{e_i}=\sum_{j=1}^na_{ij}e_j \quad i=1,\dots,n \]
-The \( n^2 \) constants \( a_{ij}\in\R \) form a \( n\times n \) matrix \( O \), which represents the linear map \( \phi:E\to E \) defined by \( \phi(a_1e_1+\dots+a_ne_n)=a_1\overline{e_1}+\dots+a_n\overline{e_n} \), which we know from above to be an automorphism of Euclidean spaces. So if we wrote the components of a vector \( x\in E \) with respect to the orthonormal basis \( \qty{e_1,\dots,e_n} \) as a column vector, then \( \phi(x)=Ox \), where the components of \( \phi(x) \) are also expressed in a column vector. What properties does the matrix \( O \) have? Well, since \( \ev{\overline{e_i},\overline{e_j}}=\delta_{ij} \) by orthonormality, we can substitute our expression for the barred basis vectors in terms of the unbarred basis vectors to obtain:
+\[ \overline{e_i}=\sum_{j=1}^na_{ij}e_j \quad i=1,\dots,n\fstop \]
+
+The \( n^2 \) constants \( a_{ij}\in\R \) form a \( n\times n \) matrix \( O \), which represents the linear map \( \phi:E\to E \) defined by \( \phi(a_1e_1+\dots+a_ne_n)=a_1\overline{e_1}+\dots+a_n\overline{e_n} \) (more on this in \Cref{sec:linear-maps}), which we know from above to be an automorphism of \( E \). So if we wrote the components of a vector \( x\in E \) with respect to the orthonormal basis \( \qty{e_1,\dots,e_n} \) as a column vector, then \( \phi(x)=Ox \), where the components of \( \phi(x) \) are also expressed in a column vector. What properties does the matrix \( O \) have? Well, since \( \ev{\overline{e_i},\overline{e_j}}=\delta_{ij} \) by orthonormality, we can substitute our expression for the barred basis vectors in terms of the unbarred basis vectors to obtain:
 \begin{align*}
   \delta_{ij}&= \ev{\sum_{k=1}^na_{ik}e_k,\sum_{l=1}^na_{jl}e_l}\\
   &= \sum_{k=1}^n\sum_{l=1}^na_{ik}a_{jl}\ev{e_k,e_l}\\
   &= \sum_{k=1}^n\sum_{l=1}^na_{ik}a_{jl}\delta_{kl}\\
-  &= \sum_{k=1}^na_{ik}a_{jk}
+  &= \sum_{k=1}^na_{ik}a_{jk}\fstop
 \end{align*}
 
-Suppose that \( b_{ij} \) are the components of the matrix \( O^T \) (the matrix transpose of \( O \)). Then \( b_{kj}=a_{jk} \), so that we have that \( \delta_{ij}=\sum_{k=1}^n a_{ik}b_{kj} \). Since \( \delta_{ij} \) are the components of the \( n\times n \) identity matrix \( I_n \), we can write the above equation in the following matrix form:
-\[ I_n=OO^T \]
+Suppose that \( b_{ij} \) are the components of the matrix \( O^T \) (the matrix transpose of \( O \)). Then \( b_{kj}=a_{jk} \), so that we have that \( \delta_{ij}=\sum_{k=1}^n a_{ik}b_{kj} \). Since \( \delta_{ij} \) are the components of the \( n\times n \) identity matrix \( I_n \), we can write the above equation in the following matrix form
+\[ I_n=OO^T\fstop \]
 
-Since \( O \) is the matrix representation of a vector space automorphism, it is invertible, and hence by premultiplying both sides of the above equation by \( O^{-1} \), we arrive at:
+Since \( O \) is the matrix representation of a vector space automorphism, it is invertible, and hence by premultiplying both sides of the above equation by \( O^{-1} \), we arrive at
 \[ O^{-1}=O^T \]
-i.e the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal transformations on Euclidean spaces are simply the ones that map orthonormal bases to orthonormal bases.
+i.e.\ the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal transformations on Euclidean spaces are simply the ones that map orthonormal bases to orthonormal bases.
 
 \section{Dual Space}
 In this section, we study a very special type of vector space mapping. Namely, the linear maps that take a vector as an input and returns a scalar. Such maps are called \textbf{linear functionals}.
@@ -497,11 +517,11 @@ The dual space of a vector space is itself a vector space under the operations o
 
 \vspace{3mm}
 
-There are many important linear functionals that are central to analysis. To name a few: the vector norm \( \norm{-} \), integral operators, scalar potentials, density functions. It is therefore quite valuable to study them in a general setting.
+There are many important linear functionals that are central to analysis. To name a few, the inner product with one input fixed, real-valued functions formed via a limiting process, and integral operators. It is therefore quite valuable to study them in a general setting.
 
 \vspace{3mm}
 
-In the finite dimensional setting, the study of linear functionals and the dual space is quite simple. In the following proposition, we show that every linear functional on a finite dimensional vector space can be completely characterised simply by knowing what values it takes at finitely many points (specifically, at the basis vectors), and that we can essentially cook up a linear functional to behave in `any way we want' (i.e take specific values at certain desired points).
+In the finite dimensional setting, the study of linear functionals and the dual space is quite simple. In the following proposition, we show that every linear functional on a finite dimensional vector space can be completely characterised simply by knowing what values it takes at finitely many points (specifically, at the basis vectors), and that we can essentially cook up a linear functional to behave in `any way we want' (i.e.\ take specific values at certain desired points).
   \begin{proposition}
     \label{thm:dualprops}
   Let \( V \) be an \( n \)-dimensional vector space and let \( \qty{v_1,\dots,v_n} \) be a basis for \( V \). Then: 
@@ -511,39 +531,41 @@ In the finite dimensional setting, the study of linear functionals and the dual 
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  (a) Let \( f\in V^* \) and let \( x=k_1v_1+\dots+k_nv_n\in V \). Then:
+  (a) Let \( f\in V^* \) and let \( x=k_1v_1+\dots+k_nv_n\in V \). Then
   \begin{align*}
     f(x)&= f(k_1v_1+\dots+k_nv_n)\\
-    &= k_1f(v_1)+\dots+k_nf(v_n) &(\text{by linearity of }f)
+    &= k_1f(v_1)+\dots+k_nf(v_n) &(\text{by linearity of }f)\fstop
   \end{align*}
-  One sees from the above expression that \( f(x) \) can be computed using only the knowledge of the values \( f(v_1),\dots,f(v_n) \). Moreover, this \emph{uniquely} identifies the linear functional. Suppose \( g\in V^* \) agrees with \( f \) at each of the basis vectors, i.e \( f(v_i)=g(v_i) \) for all \( i=1,\dots,n \). Then for any \( x\in V \) with representation as above, we have that:
+  
+  One sees from the above expression that \( f(x) \) can be computed using only the knowledge of the values \( f(v_1),\dots,f(v_n) \). Moreover, this \emph{uniquely} identifies the linear functional. Suppose \( g\in V^* \) agrees with \( f \) at each of the basis vectors, i.e.\ \( f(v_i)=g(v_i) \) for all \( i=1,\dots,n \). Then for any \( x\in V \) with representation as above, we have that
   \begin{align*}
     g(x)&= g(k_1v_1+\dots+k_nv_n)\\
     &= k_1g(v_1)+\dots+k_ng(v_n)\\
     &= k_1f(v_1)+\dots+k_nf(v_n)\\
-    &= f(x)
+    &= f(x)\fstop
   \end{align*}
 
   \vspace{3mm}
 
-  (b) Let \( a_1,\dots, a_n\in\R \). For \( x=k_1v_1+\dots+k_nv_n\in V \), define the mapping \( f:V\to\R \) by:
-  \[ f(x)=k_1a_1+\dots+k_na_n \]
+  (b) Let \( a_1,\dots, a_n\in\R \). For \( x=k_1v_1+\dots+k_nv_n\in V \), define the mapping \( f:V\to\R \) by
+  \[ f(x)=k_1a_1+\dots+k_na_n\fstop \]
+  
   Then \( f(v_i)=a_i \) for all \( i=1,\dots,n \), as required. We'll now set about to show that \( f \) is linear.
 
   \vspace{3mm}
 
-  Let \( x\in V \) as above and let \( y=l_1v_1+\dots l_nv_n\in V \). Then:
+  Let \( x\in V \) as above and let \( y=l_1v_1+\dots l_nv_n\in V \). Then
   \begin{align*}
     f(x+y)&= (k_1+l_1)a_1+\dots+(k_n+l_n)a_n\\
     &= k_1a_1+\dots+k_na_n+l_1a_1+\dots+l_na_n\\
-    &= f(x)+f(y)
+    &= f(x)+f(y)\fstop
   \end{align*}
 
-  Let \( c\in\R \). Then:
+  Let \( c\in\R \). Then
   \begin{align*}
     f(cx)&= ck_1v_1+\dots+ck_nv_n\\
     &= c(k_1v_1+\dots+k_nv_n)\\
-    &= cf(x)
+    &= cf(x)\fstop
   \end{align*}
   This proves that \( f \) is a linear map, so that \( f\in V^* \).
 \end{proof}
@@ -559,44 +581,44 @@ Given a vector space, how big is its dual space? In the infinite dimensional cas
 
   \vspace{3mm}
 
-  We first need to construct the function between \( V^* \) and \( \R^n \) which will serve as the candidate for what we hope will be the isomorphism. Fix a basis \( \qty{v_1,\dots,v_n} \) for \( V \). Let \( f\in V^* \). Define \( \psi:V^*\to\R^n \) by:
-  \[ \psi(f)=(f(v_1),\dots,f(v_n))^T \]
+  We first need to construct the function between \( V^* \) and \( \R^n \) which will serve as the candidate for what we hope will be the isomorphism. Fix a basis \( \qty{v_1,\dots,v_n} \) for \( V \). Let \( f\in V^* \). Define \( \psi:V^*\to\R^n \) by
+  \[ \psi(f)=(f(v_1),\dots,f(v_n))^T\fstop \]
 
-  Let \( f,g\in V^* \). Then:
+  Let \( f,g\in V^* \). Then
   \begin{align*}
     \psi(f+g)&= (f(v_1)+g(v_1),\dots,f(v_n)+g(v_n))^T\\
     &= (f(v_1),\dots,f(v_n))^T+(g(v_1),\dots,g(v_n))^T\\
-    &= \psi(f)+\psi(g)
+    &= \psi(f)+\psi(g)\fstop
   \end{align*}
 
-  Let \( a\in\R \). Then:
+  Let \( a\in\R \). Then
   \begin{align*}
     \psi(af)&=(af(v_1),\dots,af(v_n))^T\\
     &= a(f(v_1),\dots,f(v_n))^T\\
-    &= a\psi(f)
+    &= a\psi(f)\fstop
   \end{align*}
 
   Thus, \( \psi \) is a linear map. We now proceed to show that \( \psi \) is a bijection.
 
   \vspace{3mm}
 
-  Suppose \( \psi(f)=\psi(g) \). Then \( (f(v_1),\dots,f(v_n))^T=(g(v_1),\dots,g(v_n))^T \), i.e \( f \) and \( g \) agree at each of the basis vectors. By part (a) Proposition \ref{thm:dualprops}, this implies that \( f=g \), thus proving the injectivity of \( \psi \).
+  Suppose \( \psi(f)=\psi(g) \). Then \( (f(v_1),\dots,f(v_n))^T=(g(v_1),\dots,g(v_n))^T \), i.e.\ \( f \) and \( g \) agree at each of the basis vectors. By part (a) Proposition \ref{thm:dualprops}, this implies that \( f=g \), thus proving the injectivity of \( \psi \).
 
   \vspace{3mm}
 
-  Now let \( x=(a_1,\dots,a_n)^T\in\R^n \). By part (b) of Proposition \ref{thm:dualprops}, there exists an \( f\in V^* \) such that \( f(v_i)=a_i \) for all \( i=1,\dots, n \). It follows that \( \psi(f)=x \). Since the choice of \( x\in\R^n \) was arbitrary, it follows that \( \mathcal{R}(\psi)=\R^n \), thus proving surjectivity of \( \psi \). Putting all of this together shows that \( \psi \) is a bijective linear function, i.e a vector space isomorphism.
+  Now let \( x=(a_1,\dots,a_n)^T\in\R^n \). By part (b) of Proposition \ref{thm:dualprops}, there exists an \( f\in V^* \) such that \( f(v_i)=a_i \) for all \( i=1,\dots, n \). It follows that \( \psi(f)=x \). Since the choice of \( x\in\R^n \) was arbitrary, it follows that \( \mathcal{R}(\psi)=\R^n \), thus proving surjectivity of \( \psi \). Putting all of this together shows that \( \psi \) is a bijective linear function, i.e.\ a vector space isomorphism.
 \end{proof}
 
-Let \( V \) be an \( n \)-dimensional vector space. Since the dual space \( V^* \) is \( n \)-dimensional, it has a basis consisting of \( n \) elements. Given a basis \( \qty{v_1,\dots,v_n} \) for \( V \), there is a particular nice choice for a basis on \( V^* \). For each \( i=1,\dots,n \), define the linear functional \( v^*_i:V\to\R \) by:
-\[ v^*_i(v_j)=\delta_{ij}, \quad\text{for }j=1,\dots,n \]
+Let \( V \) be an \( n \)-dimensional vector space. Since the dual space \( V^* \) is \( n \)-dimensional, it has a basis consisting of \( n \) elements. Given a basis \( \qty{v_1,\dots,v_n} \) for \( V \), there is a particular nice choice for a basis on \( V^* \). For each \( i=1,\dots,n \), define the linear functional \( v^*_i:V\to\R \) by
+\[ v^*_i(v_j)=\delta_{ij}, \quad\text{for }j=1,\dots,n\fstop \]
 
-So the linear functionals \( v^*_i \) satisfy a `bi-orthogonality property'. The fact that such linear functionals exist again comes from Proposition \ref{thm:dualprops}. The set \( \qty{v^*_1,\dots,v^*_n} \) is a linearly independent set in \( V^* \). To see this, let \( x=a_1v_1+\dots+a_nv_n\in V \) be arbitrary and consider the following vector equation:
+So the linear functionals \( v^*_i \) satisfy a `bi-orthogonality property'. The fact that such linear functionals exist again comes from Proposition \ref{thm:dualprops}. The set \( \qty{v^*_1,\dots,v^*_n} \) is a linearly independent set in \( V^* \). To see this, let \( x=a_1v_1+\dots+a_nv_n\in V \) be arbitrary and consider the following vector equation
 \begin{align*}
   0&= \sum_{i=1}^nc_iv^*_i(x)\\
   &= \sum_{i=1}^nc_iv^*_i\qty(\sum_{j=1}^na_jv_j)\\
   &= \sum_{i=1}^n\sum_{j=1}^nc_ia_jv^*_i(v_j)\\
   &= \sum_{i=1}^n\sum_{j=1}^nc_ia_j\delta_{ij}\\
-  &= \sum_{i=1}^n c_ia_i
+  &= \sum_{i=1}^n c_ia_i\fstop
 \end{align*}
 
 Since the above equation must hold for all \( x\in V \), choosing \( x=v_k \) for each \( k=1,\dots,n \) means that \( a_i=\delta_{ik} \) in the above expression, which gives \( c_k=0 \). This demonstrates the linear independence of the \( v^*_i \)'s. Since we have shown that \( V^* \) is an \( n \)-dimensional vector space, and we have that \( \qty{v^*_1,\dots,v^*_n} \) is a linearly independent set in \( V^* \) consisting of \( n \) elements, we know automatically that this must be a basis for \( V^* \). We call this special basis the \textbf{dual basis}.
@@ -609,9 +631,9 @@ Now, since the dual space \( V^* \) is itself a vector space, we can consider it
   Let \( V \) be an \( n \)-dimensional vector space. Then \( V \) is canonically isomorphic to its second dual \( V^{**} \).
 \end{theorem}
 \begin{proof}
-  For each \( x\in V \), define the mapping \( \phi_x:V^*\to\R \) by:
+  For each \( x\in V \), define the mapping \( \phi_x:V^*\to\R \) by
   \[ \phi_x(f)=f(x) \]
-  i.e \( \phi_x \) is an evaluation map. Given a linear functional on \( V^* \), it returns a scalar by evaluating it at the fixed point \( x \). We will show that \( \phi_x\) is a linear map.
+  i.e.\ \( \phi_x \) is an evaluation map. Given a linear functional on \( V^* \), it returns a scalar by evaluating it at the fixed point \( x \). We will show that \( \phi_x\) is a linear map.
 
   \vspace{3mm}
 
@@ -621,45 +643,48 @@ Now, since the dual space \( V^* \) is itself a vector space, we can consider it
 
   \vspace{3mm}
 
-  Thus, \( \phi_x \) is a linear functional on \( V^* \), so \( \phi_x\in V^{**} \). We can hence define the mapping \( \psi:V\to V^{**} \) by \( \psi(x)=\phi_x \). We will show that \( \psi \) is a vector space homomorphism. Let \( x,y\in V \) and let \( f\in V^*\). Then:
+  Thus, \( \phi_x \) is a linear functional on \( V^* \), so \( \phi_x\in V^{**} \). We can hence define the mapping \( \psi:V\to V^{**} \) by \( \psi(x)=\phi_x \). We will show that \( \psi \) is a vector space homomorphism. Let \( x,y\in V \) and let \( f\in V^*\). Then
   \begin{align*}
     (\psi(x+y))(f)&= \phi_{x+y}(f)\\
     &= f(x+y)\\
     &= f(x)+f(y)\\
     &= \phi_x(f)+\phi_y(f)\\
-    &= (\psi(x))(f)+(\psi(y))(f)
+    &= (\psi(x))(f)+(\psi(y))(f)\fstop
   \end{align*}
+  
   Since the choice of \( f\in V^* \) was arbitrary, this shows that \( \psi(x+y)=\psi(x)+\psi(y) \).
 
   \vspace{3mm}
 
-  Let \( a\in\R \). Then:
+  Let \( a\in\R \). Then
   \begin{align*}
     (\psi(ax))(f)&= \phi_{ax}(f)\\
     &= f(ax)\\
     &= af(x)\\
     &= a\phi_x(f)\\
-    &= a(\psi(x))(f)
+    &= a(\psi(x))(f)\fstop
   \end{align*}
+  
   Thus, \( \psi(ax)=a\psi(x) \). This proves that \( \psi \) is a vector space homomorphism.
 
   \vspace{3mm}
 
-  To show the injectivity of \( \psi \), we will prove that its kernel is trivial. Suppose \( x\in\ker\psi \), so \( \psi(x)=0 \). This means that for all \( f\in V^* \), \( f(x)=0 \). If \( x\neq 0 \), then with respect to some basis \( \qty{v_1,\dots,v_n} \) of \( V \), \( x \) can be written as a nontrivial linear combination of the basis vectors: \( x=a_1v_1+\dots+a_nv_n \), where at least one of the \( a_i \)'s are nonzero. Pick a nonzero coefficient and call it \( a_k \). Then by part (b) of Proposition \ref{thm:dualprops}, there exists a \( g\in V^* \) such that \( g(v_k)=1 \) and \( g(v_i)=0 \) for all \( i\neq k \). Then:
+  To show the injectivity of \( \psi \), we will prove that its kernel is trivial. Suppose \( x\in\ker\psi \), so \( \psi(x)=0 \). This means that for all \( f\in V^* \), \( f(x)=0 \). If \( x\neq 0 \), then with respect to some basis \( \qty{v_1,\dots,v_n} \) of \( V \), \( x \) can be written as a nontrivial linear combination of the basis vectors: \( x=a_1v_1+\dots+a_nv_n \), where at least one of the \( a_i \)'s are nonzero. Pick a nonzero coefficient and call it \( a_k \). Then by part (b) of Proposition \ref{thm:dualprops}, there exists a \( g\in V^* \) such that \( g(v_k)=1 \) and \( g(v_i)=0 \) for all \( i\neq k \). Then
   \begin{align*}
     g(x)&=g(a_1v_1+\dots+a_nv_n)\\
         &= a_1g(v_1)+\dots+a_kg(v_k)+\dots+a_ng(v_n)\\
         &= a_k\\
-        &\neq 0
+        &\neq 0\fstop
   \end{align*}
+  
   This is a contradiction. Hence, \( x=0 \), which shows that \( \ker\psi=\qty{0} \), and hence \( \psi \) is injective.
 
   \vspace{3mm}
 
-  Finally, we show that \( \psi \) is surjective. Let \( \chi\in V^{**} \). Let \( \qty{v^*_1,\dots,v^*_n} \) be the dual basis for \( \qty{v_1,\dots,v_n} \). Take \( a_i=\chi(V^*_i) \) for \( i=1,\dots,n \), and thus construct the element \( x=a_1v_1+\dots+a_nv_n\in V \). We claim that \( \chi=\phi_x \). Let \( f\in V^* \), and expand it in terms of the dual basis:
-  \[ f=\sum_{i=1}^nc_iv^*_i \]
+  Finally, we show that \( \psi \) is surjective. Let \( \chi\in V^{**} \). Let \( \qty{v^*_1,\dots,v^*_n} \) be the dual basis for \( \qty{v_1,\dots,v_n} \). Take \( a_i=\chi(V^*_i) \) for \( i=1,\dots,n \), and thus construct the element \( x=a_1v_1+\dots+a_nv_n\in V \). We claim that \( \chi=\phi_x \). Let \( f\in V^* \), and expand it in terms of the dual basis
+  \[ f=\sum_{i=1}^nc_iv^*_i\fstop \]
 
-  Then we have:
+  Then we have
   \begin{align*}
     \phi_x(f)&= f(x)\\
     &= \sum_{i=1}^nc_iv^*_i(x)\\
@@ -669,7 +694,7 @@ Now, since the dual space \( V^* \) is itself a vector space, we can consider it
     &= \sum_{i=1}^nc_ia_i\\
     &= \sum_{i=1}^n c_i\chi(v^*_i)\\
     &= \chi\qty(\sum_{i=1}^nc_iv^*_i) &(\text{by linearity of }\chi)\\
-    &= \chi(f)
+    &= \chi(f)\fstop
   \end{align*}
 
   The above argument holds for all \( f\in V^* \), and thus we conclude that \( \chi=\phi_x=\psi(x) \). This proves that \( \psi \) is surjective, and hence a bijection, and hence an isomorphism.
@@ -686,9 +711,9 @@ So far, we have mostly concerned ourselves with the algebraic properties of Eucl
 
 \vspace{3mm}
 
-Since the topology of Euclidean space is the metric topology (where the metric is the Euclidean metric \( d_2 \)), we will define the open sets via the notion of \emph{open balls}. We have already described the Euclidean metric for \( \R^n \). To generalise it to Euclidean \( n \)-space \( E \), take an orthonormal basis \( \qty{e_1,\dots,e_n} \) of \( E \). Then for any \( x=x_1e_1+\dots+x_ne_n\in E \), the Euclidean norm is given by:
+Since the topology of Euclidean space is the metric topology (where the metric is the Euclidean metric \( d_2 \)), we will define the open sets via the notion of \emph{open balls}. We have already described the Euclidean metric for \( \R^n \). To generalise it to Euclidean \( n \)-space \( E \), take an orthonormal basis \( \qty{e_1,\dots,e_n} \) of \( E \). Then for any \( x=x_1e_1+\dots+x_ne_n\in E \), the Euclidean norm is given by
 \[ \norm{x}=\sqrt{\sum_{i=1}^nx_i^2} \]
-with corresponding Euclidean metric:
+with corresponding Euclidean metric
 \[ d_2(x,y)=\sqrt{\sum_{i=1}^n(x_i-y_i)^2} \]
 where \( y=y_1e_1+\dots+y_ne_n \).
 
@@ -748,7 +773,7 @@ We will later want to define the notions of limits and continuity, which both in
   Let \( E \) be a Euclidean \( n \)-space and let \( x\in E \). A \textbf{neighbourhood} of \( x \) is a subset \( U\subset E \) such that there exists an open subset \( V\subset U \) that contains \( x \).
 \end{definition}
 
-Note that in the metric topology, an open set containing a point \( x\in E \) must contain an open ball \( B(x,r) \) for some \( r>0 \), so that we can also state our definition of a neighbourhood of a point \( x \) as simply `a set which contains an open ball centred at \( x \)'. Hence, the topological notion of `wiggling around \( x \) in an arbitrarily small amount' (constrained the variation to smaller and smaller neighbourhoods) equates to the metric notion of small movement (constrained the variation to smaller and smaller open balls).
+Note that in the metric topology, an open set containing a point \( x\in E \) must contain an open ball \( B(x,r) \) for some \( r>0 \), so that we can also state our definition of a neighbourhood of a point \( x \) as simply `a set which contains an open ball centred at \( x \)'. Hence, the topological notion of `wiggling around \( x \) in an arbitrarily small amount' (constraining variation to smaller and smaller neighbourhoods) equates to the metric notion of small movement (constraining variation to smaller and smaller open balls).
 
 \vspace{3mm}
 
@@ -771,10 +796,10 @@ Our definition of the interior above formulates it as the largest open subset co
 Also equally important in a topological space is the notion of a \emph{closed} set:
 
 \begin{definition}
-  Let \( E \) be a Euclidean \( n \)-space. A set \( C\subset E \) is said to be \textbf{closed} if it is the complement of an open set, i.e \( C=E\backslash U \) for some open set \( U\subset E \).
+  Let \( E \) be a Euclidean \( n \)-space. A set \( C\subset E \) is said to be \textbf{closed} if it is the complement of an open set, i.e.\ \( C=E\backslash U \) for some open set \( U\subset E \).
 \end{definition}
 
-One should be careful that a set being closed is \emph{not} the negation of a set being open. There are sets that are neither open nor closed (e.g the half-open interval in \( \R \): \( [a,b) \)), and sets that are \emph{both} open and closed (the empty set and the entire space).
+One should be careful that a set being closed is \emph{not} the negation of a set being open. There are sets that are neither open nor closed (e.g.\ the half-open interval in \( \R \): \( [a,b) \)), and sets that are \emph{both} open and closed (the empty set and the entire space).
 
 \vspace{3mm}
 
@@ -792,14 +817,16 @@ Closed balls are a simple example of closed sets. Cartesian products of closed i
   \end{enumerate}
 \end{proposition}
 \begin{proof}
-  (a) Let \( C_\alpha\subset E \) be closed for each \( \alpha\in A \). Then \( E\backslash C_\alpha \) is open for all \( \alpha\in A \). Hence, \( \bigcup_{\alpha\in A}(E\backslash C_\alpha) \) is an open set, since arbitrary unions of open sets are open. But by de Morgan's Laws, we have that:
-  \[ \bigcup_{\alpha\in A}(E\backslash C_\alpha)=E\,\backslash\qty(\bigcap_{\alpha\in A}C_\alpha) \]
+  (a) Let \( C_\alpha\subset E \) be closed for each \( \alpha\in A \). Then \( E\backslash C_\alpha \) is open for all \( \alpha\in A \). Hence, \( \bigcup_{\alpha\in A}(E\backslash C_\alpha) \) is an open set, since arbitrary unions of open sets are open. But by de Morgan's Laws, we have that
+  \[ \bigcup_{\alpha\in A}(E\backslash C_\alpha)=E\,\backslash\qty(\bigcap_{\alpha\in A}C_\alpha)\fstop \]
+  
   We thus see that \( C=\bigcap_{\alpha\in A}C_\alpha \) is closed.
 
   \vspace{3mm}
 
-  (b) Let \( C_1,\dots, C_k \) be closed. Then \( E\backslash C_i \) is open for all \( i=1,\dots,k \). Thus, \( (E\backslash C_1)\cap\dots\cap(E\backslash C_k) \) is open since finite intersections of open sets are open. But by de Morgan's Laws, we have that:
-  \[ (E\backslash C_1)\cap\dots\cap(E\backslash C_k)=E\backslash\qty(C_1\cup\dots\cup C_k) \]
+  (b) Let \( C_1,\dots, C_k \) be closed. Then \( E\backslash C_i \) is open for all \( i=1,\dots,k \). Thus, \( (E\backslash C_1)\cap\dots\cap(E\backslash C_k) \) is open since finite intersections of open sets are open. But by de Morgan's Laws, we have that
+  \[ (E\backslash C_1)\cap\dots\cap(E\backslash C_k)=E\backslash\qty(C_1\cup\dots\cup C_k)\fstop \]
+  
   It immediately follows that \( C_1\cup\dots\cup C_k \) is closed.
 \end{proof}
 
@@ -844,11 +871,11 @@ The usual notation to denote the limit of a convergent sequence is \( x_k\to L \
 
 \vspace{3mm}
 
-The metric structure on Euclidean space gives us all of the expected desriable properties about limits and convergence that we know and love from \( \R \). If a sequence is convergent, the limit is unique. Since we have the algebraic structure of a vector space as well, we have some algebraic limit laws: the limit of a sum of sequences is equal to the sum of the limits, and we can pull scalars through limits.
+The metric structure on Euclidean space gives us all of the expected desirable properties about limits and convergence that we know and love from \( \R \). If a sequence is convergent, the limit is unique. Since we have the algebraic structure of a vector space as well, we have some algebraic limit laws: the limit of a sum of sequences is equal to the sum of the limits, and we can pull scalars through limits.
 
 \vspace{3mm}
 
-One might notice from the definition of convergence of a sequence that in order to prove directly that a sequence is convergent one must already secretly know what the limit ought to be, so that one can show that the distance between terms in the sequence and the candidate for the limit become arbitrarily small. Guessing what the limit ought to be isn't always a straightforward task, and so fortunately there is another way to show the convergence of a sequence, which relies upon the notion of \emph{completeness}. In a complete metric space, a necessary and sufficient condition for a sequence to be convergent is for the sequence to be \emph{Cauchy}; that is, the terms the sequence progressively become aribtrarily close to \emph{each other}.
+One might notice from the definition of convergence of a sequence that in order to prove directly that a sequence is convergent one must already secretly know what the limit ought to be, so that one can show that the distance between terms in the sequence and the candidate for the limit become arbitrarily small. Guessing what the limit ought to be isn't always a straightforward task, and so fortunately there is another way to show the convergence of a sequence, which relies upon the notion of \emph{completeness}. In a complete metric space, a necessary and sufficient condition for a sequence to be convergent is for the sequence to be \emph{Cauchy}; that is, the terms the sequence progressively become arbitrarily close to \emph{each other}.
 
 \begin{definition}
   Let \( E \) be a Euclidean \( n \)-space. A sequence \( (x_k)_{k=1}^\infty \) in \( E \) is said to be \textbf{Cauchy} if for all \( \epsilon>0 \), there exists an \( N\in\N \) such that for all \( j,k\geq N \), \( \norm{x_j-x_k}<\epsilon \).
@@ -860,35 +887,37 @@ Intuitively, if the terms in the sequence are gradually varying in distance to a
   Let \( (X,d) \) be a metric space. We say that \( X \) is \textbf{complete} with respect to the metric \( d \) if every Cauchy sequence in \( X \) converges.
 \end{definition}
 
-So the big advantage of completeness is that instead of having to find a candidate limit in order to prove a sequence that you suspect converges actually does so, you can just show that the sequence is Cauchy, i.e the terms just eventually clump up together. Completeness guarantees that the sequence then has a limit. We will now demonstrate the completeness of Euclidean space with respect to the Euclidean metric. The proof is primarily based on the fact that \( \R \) is complete, and that Euclidean space is finite-dimensional.
+So the big advantage of completeness is that instead of having to find a candidate limit in order to prove a sequence that you suspect converges actually does so, you can just show that the sequence is Cauchy, i.e.\ the terms just eventually clump up together. Completeness guarantees that the sequence then has a limit. We will now demonstrate the completeness of Euclidean space with respect to the Euclidean metric. The proof is primarily based on the fact that \( \R \) is complete, and that Euclidean space is finite-dimensional.
 
 \begin{theorem}
   Let \( E \) be a Euclidean \( n \)-space. Then \( E \) is complete with respect to the Euclidean metric \( d_2 \).
 \end{theorem}
 \begin{proof}
   Let \( (x_k)_{k=1}^\infty \) be a Cauchy sequence in \( E \). Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis for \( E \). We can hence express each term of the sequence in terms of the orthonormal basis:
-  \[ x_k=a_{1k}e_1+\dots+a_{nk}e_n \]
-  We claim that, for each \( i=1,\dots,n \), the coefficients sequence \( (a_{ik})_{k=1}^\infty \) is Cauchy in \( \R \). To see this, note that:
+  \[ x_k=a_{1k}e_1+\dots+a_{nk}e_n\fstop \]
+  
+  We claim that, for each \( i=1,\dots,n \), the coefficients sequence \( (a_{ik})_{k=1}^\infty \) is Cauchy in \( \R \). To see this, note that
   \begin{align*}
     \abs{a_{ij}-a_{ik}}&=\sqrt{\qty(a_{ij}-a_{ik})^2}\\
     &\leq \sqrt{\sum_{l=1}^n (a_{lj}-a_{lk})^2} &(\text{since the square root function is a real increasing function})\\
-    &= \norm{x_j-x_k}
+    &= \norm{x_j-x_k}\fstop
   \end{align*}
 
   Let \( \epsilon>0 \). Choose \( N\in\N \) such that for all \( j,k\geq N \), \( \norm{x_j-x_k}<\epsilon \). Such a choice of \( N \) is possible since \( (x_k)_{k=1}^\infty \) is a Cauchy sequence. Then for all \( j,k\geq N \), \( \abs{a_{ij}-a_{ik}}<\epsilon \). This proves our claim.
 
   \vspace{3mm}
 
-  Now, by completeness of \( \R \), the sequence \( (a_{ik})_{k=1}^\infty \) converges to, say, \( a_i\in\R \). Define \( x=a_1e_1+\dots+a_ne_n \). We will show that \( x_k\to x \) as \(k\to\infty  \). First, observe that:
+  Now, by completeness of \( \R \), the sequence \( (a_{ik})_{k=1}^\infty \) converges to, say, \( a_i\in\R \). Define \( x=a_1e_1+\dots+a_ne_n \). We will show that \( x_k\to x \) as \(k\to\infty  \). First, observe that
   \begin{align*}
     \norm{x_k-x}&= \sqrt{\sum_{i=1}^n(a_{ik}-a_i)^2}\\
     &\leq \sqrt{n\max_{i=1,\dots,n}(a_{ik}-a_i)^2}\\
     &= \sqrt{n}\max_{i=1,\dots,n}\abs{a_{ik}-a_i}\\
-    &<\sqrt{n}\qty(\sum_{i=1}^n\abs{a_{ik}-a_i})
+    &<\sqrt{n}\qty(\sum_{i=1}^n\abs{a_{ik}-a_i})\fstop
   \end{align*}
 
-  Let \( \epsilon>0 \). For each \( i=1,\dots,n \), choose \( N_i\in\N \) such that for all \( k\geq N_i \), \( \abs{a_{ik}-a_i}<\frac{\epsilon}{n\sqrt{n}} \). Such a choice of \( N_i \) is possible since \( a_{ik}\to a_i \) as \( k\to\infty \). Choose \( N=\max{N_1,\dots,N_n} \). Then for all \( k\geq N \), we have:
-  \[ \norm{x_k-x}<\sqrt{n}\sum_{i=1}^n\frac{\epsilon}{n\sqrt{n}}=\epsilon \]
+  Let \( \epsilon>0 \). For each \( i=1,\dots,n \), choose \( N_i\in\N \) such that for all \( k\geq N_i \), \( \abs{a_{ik}-a_i}<\frac{\epsilon}{n\sqrt{n}} \). Such a choice of \( N_i \) is possible since \( a_{ik}\to a_i \) as \( k\to\infty \). Choose \( N=\max\qty{N_1,\dots,N_n} \). Then for all \( k\geq N \), we have
+  \[ \norm{x_k-x}<\sqrt{n}\sum_{i=1}^n\frac{\epsilon}{n\sqrt{n}}=\epsilon\fstop \]
+  
   Hence, \( x_k\to x \) as \( k\to\infty \). This shows that \( E \) is complete with respect to the Euclidean metric.
 \end{proof}
 
@@ -900,12 +929,13 @@ Now we'll consider a few consequences of the completeness of Euclidean space. In
 
 \begin{theorem}
   \label{thm:NIP}
-  (Nested Interval Property) Let \( E \) be a Euclidean \( n \)-space. Let \( I_1\supset I_2\supset\dots\supset I_k\supset\dots \) be a decreasing sequence of nonempty closed intervals in \( E \). Then:
-  \[ \bigcap_{k=1}^\infty I_k\neq\emptyset \]
+  (Nested Interval Property) Let \( E \) be a Euclidean \( n \)-space. Let \( I_1\supset I_2\supset\dots\supset I_k\supset\dots \) be a decreasing sequence of nonempty closed intervals in \( E \). Then
+  \[ \bigcap_{k=1}^\infty I_k\neq\emptyset\fstop \]
 \end{theorem}
 \begin{proof}
-  Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis for \( E \), and thus denote the interval \( I_k \) by:
-  \[ I_k=\qty{c_1e_1+\dots +c_ne_n\in E\mid c_i\in \qty[a_{ik},b_{ik}]\;\forall\,i=1,\dots n} \]
+  Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis for \( E \), and thus denote the interval \( I_k \) by
+  \[ I_k=\qty{c_1e_1+\dots +c_ne_n\in E\mid c_i\in \qty[a_{ik},b_{ik}]\;\forall\,i=1,\dots n}\fstop \]
+  
   Since \( I_1\supset I_2\supset\dots I_k\supset\dots \) is a decreasing sequence of closed intervals, we have that for all \( i=1,\dots,n \), \( (a_{ik})_{k=1}^\infty \) is an increasing sequence of real numbers. Furthermore, the sequence is bounded above by \( b_{i1}\in\R \). Hence, we have a bounded, monotonic sequence of real numbers. By the Monotone Convergence Theorem in \( \R \), the sequence converges: so \( a_{ik}\to a_i \) as \( k\to\infty \). We will hence show that \( x=a_1e_1+\dots+a_ne_n\in\bigcap_{k=1}^\infty I_k \).
 
   \vspace{3mm}
@@ -938,8 +968,9 @@ A bounded sequence in \( E \) would thus be a sequence \((x_k)_{k=1}^\infty  \) 
 
   \vspace{3mm}
 
-  Let \( \epsilon>0 \). Choose \( k\in\N \) such that \( \frac{1}{k}<\frac{\epsilon}{M\sqrt{n}} \). Such a choice of \( k \) is possible since \( \R \) satisfies the Archimedean property. Choose \( a\in A \) such that \( a\in I_k \), which is possible since \( I_k \) contains infinitely many points of \( A \). Since we also have that \( x\in I_k \), then the (Euclidean) distance between \( x \) and \( a \) must be less than or equal to the largest possible distance between two points in the closed interval. For a closed cubical interval of equal side lengths \( r>0 \), the greatest distance is \( \sqrt{nr^2}=r\sqrt{n} \). Hence, we have that:
-  \[ \norm{x-a}\leq\frac{M}{2^{k-1}}\sqrt{n}\leq\frac{M}{k}\sqrt{n}<\epsilon \]
+  Let \( \epsilon>0 \). Choose \( k\in\N \) such that \( \frac{1}{k}<\frac{\epsilon}{M\sqrt{n}} \). Such a choice of \( k \) is possible since \( \R \) satisfies the Archimedean property. Choose \( a\in A \) such that \( a\in I_k \), which is possible since \( I_k \) contains infinitely many points of \( A \). Since we also have that \( x\in I_k \), then the (Euclidean) distance between \( x \) and \( a \) must be less than or equal to the largest possible distance between two points in the closed interval. For a closed cubical interval of equal side lengths \( r>0 \), the greatest distance is \( \sqrt{nr^2}=r\sqrt{n} \). Hence, we have that
+  \[ \norm{x-a}\leq\frac{M}{2^{k-1}}\sqrt{n}\leq\frac{M}{k}\sqrt{n}<\epsilon\fstop \]
+  
   Hence, from the above expression we have that \( a\in A\cap\qty(B(x,\epsilon)\backslash\qty{x}) \). Since this is true for all \( \epsilon>0 \), it follows that \( x \) is a limit point of \( A \).
 \end{proof}
 
@@ -957,8 +988,9 @@ Now the \emph{actual} Bolzano-Weierstrass Theorem follows as an easy consequence
 
   \vspace{3mm}
 
-  Let \( \epsilon>0 \). Choose \( N\in\N \) such that \( \frac{1}{N}<\epsilon \). Such a choice of \( N \) is possible since \( \R \) satisfies the Archimedean property. Then for all \( m\geq N \), we have:
-  \[ \norm{x_{k_m}-x}<\frac{1}{m}<\frac{1}{N}<\epsilon \]
+  Let \( \epsilon>0 \). Choose \( N\in\N \) such that \( \frac{1}{N}<\epsilon \). Such a choice of \( N \) is possible since \( \R \) satisfies the Archimedean property. Then for all \( m\geq N \), we have
+  \[ \norm{x_{k_m}-x}<\frac{1}{m}<\frac{1}{N}<\epsilon\fstop \]
+  
   Thus, \( x_{k_m}\to x \) as \( m\to\infty \).
 \end{proof}
 
@@ -998,7 +1030,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    Clearly, \( x_k\to x_0 \) as \( k\to\infty \). Hence, \( f(x_k)\to y_0 \) as \( k\to\infty \). This means that there exists an \( N\in\N \) such that for all \( k\geq N \), we have that \( \epsilon\leq \norm{f(x_k)-y_0}<\epsilon \). This is impossible, so we are forced to conclude that \( \lim_{x\to x_0}f(x)= y_0 \).
  \end{proof}
 
- We can thus easily derive the algebraic limit laws of functions from the above result and the corresponding facts for sequences: the limit of a sum of functions is the sum of the limits, and you can pull scalars through limits. Moreover, limits behave 'nicely' with composition of functions: given \( f:E\to F \) and \( g:F\to G \) and \( a\in E \), if \( f(x)\to L\in F \) as \( x\to a \) and \( g(y)\to M \) as \( y\to L \), then \( g\circ f(x)\to M \) as \( x\to a \).
+ We can thus easily derive the algebraic limit laws of functions from the above result and the corresponding facts for sequences: the limit of a sum of functions is the sum of the limits, and you can pull scalars through limits. Moreover, limits behave `nicely' with composition of functions: given \( f:E\to F \) and \( g:F\to G \) and \( a\in E \), if \( f(x)\to L\in F \) as \( x\to a \) and \( g(y)\to M \) as \( y\to L \), then \( g\circ f(x)\to M \) as \( x\to a \).
 
  \vspace{3mm}
 
@@ -1012,7 +1044,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    If \( f \) is continuous at all \( x\in U \), then we say that \( f \) is continuous on \( U \).
  \end{definition}
 
- One should notice that the above definition closely resembles that of the limit of a function, instead that the limit of the function as you approach a point is equal to the function evaluated at that particuar point, if it is continuous there. This is why people often like to say that a function \( f:U\to F \) is continuous at \( x_0\in U \) if \( \lim_{x\to x_0}f(x)=f(x_0) \). As continuity can be formulated in terms of a limit, we can obtain an analogous result to Proposition \ref{thm:limseq}, where we can formulate continuity via limits of sequences. The proof follows the same argument as Proposition \ref{thm:limseq}.
+ One should notice that the above definition closely resembles that of the limit of a function, instead that the limit of the function as you approach a point is equal to the function evaluated at that particular point, if it is continuous there. This is why people often like to say that a function \( f:U\to F \) is continuous at \( x_0\in U \) if \( \lim_{x\to x_0}f(x)=f(x_0) \). As continuity can be formulated in terms of a limit, we can obtain an analogous result to Proposition \ref{thm:limseq}, where we can formulate continuity via limits of sequences. The proof follows the same argument as Proposition \ref{thm:limseq}.
 
  \begin{proposition}
    \label{thm:seqcont}
@@ -1030,26 +1062,27 @@ A very useful fact is that limits of functions can be characterised in terms of 
  We conclude this section with a fun fact: linear maps between Euclidean spaces are automatically continuous. So linear maps are really, really nice to work with! This is another consequence of the finite dimensionality of the spaces we are working in.
 
  \begin{theorem}
+   \label{thm:lin-cont}
    Let \( f:E\to F \) be a linear mapping between Euclidean spaces. Then \( f \) is continuous.
  \end{theorem}
  \begin{proof}
-   Let \( \qty{e_1,\dots, e_n} \) be an orthonormal basis for \( E \). Let \( x_0\in E \), and let \( (x_k)_{k=1}^\infty \) be a sequence in \( E \) such that \( x_k\to x_0 \) as \( k\to\infty \). We can write each term of the sequence as a linear combination of the basis vectors:
-   \[ x_k=a_{1k}e_1+\dots+a_{nk}e_n \]
+   Let \( \qty{e_1,\dots, e_n} \) be an orthonormal basis for \( E \). Let \( x_0\in E \), and let \( (x_k)_{k=1}^\infty \) be a sequence in \( E \) such that \( x_k\to x_0 \) as \( k\to\infty \). We can write each term of the sequence as a linear combination of the basis vectors
+   \[ x_k=a_{1k}e_1+\dots+a_{nk}e_n\fstop \]
 
-   Let's also expand \( x_0 \) in terms of the basis vectors:
-   \[ x_0=a_1e_1+\dots+a_ne_n \]
+   Let's also expand \( x_0 \) in terms of the basis vectors
+   \[ x_0=a_1e_1+\dots+a_ne_n\fstop \]
 
-   Now, we know that \( x_k\to x_0 \) as \( k\to\infty \) if and only if all of the real component sequences \( (a_{ik})_{k=1}^\infty \) converge to the corresponding component \( a_i \) of \( x_0 \), i.e we have that \( a_{ik}\to a_i \) as \( k\to\infty \) for each \( i=1,\dots,n \).
+   Now, we know that \( x_k\to x_0 \) as \( k\to\infty \) if and only if all of the real component sequences \( (a_{ik})_{k=1}^\infty \) converge to the corresponding component \( a_i \) of \( x_0 \), i.e.\ we have that \( a_{ik}\to a_i \) as \( k\to\infty \) for each \( i=1,\dots,n \).
 
    \vspace{3mm}
 
-   Finally, by the linearity of \( f \), we have that:
+   Finally, by the linearity of \( f \), we have that
    \begin{align*}
      \lim_{k\to\infty}f(x_k)&= \lim_{k\to\infty}\sum_{i=1}^n a_{ik}f(e_i)\\
      &= \sum_{i=1}^n f(e_i)\lim_{k\to\infty} a_{ik} &(\text{by linearity of limits})\\
      &= \sum_{i=1}^n a_i f(e_i)\\
      &= f\qty(\sum_{i=1}^n a_ie_i) &(\text{by linearity of }f)\\
-     &= f(x_0)
+     &= f(x_0)\fstop
    \end{align*}
 
    By Proposition \ref{thm:seqcont}, this shows that \( f \) is continuous at \( x_0 \). Since the choice of \( x_0\in E \) was arbitrary, it follows that \( f \) is continuous on all of \( E \).
@@ -1086,7 +1119,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
  Before we tackle the proof, we will require a useful auxillary result that we will use in order to construct a finite subcover of a given open cover of a sequentially compact set.
 
  \begin{lemma}
-   (Lebesgue's number lemma) Let \( A\subset E \) be a sequentially compact subset of a metric space \( X \) and let \( \mathcal{U} \) be an open cover of \( A \). Then there exists a \( \delta>0 \) such that for all \( x\in A \), there exists a \( U\in\mathcal{U} \) such that \( B(x,\delta)\subset U \).
+   (Lebesgue's number lemma) Let \( A\subset X \) be a sequentially compact subset of a metric space \( X \) and let \( \mathcal{U} \) be an open cover of \( A \). Then there exists a \( \delta>0 \) such that for all \( x\in A \), there exists a \( U\in\mathcal{U} \) such that \( B(x,\delta)\subset U \).
  \end{lemma}
  \begin{proof}
    Assume for a contradiction that for all \( \delta>0 \), there exists an \( x\in A \) such that \( B(x,\delta)\cap (X\backslash U)\neq\emptyset \) for all \( U\in\mathcal{U} \). Then for each \( n\in\N \), pick an \( x_n\in A \) such that \( B\qty(x_n,\frac{1}{n})\cap (X\backslash U)\neq\emptyset \) for all \( U\in\mathcal{U} \).
@@ -1094,7 +1127,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    \vspace{3mm}
 
    This defines a sequence \( (x_n)_{n=1}^\infty \) in \( A \), which has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) since \( A \) is sequentially compact. Suppose that \( x_{n_k}\to a \) as \( k\to\infty \). Since \( a\in A \), then \( a\in V \) for some open set \( V\in\mathcal{U} \), since \( \mathcal{U} \) is an open cover of \( A \). This means that there exists an \( \epsilon>0 \) such that \( B(a,\epsilon)\subset V \). But by convergence of the subsequence \( (x_{n_k})_{k=1}^\infty \), there exists an \( N_1\in\N \) such that for all \( k\geq N_1 \) \( d(x_{n_k},a)<\frac{\epsilon}{2} \). Additionally, by the Archimedean property, there exists an \( N_2\in\N \) such that for all \( k\geq N_2 \), \( \frac{1}{k}<\frac{\epsilon}{2} \). Choose \( N=\max\qty{N_1,N_2} \). Then for all \( k\geq N \), we have that for any \( y\in B\qty(x_{n_k},\frac{1}{k}) \):
-   \[ d(y,a)\leq d(y,x_{n_k})+d(x_{n_k},a)<\frac{1}{k}+\frac{\epsilon}{2}<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon \]
+   \[ d(y,a)\leq d(y,x_{n_k})+d(x_{n_k},a)<\frac{1}{k}+\frac{\epsilon}{2}<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon\fstop \]
 
    So \( y\in B(a,\epsilon) \), and hence \( B\qty(x_{n_k},\frac{1}{k})\subset B(a,\epsilon)\subset V \), which contradicts the choice of \( x_{n_k} \).
  \end{proof}
@@ -1108,7 +1141,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
 
    \vspace{3mm}
 
-   (\( \impliedby \)) Suppose \( A \) is sequentially compact. Let \( \mathcal{U} \) be an open cover of \( A \). By Lebesgue's number lemma, there exists a \( \delta>0 \) such that for all \( x\in A \), there exists an open set \( U\in\mathcal{U} \) such that \( B(x,\delta)\subset U \). We will use this property to construct a finite subcover of \( \mathcal{U} \).
+   (\( \impliedby \)) Suppose \( A \) is sequentially compact. Let \( \mathcal{U} \) be an open cover of \( A \). By Lebesgue's number lemma, there exists a Lebesgue number \( \delta>0 \) such that for all \( x\in A \), there exists an open set \( U\in\mathcal{U} \) such that \( B(x,\delta)\subset U \). We will use this property to construct a finite subcover of \( \mathcal{U} \).
 
    \vspace{3mm}
 
@@ -1141,19 +1174,20 @@ A very useful fact is that limits of functions can be characterised in terms of 
 
    \vspace{3mm}
 
-   (\( \impliedby \)) Suppose \( A\subset E \) is closed and bounded. Let \( (a_n)_{n=1}^\infty \) be a sequence in \( A \). Thus, \( (a_n)_{n=1}^\infty \) is a bounded sequence. By the Bolzano-Weierstrass Theorem, there exists a convergent subsequence \( (a_{n_k})_{k=1}^\infty \) with limit \( a\in E \). However, since \( A \) is closed, we must have that the limit is contained in \( A \), i.e \( a\in A \). This proves the (sequential) compactness of \( A \).
+   (\( \impliedby \)) Suppose \( A\subset E \) is closed and bounded. Let \( (a_n)_{n=1}^\infty \) be a sequence in \( A \). Thus, \( (a_n)_{n=1}^\infty \) is a bounded sequence. By the Bolzano-Weierstrass Theorem, there exists a convergent subsequence \( (a_{n_k})_{k=1}^\infty \) with limit \( a\in E \). However, since \( A \) is closed, we must have that the limit is contained in \( A \), i.e.\ \( a\in A \). This proves the (sequential) compactness of \( A \).
  \end{proof}
 
  Now that we have seen the various ways we can characterise a compact set in Euclidean space, we will now spend some time looking at why compact sets are nice to work with. In particular, compact sets interact nicely with continuous functions. The first fact we will look at is that if a continuous real-valued function defined on a compact set is always positive, then it does not get arbitrarily close to 0, that is, the function is bounded below by a positive constant.
 
  \begin{proposition}
+   \label{thm:posfunc}
    Let \( E \) be a Euclidean space, \( A\subset E \) a compact set, and \( f:A\to\R \) a continuous function with \( f(x)>0 \) for all \( x\in A \). Then there exists an \( \alpha>0 \) such that \( f(x)>\alpha \) for all \( x\in A \).
  \end{proposition}
  \begin{proof}
-   Suppose for a contradiction that for all \( \epsilon>0 \), there exists an \( x\in A \) such that \( f(x)\leq\epsilon \). Then for each \( n\in\N \), choose an \( x_n\in A \) such that \( f(x_n)\leq \frac{1}{n} \). This defines a sequence \( (x_n)_{n=1}^\infty \) in \( A \). By compactness of \( A \), there exists a subsequence \( (x_{n_k})_{k=1}^\infty \) that converges to \( a\in A \). By continuity of \( f \), we thus have that \( f(x_{n_k})\to f(a) \) as \( k\to\infty \). But:
+   Suppose for a contradiction that for all \( \epsilon>0 \), there exists an \( x\in A \) such that \( f(x)\leq\epsilon \). Then for each \( n\in\N \), choose an \( x_n\in A \) such that \( f(x_n)\leq \frac{1}{n} \). This defines a sequence \( (x_n)_{n=1}^\infty \) in \( A \). By compactness of \( A \), there exists a subsequence \( (x_{n_k})_{k=1}^\infty \) that converges to \( a\in A \). By continuity of \( f \), we thus have that \( f(x_{n_k})\to f(a) \) as \( k\to\infty \). But
    \begin{align*}
      \lim_{k\to\infty}f(x_{n_k})&\leq \lim_{k\to\infty}\frac{1}{n_k}\\
-     \therefore f(a)&\leq 0
+     \therefore f(a)&\leq 0\fstop
    \end{align*}
 
    This contradicts the fact that \( f(x)>0 \) for all \( x\in A \).
@@ -1170,7 +1204,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    Let \( f:E\to F \) be a continuous mapping between Euclidean spaces and let \( A\subset E \) be a compact set. Then \( f(A) \) is a compact subset of \( F \).
  \end{proposition}
  \begin{proof}
-   Let \( (y_n)_{n=1}^\infty \) be a sequence in \( f(A) \). Then for each \( n\in\N \), there exists an \( x_n\in A \) such that \( y_n=f(x_n) \). Consider the sequence \( (x_n)_{n=1}^\infty \) in \( A \). By compactness of \( A \), this sequence has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) with limit \( x\in A \). By continuity of \( f \), we have that \( f(x_{n_k})\to f(x) \) as \( k\to\infty \), i.e \( y_{n_k}\to f(x)\in f(A) \) as \( k\to\infty \). So \( (y_{n_k})_{k=1}^\infty \) is a convergent subsequence of \( (y_n)_{n=1}^\infty \) whose limit is contained in \( f(A) \). Hence, \( f(A) \) is compact.
+   Let \( (y_n)_{n=1}^\infty \) be a sequence in \( f(A) \). Then for each \( n\in\N \), there exists an \( x_n\in A \) such that \( y_n=f(x_n) \). Consider the sequence \( (x_n)_{n=1}^\infty \) in \( A \). By compactness of \( A \), this sequence has a convergent subsequence \( (x_{n_k})_{k=1}^\infty \) with limit \( x\in A \). By continuity of \( f \), we have that \( f(x_{n_k})\to f(x) \) as \( k\to\infty \), i.e.\ \( y_{n_k}\to f(x)\in f(A) \) as \( k\to\infty \). So \( (y_{n_k})_{k=1}^\infty \) is a convergent subsequence of \( (y_n)_{n=1}^\infty \) whose limit is contained in \( f(A) \). Hence, \( f(A) \) is compact.
  \end{proof}
 
  An immediate application of the above fact is the \emph{Extreme Value Theorem}. This is an existence result that guarantees that a continuous real-valued function defined on a compact set achieves global extrema on its domain. Since one of the main goals of differential calculus is optimisation, it is a good first step to know that global extrema exist somewhere so it makes sense to look for them in the first place!
@@ -1178,53 +1212,213 @@ A very useful fact is that limits of functions can be characterised in terms of 
    (Extreme Value Theorem) Let \( E \) be a Euclidean space, \( A\subset E \) a compact set and \( f:A\to\R \) a continuous function. Then \( f \) attains a maximum and a minimum on \( A \).
  \end{theorem}
  \begin{proof}
-   By Proposition \ref{thm:cptimage}, we have that \( f(A) \) is a compact set. By the Heine-Borel Theorem, this implies that \( f(A) \) is a closed and bounded subset of \( \R \). The boundedness of \( f(A) \) implies that \( \sup f(A)<\infty \) and \( \inf f(A)>-\infty \). For each \( n\in\N \), choose \( x_n,y_n\in A \) such that \( \sup f(A)-\frac{1}{n}<f(x_n)\leq\sup f(A) \) and \( \inf f(A)\leq f(y_n)<\inf f(A)+\frac{1}{n} \). By taking limits as \( n\to\infty \) and applying the Squeeze Theorem, we see that \( f(x_n)\to\sup f(A) \) and \( f(y_n)\to\inf f(A) \) as \( n\to\infty \). By closedness of \( f(A) \), we have that \( \sup f(A)\in f(A) \) and \( \inf f(A)\in f(A) \), so there exists \( x_0,x_1\in A \) satisfying \( f(x_0)=\sup f(A) \) and \( f(x_1)=\inf f(A) \), i.e \( f \) attains a maximum at \( x_0 \) and a minimum at \( x_1 \).
+   By Proposition \ref{thm:cptimage}, we have that \( f(A) \) is a compact set. By the Heine-Borel Theorem, this implies that \( f(A) \) is a closed and bounded subset of \( \R \). The boundedness of \( f(A) \) implies that \( \sup f(A)<\infty \) and \( \inf f(A)>-\infty \). For each \( n\in\N \), choose \( x_n,y_n\in A \) such that \( \sup f(A)-\frac{1}{n}<f(x_n)\leq\sup f(A) \) and \( \inf f(A)\leq f(y_n)<\inf f(A)+\frac{1}{n} \). By taking limits as \( n\to\infty \) and applying the Squeeze Theorem, we see that \( f(x_n)\to\sup f(A) \) and \( f(y_n)\to\inf f(A) \) as \( n\to\infty \). By closedness of \( f(A) \), we have that \( \sup f(A)\in f(A) \) and \( \inf f(A)\in f(A) \), so there exists \( x_0,x_1\in A \) satisfying \( f(x_0)=\sup f(A) \) and \( f(x_1)=\inf f(A) \), i.e.\ \( f \) attains a maximum at \( x_0 \) and a minimum at \( x_1 \).
  \end{proof}
  
  \section{Equivalence of Norms}
+ In \Cref{sec:EuclidSpace}, we saw that the Euclidean inner product \emph{uniquely} induces the Euclidean norm \( \norm{-}_2 \) on \( \R^n \), which gave us sufficient machinery to define distances, convergence, continuity, etc. If we (temporarily) forget about the inner product structure of Euclidean space, a very natural thing to think about is what would happen if we equipped \( \R^n \) with a \emph{different} norm. Would the resulting topological structure differ from that of Euclidean space? Perhaps surprisingly, the answer is no. While different norms may prescribe different lengths to the same vector, they actually all induce the exact same topology in a finite dimensional setting!
+
+ \vspace{3mm}
+
+ To discuss this idea further on a more solid ground, we will define what it means in general for two norms to be `the same' under a topological lens. We will call topologically compatible pairs of norms to be \emph{strongly equivalent}:
+ 
  \begin{definition}
    Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be norms on \( V \). We say that the norms \( \norm{-}_1 \) and \( \norm{-}_2 \) are \textbf{strongly equivalent} if there exists constants \( C,D>0 \) such that \( C\norm{x}_1\leq \norm{x}_2\leq D\norm{x}_1 \) for all \( x\in V \).
  \end{definition}
 
+ Strong equivalence of norms on a vector space defines an equivalence relation on all of the possible norms that can be defined on the vector space.
+
+ \vspace{3mm}
+
+ The condition for two norms being strongly equivalent to one another may seem somewhat opaque at a first glance. Admittedly, it is more of an \emph{operational definition} in that the definition itself is not very intuitive or particularly illuminating, but it makes proving the shared properties of strongly equivalent norms a relatively simple task thanks to the nice inequality involving the two different norms that it establishes. We will say more on the implications of having strongly equivalent norms a bit later in this section. First, we will establish the very important fact that any norm that one can define on \( \R^n \) is strongly equivalent to any other.
+
  \begin{theorem}
+   \label{thm:norm-equiv}
    Let \( E \) be a Euclidean \( n \)-space. Then any two norms on \( E \) are strongly equivalent.
  \end{theorem}
+ \begin{proof}
+   We will show that every norm on \( E \) is strongly equivalent to the Euclidean norm \( \norm{-} \). Let \( \norm{-}_0 \) be any norm on \( E \). Define the function \( f:E\backslash\qty{0}\to\R \) by
+   \[ f(x)=\frac{\norm{x}}{\norm{x}_0}\fstop \]
+
+   Note that \( f(x)>0 \) for all \( x\in E\backslash\qty{0} \).
+
+   \vspace{3mm}
+   
+   Consider the unit sphere in the Euclidean norm, i.e.\ the set \( A=\qty{x\in E\mid\norm{x}=1} \). The set \( A\subset E \) is compact since it is a closed, bounded set (Heine-Borel Theorem). Hence, if we restrict the domain of \( f \) to \( A \), we can apply Proposition \ref{thm:posfunc} and obtain a constant \( C>0 \) such that \( f(x)>C \) for all \( x\in A \). Hence, we have that \( \frac{\norm{x}}{\norm{x}_0}>C \) for all \( x\in E \) with \( \norm{x}=1 \).
+
+   \vspace{3mm}
+
+   Now let \( y\in E \) with \( y\neq 0 \). Define \( \vu{y}=\frac{y}{\norm{y}} \); the vector \( y \) normalised to unit length in the Euclidean norm. Clearly, \( \norm{\vu{y}}=1 \), so that we have
+   \[ \frac{\norm{\vu{y}}}{\norm{\vu{y}}_0}>C\fstop \]
+   
+   But by homogeneity of the norm, we can pull a factor of \( \frac{1}{\norm{y}} \) outside the norms in both the numerator and denominator of the left-hand-side of the above expression, which cancel. We hence arrive at
+   \[ \frac{\norm{y}}{\norm{y}}_0>C\fstop \]
+
+   This rearranges to \( C\norm{y}_0<\norm{y} \), which holds for all \( y\neq 0 \). If \( y=0 \), then we have a trivial equality (\( 0=C\norm{y}_0=\norm{y}=0 \)). Hence, we have that \( C\norm{x}_0\leq\norm{x} \) for all \( x\in E \).
+
+   \vspace{3mm}
+
+   Similarly, define the function \( g:E\backslash\qty{0}\to\R \) by
+   \[ g(x)=\frac{\norm{x}_0}{\norm{x}}\fstop \]
+
+   We have that \( g(x)>0 \) for all \( x\in E\backslash\qty{0} \). Once again, we restrict the domain of \( g \) to the unit sphere \( A \) and apply Proposition \ref{thm:posfunc} to obtain a constant \( D'>0 \) such that \( g(x)>D' \) for all \( x\in A \). Hence, we have that \( \frac{\norm{x}_0}{\norm{x}}>D' \) for all \( x\in E \) with \( \norm{x}=1 \).
+
+   \vspace{3mm}
+
+   Let \( y\in E \) with \( y\neq 0 \). Then
+   \begin{align*}
+     \frac{\norm{\vu{y}}_0}{\norm{\vu{y}}}&>D'\\
+     \frac{\norm{\frac{y}{\norm{y}}}_0}{\norm{\frac{y}{\norm{y}}}}&>D'\\
+     \frac{\norm{y}}{\norm{y}}\,\frac{\norm{y}_0}{\norm{y}}&>D'\\
+     \frac{\norm{y}_0}{\norm{y}}&>D'\fstop
+   \end{align*}
+
+   Hence, we have that \( \norm{y}<D\norm{y}_0 \) for all \( y\neq 0 \), where we have defined \( D=\frac{1}{D'}>0 \). Once again, if \( y=0 \), then we trivially have that \( \norm{y}=D\norm{y}_0 \). Hence, for any \( x\in E \), we have the inequality \( \norm{x}\leq D\norm{x}_0 \).
+
+   \vspace{3mm}
+
+   Putting this all together, we have that \( C\norm{x}_0\leq \norm{x}\leq D\norm{x}_0 \) for all \( x\in E \). This proves that the norm \( \norm{-}_0 \) is strongly equivalent to the Euclidean norm. Since strong equivalence is an equivalence relation on the norms on \( E \), it follows that every norm on \( E \) is strongly equivalent to one another.
+ \end{proof}
+
+ We are now ready to explore the properties shared by strongly equivalent norms. First, we formally prove the statement that strongly equivalent norms induce the same topology by showing that the open sets in the metric topology induced by \( \norm{-}_1 \) exactly coincide with the open sets in the metric topology induced by \( \norm{-}_2 \).
 
  \begin{proposition}
    Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be strongly equivalent norms on \( V \). Then a subset \( U\subset V \) is open with respect to the norm \( \norm{-}_1 \) if and only if \( U \) is open with respect to the norm \( \norm{-}_2 \).
  \end{proposition}
+ \begin{proof}
+   (\( \implies \)) Suppose \( U \) is open with respect to \( \norm{-}_1 \), i.e.\ for all \( x\in U \), there exists an \( r_x>0 \) such that \( B_1(x,r_x)=\qty{y\in V\mid \norm{x-y}_1<r_x}\subset U \).
+
+   \vspace{3mm}
+   
+   Since \( \norm{-}_1 \) and \( \norm{-}_2 \) are strongly equivalent, there exists \( C>0 \) such that \( C\norm{v}_1\leq\norm{v}_2 \) for all \( v\in V \). Let \( x\in U \) and let \( y\in B_2\qty(x,Cr_x)=\qty{z\in V\mid \norm{x-z}_2<Cr_x} \). Then
+   \[ C\norm{x-y}_1\leq\norm{x-y}_2<Cr_x\fstop \]
+
+   We hence obtain \( \norm{x-y}_1<r_x \), which demonstrates that \( y\in B_1(x,r_x) \). We thus have that \( B_2(x,Cr_x)\subset B_1(x,r_x)\subset U \), which proves that \( U \) is open with respect to \( \norm{-}_2 \).
+
+   \vspace{3mm}
+
+   (\( \impliedby \)) Suppose \( U \) is open with respect to \( \norm{-}_2 \), i.e.\ for all \( x\in U \), there exists an \( r_x>0 \) such that \( B_2(x,r_x)=\qty{y\in V\mid\norm{x-y}_2<r_x}\subset U \).
+
+   \vspace{3mm}
+
+   Since \( \norm{-}_1 \) and \( \norm{-}_2 \) are strongly equivalent, there exists \( D>0 \) such that \( \norm{v}_2\leq D\norm{v}_1 \) for all \( v\in V \). Let \( x\in U \) and let \( y\in B_1\qty(x,\frac{1}{D}r_x)=\qty{z\in V\mid \norm{x-z}_1<\frac{1}{D}r_x} \). Then
+   \[ \frac{1}{D}\norm{x-y}_2\leq\norm{x-y}_1<\frac{1}{D}r_x\fstop \]
+
+   We hence have that \( \norm{x-y}_2<r_x \), so that \( y\in B_2(x,r_x) \). Hence, \( B_1\qty(x,\frac{1}{D}r_x)\subset B_2(x,r_x)\subset U \), which proves that \( U \) is open with respect to \( \norm{-}_1 \).
+ \end{proof}
+
+ Naturally, since a normed space enjoys the same set of topological properties regardless of which norm is used (as long as they are all strongly equivalent), one can expect that sequences would behave similarly in any norm. In particular, if a sequence is either Cauchy or convergent in any one norm, then it will be Cauchy or convergent (with the same limit) in any other strongly equivalent norm.
  
  \begin{proposition}
+   \label{thm:norm-equiv-conv}
    Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be strongly equivalent norms on \( V \). Let \( (x_n)_{n=1}^\infty \) be a sequence in \( V \). Then:
    \begin{enumerate}[label=(\alph*)]
    \item \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_1 \) if and only if \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_2 \).
    \item \( \norm{x_n-x}_1\to 0 \) if and only if \( \norm{x_n-x}_2\to 0 \).
    \end{enumerate}
  \end{proposition}
+ \begin{proof}
+   \begin{enumerate}[label=(\alph*)]
+   \item Firstly, since \( \norm{-}_1 \) and \( \norm{-}_2 \) are strongly equivalent norms, there exist \( C,D>0 \) such that the following inequality holds for all \( m,n\in\N \)
+     \[ 0\leq C\norm{x_m-x_n}_1\leq\norm{x_m-x_n}_2\leq D\norm{x_m-x_n}_1\fstop \]
+     (\( \implies \)) Suppose \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_1 \). Let \( \epsilon>0 \). Choose \( N\in\N \) such that for all \( m,n\geq N \), \( \norm{x_m-x_n}_1<\flatfrac{\epsilon}{D} \). Then for all \( m,n\geq N \), we have
+     \[ \norm{x_m-x_n}_2\leq D\norm{x_m-x_n}_1<D\times\frac{\epsilon}{D}=\epsilon\fstop \]
 
+     (\( \impliedby \)) Suppose \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_2 \). Let \( \epsilon>0 \). Choose \( N\in\N \) such that for all \( m,n\geq N \), \( \norm{x_m-x_n}_2<C\epsilon \). Then for all \( m,n\geq N \), we have
+     \[ \norm{x_m-x_n}_1\leq \frac{1}{C}\norm{x_m-x_n}_2<\frac{C\epsilon}{C}=\epsilon\fstop \]
+   \item For all \( n\in\N \), we have that
+     \[ 0\leq C\norm{x_n-x}_1\leq\norm{x_n-x}_2\leq D\norm{x_n-x}_1 \]
+     for some \( C,D>0 \), since \( \norm{-}_1 \) and \( \norm{-}_2 \) are strongly equivalent norms.
+
+     \vspace{3mm}
+
+     Suppose \( \lim_{n\to\infty}\norm{x_n-x}_1=0 \). Then
+     \begin{align*}
+       0&\leq\lim_{n\to\infty}\norm{x_n-x}_2\leq D\lim_{n\to\infty}\norm{x_n-x}_1\\
+       0&\leq\lim_{n\to\infty}\norm{x_n-x}_2\leq 0\fstop
+     \end{align*}
+
+     This implies that \( \norm{x_n-x}_2\to 0 \) as \( n\to\infty \) by the Squeeze Theorem. Similarly, if \( \lim_{n\to\infty}\norm{x_n-x}_2=0 \), then
+     \begin{align*}
+       0&\leq\lim_{n\to\infty}\norm{x_n-x}_1\leq \frac{1}{C}\lim_{n\to\infty}\norm{x_n-x}_2\\
+       0&\leq\lim_{n\to\infty}\norm{x_n-x}_1\leq 0
+     \end{align*}
+     which implies that \( \norm{x_n-x}_1\to 0 \) as \( n\to\infty \).
+   \end{enumerate}
+ \end{proof}
+
+ This directly gives us the following result:
  \begin{proposition}
    Let \( V \) be a vector space and let \( \norm{-}_1 \) and \( \norm{-}_2 \) be strongly equivalent norms on \( V \). Then \( V \) is complete with respect to \( \norm{-}_1 \) if and only if \( V \) is complete with respect to \( \norm{-}_2 \).
  \end{proposition}
+ \begin{proof}
+   Suppose \( V \) is complete with respect to \( \norm{-}_1 \). Let \( (x_n)_{n=1}^\infty \) be a Cauchy sequence with respect to \( \norm{-}_2 \). By \Cref{thm:norm-equiv-conv} part (a), \( (x_n)_{n=1}^\infty \) is Cauchy with respect to \( \norm{-}_1 \). By completeness of \( V \) in the 1-norm, we have that \( \norm{x_n-x}_1\to 0 \) for some \( x\in V \). But by \Cref{thm:norm-equiv-conv} part (b), this implies that \( \norm{x_n-x}_2\to 0 \) as \( n\to\infty \). This shows that every Cauchy sequence in \( (V,\norm{-}_2) \) has a limit, thus proving completeness. The same argument works in reverse for proving completeness of \( (V,\norm{-}_1) \) from that of \( (V,\norm{-}_2) \).
+ \end{proof}
 
- Discussion on p-norms.
+ Finally, given a function \( f:V \to W \) between finite dimensional normed spaces, the property of \( f \) being continuous is, in effect, independent on the particular norms used for \( V \) and \( W \).
+ \begin{proposition}
+   Let \( V,W \) be finite dimensionalnormed vector spaces. Then the continuity of a mapping \( f:V\to W \) does not depend on the choice of norm on \( V \) and \( W \).
+ \end{proposition}
+ \begin{proof}
+   Suppose the map \( f:V\to W \) is continuous with respect to the norm \( \norm{-}_1 \) on \( V \) and \( \norm{-}_2 \) on \( W \). Let \( \norm{-}_{1'} \) be an arbitrary on \( V \) and \( \norm{-}_{2'} \) be an arbitrary norm on \( W \). By \Cref{thm:norm-equiv}, \( \norm{-}_1,\norm{-}_{1'} \) are strongly equivalent norms on \( V \) and \( \norm{-}_2,\norm{-}_{2'} \) are strongly equivalent norms on \( W \). We will show that \( f \) is continuous with respect to the norms \( \norm{-}_{1'} \) and \( \norm{-}_{2'} \) on \( V \) and \( W \), respectively.
+
+   \vspace{3mm}
+
+   Let \( (x_n)_{n=1}^\infty \) be a sequence in \( V \) which converges to \( x\in V \) in the norm \( \norm{-}_{1'} \). By \Cref{thm:norm-equiv-conv}, \( x_n\to x \) as \( n\to\infty \) with respect to \( \norm{-}_1 \). By continuity of \( f \) (with respect to the unprimed norms) we have that \( f(x_n)\to f(x) \) as \( n\to\infty \) with respect to \( \norm{-}_2 \). Another application of \Cref{thm:norm-equiv-conv} shows that \( f(x_n)\to f(x) \) as \( n\to\infty \) with respect to \( \norm{-}_{2'} \). This shows the sequential continuity of \( f \) with respect to the primed norms, and hence demonstrates continuity.
+ \end{proof}
+
+ In summary, we have shown that when we are working in Euclidean space \( E \), we can equip \( E \) with any norm we want, and any topological result we deduce (including convergence and continuity) will be universal (i.e.\ norm independent). Thus, we do not necessarily need to work in the Euclidean norm \( \norm{-}_2 \) all of the time, but rather we can choose convenient norms that are better suited for the particular problems we are working on at the time.
+
+ \vspace{3mm}
+
+ In particular, for each \( p\in\N \), we have the following family of norms on \( E \) \( \norm{-}_p:E\to\R \)
+ \[ \norm{x}_p=\qty(\sum_{i=1}^n\abs{x_i}^p)^{\frac{1}{p}} \]
+ where the coefficients \( x_i \) are the coordinates of the vector \( x\in E \) with respect to some basis of \( E \). The norm \( \norm{-}_p \) is called the \( p \)-norm on \( E \). If \( p=2 \), the resulting \( p \)-norm is exactly the Euclidean norm \( \norm{-}_2 \), which justifies the notation.
+
+ \vspace{3mm}
+
+ Another important norm we can define on \( E \) is the \emph{maximum norm}, denoted \( \norm{-}_\infty \), which is defined by
+ \[ \norm{x}_\infty=\max_{i\in\qty{1,\dots, n}}\qty{\abs{x_i}}\fstop \]
+
+ This is a very convenient norm to work with which we will frequently use, especially once we begin to do calculus on Euclidean space.
  
  \section{The Space \( L(E,F) \)}
+ \label{sec:linear-maps}
+ \begin{definition}
+   Let \( E \), \( F \) be vector spaces. Define \( L(E,F) \) as the set of all linear maps \( T:E\to F \).
+ \end{definition}
+
+ Let \( E \) be Euclidean \( n \)-space, \( F \) be Euclidean \( m \)-space and let \( A:E\to F \) be a linear map. Given a basis \( \qty{e_1,\dots, e_n} \) for \( E \), and a basis \( \qty{\overline{e}_1,\dots,\overline{e}_m} \), we can represent the linear map \( A \) as an \( m\times n \) \emph{matrix} with respect to these bases, i.e.\ a collection of \( mn \) real numbers arranged in an \( m\times n \) array. To see this, given any \( x\in E \), we can express \( x \) in terms of the basis vectors
+ \[ x=\sum_{j=1}^nx_je_j\fstop \]
+
+ We act on \( x \) with the linear map \( A \), and by linearity we obtain
+ \[ Ax=A\qty(\sum_{j=1}^nx_je_j)=\sum_{j=1}^nx_jAe_j\fstop \]
+
+ We can expand each \( Ae_j\in F \) in terms of the basis in \( F \)
+ \[ Ae_j=\sum_{i=1}^ma_{ij}\overline{e}_i\fstop \]
+
+ Substituting this into our expression for \( Ax \) yields
+ \[ Ax=\sum_{i=1}^m\sum_{j=1}^na_{ij}x_j\overline{e}_i=\sum_{i=1}^m\sum_{j=1}^nA_{ij}\overline{e}_i \]
+ where we have defined
+ \[ A_{ij}=a_{ij}x_j \]
+ as the entries of the matrix representing the linear map \( A \). Notice that the entries depend on the choice of basis on both \( E \) and \( F \).
+ 
  \begin{theorem}
    Let \( E,F \) be vector spaces with \( \dim E=n \) and \( \dim F=m \). Then \( L(E,F) \) is an \( mn \)-dimensional vector space.
  \end{theorem}
 
+ The dual space \( E^* \) of Euclidean \( n \)-space \( E \) can be alternatively expressed as \( L(E,\R) \). We know that the dimension of \( E^* \) is \( n \) - the same as \( E \). This is consistent with the above theorem, which says that \( \dim E^*=\dim L(E,\R)=n\times 1=n \).
+
+ \vspace{3mm}
+
+ The composition of linear maps is linear. Matrix multiplication.
+
  \begin{theorem}
    Let \( E,F \) be normed vector spaces. Then \( L(E,F) \) is a normed vector space, with norm given by:
-   \[ \norm{f}=\sup_{\norm{x}=1}\qty{\norm{f(x)}\mid x\in E} \]
+   \[ \norm{T}=\sup_{\norm{x}=1}\qty{\norm{Tx}\mid x\in E} \]
  \end{theorem}
 
- The norm defined on \( L(E,F) \) is often referred to as the `operator norm'.
-
- \begin{theorem}
-   Let \( E,F \) be normed vector spaces. If \( F \) is complete, then \( L(E,F) \) is complete with respect to the operator norm.
- \end{theorem}
-
- An easy consequence of the above theorem is that the dual space \( E^*=L(E,\R) \) of any normed vector space \( E \) is complete since \( \R \) is complete. This is true regardless of whether \( E \) is complete or not.
+ The norm defined on \( L(E,F) \) is often referred to as the `operator norm'. If \( E \) and \( F \) are Euclidean spaces, then \( L(E,F) \) is a finite dimensional normed vector space.
 
 %%% Local Variables: 
 %%% mode: latex

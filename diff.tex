@@ -1,0 +1,95 @@
+% Chapter 2
+\chapter{Differentiation}
+\section{Definition of the Derivative}
+In the discussion that will follow, let \( E \) be Euclidean \( n \)-space, let \( F \) be Euclidean \( m \)-space and let \( U\subseteq E \) be an open set.
+\begin{definition}
+  A mapping \( f:U\to F \) is said to be \textbf{differentiable} at \( x_0\in U \) if there exists a linear map \( \D f(x_0)\in L(E,F) \) and a map \( R:E\cross E\to F \) such that for every \( x\in U \), we have
+  \[ f(x)=f(x_0)+[\D f(x_0)]\qty(x-x_0)+R(x,x_0) \]
+  and
+  \[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}}=0\fstop \]
+
+  If \( f \) is differentiable at \( x_0 \), the linear map \( \D f(x_0):E\to F \) is called the \textbf{derivative} of \( f \) at \( x_0 \).
+\end{definition}
+
+If \( f \) is differentiable at each \( x_0\in U \), we say that \( f \) is differentiable on \( U \) (or simply: differentiable), and can define the differentiation map \( \D f:U\to L(E,F) \), which takes each \( x_0\in U \) to \( \D f(x_0) \); the derivative of \( f \) at \( x_0 \).
+
+\begin{definition}
+  The \textbf{directional derivative} of a map \( f:U\to F \) at \( x_0\in U \) in the direction of \( y\in E \) is
+  \[ \lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}\cma \]
+  provided that the above limit exists.
+\end{definition}
+
+\begin{proposition}
+  Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then for every \( y\in E \), \( [\D f(x_0)](y) \) is equal to the directional derivative of \( f \) at \( x_0 \) in the direction of \( y \).
+\end{proposition}
+
+\begin{corollary}
+  Let \( A\subseteq\R \) be open and let \( x_0\in A \). Then \( f:A\to\R \) is differentiable at \( x_0 \) if and only if \( f \) is differentiable in the one-variable sense, i.e.\ the following limit exists
+  \[ f'(x_0)\coloneqq\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}\fstop \]
+
+  Moreover, \( [\D f(x_0)](1)=f'(x_0) \).
+\end{corollary}
+
+Let \( \qty{e_1,\dots, e_n} \) be a basis in \( E \).
+
+\begin{definition}
+  The \textbf{partial derivative} of \( f:U\to F \) with respect to the \( i^{\text{th}} \) coordinate at \( x_0\in U \) is the directional derivative of \( f \) at \( x_0 \) in the direction of the basis vector \( e_i \), i.e.\
+  \[ {\pdv{f}{x_i}} (x_0)=\lim_{t\to 0}\frac{f(x_0+te_i)-f(x_0)}{t}\fstop \]
+\end{definition}
+
+\begin{corollary}
+  Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then all of the partial derivatives of \( f \) at \( x_0 \) exist, and moreover we have
+  \[ [\D f(x_0)](e_i)={\pdv{f}{x_i}}(x_0) \]
+  for each \( i=1,\dots, n \).
+\end{corollary}
+
+\section{Properties of the Derivative}
+\begin{proposition}
+  If \( f:U\to F \) is differentiable at \( x_0\in U \), the derivative \( \D f(x_0) \) is unique.
+\end{proposition}
+
+\begin{theorem}
+  (Differentiability implies continuity) Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then \( f \) is continuous at \( x_0 \).
+\end{theorem}
+\begin{proof}
+  Since \( f \) is differentiable at \( x_0 \), then for all \( x\in U \),
+  \[ f(x)-f(x_0)=[\D f(x_0)](x-x_0)+R(x,x_0)\fstop \]
+
+  We can thus establish the following inequality
+  \[ 0\leq\norm{f(x)-f(x_0)}\leq\norm{[\D f(x_0)](x-x_0)}+\norm{R(x,x_0)}\fstop \]
+
+  Consider taking the limit as \( x\to x_0 \) of the above
+  \begin{equation*}
+    \lim_{x\to x_0}\norm{f(x)-f(x_0)}\leq \lim_{x\to x_0}\norm{[\D f(x_0)](x-x_0)}+\lim_{x\to x_0}\norm{R(x,x_0)}\fstop
+  \end{equation*}
+
+  Any vector norm \( \norm{-} \) is a continuous function. Moreover, since \( \D f(x_0) \) is a linear map, it is continuous by \Cref{thm:lin-cont}. We can hence `pull the limit inside the function' on the first term on the right-hand-side of the above as follows
+  \[ \lim_{x\to x_0}\norm{[\D f(x_0)](x-x_0)}=\norm{[\D f(x_0)]\qty(\lim_{x\to x_0}\qty(x-x_0))}=\norm{[\D f(x_0)](x_0-x_0)}=\norm{[\D f(x_0)](0)}=0\fstop \]
+
+  This yields the following simplification
+  \begin{align*}
+    0\leq \lim_{x\to x_0}\norm{f(x)-f(x_0)}&\leq \lim_{x\to x_0}\norm{R(x,x_0)}\\
+    &= \lim_{x\to x_0}\qty(\norm{x-x_0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}})\\
+    &= \qty(\lim_{x\to x_0}\norm{x-x_0})\qty(\lim_{x\to x_0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}})\\
+    &= 0\fstop
+  \end{align*}
+
+  It follows that \( \norm{f(x)-f(x_0)}\to 0 \) as \( x\to x_0 \). This implies that \( f \) is continuous at \( x_0\).
+\end{proof}
+
+Sum rule. Scalar products.
+
+\begin{theorem}
+  The differentiability of a mapping \( f:U\to F \) does not depend on the choice of norm on \( E \) and \( F \).
+\end{theorem}
+
+\section{Mappings of Class \( \mathcal{C}^1\)}
+\section{Compositions of Differentiable Mappings}
+\section{Higher Order Derivatives}
+\section{Taylor's Theorem}
+\section{Location of Extrema}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "multivar"
+%%% End:
