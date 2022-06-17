@@ -3,7 +3,7 @@
 \section{Definition of the Derivative}
 In the discussion that will follow, let \( E \) be Euclidean \( n \)-space, let \( F \) be Euclidean \( m \)-space and let \( U\subseteq E \) be an open set.
 \begin{definition}
-  A mapping \( f:U\to F \) is said to be \textbf{differentiable} at \( x_0\in U \) if there exists a linear map \( \D f(x_0)\in L(E,F) \) and a map \( R:E\cross E\to F \) such that for every \( x\in U \), we have
+  A mapping \( f:U\to F \) is said to be \textbf{differentiable} at \( x_0\in U \) if there exists a linear map \( \D f(x_0)\in L(E,F) \) and a map \( R:U\cross U\to F \) such that for every \( x\in U \), we have
   \[ f(x)=f(x_0)+[\D f(x_0)]\qty(x-x_0)+R(x,x_0) \]
   and
   \[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}}=0\fstop \]
@@ -13,22 +13,106 @@ In the discussion that will follow, let \( E \) be Euclidean \( n \)-space, let 
 
 If \( f \) is differentiable at each \( x_0\in U \), we say that \( f \) is differentiable on \( U \) (or simply: differentiable), and can define the differentiation map \( \D f:U\to L(E,F) \), which takes each \( x_0\in U \) to \( \D f(x_0) \); the derivative of \( f \) at \( x_0 \).
 
-\begin{definition}
-  The \textbf{directional derivative} of a map \( f:U\to F \) at \( x_0\in U \) in the direction of \( y\in E \) is
-  \[ \lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}\cma \]
-  provided that the above limit exists.
-\end{definition}
+\vspace{3mm}
+
+Since the derivative is a linear map (i.e.\ an element of \( L(E,F) \)), it can be represented by an \( m\times n \) matrix. This matrix is called the \emph{Jacobian matrix}.
 
 \begin{proposition}
-  Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then for every \( y\in E \), \( [\D f(x_0)](y) \) is equal to the directional derivative of \( f \) at \( x_0 \) in the direction of \( y \).
+  \label{thm:direction-deriv}
+  Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then for every \( y\in E \), we have that
+  \[ [\D f(x_0)](y)=\lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}\fstop \]
 \end{proposition}
+\begin{proof}
+  Let \( y\in E \). If \( y=0 \), then
+  \[ \lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}=\lim_{t\to 0}\frac{f(x_0)-f(x_0)}{t}=0\fstop \]
+
+  Moreover, we have that \( [\D f(x_0)](0)=0 \) since \( \D f(x_0) \) is linear, which verifies the statement for this particular case.
+
+  \vspace{3mm}
+
+  Now suppose that \( y\neq 0 \). Since \( U \) is open, there exists a \( \delta>0 \) such that \( B(x_0,\delta)\subseteq U \). Then for all \( t\in\qty(-\flatfrac{\delta}{\norm{y}},\flatfrac{\delta}{\norm{y}}) \), we have that \( x=x_0+ty\in U \), and hence
+  \[ f(x_0+ty)-f(x_0)=[\D f(x_0)](ty)+R(x,x_0) \]
+  since \( f \) is differentiable at \( x_0 \). Dividing through the above expression by \( t \) and rearranging gives
+  \[ \frac{f(x_0+ty)-f(x_0)}{t}- \frac{t[\D f(x_0)](y)}{t}=\frac{R(x,x_0)}{t} \]
+  noting that we have used the linearity of \( \D f(x_0) \) to pull out the factor of \( t \). Now, by applying the norm to both sides and taking the limit \( t\to 0 \) gives
+  \[ \lim_{t\to 0}\norm{\frac{f(x_0+ty)-f(x_0)}{t}- [\D f(x_0)](y)}=\lim_{t\to 0}\frac{\norm{R(x,x_0)}}{\abs{t}}\fstop \]
+
+  Since \( \norm{x-x_0}=\norm{ty}=\abs{t}\norm{y} \), we can write
+  \begin{align*}
+    \norm{\lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}- [\D f(x_0)](y)}&=\norm{y}\lim_{t\to 0}\frac{\norm{R(x,x_0)}}{\abs{t}\norm{y}}\\
+    &= \norm{y}\lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}}\\
+    &= 0
+  \end{align*}
+  which follows from the differentiability of \( f \) at \( x_0 \) and by exploiting the continuity of the norm in two places: to assert that \( \norm{x-x_0}\to 0 \) as \( t\to 0 \) and to pull limits inside of the norm. By positivity of the norm, we obtain the desired result
+  \[ \lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}=[\D f(x_0)](y)\fstop \]
+\end{proof}
+
+\begin{definition}
+  The \textbf{directional derivative} of a map \( f:U\to F \) at \( x_0\in U \) in the direction of \( y\in E\backslash\qty{0} \) is
+  \[ \lim_{t\to 0}\frac{f(x_0+t\vu{y})-f(x_0)}{t}\cma \]
+  provided that the above limit exists. The vector \( \vu{y}=\flatfrac{y}{\norm{y}} \) is a unit vector in the direction of \( y \).
+\end{definition}
 
 \begin{corollary}
+  \label{thm:direction-cor}
+  Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then for every \( y\in E\backslash\qty{0} \), the directional derivative of \( f \) at \( x_0 \) in the direction of \( y \) exists, and is equal to \( [\D f(x_0)](\vu{y}) \).
+\end{corollary}
+
+The converse of the above statement does not hold. That is, if the directional derivative of \( f \) at \( x_0 \) in the direction of \( y \) exists for every \( y\in E \), \( f \) is not necessarily differentiable at \( x_0 \). A nice counterexample is the following: define the function \( f:\R^2\to\R \) by
+\[ f(x,y)=
+  \begin{cases}
+    \frac{x^3}{x^2+y^2} &\text{if }(x,y)\neq (0,0)\\
+    0 &\text{if }(x,y)=(0,0)\fstop
+  \end{cases}
+\]
+
+Let \( \vb{v}\in\R^2 \) be any nonzero vector. We can express \( \vu{v} \) in terms of the standard basis \( \qty{\vu{e}_x,\vu{e}_y} \) in \( \R^2 \) as follows
+\[ \vu{v}=\cos\theta\vu{e}_x+\sin\theta\vu{e}_y \]
+for some \( \theta\in\R \). Then for any \( t\neq 0 \), we have
+\[ \lim_{t\to 0}\frac{f(\vb{0}+t\vu{v})-f(\vb{0})}{t}=\lim_{t\to 0}\frac{1}{t}\qty(\frac{t^3\cos^3\theta}{t^2\cos^2\theta+t^2\sin^2\theta})=\lim_{t\to 0}\frac{t^3\cos^3\theta}{t^3}=\lim_{t\to 0}\cos^3\theta=\cos^3\theta \]
+noting that we have used the fact that \( \cos^2\theta+\sin^2\theta=1 \). This shows that the directional derivative of \( f \) at \( \vb{0} \) in the direction of \( \vb{v} \) exists, and is equal to \( \cos^3\theta \). Since the choice of \( \vb{v}\in\R^2\backslash\qty{\vb{0}} \) was arbitrary, it follows that all of the directional derivatives of \( f \) at \( \vb{0} \) exist. However, \( f \) is \emph{not} differentiable at \( \vb{0} \). Assume for a contradiction that \( f \) were differentiable at \( \vb{0} \) with derivative \( \D f(\vb{0}) \). By \Cref{thm:direction-cor}, \( \qty[\D f(\vb{0})](\vu{e}_x) \) is equal to the directional derivative of \( f \) at \( \vb{0} \) in the direction of \( \vu{e}_x \), so that
+\[ [\D f(\vb{0})](\vu{e}_x)=\eval{\cos^3\theta}_{\theta=0}=1\fstop \]
+
+Similarly, \( \qty[\D f(\vb{0})](\vu{e}_y) \) is equal to the directional derivative of \( f \) at \( \vb{0} \) in the direction of \( \vu{e}_y \), which implies that
+\[ [\D f(\vb{0})](\vu{e}_y)=\eval{\cos^3\theta}_{\theta=\frac{\pi}{2}}=0\fstop \]
+
+Since \( \D f(\vb{0}) \) is a linear map, we have that
+\[ [\D f(\vb{0})](\vu{e}_x+\vu{e}_y)=[\D f(\vb{0})](\vu{e}_x)+[\D f(\vb{0})](\vu{e}_y)=1\fstop \]
+
+However, by \Cref{thm:direction-cor}, we can obtain an expression for \( [\D f(\vb{0})(\vu{e}_x+\vu{e}_y) \) by evaluating the directional derivative in the direction of \( (1,1) \).
+\[ [\D f(\vb{0})](\vu{e}_x+\vu{e}_y)=\sqrt{2}[\D f(\vb{0})]\qty(\frac{\vu{e}_x+\vu{e}_y}{\sqrt{2}})=\sqrt{2}\eval{\cos^3\theta}_{\theta=\frac{\pi}{4}}=\sqrt{2}\qty(\frac{1}{\sqrt{2}})^3=\frac{1}{2}\fstop \]
+
+Putting this all together leads to the statement that \( \frac{1}{2}=1 \), which gives us our desired contradiction.
+
+\begin{proposition}
   Let \( A\subseteq\R \) be open and let \( x_0\in A \). Then \( f:A\to\R \) is differentiable at \( x_0 \) if and only if \( f \) is differentiable in the one-variable sense, i.e.\ the following limit exists
   \[ f'(x_0)\coloneqq\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}\fstop \]
 
   Moreover, \( [\D f(x_0)](1)=f'(x_0) \).
-\end{corollary}
+\end{proposition}
+\begin{proof}
+  (\( \implies \)) Suppose \( f \) is differentiable at \( x_0 \). By \Cref{thm:direction-cor}, the directional derivative of \( f \) at \( x_0 \) in the direction of \( 1\in\R \) exists, and is given by
+  \[ [\D f(x_0)](1)=\lim_{t\to 0}\frac{f(x_0+t)-f(x_0)}{t}\fstop \]
+
+  Let \( x=x_0+t \), which will be an element of the domain \( A \) provided that \( t \) is chosen sufficiently small in magnitude. Then \( x\to x_0 \) as \( t\to 0 \), and so we have that
+  \[ [\D f(x_0)](1)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=f'(x_0)\fstop \]
+
+  (\( \impliedby \)) Suppose \( f \) is differentiable at \( x_0 \) in the one-variable sense. Let \( x\in A \). Define the function \( R:A\cross A\to\R \) by
+  \[ R(x,x_0)=f(x)-f(x_0)-f'(x_0)(x-x_0)\fstop \]
+
+  Then
+  \[ \frac{\abs{R(x,x_0)}}{\abs{x-x_0}}=\abs{\frac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}\fstop \]
+
+  Taking the limit as \( x\to x_0 \) gives
+  \[ \lim_{x\to x_0}\frac{\abs{R(x,x_0)}}{\abs{x-x_0}}=\abs{\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}=\abs{f'(x_0)-f'(x_0)}=0\fstop \]
+
+  From the definition of \( R \), we obtain the desired expression
+  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R(x,x_0) \]
+  where we have defined the linear map \( \D f(x_0):\R\to \R \) by
+  \[ [\D f(x_0)](a)=f'(x_0)a\fstop \]
+
+  This shows that \( f \) is differentiable at \( x_0 \) with derivative \( \D f(x_0) \). Evaluating the derivative at \( a=1 \) gives \( [\D f(x_0)](1)=f'(x_0) \), as required.
+\end{proof}
 
 Let \( \qty{e_1,\dots, e_n} \) be a basis in \( E \).
 
@@ -37,16 +121,34 @@ Let \( \qty{e_1,\dots, e_n} \) be a basis in \( E \).
   \[ {\pdv{f}{x_i}} (x_0)=\lim_{t\to 0}\frac{f(x_0+te_i)-f(x_0)}{t}\fstop \]
 \end{definition}
 
+Interpretation as `treating \( f \) as a one-variable function in \( x \) (holding all other coordinates fixed) and taking a one-variable derivative'.
+
 \begin{corollary}
   Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then all of the partial derivatives of \( f \) at \( x_0 \) exist, and moreover we have
   \[ [\D f(x_0)](e_i)={\pdv{f}{x_i}}(x_0) \]
   for each \( i=1,\dots, n \).
 \end{corollary}
+\begin{proof}
+  Since, by definition, the partial derivatives of \( f \) at \( x_0 \) are simply directional derivatives of \( f \) at \( x_0 \) in the direction of the basis vectors, all of the partial derivatives at \( x_0 \) exist by \Cref{thm:direction-cor}. Moreover for each \( i\in\qty{1,\dots,n} \), we have that
+  \[ [\D f(x_0)](e_i)=\lim_{t\to 0}\frac{f(x_0+te_i)-f(x_0)}{t}={\pdv{f}{x_i}} (x_0)\fstop \]
+\end{proof}
+
+Representation of derivative of scalar function via partial derivatives.
+
+\begin{proposition}
+  A function \( f:U\to F \) is differentiable at \( x_0\in U \) if and only if all of its component functions \( f_i:U\to\R \) are differentiable at \( x_0 \).
+\end{proposition}
 
 \section{Properties of the Derivative}
 \begin{proposition}
   If \( f:U\to F \) is differentiable at \( x_0\in U \), the derivative \( \D f(x_0) \) is unique.
 \end{proposition}
+\begin{proof}
+  Suppose the linear maps \( \D f(x_0)\in L(E,F) \) and \( T\in L(E,F) \) are both derivatives of \( f \) at \( x_0 \). Let \( y\in E \). Then by \Cref{thm:direction-deriv}, we have that
+  \[ [\D f(x_0)](y)=\lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}=Ty\fstop \]
+
+  Since the above equality holds for any \( y\in E \), it follows that \( \D f(x_0)=T \).
+\end{proof}
 
 \begin{theorem}
   (Differentiability implies continuity) Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then \( f \) is continuous at \( x_0 \).
@@ -83,8 +185,26 @@ Sum rule. Scalar products.
   The differentiability of a mapping \( f:U\to F \) does not depend on the choice of norm on \( E \) and \( F \).
 \end{theorem}
 
-\section{Mappings of Class \( \mathcal{C}^1\)}
 \section{Compositions of Differentiable Mappings}
+\begin{theorem}
+  (Chain Rule:) Let \( E, F, G \) be Euclidean spaces, let \( U\subseteq E \) and \( V\subseteq F \) be open and consider mappings
+  \begin{align*}
+    f&:U\to F\\
+    g&:V\to G\fstop
+  \end{align*}
+  such that \( f(U)\subseteq V \). If \( f \) is differentiable at \( x_0\in U \) and \( g \) is differentiable at \( f(x_0)\in V \), then the composite mapping
+  \[ g\circ f:U\to G \]
+  is differentiable at \( x_0 \) with derivative \( \D g(x_0)\circ\D f(x_0) \).
+\end{theorem}
+ Multiplication of Jacobian matrices.
+\section{Mappings of Class \( \mathcal{C}^1\)}
+\begin{definition}
+  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^1}\)} (or simply, \( \mathcal{C}^1 \)) if it is differentiable on \( U \) and its derivative \( \D f:U\to L(E,F) \) is continuous on \( U \).
+\end{definition}
+
+\begin{theorem}
+  A mapping \( f:U\to F \) is \( \mathcal{C}^1 \) if and only if all of the partial derivatives of \( f \) with respect to the coordinates of an orthonormal basis in \( E \) exist and are continuous on \( U \).
+\end{theorem}
 \section{Higher Order Derivatives}
 \section{Taylor's Theorem}
 \section{Location of Extrema}

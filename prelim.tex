@@ -22,11 +22,11 @@ We'll now fly through some standard linear algebra concepts. Let \( V \) be a ve
 
 \vspace{3mm}
 
-A mapping \( f:S\to T \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e.\ for all \( x,y\in S \) we have \( f(x+y)=f(x)+f(y) \) and for all \( a\in\R \) we have \( f(ax)=af(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same algebraic properties.
+A mapping \( f:V\to W \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e.\ for all \( x,y\in V \) we have \( f(x+y)=f(x)+f(y) \) and for all \( a\in\R \) we have \( f(ax)=af(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same algebraic properties.
 
 \vspace{3mm}
 
-Let \( f:S\to T \) be a vector space homomorphism. The set \( \ker f=\qty{x\in S\mid f(x)=0} \) is called the \textbf{kernel} of \( f \), and the set \( \mathcal{R}(f)=\qty{f(x)\mid x\in S} \) is called the \textbf{range} of \( f \). It can be easily shown that \( \ker f \) is a subspace of \( S \) and \( \mathcal{R}(f) \) is a subspace of \( T \). Another useful fact worth noting is that a linear map \( f \) is injective if and only if its kernel is trivial (i.e.\ \( \ker f=\qty{0} \)). Hence, \( f \) is an isomorphism if and only if \( \ker f=\qty{0} \) and \( \mathcal{R}(f)=T \).
+Let \( f:V\to W \) be a vector space homomorphism. The set \( \ker f=\qty{x\in V\mid f(x)=0} \) is called the \textbf{kernel} of \( f \), and the set \( \mathcal{R}(f)=\qty{f(x)\mid x\in V} \) is called the \textbf{range} of \( f \). It can be easily shown that \( \ker f \) is a subspace of \( V \) and \( \mathcal{R}(f) \) is a subspace of \( W \). Another useful fact worth noting is that a linear map \( f \) is injective if and only if its kernel is trivial (i.e.\ \( \ker f=\qty{0} \)). Hence, \( f \) is an isomorphism if and only if \( \ker f=\qty{0} \) and \( \mathcal{R}(f)=W \).
 
 \vspace{3mm}
 
@@ -219,6 +219,7 @@ One more tidbit that we should address is to show that two vector spaces of diff
 
 In summary, we have proven the following very important result about finite dimensional vector spaces:
 \begin{theorem}
+  \label{thm:iso-samedim}
   Let \( V \) and \( W \) be finite dimensional vector spaces. Then \( V \) and \( W \) are isomorphic if and only if \( \dim V=\dim W \).
 \end{theorem}
 
@@ -504,6 +505,7 @@ Since \( O \) is the matrix representation of a vector space automorphism, it is
 i.e.\ the matrix \( O \) is an orthogonal matrix. This reveals that orthogonal transformations on Euclidean spaces are simply the ones that map orthonormal bases to orthonormal bases.
 
 \section{Dual Space}
+\label{sec:dual}
 In this section, we study a very special type of vector space mapping. Namely, the linear maps that take a vector as an input and returns a scalar. Such maps are called \textbf{linear functionals}.
 \begin{definition}
   Let \( V \) be an \( n \)-dimensional vector space. A \textbf{linear functional} on \( V \) is a linear mapping \( f:V\to\R \).
@@ -517,7 +519,7 @@ The dual space of a vector space is itself a vector space under the operations o
 
 \vspace{3mm}
 
-There are many important linear functionals that are central to analysis. To name a few, the inner product with one input fixed, real-valued functions formed via a limiting process, and integral operators. It is therefore quite valuable to study them in a general setting.
+There are many important linear functionals that are central to analysis. To name a few, the trace operator, the inner product with one input fixed, and integral operators. It is therefore quite valuable to study them in a general setting.
 
 \vspace{3mm}
 
@@ -871,7 +873,7 @@ The usual notation to denote the limit of a convergent sequence is \( x_k\to L \
 
 \vspace{3mm}
 
-The metric structure on Euclidean space gives us all of the expected desirable properties about limits and convergence that we know and love from \( \R \). If a sequence is convergent, the limit is unique. Since we have the algebraic structure of a vector space as well, we have some algebraic limit laws: the limit of a sum of sequences is equal to the sum of the limits, and we can pull scalars through limits.
+The metric structure on Euclidean space gives us all of the expected desirable properties about limits and convergence that we know and love from \( \R \). If a sequence is convergent, the limit is unique. Closed sets in Euclidean space are exactly the \emph{sequentially closed sets} (i.e.\ every convergent sequence whose points are all contained within a sequentially closed set have a limit inside the set). Since we have the algebraic structure of a vector space as well, we have some algebraic limit laws: the limit of a sum of sequences is equal to the sum of the limits, and we can pull scalars through limits.
 
 \vspace{3mm}
 
@@ -1056,8 +1058,32 @@ A very useful fact is that limits of functions can be characterised in terms of 
  \vspace{3mm}
 
  Let \( E \) be a Euclidean \( n \)-space and \( F \) a Euclidean \( m \)-space. Let \( \overline{e}_1,\dots,\overline{e}_m \) be a basis for \( F \). A multivariable function \( f:E\to F \) can be studied in terms of its real-valued component functions with respect to the basis in \( F \): \( f(x)=f_1(x)\overline{e}_1+\dots+f_m(x)\overline{e}_m \). One nice fact is that \( f \) is continuous if and only if each of the component functions \( f_i:E\to\R \), \( i=1,\dots, m \), are continuous, so that we can simply deal with real-valued functions.
+ \begin{proposition}
+   A function \( f:E\to F \) is continuous at \( x_0\in E \) if and only if all of its component functions \( f_i:E\to\R \) are continuous at \( x_0 \).
+ \end{proposition}
+ \begin{proof}
+   (\( \implies \)) Suppose \( f \) is continuous at \( x_0 \). Let \( i\in\qty{1,\dots,m} \) and consider the component map \( f_i:E\to\R \). Then for all \( x\in E \), we have
+   \[ \abs{f_i(x)-f_i(x_0)}\leq\qty(\sum_{k=1}^m(f_k(x)-f_k(x_0))^2)^{\frac{1}{2}}=\norm{f(x)-f(x_0)}\fstop \]
 
- \vspace{3mm}
+   Taking the limit as \( x\to x_0 \) yields
+   \[ 0\leq\lim_{x\to x_0}\abs{f_i(x)-f_i(x_0)}\leq 0 \]
+   since \( \lim_{x\to x_0}\norm{f(x)-f(x_0)} \) by continuity of \( f \) at \( x_0 \). It follows that \( f_i \) is continuous at \( x_0 \).
+
+   \vspace{3mm}
+
+   (\( \impliedby \)) Suppose \( f_i:E\to\R \) is continuous for each \( i\in\qty{1,\dots\,m} \). Then for all \( x\in E \), we have
+   \begin{align*}
+     \norm{f(x)-f(x_0)}^2&=\sum_{k=1}^m(f_k(x)-f_k(x_0))^2\\
+     &\leq m\times\max_{i\in\qty{1,\dots,m}}(f_i(x)-f_i(x_0))^2
+   \end{align*}
+
+   This, in turn, gives
+   \[ \norm{f(x)-f(x_0)}\leq \sqrt{m}\times\max_{i\in\qty{1,\dots,m}}\abs{f_i(x)-f_i(x_0)}\leq\sqrt{m}\sum_{k=1}^m\abs{f_k(x)-f_k(x_0)}\fstop \]
+
+   Applying the limit as \( x\to x_0 \) yields
+   \[ 0\leq\lim_{x\to x_0}\norm{f(x)-f(x_0)}\leq\sqrt{m}\sum_{k=1}^m\lim_{x\to x_0}\abs{f_k(x)-f_k(x_0)}=0 \]
+   which follows from the continuity of each of the \( f_k \) at \( x_0 \). Hence, we have that \( \lim_{x\to x_0}\norm{f(x)-f(x_0)}=0 \), which implies that \( f \) is continuous at \( x_0 \).
+ \end{proof}
 
  We conclude this section with a fun fact: linear maps between Euclidean spaces are automatically continuous. So linear maps are really, really nice to work with! This is another consequence of the finite dimensionality of the spaces we are working in.
 
@@ -1244,7 +1270,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
 
    \vspace{3mm}
    
-   Consider the unit sphere in the Euclidean norm, i.e.\ the set \( A=\qty{x\in E\mid\norm{x}=1} \). The set \( A\subset E \) is compact since it is a closed, bounded set (Heine-Borel Theorem). Hence, if we restrict the domain of \( f \) to \( A \), we can apply Proposition \ref{thm:posfunc} and obtain a constant \( C>0 \) such that \( f(x)>C \) for all \( x\in A \). Hence, we have that \( \frac{\norm{x}}{\norm{x}_0}>C \) for all \( x\in E \) with \( \norm{x}=1 \).
+   Consider the unit sphere in the Euclidean norm, i.e.\ the set \( S=\qty{x\in E\mid\norm{x}=1} \). The set \( S\subset E \) is compact since it is a closed, bounded set (Heine-Borel Theorem). Hence, if we restrict the domain of \( f \) to \( S \), we can apply Proposition \ref{thm:posfunc} and obtain a constant \( C>0 \) such that \( f(x)>C \) for all \( x\in S \). Hence, we have that \( \frac{\norm{x}}{\norm{x}_0}>C \) for all \( x\in E \) with \( \norm{x}=1 \).
 
    \vspace{3mm}
 
@@ -1261,7 +1287,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    Similarly, define the function \( g:E\backslash\qty{0}\to\R \) by
    \[ g(x)=\frac{\norm{x}_0}{\norm{x}}\fstop \]
 
-   We have that \( g(x)>0 \) for all \( x\in E\backslash\qty{0} \). Once again, we restrict the domain of \( g \) to the unit sphere \( A \) and apply Proposition \ref{thm:posfunc} to obtain a constant \( D'>0 \) such that \( g(x)>D' \) for all \( x\in A \). Hence, we have that \( \frac{\norm{x}_0}{\norm{x}}>D' \) for all \( x\in E \) with \( \norm{x}=1 \).
+   We have that \( g(x)>0 \) for all \( x\in E\backslash\qty{0} \). Once again, we restrict the domain of \( g \) to the unit sphere \( S \) and apply Proposition \ref{thm:posfunc} to obtain a constant \( D'>0 \) such that \( g(x)>D' \) for all \( x\in S \). Hence, we have that \( \frac{\norm{x}_0}{\norm{x}}>D' \) for all \( x\in E \) with \( \norm{x}=1 \).
 
    \vspace{3mm}
 
@@ -1357,7 +1383,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
 
  Finally, given a function \( f:V \to W \) between finite dimensional normed spaces, the property of \( f \) being continuous is, in effect, independent on the particular norms used for \( V \) and \( W \).
  \begin{proposition}
-   Let \( V,W \) be finite dimensionalnormed vector spaces. Then the continuity of a mapping \( f:V\to W \) does not depend on the choice of norm on \( V \) and \( W \).
+   Let \( V,W \) be finite dimensional normed vector spaces. Then the continuity of a mapping \( f:V\to W \) does not depend on the choice of norm on \( V \) and \( W \).
  \end{proposition}
  \begin{proof}
    Suppose the map \( f:V\to W \) is continuous with respect to the norm \( \norm{-}_1 \) on \( V \) and \( \norm{-}_2 \) on \( W \). Let \( \norm{-}_{1'} \) be an arbitrary on \( V \) and \( \norm{-}_{2'} \) be an arbitrary norm on \( W \). By \Cref{thm:norm-equiv}, \( \norm{-}_1,\norm{-}_{1'} \) are strongly equivalent norms on \( V \) and \( \norm{-}_2,\norm{-}_{2'} \) are strongly equivalent norms on \( W \). We will show that \( f \) is continuous with respect to the norms \( \norm{-}_{1'} \) and \( \norm{-}_{2'} \) on \( V \) and \( W \), respectively.
@@ -1384,41 +1410,313 @@ A very useful fact is that limits of functions can be characterised in terms of 
  
  \section{The Space \( L(E,F) \)}
  \label{sec:linear-maps}
+ The importance of linear maps in multivariable calculus cannot be understated (indeed, we will later see that our definition of the derivative of a multivariable function will be an appropriate linear map). We will therefore carry out a study on the collection of all linear maps between two Euclidean spaces, and consider the structures that can be naturally prescribed to this space of maps to see what existing theories can be used to describe these objects and their relationships with one another.
+
  \begin{definition}
    Let \( E \), \( F \) be vector spaces. Define \( L(E,F) \) as the set of all linear maps \( T:E\to F \).
  \end{definition}
 
- Let \( E \) be Euclidean \( n \)-space, \( F \) be Euclidean \( m \)-space and let \( A:E\to F \) be a linear map. Given a basis \( \qty{e_1,\dots, e_n} \) for \( E \), and a basis \( \qty{\overline{e}_1,\dots,\overline{e}_m} \), we can represent the linear map \( A \) as an \( m\times n \) \emph{matrix} with respect to these bases, i.e.\ a collection of \( mn \) real numbers arranged in an \( m\times n \) array. To see this, given any \( x\in E \), we can express \( x \) in terms of the basis vectors
+ Here, we will study the space \( L(E,F) \) for the case where \( E \) and \( F \) are both Euclidean spaces (of possibly different dimension).
+
+ \vspace{3mm}
+
+ First, we formally introduce the \emph{matrix representation} of an element of \( L(E,F) \), which is a convenient way to describe and work with linear maps. In this representation, all of the information about a given linear map is captured by a (finite) array of real numbers. The details are as follows:
+
+ \vspace{3mm}
+
+ Let \( E \) be Euclidean \( n \)-space, \( F \) be Euclidean \( m \)-space and let \( A\in L(E,F) \). Given a basis \( \qty{e_1,\dots, e_n} \) for \( E \), and a basis \( \qty{\overline{e}_1,\dots,\overline{e}_m} \) for \( F \), we can represent the linear map \( A \) as an \( m\times n \) \emph{matrix} with respect to these bases, i.e.\ a collection of \( mn \) real numbers arranged in an \( m\times n \) array (\( m \) rows and \( n \) columns). To see this, given any \( x\in E \), we can express \( x \) in terms of the basis vectors
  \[ x=\sum_{j=1}^nx_je_j\fstop \]
 
  We act on \( x \) with the linear map \( A \), and by linearity we obtain
  \[ Ax=A\qty(\sum_{j=1}^nx_je_j)=\sum_{j=1}^nx_jAe_j\fstop \]
 
  We can expand each \( Ae_j\in F \) in terms of the basis in \( F \)
- \[ Ae_j=\sum_{i=1}^ma_{ij}\overline{e}_i\fstop \]
+ \[ Ae_j=\sum_{i=1}^mA_{ij}\overline{e}_i\fstop \]
 
  Substituting this into our expression for \( Ax \) yields
- \[ Ax=\sum_{i=1}^m\sum_{j=1}^na_{ij}x_j\overline{e}_i=\sum_{i=1}^m\sum_{j=1}^nA_{ij}\overline{e}_i \]
- where we have defined
- \[ A_{ij}=a_{ij}x_j \]
- as the entries of the matrix representing the linear map \( A \). Notice that the entries depend on the choice of basis on both \( E \) and \( F \).
+ \[ Ax=\sum_{i=1}^m\sum_{j=1}^nA_{ij}x_j\overline{e}_i\fstop\]
+
+ The constants \( A_{ij} \) are referred to as the entries of the matrix representing the linear map \( A \). Notice that the entries depend on the choice of basis on both \( E \) and \( F \).
+
+ \vspace{3mm}
+
+ The composition \( B\circ A \) of two linear maps \( A\in L(E,F) \) and \( B\in L(F,G) \) is again a linear map. What will the corresponding matrix representation of \( B\circ A \) look like in terms of the matrices for \( A \) and \( B \)? We'll use the same bases for \( E \) and \( F \) and consider the basis \( \qty{\hat{e}_1,\dots,\hat{e}_l} \) for \( G \) (\( l \)-dimensional Euclidean space). Then for any \( x\in E \), we can write
+ \begin{align*}
+   B\circ A x&= B\qty(\sum_{j=1}^m\sum_{k=1}^n A_{jk}x_k\overline{e}_j)\\
+   &= \sum_{j=1}^m\sum_{k=1}^n A_{jk}x_kB\overline{e}_j
+ \end{align*}
+ where the final equality follows from the linearity of \( B \). We expand \( B\overline{e}_j \) in terms of the given basis in \( G \), noting that the corresponding coefficients are simply the matrix elements \( B_{ij} \) of \( B \)
+ \[ B\circ Ax=\sum_{i=1}^l\sum_{j=1}^m\sum_{k=1}^nB_{ij}A_{jk}x_k\hat{e}_i=\sum_{i=1}^l\sum_{k=1}^nC_{ik}x_k\hat{e}_i\fstop \]
+
+ Hence, the linear map \( B\circ A:E\to G \) is represented by an \( l\times n \) matrix, and its corresponding matrix elements are \( C_{ik} \), which are given by
+ \[ C_{ik}=\sum_{j=1}^mB_{ij}A_{jk}\fstop \]
+
+ One may recognise that the the matrix for the composite map \( B\circ A \) is obtained by performing matrix multiplication with the matrices for \( B \) and \( A \).
+
+ \vspace{3mm}
+
+ We now consider the relevant structures which we can endow upon \( L(E,F) \). Firstly, from the algebraic properties of addition and scalar multiplication of vector-valued functions, we can consider \( L(E,F) \) to be a vector space.
  
  \begin{theorem}
    Let \( E,F \) be vector spaces with \( \dim E=n \) and \( \dim F=m \). Then \( L(E,F) \) is an \( mn \)-dimensional vector space.
  \end{theorem}
+ \begin{proof}
+   Since sums of linear maps are linear, and scalar multiples of linear maps are linear, it follows that \( L(E,F) \) is a vector space (a subspace of the vector space of all functions \( f:E\to F \)). We compute the dimension of \( L(E,F) \) by explicitly finding a basis. The construction that will be employed below is a generalisation of the construction of the dual basis for \( E^* \) in \Cref{sec:dual}. Fix a basis \( \qty{e_1,\dots,e_n} \) for \( E \) and a basis \( \qty{\overline{e}_1,\dots,\overline{e}_m} \) for \( F \), and define linear maps \( \phi_{ij}:E\to F \) for each \( i=1,\dots,n \) and \( j=1,\dots,m \) by
+   \[ \phi_{ij}(e_k)=\delta_{jk}\overline{e}_i\fstop \]
+
+   Note that defining the map \( \phi_{ij} \) on the basis elements of \( E \) completely defines the map on all of \( E \) by linearity. We will now show that:
+   \begin{enumerate}[label=(\roman*)]
+   \item The set \( \qty{\phi_{ij}:E\to F\mid i\in\qty{1,\dots,m}, j\in\qty{1,\dots,n}} \) is linearly independent.
+   \item The span of \( \qty{\phi_{ij}:E\to F\mid i\in\qty{1,\dots,m}, j\in\qty{1,\dots,n}} \) is equal to \( L(E,F) \).
+   \end{enumerate}
+
+   This will demonstrate that \( \qty{\phi_{ij}:E\to F\mid i\in\qty{1,\dots,m}, j\in\qty{1,\dots,n}} \) is a basis for \( L(E,F) \).
+
+   \begin{enumerate}[label=(\roman*)]
+   \item Consider the following operator equation
+     \[ \sum_{i=1}^m\sum_{j=1}^n c_{ij}\phi_{ij}=0 \]
+     where the \( c_{ij} \) are some real constants, and the right-hand side is understood to be the zero operator in \( L(E,F) \). Consider the action of the above operators on the basis vector \( e_k \) for an arbitrary \( k\in\qty{1,\dots,n} \)
+     \[ \sum_{i=1}^m\sum_{j=1}^nc_{ij}\phi_{ij}(e_k)=\sum_{i=1}^m\sum_{j=1}^nc_{ij}\delta_{jk}\overline{e}_i=\sum_{j=1}^nc_{ik}\overline{e}_i=0\fstop \]
+
+     However, by linear independence of \( \qty{\overline{e}_1,\dots,\overline{e}_m} \), it follows that \( c_{ik}=0 \) for all \( i\in\qty{1,\dots, m} \). This holds for any \( k\in\qty{1,\dots,n} \), which implies that the only solution to the initial operator equation is the trivial solution. This proves linear independence.
+
+   \item Let \( A\in L(E,F) \), and let \( x\in E \). From a previous calculation, we have that
+     \begin{align*}
+       Ax&=\sum_{i=1}^m\sum_{j=1}^n A_{ij}x_j\overline{e}_i\\
+       &=\sum_{i=1}^m\sum_{j=1}^nA_{ij}\sum_{k=1}^nx_k\phi_{ij}(e_k)\\
+       &=\sum_{i=1}^m\sum_{j=1}^nA_{ij}\phi_{ij}\qty(\sum_{k=1}^nx_ke_k)\\
+       &=\sum_{i=1}^m\sum_{j=1}^nA_{ij}\phi_{ij}(x)\fstop 
+     \end{align*}
+
+     Since the above holds for all \( x\in E \), we must have equality of the operators
+     \[ A=\sum_{i=1}^m\sum_{j=1}^nA_{ij}\phi_{ij}\fstop \]
+
+     So \( A \) can be written as a linear combination of the \( \phi_{ij} \). Moreover, the coefficients are none other than the entries \( A_{ij} \) of the matrix corresponding to \( A \). In fact, one sees that the matrix representation of the linear map \( \phi_{ij} \) simply contains a `1' in the \( i^{\text{th}} \) row and \( j^{\text{th}} \) column, and zeros elsewhere.
+   \end{enumerate}
+
+   Now, since the set \( \qty{\phi_{ij}:E\to F\mid i\in\qty{1,\dots,m},j\in\qty{1,\dots,n}} \) is a basis for \( L(E,F) \), the dimension of \( L(E,F) \) is simply the number of basis elements. There are \( m\times n=mn \) such linear maps in this basis, and so it follows that \( \dim L(E,F)=mn \).
+ \end{proof}
 
  The dual space \( E^* \) of Euclidean \( n \)-space \( E \) can be alternatively expressed as \( L(E,\R) \). We know that the dimension of \( E^* \) is \( n \) - the same as \( E \). This is consistent with the above theorem, which says that \( \dim E^*=\dim L(E,\R)=n\times 1=n \).
 
  \vspace{3mm}
 
- The composition of linear maps is linear. Matrix multiplication.
+ Next, we will see that \( L(E,F) \) inherits a normed structure from \( E \) and \( F \), and so can be considered to be a normed vector space. Thus, all of our work on studying finite dimensional normed vector spaces can be applied to \( L(E,F) \).
 
  \begin{theorem}
-   Let \( E,F \) be normed vector spaces. Then \( L(E,F) \) is a normed vector space, with norm given by:
-   \[ \norm{T}=\sup_{\norm{x}=1}\qty{\norm{Tx}\mid x\in E} \]
+   Let \( E,F \) be finite dimensional normed vector spaces. Then \( L(E,F) \) is a normed vector space, with norm given by
+   \[ \norm{T}=\sup_{\norm{x}_E=1}\qty{\norm{Tx}_F\mid x\in E} \]
+   where \( \norm{-}_E \) is the norm on \( E \) and \( \norm{-}_F\) is the norm on \( F \).
  \end{theorem}
+ \begin{proof}
+   Let \( T\in L(E,F) \). Denote by \( S \) the unit sphere in \( E \) with respect to the norm on \( E \), i.e.\
+   \[ S=\qty{x\in E\mid \norm{x}_E=1}\fstop \]
 
- The norm defined on \( L(E,F) \) is often referred to as the `operator norm'. If \( E \) and \( F \) are Euclidean spaces, then \( L(E,F) \) is a finite dimensional normed vector space.
+   The set \( S \) is a compact subset of \( E \). Since \( T \) is linear, it is continuous by \Cref{thm:lin-cont}. Thus, the composition of the norm \( \norm{-}_F \) with \( T \) is a continuous function. Hence, by the Extreme Value Theorem, the restriction of \( \norm{-}_F\circ T \) to \( S \) attains a maximum value, which is defined to be \( \norm{T} \). This shows that the function \( \norm{-}:L(E,F)\to\R \) described above has well-defined values on all of \( L(E,F) \). We will proceed to show that this function is indeed a norm on \( L(E,F) \).
+   \begin{enumerate}[label=(\roman*)]
+   \item (Positivity) Let \( T\in L(E,F) \). Then \( \norm{Tx}_F\geq 0 \) for all \( x\in S \) by positivity of the norm \( \norm{-}_F \). Taking the supremum over \( S \) on both sides gives \( \norm{T}=\sup_{x\in S}\norm{Tx}_F\geq 0 \).
+
+     \vspace{3mm}
+
+     If \( T=0 \) (i.e.\ the zero function), then \( \norm{Tx}_F=0 \) for all \( x\in S \), and so \( \norm{T}=\sup_{x\in S}\norm{Tx}_F=0 \). Conversely, if \( \norm{T}=0 \), then for all \( x\in S \), we have
+     \[ 0\leq\norm{Tx}_F\leq\sup_{x\in S}\norm{Tx}_F=\norm{T}=0\fstop \]
+
+     So \( \norm{Tx}_F=0 \) for all \( x\in S \). Let \( y\in E\backslash\qty{0} \). Then \( \flatfrac{y}{\norm{y}_E}\in S \), so that
+     \[ 0=\norm{T\frac{y}{\norm{y}_E}}_F=\frac{1}{\norm{y}_E}\norm{Ty}_F\fstop \]
+
+     Thus, \( \norm{Ty}_F=0 \), which implies that \( Ty=0 \). Thus, \( T \) maps every element of \( E \) to \( 0\in F \), and so we must have that \( T=0 \).
+   \item (Homogeneity of degree 1) Let \( a\in\R \). Then
+     \[ \norm{aT}=\sup_{x\in S}\norm{aTx}_F=\abs{a}\sup_{x\in S}\norm{Tx}_F=\abs{a}\norm{T}\fstop \]
+   \item (Triangle Inequality) Let \( A,B\in L(E,F) \). Then
+     \[ \norm{A+B}=\sup_{x\in S}\norm{(A+B)x}_F\leq\sup_{x\in S}\qty(\norm{Ax}_F+\norm{Bx}_F)=\norm{A}+\norm{B}\fstop \]
+   \end{enumerate}
+ \end{proof}
+
+ The norm defined on \( L(E,F) \) is often referred to as the `operator norm'. It is a natural norm induced by the norms on \( E \) and \( F \). The value of the operator norm will therefore depend on which norms we use for \( E \) and \( F \), but since \( L(E,F) \) is a finite dimensional vector space, every possible choice will yield strongly equivalent norms, and so it doesn't really matter too much which norms on \( E \) and \( F \) we pick for the purposes of doing analysis.
+
+ \vspace{3mm}
+
+ Finally, we will present some further results on linear maps. In particular, we will present a version of the First Isomorphism Theorem for vector spaces, and from it derive the famous `Rank Theorem'. We then show a situation in which the injectivity of a linear map becomes a sufficient property for bijectivity.
+
+ \vspace{3mm}
+ 
+ In the results that follow, we will make use of the notion of a \emph{quotient space}. A somewhat geometrical picture is the following: given a vector space \( V \) and a subspace \( W \) of \( V \), we wish to consider the space \( W \) within \( V \) (which contains the origin), and all possible translations of \( W \) by vectors in \( V \). The set consisting of \( W \) as well as all of its different translates is what we will call the quotient space \( V/W \). So elements of \( V/W \) are subsets of \( V \), called cosets. When are two vectors \( v_1,v_2\in V \) contained in the same coset? Well, if they were, then we could write each vector as the sum of some vector in \( W \) and the constant offset/translation vector \( t\in V \), i.e.\
+ \begin{align*}
+   v_1&= w_1+t\\
+   v_2&= w_2+t
+ \end{align*}
+ for some \( w_1,w_2\in W \). Hence, the difference between \( v_1 \) and \( v_2 \) is
+ \[ v_1-v_2=(w_1+t)-(w_2+t)=w_1-w_2\in W \]
+ where the statement \( w_1-w_2\in W \) follows from the fact that \( W \) is a subspace. This motivates us to define the relation \( \sim \) on \( V \) by
+ \[ v_1\sim v_2\quad\text{if }v_1-v_2\in W\fstop \]
+
+ This is an equivalence relation on \( V \), which follows from the fact that \( W \) is a subspace. The equivalence classes \( [v] \) of \( V \) under the relation \( \sim \) are the vector cosets \( v+W \) (translation of \( W \) by \( v \)). To show this, let \( v'\in [v] \). Then \( v'-v\coloneqq w\in W \), and so \( v'=v+(v'-v)=v+w \), which shows that \( v'\in v+W \), implying that \( [v]\subseteq v+W \). Conversely, if we suppose that \( v'\in v+W \), then \( v'=v+w \) for some \( w\in W \). This implies that \( v'-v=w\in W \), which shows that \( v'\sim v \), i.e.\ \( v'\in [v] \) and hence \( v+W\subseteq [v] \). Together, we have that \( [v]=v+W \). This leads us to the following definition:
+ 
+ \begin{definition}
+   Let \( V \) be a vector space, and let \( W \) be a subspace of \( V \). The \textbf{quotient space} \( V/W \) is the set of vector cosets
+   \[ V/W=\qty{v+W\mid v\in V}\fstop \]
+ \end{definition}
+
+ We can define addition and scalar multiplication on \( V/W \) by \( (v_1+W)+(v_2+W)=(v_1+v_2)+W \) and \( a(v_1+W)=av_1+W \). These definitions are appropriate, since we have:
+  \begin{proposition}
+   Let \( V \) be a vector space, and let \( W \) be a subspace of \( V \). The operations of addition and scalar multiplication of vector cosets are well-defined operations on the quotient space \( V/W \).
+ \end{proposition}
+ \begin{proof}
+   Let \( v_1,v_2,v_1',v_2'\in V \) such that
+   \begin{align*}
+     v_1+W&= v_1'+W\\
+     v_2+W&= v_2'+W\fstop
+   \end{align*}
+
+   This implies that \( v_1\sim v_1' \) and \( v_2\sim v_2' \), and hence that \( v_1'-v_1\in W \) and \( v_2'-v_2\in W \). We therefore have that
+   \begin{align*}
+     (v_1'+W)+(v_2'+W)&= (v_1'-v_1+v_1+W)+(v_2'-v_2+v_2+W)\\
+     &= (v_1+W)+(v_2+W)\fstop
+   \end{align*}
+
+   Now let \( a\in\R \). Then
+   \[ av_1'+W=a(v_1'+W)=a(v_1'-v_1+v_1+W)=a(v_1+W)=av_1+W\fstop \]
+ \end{proof}
+
+ Thus, when equipped with these operations, \( V/W \) is a vector space. The fact that \( V/W \) satisfies the defining properties of a vector space follows quite readily from simple and not very illuminating calculations involving the analogous properties of \( V \). The additive identity on \( V/W \) is \( 0+W=W \).
+
+ \vspace{3mm}
+
+ We now have the machinery required to present the (coincidentally) first major theorem for this section: the First Isomorphism Theorem (for vector spaces), which states that given a linear map \( T:V\to W \) between vector spaces, the quotient space \( V/\ker T \) is isomorphic to the range \( \mathcal{R}(T) \) of \( T \). This, at first glance, may seem like magic, but actually once you break it down it really is just common sense! Let's explain:
+
+ \vspace{3mm}
+
+ A desired isomorphism \( \widetilde{T}:V/\ker T\to \mathcal{R}(T) \) will be constructed from \( T \). How does \( T \) itself fail to be an isomorphism? Since it is a vector space homomorphism (i.e.\ a linear map), the only way it can fall short of being an isomorphism is if it fails to be bijective. We form the map \( \widetilde{T} \) by `patching in' the deficiencies in \( T \) by `fixing' injectivity and surjectivity. It turns out that the process of fixing these failures shrinks the codomain to the image of \( T \) and shrinks the domain to the quotient space \( V/\ker T \).
+
+  \begin{theorem}
+   (First Isomorphism Theorem) Let \( V \), \( W \) be vector spaces and let \( T:V\to W \) be a linear map. Then \( V/\ker T\simeq\mathcal{R}(T) \).
+ \end{theorem}
+ \begin{proof}
+   The map \( T \) can be made surjective by restricting its codomain to its range \( \mathcal{R}(T) \), so that \( T:V\to\mathcal{R}(T) \) is a surjective linear map.
+
+   \vspace{3mm}
+
+   A linear map \( T \) is injective if and only if \( \ker T=\qty{0} \). So if \( T \) is not injective, then its kernel is a subspace of \( V \) whose dimension is nonzero. In order to `shrink' the kernel, we form the quotient space \( V/\ker T \), which in essence collapses all vectors in the kernel down to a single element; a vector coset. We hence define a map \( \widetilde{T}:V/\ker T\to\mathcal{R}(T) \) that acts on the cosets by
+   \[ \widetilde{T}(v+\ker T)=T(v)\fstop \]
+
+   We will need to show that
+   \begin{enumerate}[label=(\roman*)]
+   \item \( \widetilde{T} \) is well-defined.
+   \item \( \widetilde{T} \) is linear.
+   \item \( \widetilde{T} \) is injective.
+   \item \( \widetilde{T} \) is surjective.
+   \end{enumerate}
+
+   Together, these would show that \( \widetilde{T} \) is an isomorphism between \( V/\ker T \) and \( \mathcal{R}(T) \).
+   \begin{enumerate}[label=(\roman*)]
+   \item Let \( v'\in V \) be such that \( v'+\ker T=v+\ker T \), i.e.\ \( v'\sim v \). Thus, \( v'-v\in\ker T \). We therefore have that
+     \[ \widetilde{T}(v'+\ker T)=T(v')=T(v'-v+v)=T(v'-v)+T(v)=0+T(v)=T(v)=\widetilde{T}(v+\ker T)\fstop \]
+   \item Let \( v_1+\ker T, v_2+\ker T\in V/\ker T \). Then
+     \begin{align*}
+       \widetilde{T}(v_1+\ker T+v_2+\ker T)&= \widetilde{T}(v_1+v_2+\ker T)\\
+       &= T(v_1+v_2)\\
+       &= T(v_1)+T(v_2)\\
+       &= \widetilde{T}(v_1+\ker T)+\widetilde{T}(v_2+\ker T)\fstop
+     \end{align*}
+
+     Let \( a\in\R \) and let \( v+\ker T\in V/\ker T \). Then
+     \begin{align*}
+       \widetilde{T}(a(v+\ker T))&= \widetilde{T}(av+\ker T)\\
+       &= T(av)\\
+       &= aT(v)\\
+       &= a\widetilde{T}(v+\ker T)\fstop
+     \end{align*}
+   \item Let \( (v+\ker T)\in\ker\widetilde{T} \). So \( \widetilde{T}(v+\ker T)=0 \). But
+     \[ 0=\widetilde{T}(v+\ker T)=T(v)\fstop \]
+
+     This implies that \( v\in\ker T \), and hence \( v+\ker T=\ker T \). Thus, \( \ker\widetilde{T}=\qty{\ker T} \), i.e.\ the kernel of \( \widetilde{T} \) contains only the zero coset. Since \( \widetilde{T} \) is linear, this proves the injectivity of \( \widetilde{T} \).
+   \item Let \( w\in\mathcal{R}(T) \). Since \( T:V\to\mathcal{R}(T) \) is surjective, there exists a \( v\in V \) such that \( T(v)=w \). But then we have that \( v+\ker T\in V/\ker T \) satisfies
+     \[ \widetilde{T}(v+\ker T)=T(v)=w\fstop \]
+   \end{enumerate}
+ \end{proof}
+
+ This line of thinking can be used to prove other versions of the First Isomorphism Theorem between different structures, e.g.\ groups, rings, fields. The central idea remains the same: given a map that is \emph{not} bijective, how can we `fix' it and make it bijective? We fix surjectivity by restricting the codomain to the image of the map, and fix injectivity by grouping together elements that map to the same object. Of course, this means that the modified map now acts on \emph{equivalence classes} rather than the original elements. Finally, if the map preserves some structure (e.g.\ is a group homomorphism), then the modified map will also preserve the same structure (e.g.\ group multiplication).
+
+ \vspace{3mm}
+
+ Back to quotient spaces: what is the dimension of the quotient space? Given that in the construction of the quotient space, we group together entire subsets of vectors to form a single vector coset, we expect that the quotient space is `smaller' than the original vector space. Exactly how much smaller is dictated by the size of the subspace that has been quotiented out.
+ \begin{proposition}
+   \label{thm:codim}
+   Let \( V \) be a finite dimensional vector space, and let \( W \) be a subspace of \( V \). Then \( \dim V/W=\dim V-\dim W \).
+ \end{proposition}
+ \begin{proof}
+   Suppose \( \dim V=n \), \( \dim W=k\leq n \), \( \qty{w_1,\dots, w_k} \) is a basis for \( W \) and \( \qty{v_1,\dots, v_n} \) be a basis for \( V \). By an analogous argument as was used in the proof of \Cref{thm:dim}, we can replace \( k \) of the basis vectors for \( V \) with the basis vectors for \( W \) and obtain (after some relabelling) the following basis\footnote{By the way, this result is often called the `Replacement Lemma'.} for \( V \):
+   \[ \qty{w_1,\dots,w_k,v_{k+1},\dots,v_n}\fstop \]
+
+   We claim that \( \qty{v_{k+1}+W,\dots,v_n+W} \) is a basis for \( V/W \).
+
+   \vspace{3mm}
+
+   Let \( v+W\in V/W \). We can expand \( v\in V \) as a linear combination of our basis for \( V \)
+   \[ v=c_1w_1+\dots+c_kw_k+c_{k+1}v_{k+1}+\dots+c_nv_n\fstop \]
+
+   This implies that
+   \[ v+W=c_1(w_1+W)+\dots+c_k(w_k+W)+c_{k+1}(v_{k+1}+W)+\dots+c_n(v_n+W)\fstop \]
+
+   But \( w_i+W=W \) for each \( i\in\qty{1,\dots,k} \), so that
+   \[ v+W=c_{k+1}(v_{k+1}+W)+\dots+c_n(v_n+W)\fstop \]
+
+   Thus, any element of \( V/W \) can be expressed as a linear combination of the vectors in
+   \[ \qty{v_{k+1}+W,\dots,v_n+W} \fstop \]
+
+   This shows that
+   \[ V/W=\text{span}\qty{v_{k+1}+W,\dots,v_n+W}\fstop \]
+
+   Next, consider the following equation
+   \[ a_1(v_{k+1}+W)+\dots+a_{n-k}(v_n+W)=W \]
+   where \( a_1,\dots,a_{n-k}\in \R \). Performing the addition of the vector cosets allows us to write
+   \[ \qty(a_1v_{k+1}+\dots+a_{n-k}v_n)+W=W\cma \]
+   which is satisfied if and only if
+   \[ a_1v_{k+1}+\dots+a_{n-k}v_n\in W\fstop \]
+
+   Thus, the above vector can be written as a linear combination of the basis vectors for \( W \)
+   \[ a_1v_{k+1}+\dots+a_{n-k}v_n=b_1w_1+\dots+b_kw_k\fstop \]
+
+   We can rearrange this as follows
+   \[ a_1v_{k+1}+\dots+a_{n-k}v_n-b_1w_1-\dots-b_kw_k=0\fstop \]
+
+   But since \( \qty{w_1,\dots,w_k,v_{k+1},\dots,v_n} \) is a basis for \( V \), it is a linearly independent set. All of the above coefficients must vanish, although in particular, we have that \( a_1=\dots=a_{n-k}=0 \), which implies the linear independence of \( \qty{v_{k+1}+W,\dots,v_n+W} \), and thus demonstrates that it is a basis for \( V/W \). The number of elements in this basis is equal to \( n-k \), so we have that
+   \[ \dim(V/W)=n-k=\dim V-\dim W\fstop \]
+ \end{proof}
+
+ The above result, together with the First Isomorphism Theorem, leads to an easy proof of the Rank Theorem, which provides a relationship between the kernel and range of a linear map.
+ 
+ \begin{theorem}
+   (Rank Theorem) Let \( V \), \( W \) be finite dimensional vector spaces and let \( T:V\to W \) be a linear map. Then
+   \[ \dim\ker T+\dim\mathcal{R}(T)=\dim V\fstop \]
+ \end{theorem}
+ \begin{proof}
+   By the First Isomorphism Theorem, \( V/\ker T \) is isomorphic to \( \mathcal{R}(T) \). By \Cref{thm:iso-samedim}, this implies that \( \dim (V/\ker T)=\dim\mathcal{R}(T) \). But by \Cref{thm:codim}, we have that
+   \[ \dim\mathcal{R}(T)=\dim (V/\ker T)=\dim V-\dim\ker T\fstop \]
+
+   Rearranging the above expression gives the desired relationship.
+ \end{proof}
+
+ The name `Rank Theorem' is due to the fact that the dimension of the range of \( T \) is often referred to as the \emph{rank} of the linear operator \( T \).
+
+ \vspace{3mm}
+ 
+ Finally, we provide a quick application of the Rank Theorem:
+ \begin{proposition}
+   Let \( E \) and \( F \) be \( n \)-dimensional vector spaces, and let \( T\in L(E,F) \). Then \( T \) is injective if and only if \( T \) is bijective (and hence an isomorphism).
+ \end{proposition}
+ \begin{proof}
+   Suppose \( T \) is injective. Since \( T \) is linear, this implies that \( \ker T=\qty{0} \), so that \( \dim\ker T=0 \). Then by the Rank Theorem, we have that
+   \[ \dim\mathcal{R}(T)=\dim V=n=\dim W\fstop \]
+
+   However, since \( \mathcal{R}(T)\subseteq W \), we must have that \( \mathcal{R}(T)=W \), as the only \( n \)-dimensional subspace of an \( n \)-dimensional vector space \( W \) is \( W \) itself. This shows that \( T \) is surjective, and hence a bijection.
+ \end{proof}
+
+ This result will be useful to establish when a linear map is \emph{invertible} (recall that a function is invertible if and only if it is bijective). For instance, this will pop up when we come to discuss the \emph{Inverse Function Theorem}, which is concerned with the inverse of a differentiable function.
+
+ \vspace{3mm}
+
+ There are many more purely algebraic and topological things in Euclidean space which we can discuss further, but for now, we'll call it a day and start doing some calculus!
 
 %%% Local Variables: 
 %%% mode: latex
