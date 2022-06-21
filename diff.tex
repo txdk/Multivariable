@@ -1,21 +1,117 @@
 % Chapter 2
 \chapter{Differentiation}
 \section{Definition of the Derivative}
-In the discussion that will follow, let \( E \) be Euclidean \( n \)-space, let \( F \) be Euclidean \( m \)-space and let \( U\subseteq E \) be an open set.
+We will now begin developing the theory of calculus for vector-valued functions with vector-valued inputs, starting with \emph{differential calculus}. When talking about the differentiability of mappings between Euclidean spaces, we will consider the domain of the map to be an open set, so that we can move some small amount in any direction about any point in the domain. This, loosely speaking, will give us some notion of being able to approach any particular point from any given direction, and thus allow us to consider the rate of change of the function along this path. Indeed, the rate of change of a function as we vary the input variable(s) is one intuitive notion of the derivative of the function.
+
+\vspace{3mm}
+
+In the discussion that will follow, let \( E \) be Euclidean \( n \)-space, let \( F \) be Euclidean \( m \)-space and let \( U\subseteq E \) be an open set. We want to define the notion of differentiability for mappings \( f:U\to F \). Another way to think whether a map \( f \) is differentiable is whether it looks locally like a first-order polynomial, i.e.\ in some neighbourhood of a point \( x_0 \) in the domain of \( f \), the following expression is a `good' approximation for \( f \)
+\[ f(x)\approx f(x_0)+T(x-x_0) \]
+for some linear map \( T\in L(E,F) \). Of course, the behaviour of \( f \) can be quite complicated, and so such a linear approximation for \( f \) may be quite bad far away from \( x_0 \). The expression is of course exact \emph{at} \( x_0 \). As for points `close to' \( x_0 \), we will designate the functions \( f \) for which the approximation is `good' to be the differentiable functions. The linear map \( T \) appearing in the linear approximation (the `slope', if you may, to make an analogy with real-valued functions of a single variable) that minimises the error of the linear approximation is what we will call the derivative of \( f \), so that the derivative is the linear map used to construct the `best' linear approximation of \( f \) at \( x_0 \).
+
 \begin{definition}
-  A mapping \( f:U\to F \) is said to be \textbf{differentiable} at \( x_0\in U \) if there exists a linear map \( \D f(x_0)\in L(E,F) \) and a map \( R:U\cross U\to F \) such that for every \( x\in U \), we have
-  \[ f(x)=f(x_0)+[\D f(x_0)]\qty(x-x_0)+R(x,x_0) \]
+  \label{def:derivative}
+  A mapping \( f:U\to F \) is said to be \textbf{differentiable} at \( x_0\in U \) if there exists a linear map \( \D f(x_0)\in L(E,F) \) and a map \( R:U\to F \) such that for every \( x\in U \), we have
+  \[ f(x)=f(x_0)+[\D f(x_0)]\qty(x-x_0)+R(x) \]
   and
-  \[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}}=0\fstop \]
+  \[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x)}}{\norm{x-x_0}}=0\fstop \]
 
   If \( f \) is differentiable at \( x_0 \), the linear map \( \D f(x_0):E\to F \) is called the \textbf{derivative} of \( f \) at \( x_0 \).
 \end{definition}
+
+So, we can express any function \( f \) as the sum of a linear approximation for \( f \) and some remainder/rubbish term \( R(x) \), the latter of which captures the `error' of the linear approximation compared to the true value of \( f \). The value of the error can be quite large for certain values of \( x \), but if \( f \) is differentiable, the error tends to zero as one approaches \( x_0 \). This makes rigourous the notion that the linear approximation can be made arbitrarily accurate for values of \( x \) that are sufficiently close to \( x_0 \).
+
+\vspace{3mm}
+
+Since the derivative is a linear map (i.e.\ an element of \( L(E,F) \)), it can be represented by an \( m\times n \) matrix. This matrix is called the \emph{Jacobian matrix}.
+
+\vspace{3mm}
 
 If \( f \) is differentiable at each \( x_0\in U \), we say that \( f \) is differentiable on \( U \) (or simply: differentiable), and can define the differentiation map \( \D f:U\to L(E,F) \), which takes each \( x_0\in U \) to \( \D f(x_0) \); the derivative of \( f \) at \( x_0 \).
 
 \vspace{3mm}
 
-Since the derivative is a linear map (i.e.\ an element of \( L(E,F) \)), it can be represented by an \( m\times n \) matrix. This matrix is called the \emph{Jacobian matrix}.
+Let's look at a couple of examples. First, consider the first-order polynomial \( p:\R^n\to\R^m \)
+\[ p(\vb{x})=A\vb{x}+\vb{b} \]
+where \( A\in L(\R^n,\R^m) \) is a linear map and \( \vb{b}\in\R^m \) is a constant vector. We claim that \( p \) is a differentiable function for all \( \vb{x_0}\in\R^n \) with derivative \( A \). To see this, define the function \( R:\R^n\to \R^m \) by
+\[ R(\vb{x})=p(\vb{x})-p(\vb{x_0})-A(\vb{x}-\vb{x_0})\fstop \]
+
+Then substituting the definition of \( p \) gives
+\[ R(\vb{x})= A\vb{x}+\vb{b}-(A\vb{x_0}+\vb{b})-A\vb{x}+A\vb{x_0}=\vb{0}\]
+which holds for all \( \vb{x}\in\R^n \). Thus, we clearly have that
+\[ \lim_{\norm{\vb{x}-\vb{x_0}}\to 0}\frac{\norm{R(\vb{x})}}{\norm{\vb{x}-\vb{x_0}}}=0\fstop \]
+
+This shows that \( p \) is differentiable on \( \R^n \), and moreover that \( \D p(\vb{x_0})=A \) for all \( \vb{x_0}\in\R^n \), i.e.\ the differentiation map \( \D p:\R^n\to L(\R^n,\R^m) \) is constant with value \( A \). Notice that the remainder function \( R \) is identically zero on \( \R^n \). This is because \( p \) is a first-order polynomial in \( \vb{x} \), so it is \emph{equal} to its linear approximation. The Jacobian matrix for \( p \) at any \( \vb{x_0}\in\R^n \) would simply be the matrix representation of \( A \).
+
+\vspace{3mm}
+
+Now for a slightly more nontrivial example. Consider the function \( f:\R^2\to\R^2 \) defined by
+\[ f(x,y)=\mqty(x^2+y^2 \\ xy) \]
+where we have expressed all elements of \( \R^2 \) in terms of the standard basis. We will show that \( f \) is differentiable on \( \R^2 \), with the differentiation map \( \D f:\R^2\to L(\R^2,\R^2) \) given by
+\[ \D f(x,y)=\mqty(2x & 2y\\ y & x)\fstop \]
+
+Let \( \vb{x_0}=(x_0,y_0)^T\in\R^2 \). Using the above linear map as our candidate for the derivative, we will define the remainder function \( R:\R^2\to\R^2 \) by
+\[ R(x,y)=f(x,y)-f(x_0,y_0)-[\D f(x_0)](\vb{x}-\vb{x_0})\fstop \]
+
+Writing the above expression out as a vector equation gives
+\begin{align*}
+  R(x,y)&=\mqty(x^2+y^2\\xy)-\mqty(x_0^2+y_0^2\\x_0y_0)-\mqty(2x & 2y\\ y & x)\mqty(x-x_0\\y-y_0)\\
+  &= \mqty(x^2-x_0^2+y^2-y_0^2\\xy-x_0y_0)-\mqty(2x(x-x_0)+2y(y-y_0)\\y(x-x_0)+x(y-y_0))\\
+  &= \mqty(-(x-x_0)^2-(y-y_0)^2\\-(x-x_0)(y-y_0))\fstop
+\end{align*}
+
+Consider taking the maximum norm of both sides
+\[ \norm{R(x,y)}_\infty=\max\qty{\abs{(x-x_0)^2+(y-y_0)^2},\abs{(x-x_0)(y-y_0)}}\fstop \]
+
+But since \( \norm{\vb{x}-\vb{x_0}}_\infty=\max\qty{\abs{x-x_0},\abs{y-y_0}} \), we have that
+\[ \norm{R(x,y)}_\infty\leq\max\qty{2\norm{\vb{x}-\vb{x_0}}_\infty^2,\norm{\vb{x}-\vb{x_0}}^2_\infty}=2\norm{\vb{x}-\vb{x_0}}_\infty^2\fstop \]
+
+Dividing through by \( \norm{\vb{x}-\vb{x_0}}_\infty\) yields
+\[ 0\leq\frac{\norm{R(x,y)}_\infty}{\norm{\vb{x}-\vb{x_0}}_\infty}\leq 2\norm{\vb{x}-\vb{x_0}}_\infty\fstop \]
+
+Taking the limit as \( \norm{\vb{x}-\vb{x_0}}_\infty\to 0 \) and applying the Squeeze Theorem yields
+\[ \lim_{\norm{\vb{x}-\vb{x_0}}_\infty\to 0}\frac{\norm{R(x,y)}_\infty}{\norm{\vb{x}-\vb{x_0}}_\infty}=0\fstop \]
+
+Since the maximum norm is strongly equivalent to the Euclidean norm, the above limit also converges to 0 in the Euclidean norm. This shows that \( f \) is differentiable at \( \vb{x_0} \). Since the choice of \( \vb{x_0}\in\R^2 \) was arbitrary, it follows that \( f \) is differentiable on \( \R^2 \), with derivative \( \D f \) as  shown.
+
+\vspace{3mm}
+
+Our use of the maximum norm over the Euclidean norm to prove differentiability of \( f \) resulted in a greatly simplified calculation. Our argument for why this was justified may be generalised to the following result.
+
+\begin{proposition}
+  \label{thm:diff-norm-inv}
+  The differentiability of a mapping \( f:U\to F \) does not depend on the choice of norm on \( E \) and \( F \).
+\end{proposition}
+\begin{proof}
+  Suppose \( f:U\to F \) is differentiable at \( x_0\in U \) with respect to the norms \( \norm{-}_E \) and \( \norm{-}_F \) on \( E \) and \( F \) respectively. That is, there exist maps \( \D f(x_0)\in L(E,F) \) and \( R:U\to F \) such that for all \( x\in U \),
+  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R(x) \]
+  and
+  \[ \lim_{\norm{x-x_0}_E\to 0}\frac{\norm{R(x)}_F}{\norm{x-x_0}_E}=0\fstop \]
+
+  Let \( \norm{-}_{E'} \) be any other norm on \( E \) and \( \norm{-}_{F'} \) be an arbitrary norm on \( F \). Then by \Cref{thm:norm-equiv}, \( \norm{-}_E\) and \( \norm{-}_{E'} \) are strongly equivalent, and \( \norm{-}_F \) and \( \norm{-}_{F'} \) are strongly equivalent. This means that there exists \( K_1,K_2>0 \) such that
+  \begin{align*}
+    \norm{x-x_0}_E&\leq K_1\norm{x-x_0}_{E'}\\
+    \norm{R(x)}_{F'}&\leq K_2\norm{R(x)}_F
+  \end{align*}
+  which holds for all \( x\in U \). Thus, we have that
+  \[ 0\leq \frac{\norm{R(x)}_{F'}}{\norm{x-x_0}_{E'}}\leq K_1K_2\frac{\norm{R(x)}_F}{\norm{x-x_0}_E}\fstop \]
+
+  Taking limits gives
+  \[  0\leq \lim_{\norm{x-x_0}_{E'}\to 0}\frac{\norm{R(x)}_{F'}}{\norm{x-x_0}_{E'}}\leq K_1K_2\lim_{\norm{x-x_0}_{E'}\to 0}\frac{\norm{R(x)}_F}{\norm{x-x_0}_E}\fstop \]
+
+  But by \Cref{thm:norm-equiv-conv}, we have that \( \norm{x-x_0}_E\to 0 \) if and only if \( \norm{x-x_0}_{E'}\to 0 \). Thus, the limit on the right-hand side of the above inequality vanishes, and thus we conclude by the Squeeze Theorem that
+  \[ \lim_{\norm{x-x_0}_{E'}\to 0}\frac{\norm{R(x)}_{F'}}{\norm{x-x_0}_{E'}}=0 \]
+  which proves that \( f \) is differentiable at \( x_0 \) with respect to the norms \( \norm{-}_{E'} \) and \( \norm{-}_{F'} \), with the same derivative \( \D f(x_0) \) and remainder function \( R \).
+\end{proof}
+
+You may have noticed a few things about the calculations in the previous examples. Firstly, they were somewhat tedious to do! Indeed, in the future we surely do not want to be showing that a given function is differentiable directly from the definition. Secondly (and perhaps most importantly), to show that a function is differentiable, we somehow have to pre-ordain what the derivative ought to be (which we did before by coincidentally materialising the correct linear map seemingly out of nowhere). These factors combined means that the definition of the derivative alone does not naturally lend itself to \emph{practical} computations for the derivative of a multivariable function, and so we'll need to develop the theory further to obtain some results and formulae to simplify this process.
+
+\vspace{3mm}
+
+The definition of the derivative can actually be stated in terms of a single limit expression by combining the two expressions in \Cref{def:derivative} by eliminating the remainder function \( R \). Explicitly, a function \( f:U\to F \) is differentiable at \( x_0\in U \) if and only if there exists a linear map \( \D f(x_0)\in L(E,F) \) such that
+\[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{f(x)-f(x_0)-[\D f(x_0)](x-x_0)}}{\norm{x-x_0}}=0\fstop \]
+
+The derivative of a function \( f \) at \( x_0 \) retains its interpretation as the infinitesimal rate of change of the function \( f \) as you move away from \( x_0 \) even in the multivariable realm. Given any vector \( y\in E \), the derivative at \( x_0 \) evaluated at \( y \), \( [\D f(x_0)](y) \), is the variation of \( f \) as one moves an infinitesimal distance in a straight line in the direction of \( y \) from the point \( x_0 \).
 
 \begin{proposition}
   \label{thm:direction-deriv}
@@ -31,27 +127,31 @@ Since the derivative is a linear map (i.e.\ an element of \( L(E,F) \)), it can 
   \vspace{3mm}
 
   Now suppose that \( y\neq 0 \). Since \( U \) is open, there exists a \( \delta>0 \) such that \( B(x_0,\delta)\subseteq U \). Then for all \( t\in\qty(-\flatfrac{\delta}{\norm{y}},\flatfrac{\delta}{\norm{y}}) \), we have that \( x=x_0+ty\in U \), and hence
-  \[ f(x_0+ty)-f(x_0)=[\D f(x_0)](ty)+R(x,x_0) \]
+  \[ f(x_0+ty)-f(x_0)=[\D f(x_0)](ty)+R(x) \]
   since \( f \) is differentiable at \( x_0 \). Dividing through the above expression by \( t \) and rearranging gives
-  \[ \frac{f(x_0+ty)-f(x_0)}{t}- \frac{t[\D f(x_0)](y)}{t}=\frac{R(x,x_0)}{t} \]
+  \[ \frac{f(x_0+ty)-f(x_0)}{t}- \frac{t[\D f(x_0)](y)}{t}=\frac{R(x)}{t} \]
   noting that we have used the linearity of \( \D f(x_0) \) to pull out the factor of \( t \). Now, by applying the norm to both sides and taking the limit \( t\to 0 \) gives
-  \[ \lim_{t\to 0}\norm{\frac{f(x_0+ty)-f(x_0)}{t}- [\D f(x_0)](y)}=\lim_{t\to 0}\frac{\norm{R(x,x_0)}}{\abs{t}}\fstop \]
+  \[ \lim_{t\to 0}\norm{\frac{f(x_0+ty)-f(x_0)}{t}- [\D f(x_0)](y)}=\lim_{t\to 0}\frac{\norm{R(x)}}{\abs{t}}\fstop \]
 
   Since \( \norm{x-x_0}=\norm{ty}=\abs{t}\norm{y} \), we can write
   \begin{align*}
-    \norm{\lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}- [\D f(x_0)](y)}&=\norm{y}\lim_{t\to 0}\frac{\norm{R(x,x_0)}}{\abs{t}\norm{y}}\\
-    &= \norm{y}\lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}}\\
+    \norm{\lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}- [\D f(x_0)](y)}&=\norm{y}\lim_{t\to 0}\frac{\norm{R(x)}}{\abs{t}\norm{y}}\\
+    &= \norm{y}\lim_{\norm{x-x_0}\to 0}\frac{\norm{R(x)}}{\norm{x-x_0}}\\
     &= 0
   \end{align*}
   which follows from the differentiability of \( f \) at \( x_0 \) and by exploiting the continuity of the norm in two places: to assert that \( \norm{x-x_0}\to 0 \) as \( t\to 0 \) and to pull limits inside of the norm. By positivity of the norm, we obtain the desired result
   \[ \lim_{t\to 0}\frac{f(x_0+ty)-f(x_0)}{t}=[\D f(x_0)](y)\fstop \]
 \end{proof}
 
+This leads us to define the concept of the \emph{directional derivative}, a weaker notion of the derivative of a vector-valued function.
+
 \begin{definition}
   The \textbf{directional derivative} of a map \( f:U\to F \) at \( x_0\in U \) in the direction of \( y\in E\backslash\qty{0} \) is
   \[ \lim_{t\to 0}\frac{f(x_0+t\vu{y})-f(x_0)}{t}\cma \]
   provided that the above limit exists. The vector \( \vu{y}=\flatfrac{y}{\norm{y}} \) is a unit vector in the direction of \( y \).
 \end{definition}
+
+An immediate consequence of \Cref{thm:direction-deriv} is that it provides a convenient relation between the derivative of a differentiable function and its corresponding directional derivatives.
 
 \begin{corollary}
   \label{thm:direction-cor}
@@ -84,6 +184,10 @@ However, by \Cref{thm:direction-cor}, we can obtain an expression for \( [\D f(\
 
 Putting this all together leads to the statement that \( \frac{1}{2}=1 \), which gives us our desired contradiction.
 
+\vspace{3mm}
+
+An important consideration that should be on the forefront of our minds is whether the way we've defined the notion of derivatives is consistent with the one-variable definition of the derivative. That is, since \( \R \) is (one-dimensional) Euclidean space, we can talk about the notion of a map \( f:\R\to\R \) being differentiable with respect to \Cref{def:derivative}. However, at the surface level, this appears to be a different notion to that of \( f \) being differentiable in the ordinary, one-variable sense. We must check that these two notions actually coincide, so that our definition of the derivative is indeed a generalisation of the notion of differentiability to the multivariable case.
+
 \begin{proposition}
   Let \( A\subseteq\R \) be open and let \( x_0\in A \). Then \( f:A\to\R \) is differentiable at \( x_0 \) if and only if \( f \) is differentiable in the one-variable sense, i.e.\ the following limit exists
   \[ f'(x_0)\coloneqq\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}\fstop \]
@@ -97,31 +201,70 @@ Putting this all together leads to the statement that \( \frac{1}{2}=1 \), which
   Let \( x=x_0+t \), which will be an element of the domain \( A \) provided that \( t \) is chosen sufficiently small in magnitude. Then \( x\to x_0 \) as \( t\to 0 \), and so we have that
   \[ [\D f(x_0)](1)=\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=f'(x_0)\fstop \]
 
-  (\( \impliedby \)) Suppose \( f \) is differentiable at \( x_0 \) in the one-variable sense. Let \( x\in A \). Define the function \( R:A\cross A\to\R \) by
-  \[ R(x,x_0)=f(x)-f(x_0)-f'(x_0)(x-x_0)\fstop \]
+  (\( \impliedby \)) Suppose \( f \) is differentiable at \( x_0 \) in the one-variable sense. Let \( x\in A \). Define the function \( R:A\to\R \) by
+  \[ R(x)=f(x)-f(x_0)-f'(x_0)(x-x_0)\fstop \]
 
   Then
-  \[ \frac{\abs{R(x,x_0)}}{\abs{x-x_0}}=\abs{\frac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}\fstop \]
+  \[ \frac{\abs{R(x)}}{\abs{x-x_0}}=\abs{\frac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}\fstop \]
 
   Taking the limit as \( x\to x_0 \) gives
-  \[ \lim_{x\to x_0}\frac{\abs{R(x,x_0)}}{\abs{x-x_0}}=\abs{\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}=\abs{f'(x_0)-f'(x_0)}=0\fstop \]
+  \[ \lim_{x\to x_0}\frac{\abs{R(x)}}{\abs{x-x_0}}=\abs{\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}-f'(x_0)}=\abs{f'(x_0)-f'(x_0)}=0\fstop \]
 
   From the definition of \( R \), we obtain the desired expression
-  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R(x,x_0) \]
+  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R(x) \]
   where we have defined the linear map \( \D f(x_0):\R\to \R \) by
   \[ [\D f(x_0)](a)=f'(x_0)a\fstop \]
 
   This shows that \( f \) is differentiable at \( x_0 \) with derivative \( \D f(x_0) \). Evaluating the derivative at \( a=1 \) gives \( [\D f(x_0)](1)=f'(x_0) \), as required.
 \end{proof}
 
-Let \( \qty{e_1,\dots, e_n} \) be a basis in \( E \).
+Given the linear nature of the derivative map, one can recover all of the information about the derivative by evaluating it on a basis of \( E \). This means that there is a distinguished set of directional derivatives that serve to describe the total derivative of the function. These are none other than the function's \emph{partial derivatives}, which are simply the directional derivatives of the function in the direction of the basis vectors.
 
 \begin{definition}
-  The \textbf{partial derivative} of \( f:U\to F \) with respect to the \( i^{\text{th}} \) coordinate at \( x_0\in U \) is the directional derivative of \( f \) at \( x_0 \) in the direction of the basis vector \( e_i \), i.e.\
+  Let \( \qty{e_1,\dots, e_n} \) be a basis for \( E \). The \textbf{partial derivative} of \( f:U\to F \) with respect to the \( i^{\text{th}} \) coordinate at \( x_0\in U \) is the directional derivative of \( f \) at \( x_0 \) in the direction of the basis vector \( e_i \), i.e.\
   \[ {\pdv{f}{x_i}} (x_0)=\lim_{t\to 0}\frac{f(x_0+te_i)-f(x_0)}{t}\fstop \]
 \end{definition}
 
-Interpretation as `treating \( f \) as a one-variable function in \( x \) (holding all other coordinates fixed) and taking a one-variable derivative'.
+The definition of a partial derivative closely resembles that of a one-variable derivative. Indeed, we are simply restricting our attention to a one-dimensional subset of the domain (a straight line segment in the direction of the basis vector \( e_i \) passing through the point of interest \( x_0 \)), and so the corresponding limit is a one-dimensional limit. This means that partial derivatives can be readily computed using techniques for computing derivatives of single-variable, real-valued functions. To compute the partial derivative with respect to some coordinate \( x_i \), you essentially treat all other coordinates/variables as constants and consider the function as a one-variable function in \( x_i \), and thus compute the one-variable derivative of the function with respect to \( x_i \).
+
+\vspace{3mm}
+
+For example, consider the scalar function \( f:\R^2\to\R \) given by
+\[ f(x,y)=3x^2y+x\cos(y)\fstop \]
+
+Again, we are working in the standard basis, so our basis vectors are
+\[ \vu{e}_1=\mqty(1\\0), \quad \vu{e}_2=\mqty(0\\1)\fstop \]
+
+Let's first compute the partial derivative with respect to the \( x \)-coordinate directly from the definition. As is conventional, the coordinate \( x \) corresponds to the basis vector \( \vu{e}_1 \), so the corresponding partial derivative at \( \vb{x_0}=(x_0,y_0)^T\in\R^2 \) is
+\begin{align*}
+  {\pdv{f}{x}}(\vb{x_0})&= \lim_{t\to 0}\frac{f(x_0+t,y_0)-f(x_0,y_0)}{t}\\
+  &= \lim_{t\to 0}\frac{3(x_0+t)^2y+(x_0+t)\cos(y_0)-3x_0^2y_0-x_0\cos(y_0)}{t}\\
+  &= \lim_{t\to 0}\frac{3x_0^2y+6x_0y_0t+3t^2y_0+x_0\cos(y_0)+t\cos(y_0)-3x_0^2y_0-x_0\cos(y_0)}{t}\\
+  &= \lim_{t\to 0}\frac{6x_0y_0t+3t^2y_0+t\cos(y_0)}{t}\\
+  &= \lim_{t\to 0}\qty(6x_0y_0+3ty_0+\cos(y_0))\\
+  &= 6x_0y_0+\cos(y_0)\fstop
+\end{align*}
+
+Observe that we have basically computed a derivative by first principles. The faster approach that makes use of our knowledge of one-variable derivatives goes as follows: fix \( y_0\in\R \) and consider the restricted (now single-variable) function \( g:\R\to\R \) given by
+\[ g(x)=f(x,y_0)=3x^2y_0+x\cos(y_0)\fstop \]
+
+We can readily compute the one-variable derivative
+\[ g'(x)=6xy_0+\cos(y_0)\fstop \]
+
+But notice that
+\[ {\pdv{f}{x}}(\vb{x_0})=g'(x_0)\fstop \]
+
+We will use the latter method to compute the partial derivative of \( f \) with respect to the coordinate \( y \), which corresponds to the basis vector \( \vu{e}_2 \). Fix \( x_0\in\R \), and consider the restricted map \( h:\R\to\R \) given by
+\[ h(y)=f(x_0,y)=3x_0^2y+x\cos(y)\fstop \]
+
+Then the partial derivative with respect to \( y \) is given by
+\[ {\pdv{f}{y}}(\vb{x_0})=\eval{h'(y)}_{y=y_0}=3x_0^2-x_0\sin(y_0)\fstop \]
+
+Wasn't that so much easier to do? This is the method we will adopt to compute partial derivatives. After all, why would we want to compute derivatives via first principles given what we know about single-variable calculus? (Answer: we don't!)
+
+\vspace{3mm}
+
+Now, as we eluded to previously, the reason why we're making such a big deal about the partial derivatives is because we can express the (total) derivative of a function entirely in terms of its partial derivatives. Since the partial derivatives are fairly easy to compute, this gives us a practical means to compute the total derivative. The foundation of this method will be built upon the following result.
 
 \begin{corollary}
   Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then all of the partial derivatives of \( f \) at \( x_0 \) exist, and moreover we have
@@ -133,11 +276,126 @@ Interpretation as `treating \( f \) as a one-variable function in \( x \) (holdi
   \[ [\D f(x_0)](e_i)=\lim_{t\to 0}\frac{f(x_0+te_i)-f(x_0)}{t}={\pdv{f}{x_i}} (x_0)\fstop \]
 \end{proof}
 
-Representation of derivative of scalar function via partial derivatives.
+We are now ready to discuss our method for computing the derivative of a multivariable function \( f \) from its partial derivatives. We'll start by considering the case where \( f \) is a scalar function then work our way up to a vector-valued function. Suppose we somehow knew that the scalar function \( f:U\to\R \) is differentiable at \( x_0\in U \) and want to compute its derivative \( \D f(x_0) \). Since \( \D f(x_0)\in L(E,\R)=E^* \), i.e.\ it is a linear functional, we can expand \( \D f(x_0) \) in terms of the \emph{dual basis} introduced in \Cref{sec:dual}
+\[ \D f(x_0)=\sum_{i=1}^na_iv_i^* \]
+for some coefficients \( a_i\in\R \). To determine the values of \( a_i \), we evaluate the operators on both sides of the above expression at the \( k^{\text{th}} \) basis vector \( e_k \)
+\begin{align*}
+  [\D f(x_0)](e_k)&=\sum_{i=1}^na_iv_i^*(e_k)\\
+  &= \sum_{i=1}^na_i\delta_{ik}\\
+  &= a_k
+\end{align*}
+but the left-hand side is simply the \( k^{\text{th}} \) partial derivative of \( f \) at \( x_0 \), so that
+\[ a_k={\pdv{f}{x_k}}(x_0)\fstop \]
+
+Hence, the derivative of a scalar function has the following representation in terms of its partial derivatives
+\[ \D f(x_0)=\sum_{i=1}^n{\pdv{f}{x_i}}(x_0)\,v_i^*\fstop \]
+
+Thus, the task of computing the derivative of a differentiable function reduces to computing each of its partial derivatives. The Jacobian matrix of \( f \) at \( x_0 \), i.e.\ the matrix representation of \( \D f(x_0) \) is simply a \( 1\times n \) matrix of the form
+\[ \mqty({\pdv{f}{x_1}}(x_0)&{\pdv{f}{x_2}}(x_0)&{\pdv{f}{x_3}}(x_0)& \dots&{\pdv{f}{x_n}}(x_0))\fstop \]
+
+Now let's consider the case for vector-valued functions. Let \( \qty{\overline{e}_1,\dots,\overline{e}_m} \) be a basis for \( F \), so that for all \( x\in U \), we can write
+\[ f(x)=\sum_{i=1}^m f_i(x)\overline{e}_i \]
+where each \( f_i:U\to\R \) are the component functions of \( f \). Each of the component functions are scalar functions. The differentiability of \( f \) implies the differentiability of each of the \( f_i \). In fact, we also have the converse.
 
 \begin{proposition}
+  \label{thm:comp-diff}
   A function \( f:U\to F \) is differentiable at \( x_0\in U \) if and only if all of its component functions \( f_i:U\to\R \) are differentiable at \( x_0 \).
 \end{proposition}
+\begin{proof}
+  (\( \implies \)) Suppose \( f \) is differentiable at \( x_0\in U \). Then
+  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R(x) \]
+  for some \( R:U\to F \) satisfying
+  \[ \lim_{\norm{x-x_0}}\frac{\norm{R(x)}_\infty}{\norm{x-x_0}}=0 \]
+  for all \( x\in U \). Notice that we have equipped \( F \) with the maximum norm \( \norm{-}_\infty \), but the final result will be independent of the choice of norm by way of \Cref{thm:diff-norm-inv}.
+
+  \vspace{3mm}
+
+  We expand the first expression in terms of the basis in \( F \) (i.e.\ in terms of component functions)
+  \[ \sum_{i=1}^m f_i(x)\overline{e}_i= \sum_{i=1}^m\Big(f_i(x_0)+[\D f_i(x_0)](x-x_0)+R_i(x)\Big)\overline{e}_i \]
+  where \( \D f_i(x_0) \) and \( R_i \) are the \( i^{\text{th}} \) component functions of \( \D f(x_0) \) and \( R \), respectively. Then by linear independence of the \( \overline{e}_i \), we can equate the above expression component-wise to obtain
+  \[ f_i(x)=f_i(x_0)+[\D f_i(x_0)](x-x_0)+R_i(x)\fstop \]
+
+  Recall from \Cref{sec:linear-maps} that an arbitrary linear map in \( L(E,F) \) can be expressed in terms of a basis consisting of linear maps \( \phi_{ij}:E\to F \) satisfying
+  \[ \phi_{ij}(e_k)=\delta_{jk}\overline{e}_i\fstop \]
+
+  The corresponding representation of \( \D f(x_0) \) in terms of this basis is
+  \[ \D f(x_0)=\sum_{i=1}^m\sum_{j=1}^n J_{ij}(x_0)\phi_{ij} \]
+  where \( J_{ij}(x_0)\in\R \) is the \( i,j \)-element of the Jacobian matrix of \( f \) at \( x_0 \). Let \( x=a_1e_1+\dots+a_ne_n\in E \). Then
+  \begin{align*}
+    [\D f(x_0)](x)&=\sum_{i=1}^m\sum_{j=1}^n J_{ij}(x_0)\sum_{k=1}^na_k\phi_{ij}(e_k)\\
+    &= \sum_{i=1}^m\sum_{j=1}^n J_{ij}(x_0)\sum_{k=1}^na_k\delta_{jk}\overline{e}_i\\
+    &= \sum_{i=1}^m\Big(\sum_{j=1}^nJ_{ij}(x_0)a_j\Big)\overline{e}_i\\
+    &= \sum_{i=1}^m\Big(\sum_{j=1}^nJ_{ij}(x_0)v_j^*(x)\Big)\overline{e}_i
+  \end{align*}
+
+  Based on the above representation of \( [\D f(x_0)](x) \) in terms of the basis in \( F \), we see that
+  \[ [\D f_i(x_0)](x)=\sum_{j=1}^nJ_{ij}(x_0)v_j^*(x) \]
+  which holds for all \( x\in E \). The \( i^{\text{th}} \) component of the derivative \( \D f_i(x_0):E\to\R \) is hence a linear map, since it is a linear combination of linear maps.
+
+  \vspace{3mm}
+
+  Furthermore, for each \( i\in\qty{1,\dots, m} \), we have that
+  \[ 0\leq\frac{\abs{R_i(x)}}{\norm{x-x_0}_\infty}\leq\max_{k\in\qty{1,\dots,m}}\frac{\abs{R_k(x)}}{{\norm{x-x_0}_\infty}}=\frac{\norm{R(x)}_\infty}{{\norm{x-x_0}_\infty}}\fstop \]
+
+  Applying the limit as \( \norm{x-x_0}_\infty\to 0 \) and applying the Squeeze Theorem gives
+  \[ \lim_{\norm{x-x_0}_\infty\to 0}\frac{\abs{R_i(x)}}{\norm{x-x_0}_\infty}=0\fstop \]
+
+  This shows that \( f_i \) is differentiable at \( x_0 \) with derivative \( [\D f(x_0)]_i \) and remainder function \( R_i \).
+
+  \vspace{3mm}
+
+  (\( \impliedby \)) Suppose each of the component functions \( f_i \) are differentiable at \( x_0 \). Then
+  \[ f_i(x)=f_i(x_0)+[\D f_i(x_0)](x-x_0)+R_i(x) \]
+  where \( R_i:U\to\R \) satisfies
+  \[ \lim_{\norm{x-x_0}_\infty\to 0}\frac{\abs{R_i(x)}}{\norm{x-x_0}_\infty}=0 \]
+  for each \( i\in\qty{1,\dots,m} \). Define the functions \( \D f(x_0):E\to F \) and \( R:U\to F \) by
+  \begin{align*}
+    [\D f(x_0)](x)&= \sum_{i=1}^m[\D f_i(x_0)](x)\overline{e}_i\\
+    R(x)&= \sum_{i=1}^m R_i(x)\overline{e}_i\fstop
+  \end{align*}
+
+  Thus, we clearly have that
+  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R(x)\fstop \]
+
+  Now, \( \D f(x_0) \) is linear because it is a sum of linear maps. We also have that
+  \[ 0\leq\frac{\norm{R(x)}_\infty}{\norm{x-x_0}_\infty}\leq\sum_{i=1}^m\frac{\abs{R_i(x)}}{\norm{x-x_0}_\infty} \]
+  for all \( x\in U \). Applying the limit as \( \norm{x-x_0}_\infty\to 0 \) and using the Squeeze Theorem gives
+  \[ \lim_{\norm{x-x_0}}\frac{\norm{R(x)}_\infty}{\norm{x-x_0}}=0 \]
+  which proves that \( f \) is differentiable at \( x_0 \) with derivative \( \D f(x_0) \) and remainder function \( R \).
+\end{proof}
+
+In light of the above result, given a vector-valued function \( f:U\to F \) that is differentiable at \( x_0\in U \), each of the component functions \( f_i \) are scalar functions that are differentiable at \( x_0 \), and thus they can each be expressed in terms of their partial derivatives
+\[ \D f_i(x_0)=\sum_{j=1}^n{\pdv{f_i}{x_j}}(x_0)v_j^*\fstop \]
+
+In the proof for \Cref{thm:comp-diff}, we saw that the derivative of \( f \) can be constructed from the derivatives of the components of \( f \) as follows
+\[ \D f(x_0)=\sum_{i=1}^m\overline{e}_i\D f_i(x_0)=\sum_{i=1}^m\sum_{j=1}^n{\pdv{f_i}{x_j}}(x_0)\overline{e}_iv_j^*=\sum_{i=1}^m\sum_{j=1}^n{\pdv{f_i}{x_j}}(x_0)\phi_{ij}\fstop \]
+
+This implies that the derivative \( \D f \) is constructed from all of the partial derivatives of the component functions. Written in this way, we see that the \( i,j \)-component of the corresponding Jacobian matrix \( J_{ij}(x_0) \) is simply
+\[ J_{ij}(x_0)={\pdv{f_i}{x_j}}(x_0)\fstop \]
+
+Thus, the derivative of a differentiable multivariable function can be completely expressed in terms of its partial derivatives. To put this into practice, recall our early example of the function \( f:\R^2\to\R^2 \) given by
+\[ f(x,y)=\mqty(x^2+y^2\\ xy)\fstop \]
+
+Let's compute its derivative using our described method. First, we'll explicitly write out the component functions of \( f \)
+\begin{align*}
+  f_1(x,y)&= x^2+y^2\\
+  f_2(x,y)&= xy\fstop
+\end{align*}
+
+Next, we compute all of the partial derivatives at some arbitrary \( \vb{x_0}=(x_0,y_0)^T\in\R^2 \)
+\begin{align*}
+  {\pdv{f_1}{x}}(\vb{x_0})&= 2x_0 & {\pdv{f_1}{y}}(\vb{x_0})=2y_0\\
+  {\pdv{f_2}{x}}(\vb{x_0})&= y_0 & {\pdv{f_1}{y}}(\vb{x_0})=x_0\fstop
+\end{align*}
+
+Finally, we represent the derivative \( \D f(\vb{x_0}):\R^2\to\R^2 \) by its Jacobian matrix
+\[ \D f(\vb{x_0})=\mqty({\pdv{f_1}{x}}(\vb{x_0})&{\pdv{f_1}{y}}(\vb{x_0})\\{\pdv{f_2}{x}}(\vb{x_0}) & {\pdv{f_2}{y}}(\vb{x_0}))=\mqty(2x_0 & 2y_0 \\ y_0 & x_0)\fstop \]
+
+You will notice that this coincides with the derivative for \( f \) that we plucked out of thin air when we first considered this example.
+
+\vspace{3mm}
+
+We remark that while this is an excellent method for actually computing the derivative, it relies on the assumption that \( f \) is actually differentiable. Just like with directional derivatives, the partial derivatives of a multivariable function can exist without the function itself actually being differentiable. The existence of the partial derivatives is a necessary condition for differentiability, but not sufficient. At the very least, with what we know now, we can check the differentiability of a function by computing a candidate for the derivative using the partial derivative method, and then directly checking against the definition for differentiability. This is still somewhat awkward, and indeed we will later resolve this inconvenience by using a nice result to establish a criterion for a function to be differentiable based on the behaviour of its partial derivatives. This will be carried out in \Cref{sec:C1}.
 
 \section{Properties of the Derivative}
 \begin{proposition}
@@ -155,14 +413,14 @@ Representation of derivative of scalar function via partial derivatives.
 \end{theorem}
 \begin{proof}
   Since \( f \) is differentiable at \( x_0 \), then for all \( x\in U \),
-  \[ f(x)-f(x_0)=[\D f(x_0)](x-x_0)+R(x,x_0)\fstop \]
+  \[ f(x)-f(x_0)=[\D f(x_0)](x-x_0)+R(x)\fstop \]
 
   We can thus establish the following inequality
-  \[ 0\leq\norm{f(x)-f(x_0)}\leq\norm{[\D f(x_0)](x-x_0)}+\norm{R(x,x_0)}\fstop \]
+  \[ 0\leq\norm{f(x)-f(x_0)}\leq\norm{[\D f(x_0)](x-x_0)}+\norm{R(x)}\fstop \]
 
   Consider taking the limit as \( x\to x_0 \) of the above
   \begin{equation*}
-    \lim_{x\to x_0}\norm{f(x)-f(x_0)}\leq \lim_{x\to x_0}\norm{[\D f(x_0)](x-x_0)}+\lim_{x\to x_0}\norm{R(x,x_0)}\fstop
+    \lim_{x\to x_0}\norm{f(x)-f(x_0)}\leq \lim_{x\to x_0}\norm{[\D f(x_0)](x-x_0)}+\lim_{x\to x_0}\norm{R(x)}\fstop
   \end{equation*}
 
   Any vector norm \( \norm{-} \) is a continuous function. Moreover, since \( \D f(x_0) \) is a linear map, it is continuous by \Cref{thm:lin-cont}. We can hence `pull the limit inside the function' on the first term on the right-hand-side of the above as follows
@@ -170,42 +428,48 @@ Representation of derivative of scalar function via partial derivatives.
 
   This yields the following simplification
   \begin{align*}
-    0\leq \lim_{x\to x_0}\norm{f(x)-f(x_0)}&\leq \lim_{x\to x_0}\norm{R(x,x_0)}\\
-    &= \lim_{x\to x_0}\qty(\norm{x-x_0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}})\\
-    &= \qty(\lim_{x\to x_0}\norm{x-x_0})\qty(\lim_{x\to x_0}\frac{\norm{R(x,x_0)}}{\norm{x-x_0}})\\
+    0\leq \lim_{x\to x_0}\norm{f(x)-f(x_0)}&\leq \lim_{x\to x_0}\norm{R(x)}\\
+    &= \lim_{x\to x_0}\qty(\norm{x-x_0}\frac{\norm{R(x)}}{\norm{x-x_0}})\\
+    &= \qty(\lim_{x\to x_0}\norm{x-x_0})\qty(\lim_{x\to x_0}\frac{\norm{R(x)}}{\norm{x-x_0}})\\
     &= 0\fstop
   \end{align*}
 
   It follows that \( \norm{f(x)-f(x_0)}\to 0 \) as \( x\to x_0 \). This implies that \( f \) is continuous at \( x_0\).
 \end{proof}
 
-Sum rule. Scalar products.
-
-\begin{theorem}
-  The differentiability of a mapping \( f:U\to F \) does not depend on the choice of norm on \( E \) and \( F \).
-\end{theorem}
+Sum rule. Product rule for scalar functions.
 
 \section{Compositions of Differentiable Mappings}
 \begin{theorem}
-  (Chain Rule:) Let \( E, F, G \) be Euclidean spaces, let \( U\subseteq E \) and \( V\subseteq F \) be open and consider mappings
+  (Chain Rule:) Let \( E, F, G \) be Euclidean spaces, let \( U\subseteq E \) and \( V\subseteq F \) be open and consider the mappings
   \begin{align*}
     f&:U\to F\\
     g&:V\to G\fstop
   \end{align*}
   such that \( f(U)\subseteq V \). If \( f \) is differentiable at \( x_0\in U \) and \( g \) is differentiable at \( f(x_0)\in V \), then the composite mapping
   \[ g\circ f:U\to G \]
-  is differentiable at \( x_0 \) with derivative \( \D g(x_0)\circ\D f(x_0) \).
+  is differentiable at \( x_0 \) with derivative \( \D g(f(x_0))\circ\D f(x_0) \).
 \end{theorem}
- Multiplication of Jacobian matrices.
+Multiplication of Jacobian matrices.
+
+Different coordinate systems.
 \section{Mappings of Class \( \mathcal{C}^1\)}
+\label{sec:C1}
 \begin{definition}
-  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^1}\)} (or simply, \( \mathcal{C}^1 \)) if it is differentiable on \( U \) and its derivative \( \D f:U\to L(E,F) \) is continuous on \( U \).
+  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^1}\)} (or simply, \( \mathcal{C}^1 \)) if it is differentiable on \( U \) and its derivative map \( \D f:U\to L(E,F) \) is continuous on \( U \).
 \end{definition}
+
+\begin{theorem}
+  A scalar function \( f:U\to \R \) is \( \mathcal{C}^1 \) if and only if all of the partial derivatives of \( f \) with respect to the coordinates of an orthonormal basis in \( E \) exist and are continuous on \( U \).
+\end{theorem}
 
 \begin{theorem}
   A mapping \( f:U\to F \) is \( \mathcal{C}^1 \) if and only if all of the partial derivatives of \( f \) with respect to the coordinates of an orthonormal basis in \( E \) exist and are continuous on \( U \).
 \end{theorem}
 \section{Higher Order Derivatives}
+Mappings of Class \( \mathcal{C}^k \) and \( \mathcal{C}^\infty \).
+
+Swapping order of partial derivatives.
 \section{Taylor's Theorem}
 \section{Location of Extrema}
 
