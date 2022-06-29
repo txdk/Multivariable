@@ -76,7 +76,7 @@ Since the maximum norm is strongly equivalent to the Euclidean norm, the above l
 
 \vspace{3mm}
 
-Our use of the maximum norm over the Euclidean norm to prove differentiability of \( f \) resulted in a greatly simplified calculation. Our argument for why this was justified may be generalised to the following result.
+Our use of the maximum norm over the Euclidean norm to prove the differentiability of \( f \) resulted in a greatly simplified calculation. Our argument for why this was justified may be generalised to the following result.
 
 \begin{proposition}
   \label{thm:diff-norm-inv}
@@ -258,7 +258,7 @@ We will use the latter method to compute the partial derivative of \( f \) with 
 \[ h(y)=f(x_0,y)=3x_0^2y+x\cos(y)\fstop \]
 
 Then the partial derivative with respect to \( y \) is given by
-\[ {\pdv{f}{y}}(\vb{x_0})=\eval{h'(y)}_{y=y_0}=3x_0^2-x_0\sin(y_0)\fstop \]
+\[ {\pdv{f}{y}}(\vb{x_0})=h'(y_0)=3x_0^2-x_0\sin(y_0)\fstop \]
 
 Wasn't that so much easier to do? This is the method we will adopt to compute partial derivatives. After all, why would we want to compute derivatives via first principles given what we know about single-variable calculus? (Answer: we don't!)
 
@@ -385,7 +385,7 @@ Let's compute its derivative using our described method. First, we'll explicitly
 Next, we compute all of the partial derivatives at some arbitrary \( \vb{x_0}=(x_0,y_0)^T\in\R^2 \)
 \begin{align*}
   {\pdv{f_1}{x}}(\vb{x_0})&= 2x_0 & {\pdv{f_1}{y}}(\vb{x_0})=2y_0\\
-  {\pdv{f_2}{x}}(\vb{x_0})&= y_0 & {\pdv{f_1}{y}}(\vb{x_0})=x_0\fstop
+  {\pdv{f_2}{x}}(\vb{x_0})&= y_0 & {\pdv{f_2}{y}}(\vb{x_0})=x_0\fstop
 \end{align*}
 
 Finally, we represent the derivative \( \D f(\vb{x_0}):\R^2\to\R^2 \) by its Jacobian matrix
@@ -398,6 +398,11 @@ You will notice that this coincides with the derivative for \( f \) that we pluc
 We remark that while this is an excellent method for actually computing the derivative, it relies on the assumption that \( f \) is actually differentiable. Just like with directional derivatives, the partial derivatives of a multivariable function can exist without the function itself actually being differentiable. The existence of the partial derivatives is a necessary condition for differentiability, but not sufficient. At the very least, with what we know now, we can check the differentiability of a function by computing a candidate for the derivative using the partial derivative method, and then directly checking against the definition for differentiability. This is still somewhat awkward, and indeed we will later resolve this inconvenience by using a nice result to establish a criterion for a function to be differentiable based on the behaviour of its partial derivatives. This will be carried out in \Cref{sec:C1}.
 
 \section{Properties of the Derivative}
+In this section, we'll begin to tackle some easy facts about the derivative. All of these are actually generalised versions of their counterparts in one-variable calculus. Namely, the uniqueness of the derivative, differentiability implying continuity, and how differentiation behaves on sums and products of scalar functions. We'll delay the discussion of differentiation of compositions of functions and the Chain Rule for \Cref{sec:Chain-rule}, as it deserves its very own section.
+
+\vspace{3mm}
+
+First, we prove the easy fact that if the derivative of a function exists, it is unique. The difference from the one-variable case is that now the derivative (at a point) is a linear map instead of a single number. To check that it is indeed unique, we suppose the existence of another linear map defined on the same domain that satisfy the properties of the derivative of the given function, and show that the two linear maps agree on their entire (shared) domain.
 \begin{proposition}
   If \( f:U\to F \) is differentiable at \( x_0\in U \), the derivative \( \D f(x_0) \) is unique.
 \end{proposition}
@@ -407,6 +412,8 @@ We remark that while this is an excellent method for actually computing the deri
 
   Since the above equality holds for any \( y\in E \), it follows that \( \D f(x_0)=T \).
 \end{proof}
+
+Next, we prove the famous fact that the differentiability of a mapping implies that the mapping is also continuous. So, differentiability is still a stronger property than continuity, even in the multivariable case.
 
 \begin{theorem}
   (Differentiability implies continuity) Suppose \( f:U\to F \) is differentiable at \( x_0\in U \). Then \( f \) is continuous at \( x_0 \).
@@ -437,11 +444,120 @@ We remark that while this is an excellent method for actually computing the deri
   It follows that \( \norm{f(x)-f(x_0)}\to 0 \) as \( x\to x_0 \). This implies that \( f \) is continuous at \( x_0\).
 \end{proof}
 
-Sum rule. Product rule for scalar functions.
+Given a differentiable function \( f:U\to F \), is the derivative map \( \D f:U\to L(E,F) \) continuous? The answer is not necessarily. In fact, we don't even need to invoke a multivariable function to construct a suitable counterexample. Consider the function \( f:\R\to\R \) given by
+\[ f(x)=
+  \begin{cases}
+    x^2\sin(\frac{1}{x}) &x\neq 0\\
+    0 &x=0\fstop
+  \end{cases}
+\]
+
+Since \( f \) is differentiable on \( \R \) in the one-variable sense, it is differentiable in the multivariable sense. Its corresponding differentiation map \( \D f:\R\to L(\R,\R) \) is
+\[ \D f(x)=f'(x)\,I_1=
+  \begin{cases}
+    \qty(2x\sin(\frac{1}{x})-\cos(\frac{1}{x}))I_1 &x\neq 0\\
+    0\, I_1 &x=0\fstop
+  \end{cases}
+\]
+
+We claim that \( \D f \) is \emph{not} continuous at \( x=0 \). We will show this by showing that \( \D f \) is not sequentially continuous at \( x=0 \). That is, we will identify a real-valued sequence \( (x_n)_{n=1}^\infty \) that converges to 0, but orchestrate for \( \norm{\D f(x_n)-\D f(0)} \) to not converge to 0 (in operator norm). To this end, consider the sequence defined by
+\[ x_n=\frac{1}{2\pi n}\fstop \]
+
+Clearly, we have that \( x_n\to 0 \) as \( n\to\infty \). Moreover, we have for all \( n\in\N \)
+\[ \norm{\D f(x_n)-\D f(0)}=\norm{(-\cos(2\pi n))I_1}=1\fstop \]
+
+Thus, the derivative map \( \D f \) of a differentiable function is not necessarily continuous. Those that do indeed have a continuous derivative fall into a class of functions called \( \mathcal{C}^1 \) functions. Such functions will be the topic of \Cref{sec:C1}.
+
+\vspace{3mm}
+
+Now, we will consider ways in which we may obtain new differentiable functions from old. One of the simplests ways to do so is to consider a vector sum of two differentiable functions. The theorem below says that the resulting sum function is itself differentiable, and the formula for the derivative is simply the sum of the respective derivatives.
+
+\begin{theorem}
+  (Sum Rule) Suppose the maps \( f:U\to F \) and \( g:U\to F \) are differentiable at \( x_0\in U \). Then the sum function \( f+g:U\to F \) defined by
+  \[ (f+g)(x)=f(x)+g(x) \]
+  is differentiable at \( x_0 \), and its derivative is given by
+  \[ \D (f+g)(x_0)=\D f(x_0)+\D g(x_0)\fstop \]
+\end{theorem}
+\begin{proof}
+  From the differentiability of \( f \) and \( g \) at \( x_0 \), we can establish the existence of the mappings \( \D f(x_0),\D g(x_0)\in L(E,F) \) and \( R_f,R_g:U\to F \) satisfying
+  \begin{align*}
+    f(x)&= f(x_0)+[\D f(x_0)](x-x_0)+R_f(x)\\
+    g(x)&= g(x_0)+[\D g(x_0)](x-x_0)+R_g(x)
+  \end{align*}
+  and
+  \begin{align*}
+    \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_f(x)}}{\norm{x-x_0}}&= 0\\
+    \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_g(x)}}{\norm{x-x_0}}&= 0\fstop
+  \end{align*}
+
+  Summing the expressions for \( f(x) \) and \( g(x) \) yields
+  \[ (f+g)(x)=(f+g)(x_0)+(\D f(x_0)+\D g(x_0))(x-x_0)+(R_f(x)+R_g(x))\fstop \]
+
+  Note that \( (\D f(x_0)+\D g(x_0))\in L(E,F) \), since the sum of linear maps is linear. Moreover, if we define \( R_{f+g}:U\to F \) by \( R_{f+g}=R_f+R_g \), then
+  \[ 0\leq\lim_{\norm{x-x_0}\to 0}\frac{\norm{R_{f+g}(x)}}{\norm{x-x_0}}\leq\lim_{\norm{x-x_0}\to 0}\qty(\frac{\norm{R_f(x)}}{\norm{x-x_0}}+\frac{\norm{R_g(x)}}{\norm{x-x_0}})=0\fstop \]
+
+  This proves that \( f+g \) is differentiable at \( x_0 \). Moreover, we see that \( \D(f+g)(x_0)=\D f(x_0)+\D g(x_0) \).
+\end{proof}
+
+Next, we consider a multivariable product rule for differentiation. Given two differentiable scalar-valued functions (i.e.\ the outputs are real numbers), we can sensibly form the product function and think about trying to differentiate it. The Product Rule below says that the differentiation procedure on the product is A-OK and furthermore there is a formula for the derivative that is a mere generalisation of the familiar one-variable product rule.
+
+\begin{theorem}
+  (Product Rule) Suppose the scalar functions \( f:U\to\R \) and \( g:U\to\R \) are differentiable at \( x_0\in U \). Then the product function \( fg:U\to\R \) defined by
+  \[ (fg)(x)=f(x)g(x) \]
+  is differentiable at \( x_0 \), and its derivative is given by
+  \[ \D(fg)(x_0)=f(x_0)\D g(x_0)+g(x_0)\D f(x_0)\fstop \]
+\end{theorem}
+\begin{proof}
+    From the differentiability of \( f \) and \( g \) at \( x_0 \), we can establish the existence of the mappings \( \D f(x_0),\D g(x_0)\in L(E,F) \) and \( R_f,R_g:U\to F \) satisfying
+  \begin{align*}
+    f(x)&= f(x_0)+[\D f(x_0)](x-x_0)+R_f(x)\\
+    g(x)&= g(x_0)+[\D g(x_0)](x-x_0)+R_g(x)
+  \end{align*}
+  and
+  \begin{align*}
+    \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_f(x)}}{\norm{x-x_0}}&= 0\\
+    \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_g(x)}}{\norm{x-x_0}}&= 0\fstop
+  \end{align*}
+
+  Multiplying the expressions for \( f(x) \) and \( g(x) \) yields
+  \begin{align*}
+    (fg)(x)&= (fg)(x_0)+f(x_0)[\D g(x_0)](x-x_0)+f(x_0)R_g(x)+g(x_0)[\D f(x_0)](x-x_0)+\dots\\
+    &\hspace{6mm}+([\D f(x_0)](x-x_0))([\D g(x_0)](x-x_0))+R_g(x)[\D f(x_0)](x-x_0)+\dots\\
+    &\hspace{6mm}+g(x_0)R_f(x)+R_f(x)[\D g(x_0)](x-x_0)+R_f(x)R_g(x)\fstop
+  \end{align*}
+
+  We will define the linear map \( \D(fg)(x_0)\in L(E,\R) \) by the linear combination of linear maps
+  \[ \D(fg)(x_0)=f(x_0)\D g(x_0)+g(x_0)\D f(x_0) \]
+  and define the remainder function \( R_{fg}:U\to\R \) by `all of the other stuff in the expression'
+  \begin{align*}
+    R_{fg}(x)&=f(x_0)R_g(x)+([\D f(x_0)](x-x_0))([\D g(x_0)](x-x_0))+R_g(x)[\D f(x_0)](x-x_0)+\dots\\
+    &\hspace{6mm}+g(x_0)R_f(x)+R_f(x)[\D g(x_0)](x-x_0)+R_f(x)R_g(x)\fstop
+  \end{align*}
+
+  Thus, \( (fg)(x) \) can be expressed as follows
+  \[ (fg)(x)=(fg)(x_0)+\D(fg)(x_0)(x-x_0)+R_{fg}(x)\fstop \]
+
+  It remains to be checked that
+  \[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_{fg}(x)}}{\norm{x-x_0}}=0\fstop \]
+
+  By inspection of the expression for \( R_{fg} \), by taking the norm and dividing through by \( \norm{x-x_0} \), we can repeatedly apply the triangle inequality to separate the normed expression into the norms of each of its individual summands. Any terms containing \( R_f \) or \( R_g \) can thus be made to vanish by taking the limit \( \norm{x-x_0}\to 0 \) by hypothesis. The only other term to worry about is
+  \begin{align*}
+    \frac{\norm{([\D f(x_0)](x-x_0))([\D g(x_0)](x-x_0))}}{\norm{x-x_0}}&\leq\frac{\norm{\D f(x_0)}\norm{x-x_0}\norm{\D g(x_0)}\norm{x-x_0}}{\norm{x-x_0}}\\
+    &= \norm{\D f(x_0)}\norm{\D g(x_0)}\norm{x-x_0}
+  \end{align*}
+  where \( \norm{\D f(x_0)} \) and \( \norm{\D g(x_0)} \) are the operator norms of the linear maps \( \D f(x_0) \) and \( \D g(x_0) \), respectively. Taking the limit as \( \norm{x-x_0}\to 0 \) makes the right-hand side of the above expression vanish, which implies that the left-hand side also vanishes by the Squeeze Theorem. This proves the desired result, and thus demonstrates the differentiability of \( fg \) at \( x_0 \) with the anticipated derivative.
+\end{proof}
+
+We saw earlier that first-order monomials (e.g.\ functions of the form \( f(x,y,z)=x \), \( g(x,y,z)=y \), \( h(x,y,z)=z \)) are differentiable. Thus, by the Sum Rule and Product Rule together, we have that every multivariable scalar function that is a polynomial in terms of its coordinate variables is differentiable.
+
+\vspace{3mm}
+
+With the previous results under our belt, you may be eager to extend the familiar Quotient Rule to multivariable calculus. We will actually delay the proof of it till the following section, where it will be shown to be a straightforward consequence of the Product Rule and Chain Rule.
 
 \section{Compositions of Differentiable Mappings}
+\label{sec:Chain-rule}
 \begin{theorem}
-  (Chain Rule:) Let \( E, F, G \) be Euclidean spaces, let \( U\subseteq E \) and \( V\subseteq F \) be open and consider the mappings
+  (Chain Rule) Let \( E, F, G \) be Euclidean spaces, let \( U\subseteq E \) and \( V\subseteq F \) be open and consider the mappings
   \begin{align*}
     f&:U\to F\\
     g&:V\to G\fstop
@@ -450,9 +566,147 @@ Sum rule. Product rule for scalar functions.
   \[ g\circ f:U\to G \]
   is differentiable at \( x_0 \) with derivative \( \D g(f(x_0))\circ\D f(x_0) \).
 \end{theorem}
+\begin{proof}
+  From the differentiability of \( f \) at \( x_0 \), we can establish the existence of the mappings \( \D f(x_0)\in L(E,F) \) and \( R_f:U\to F \) satisfying
+  \[ f(x)=f(x_0)+[\D f(x_0)](x-x_0)+R_f(x) \]
+  for all \( x\in E \), and
+  \[ \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_f(x)}}{\norm{x-x_0}}=0\fstop \]
+
+  Similarly, from the differentiability of \( g \) at \( f(x_0) \), we can establish the existence of the mappings \( \D g(f(x_0))\in L(F,G) \) and \( R_g:V\to G \) satisfying
+  \[ g(y)=g(f(x_0))+[\D g(f(x_0))](y-f(x_0))+R_g(y) \]
+  for all \( y\in F \), and
+  \[ \lim_{\norm{y-f(x_0)}\to 0}\frac{\norm{R_g(y)}}{\norm{y-f(x_0)}}=0\fstop \]
+
+  Let \( x\in E \). Then \( f(x)\in V \) by hypothesis so that \( f(x)\in\mathcal{D}(g) \). Thus we can meaningfully substitute \( y=f(x) \) into the expression for \( g(y) \) to obtain
+  \[ g(f(x))=g(f(x_0))+[\D g(f(x_0))](f(x)-f(x_0))+R_g(f(x))\fstop \]
+
+  Now substitute the expression for \( f(x) \) into the above
+  \begin{align*}
+    g\circ f(x)&= g\circ f(x_0)+[\D g(f(x_0))]\qty([\D f(x_0)](x-x_0)+R_f(x))+R_g(f(x))\\
+    &= g\circ f(x_0)+[\D g(f(x_0))]\circ[\D f(x_0)](x-x_0)+R_{g\circ f}(x)
+  \end{align*}
+  where \( R_{g\circ f}:U\to G \) is defined as
+  \[ R_{g\circ f}(x)=[\D g(f(x_0))](R_f(x))+R_g(f(x))\fstop \]
+
+  From the above, we can establish the following inequality
+  \[ \frac{\norm{R_{g\circ f}(x)}}{\norm{x-x_0}}\leq [\D g(f(x_0))]\qty(\frac{\norm{R_f(x)}}{\norm{x-x_0}})+\frac{\norm{R_g(f(x))}}{\norm{x-x_0}}\fstop \]
+
+  Taking the limit as \( \norm{x-x_0}\to 0 \) yields
+  \begin{align*}
+    \lim_{\norm{x-x_0}\to 0}\frac{\norm{R_{g\circ f}(x)}}{\norm{x-x_0}}&\leq \lim_{\norm{x-x_0}\to 0}[\D g(f(x_0))]\qty(\frac{\norm{R_f(x)}}{\norm{x-x_0}})+\lim_{\norm{x-x_0}\to 0}\qty(\frac{\norm{R_g(f(x))}}{\norm{f(x)-f(x_0)}}\times\frac{\norm{f(x)-f(x_0)}}{\norm{x-x_0}})\\
+    &= [\D g(f(x_0))]\qty(\lim_{\norm{x-x_0}\to 0}\frac{\norm{R_f(x)}}{\norm{x-x_0}})+\lim_{\norm{x-x_0}\to 0}\frac{\norm{R_g(f(x))}}{\norm{f(x)-f(x_0)}}\frac{\norm{[\D f(x_0)](x-x_0)+R_f(x)}}{\norm{x-x_0}}\\
+    &\leq [\D g(f(x_0))](0)+0\times\lim_{\norm{x-x_0}\to 0}\qty(\norm{\D f(x_0)}+\frac{\norm{R_f(x)}}{\norm{x-x_0}})\\
+    &= 0\fstop
+  \end{align*}
+
+  We remark that the above calculations are valid provided that \( f(x)\neq f(x_0) \), so that the expression containing \( \flatfrac{1}{\norm{f(x)-f(x_0)}} \) is non-singular. However, notice that for any \( x\in U \) satisfying \( f(x)=f(x_0) \), we have that\footnote{To see this, consider substituting \( y=f(x_0) \) into \[ g(y)=g(f(x_0))+[\D g(f(x_0))](y-f(x_0))+R_g(y) \] and solve for \( R_g(f(x_0)) \).} \( R_g(f(x))=R_g(f(x_0))=0 \), so the problematic term can be replaced with 0 any time we have \( f(x)=f(x_0) \) whilst taking the limit \( x\to x_0 \).
+
+  \vspace{3mm}
+
+  The above calculation, together with the fact the composition of linear maps is linear, shows that \( g\circ f \) is differentiable at \( x_0 \) with the expected derivative.
+\end{proof}
+
 Multiplication of Jacobian matrices.
 
-Different coordinate systems.
+\begin{theorem}
+  (Quotient Rule) Suppose the scalar functions \( f:U\to\R \) and \( g:U\to\R \) are differentiable at \( x_0\in U \), and moreover we have that \( g(x_0)\neq 0 \). Then the quotient function \( \flatfrac{f}{g}:U\to\R \) defined by
+  \[ (\flatfrac{f}{g})(x)=\frac{f(x)}{g(x)} \]
+  is differentiable at \( x_0 \), and its derivative is given by
+  \[ \D\qty(\flatfrac{f}{g})(x_0)=\frac{g(x_0)\D f(x_0)-f(x_0)\D g(x_0)}{(g(x_0))^2}\fstop \]
+\end{theorem}
+\begin{proof}
+  Define the function \( h:\R\backslash\qty{0}\to\R \) by
+  \[ h(x)=\frac{1}{x}\fstop \]
+
+  Then \( \flatfrac{1}{g}=h\circ g \). Since \( h \) is differentiable on \( \R\backslash\qty{0} \), and \( g \) is differentiable at \( x_0 \), it follows that \( h\circ g \) is differentiable at \( x_0 \) by the Chain Rule, which yields the formula
+  \[ \D(h\circ g)(x_0)=\D h(g(x_0))\circ\D g(x_0)\fstop \]
+
+  We recall from one-variable calculus the derivative of \( \flatfrac{1}{x} \)
+  \[ \D h(g(x_0))=h'(g(x_0))I_1=-\frac{1}{(g(x_0))^2}I_1 \]
+  where \( I_1:\R\to\R \) is the 1D identity map \( I_1(x)=x \), which has been inserted to make clear that the above expression is an operator expression. Substituting this into our expression for the derivative of \( h\circ g \) yields
+  \[ \D(h\circ g)(x_0)=-\frac{1}{(g(x_0))^2}\D g(x_0)\fstop\]
+
+  Finally, we apply the Product Rule to \( f \) and \( \flatfrac{1}{g}=h\circ g \) and conclude that \( \flatfrac{f}{g} \) is differentiable at \( x_0 \) with derivative
+  \begin{align*}
+    \D(\flatfrac{f}{g})(x_0)&= f(x_0)\D(h\circ g)(x_0)+(h\circ g)(x_0)\D f(x_0)\\
+    &= \frac{-f(x_0)\D g(x_0)}{(g(x_0))^2}+\frac{\D f(x_0)}{g(x_0)}\\
+    &= \frac{g(x_0)\D f(x_0)-f(x_0)\D g(x_0)}{(g(x_0))^2}\fstop
+  \end{align*}
+\end{proof}
+
+\vspace{3mm}
+
+An important application of the Chain Rule is the computation of derivatives of functions with respect to an alternative coordinate system. By default, when we work in \( \R^n \), we express every vector in terms of an orthonormal basis \( \qty{\vu{e}_1,\dots, \vu{e}_n} \) in \( \R^n \) (typically the standard basis). So given an arbitrary vector \( \vb{x}\in\R^n \) and the representation
+\[ \vb{x}=\sum_{i=1}^nx_i\vu{e}_i\cma \]
+the \( n \)-tuple \( (x_1,\dots,x_n) \) of real numbers are the coordinates of \( \vb{x} \) in a \emph{rectangular} or \emph{Cartesian} coordinate system. The name `rectangular' comes from the fact that it is very easy to specify rectangular regions (i.e.\ \( n \)-dimensional boxes) using this coordinate system; they are simply the set of vectors whose coordinates lie in a Cartesian product of intervals
+\[ \qty{\vb{x}\in\R^n\mid (x_1,\dots,x_n)\in [a_1,b_1]\times\dots\times[a_n,b_n]} \]
+where \( a_i,b_i\in\R \).
+
+\vspace{3mm}
+
+Sometimes, it is convenient to express vectors in different coordinate systems. One reason is to exploit a particular symmetry that a function may exhibit that is not too clear to realise in Cartesian coordinates. Another reason is that the domain of the function may not be a rectangular region (or the entire vector space), and so it becomes easier to specify the vectors that lie in the domain using different coordinates.
+
+\vspace{3mm}
+
+To change from Cartesian coordinates to a different coordinate system, one applies a suitable \emph{coordinate transformation} \( T \). To express a mapping \( f:\R^n\to\R^m \) with respect to our new coordinate system, we simply take the composition \( f\circ T \). Thus, to compute the derivative of \( f \) with respect to the new coordinates, we differentiate \( f\circ T \). This is where the Chain Rule comes in.
+
+\vspace{3mm}
+
+Let's consider a concrete example. A popular choice of coordinates in \( \R^2 \) is the \emph{plane polar coordinate system}, in which every \( \vb{x}\in\R^2 \) is specified by its distance \( r \) from the origin, and the angle \( \theta \) it makes with the positive \( x \)-axis (i.e.\ with the basis vector \( \vu{e}_1 \)), measured in a counterclockwise direction. That is, any vector can be represented in terms of the coordinates \( (r,\theta) \), where the corresponding representation is given by the coordinate transformation \( T:[0,\infty)\times[0,2\pi)\to\R^2 \) given by
+\[ T(r,\theta)=\mqty(r\cos\theta\\ r\sin\theta)\fstop \]
+
+This coordinate transformation is surjective, i.e.\ every vector in \( \R^2 \) can be represented in plane polar coordinates.
+
+\vspace{3mm}
+
+Now, let's consider the scalar function \( f:\R^2\to\R \) given by
+\[ f(x,y)=x^2+y^2\fstop \]
+
+We can compute the derivative of \( f \) with respect to plane polar coordinates using the Chain Rule.
+\begin{align*}
+  \D(f\circ T)(r,\theta)&= \D f(T(r,\theta))\circ\D T(r,\theta)\\
+  &= \eval{\mqty(\pdv{f}{x} & \pdv{f}{y})}_{(x,y)=(r\cos\theta,r\sin\theta)} \mqty(\pdv{x}{r} &\pdv{x}{\theta}\\\pdv{y}{r} &\pdv{y}{\theta})\\
+  &= \eval{\mqty(2x & 2y)}_{(x,y)=(r\cos\theta,r\sin\theta)}\mqty(\cos\theta & -r\sin\theta\\\sin\theta & r\cos\theta)\\
+  &= \mqty(2r\cos\theta &2r\sin\theta)\mqty(\cos\theta & -r\sin\theta\\\sin\theta & r\cos\theta)\\
+  &= \mqty(2r\cos^2\theta+2r\sin^2\theta & -2r^2\sin\theta\cos\theta+2r^2\sin\theta\cos\theta)\\
+  &= \mqty(2r & 0)
+\end{align*}
+
+Since \( \D(f\circ T)(r,\theta)=\mqty(\pdv{(f\circ T)}{r} &\pdv{(f\circ T)}{\theta}) \), by comparison with the above expression we see that
+\begin{align*}
+  \pdv{(f\circ T)}{r}&= 2r\\
+  \pdv{(f\circ T)}{\theta}&=0\fstop
+\end{align*}
+
+Of course, we still have the interpretation that the partial derivatives are the infinitesimal change of the function with respect to a single coordinate, holding all others fixed. So for instance, \( \pdv{(f\circ T)}{r} \) is the infinitesimal rate of change of \( f \) in the radial direction \( \vu{r} \). Which way does the radial direction point? If we perturb \( r \) slightly whilst holding the other coordinate, \( \theta \), fixed, the \( x \)-coordinate changes by an amount \( \pdv{x}{r} \), and the \( y \)-coordinate changes by an amount \( \pdv{y}{r} \), so a vector \( \va{r} \) pointing in the radial direction is given by
+\[ \va{r}=\pdv{x}{r}\vu{e}_1+\pdv{y}{r}\vu{e}_2=\cos\theta\vu{e}_1+\sin\theta\vu{e}_2\fstop \]
+
+To obtain a unit vector \( \vu{r} \), we then normalise the length of \( \va{r} \)
+\[ \vu{r}=\frac{\va{r}}{\norm{\va{r}}}=\cos\theta\vu{e}_1+\sin\theta\vu{e}_2\fstop \]
+
+Here, it so happened that \( \va{r} \) already had unit length. Notice that the direction of \( \vu{r} \) changes depending on where you are in \( \R^2 \), as opposed to the direction of the basis vectors \( \vu{e}_1 \) and \( \vu{e}_2 \), whose directions are the same everywhere. The unit vector \( \vu{r} \) always points radially away from the origin, as expected.
+
+\vspace{3mm}
+
+We can play a similar game to compute the unit vector \( \vu*{\theta} \)
+\[ \vu*{\theta}=\qty(\pdv{x}{\theta}\vu{e}_1+\pdv{y}{\theta}\vu{e}_2)\qty(\qty(\pdv{x}{\theta})^2+\qty(\pdv{y}{\theta})^2)^{-\flatfrac{1}{2}}=\frac{1}{r}\Big(-r\sin\theta\vu{e}_1+r\cos\theta\vu{e}_2\Big)=-\sin\theta\vu{e}_1+\cos\theta\vu{e}_2\fstop \]
+
+For some \( \vb{x}=(r\cos\theta,r\sin\theta)^T\in\R^2 \), \( \vu*{\theta} \) is tangential to a circle of radius \( r \) centred at the origin (pointing in a counterclockwise direction). This aligns with our intuition that \( \theta \) is an angular coordinate.
+
+\vspace{3mm}
+
+Now, notice that the partial derivative of \( f\circ T \) with respect to \( \theta \) vanishes, which reveals that \( f \) possesses \emph{angular symmetry}, i.e.\ the value of \( f \) is constant on any circle centred on the origin. Thus, the value of \( f \) at a point \( \vb{x} \) is only dependent on the distance \( r \) of \( \vb{x} \) from the origin. This is an instance of a property of a function that becomes much easier to notice when expressed in a more appropriate coordinate system.
+
+\vspace{3mm}
+
+We can also observe this by expressing \( f \) directly in plane polar coordinates
+\[ f\circ T(r,\theta)=f(r\cos\theta,r\sin\theta)=r^2\cos^2\theta+r^2\sin^2\theta=r^2\fstop \]
+
+Notice that \( f\circ T \) is independent of the angular coordinate \( \theta \), which is consistent with our previous observations.
+
+\vspace{3mm}
+
+When expressing functions in different coordinate systems, it is common to adopt the abuse of notation by dropping the coordinate transformation \( T \). That is, one would write \( f(r,\theta) \) to mean \( f\circ T(r,\theta) \). To express \( f \) in Cartesian coordinates, one would simply write \( f(x,y) \). So, the coordinates appearing as arguments of the function indicate indicate which particular coordinate system we are in. Here, the coordinate pair \( (r,\theta) \) is implicitly understood to be plane polar coordinates and \( (x,y) \) is understood to designate Cartesian coordinates. For the sake of clarity, we will \emph{not} adopt such conventions, but warn the reader that such (mal)practice is standard.
 \section{Mappings of Class \( \mathcal{C}^1\)}
 \label{sec:C1}
 \begin{definition}

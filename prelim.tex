@@ -1532,7 +1532,21 @@ A very useful fact is that limits of functions can be characterised in terms of 
    \end{enumerate}
  \end{proof}
 
- The norm defined on \( L(E,F) \) is often referred to as the `operator norm'. It is a natural norm induced by the norms on \( E \) and \( F \). The value of the operator norm will therefore depend on which norms we use for \( E \) and \( F \), but since \( L(E,F) \) is a finite dimensional vector space, every possible choice will yield strongly equivalent norms, and so it doesn't really matter too much which norms on \( E \) and \( F \) we pick for the purposes of doing analysis.
+ The norm defined on \( L(E,F) \) is often referred to as the `operator norm'. It is a natural norm induced by the norms on \( E \) and \( F \). A geometric interpretation for the norm of a linear map \( T \) is the maximum extent/scale factor that a unit vector is scaled by \( T \). So the value of \( \norm{Tx} \) never `blows up' as we approach any \( x_0\in E \) with finite length. This is a feature of the finite dimensional nature of the spaces we are working in.
+
+ \vspace{3mm}
+
+ Linear operators can be seen to satisfy the following boundedness property. Given any \( x\in E\backslash\qty{0} \), we have
+ \begin{align*}
+   \norm{Tx}&= \norm{x}\norm{T\hat{x}}\\
+   &\leq \norm{x}\sup_{\norm{y}=1}\norm{Ty}\\
+   &= \norm{T}\norm{x}
+ \end{align*}
+ where \( \hat{x}=\flatfrac{x}{\norm{x}} \) is the vector \( x \) normalised to have unit length. This inequality is also valid for \( x=0 \), in which case we have the trivial equality \( 0=0 \), and so the inequality holds for all \( x\in E \). In general, an operator satisfying this inequality is called a \emph{bounded operator}. The name arises from the fact that a bounded operator maps bounded sets to bounded sets. In the finite dimensional case, every linear operator is bounded.
+
+ \vspace{3mm}
+ 
+ The value of the operator norm will depend on which norms we use for \( E \) and \( F \), but since \( L(E,F) \) is a finite dimensional vector space, every possible choice will yield strongly equivalent norms, and so it doesn't really matter too much which norms on \( E \) and \( F \) we pick for the purposes of doing analysis.
 
  \vspace{3mm}
 
@@ -1707,9 +1721,9 @@ A very useful fact is that limits of functions can be characterised in terms of 
  \end{proposition}
  \begin{proof}
    Suppose \( T \) is injective. Since \( T \) is linear, this implies that \( \ker T=\qty{0} \), so that \( \dim\ker T=0 \). Then by the Rank Theorem, we have that
-   \[ \dim\mathcal{R}(T)=\dim V=n=\dim W\fstop \]
+   \[ \dim\mathcal{R}(T)=\dim E=n=\dim F\fstop \]
 
-   However, since \( \mathcal{R}(T)\subseteq W \), we must have that \( \mathcal{R}(T)=W \), as the only \( n \)-dimensional subspace of an \( n \)-dimensional vector space \( W \) is \( W \) itself. This shows that \( T \) is surjective, and hence a bijection.
+   However, since \( \mathcal{R}(T)\subseteq F \), we must have that \( \mathcal{R}(T)=F \), as the only \( n \)-dimensional subspace of an \( n \)-dimensional vector space \( F \) is \( F \) itself. This shows that \( T \) is surjective, and hence a bijection.
  \end{proof}
 
  This result will be useful to establish when a linear map is \emph{invertible} (recall that a function is invertible if and only if it is bijective). For instance, this will pop up when we come to discuss the \emph{Inverse Function Theorem}, which is concerned with the inverse of a differentiable function.
