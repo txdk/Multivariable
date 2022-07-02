@@ -22,22 +22,22 @@ We'll now fly through some standard linear algebra concepts. Let \( V \) be a ve
 
 \vspace{3mm}
 
-A mapping \( f:V\to W \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e.\ for all \( x,y\in V \) we have \( f(x+y)=f(x)+f(y) \) and for all \( a\in\R \) we have \( f(ax)=af(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same algebraic properties.
+A mapping \( T:V\to W \) between vector spaces that preserves the vector space structure is called a \textbf{linear map} or a \textbf{vector space homomorphism}, i.e.\ for all \( x,y\in V \) we have \( T(x+y)=T(x)+T(y) \) and for all \( a\in\R \) we have \( T(ax)=aT(x) \). A bijective homomorphism is called an \textbf{isomorphism}. Two vector spaces are \emph{isomorphic} is there exists an isomorphism between them. Isomorphic vector spaces are essentially `the same' for all intents and purposes; vector spaces that are isomorphic share all the same algebraic properties.
 
 \vspace{3mm}
 
-Let \( f:V\to W \) be a vector space homomorphism. The set \( \ker f=\qty{x\in V\mid f(x)=0} \) is called the \textbf{kernel} of \( f \), and the set \( \mathcal{R}(f)=\qty{f(x)\mid x\in V} \) is called the \textbf{range} of \( f \). It can be easily shown that \( \ker f \) is a subspace of \( V \) and \( \mathcal{R}(f) \) is a subspace of \( W \). Another useful fact worth noting is that a linear map \( f \) is injective if and only if its kernel is trivial (i.e.\ \( \ker f=\qty{0} \)). Hence, \( f \) is an isomorphism if and only if \( \ker f=\qty{0} \) and \( \mathcal{R}(f)=W \).
+Let \( T:V\to W \) be a vector space homomorphism. The set \( \ker T=\qty{x\in V\mid T(x)=0} \) is called the \textbf{kernel} or \textbf{null space} of \( T \), and the set \( \mathcal{R}(T)=\qty{T(x)\mid x\in V} \) is called the \textbf{range} of \( T \). It can be easily shown that \( \ker T \) is a subspace of \( V \) and \( \mathcal{R}(T) \) is a subspace of \( W \). Another useful fact worth noting is that a linear map \( T \) is injective if and only if its kernel is trivial, i.e.\ \( \ker T=\qty{0} \) (see exercises). Hence, \( T \) is an isomorphism if and only if \( \ker T=\qty{0} \) and \( \mathcal{R}(T)=W \).
 
 \vspace{3mm}
 
-A particularly important way that we use to classify vector spaces is the notion of dimension, which intuitively speaking is the `number of degrees of freedom' it possesses. We will proceed to formalise this below. To find out how many degrees of freedom a vector space has, we essentially need to find the minimum number of fixed vectors required to write any arbitrary vector from the space as some weighted sum of these fixed vectors. We call such weighted sums of vectors \textbf{linear combinations}; a linear combination of the vectors in the subset \( \qty{v_1,\dots,v_n} \) is a sum \( \sum_{i=1}^nc_iv_i \) for some constants \( c_i\in\R \). The \textbf{span} of a subset \( \qty{v_1,\dots,v_n} \) is the set of all possible linear combinations of vectors in the set. Hence, in order to describe the entire vector space in terms of sums of vectors from one of its subsets \( \qty{v_1,\dots,v_n} \), we require that \( V=\text{span}\qty{v_1,\dots,v_n} \).
+A particularly important way that we use to classify vector spaces is the notion of dimension, which intuitively speaking is the `number of degrees of freedom' it possesses. We will proceed to formalise this below. To find out how many degrees of freedom a vector space has, we essentially need to find the minimum number of fixed vectors required to write any arbitrary vector from the space as some weighted sum of these fixed vectors. We call such weighted sums of vectors \textbf{linear combinations}; a linear combination of the vectors \( v_1,\dots,v_n \) is a sum \( \sum_{i=1}^nc_iv_i \) for some constants \( c_i\in\R \). The \textbf{span} of a subset \( A \) of some vector space \( V \) is the set of all possible linear combinations of finite subsets of vectors of \( A \). Hence, in order to describe the entire vector space in terms of sums of vectors from one of its subsets \( A \), we require that \( V=\text{span}A \).
 
 \vspace{3mm}
 
-However, even if we are able to identify a finite subset \( \qty{v_1,\dots,v_n} \) of \( V \) such that \( V=\text{span}\qty{v_1,\dots,v_n} \), it is possible that we are able to find a smaller subset that does the trick, which suggests that the original subset may contain redundant information. The way we describe this redundancy is through the concept of linear dependence:
+However, even if we are able to identify a subset \( A\subset V \) such that \( V=\text{span}\,A \), it is possible that we are able to find a smaller subset that does the trick, which suggests that the original subset may contain redundant information. The way we describe this redundancy is through the concept of linear dependence:
 
 \begin{definition}
-  Let \( V \) be a vector space. A subset \( A\subset V \) is \textbf{linearly independent} if for every finite subset \( \qty{v_1,\dots, v_n} \) of \( A \), we have that \(a_1v_1+\dots +a_nv_n=0  \) for scalars \( a_1,\dots, a_n\in\mathbb{K} \) implies that \( a_1=\dots =a_n=0 \).
+  Let \( V \) be a vector space. A subset \( A\subset V \) is \textbf{linearly independent} if for every finite subset \( \qty{v_1,\dots, v_n} \) of \( A \), we have that \(a_1v_1+\dots +a_nv_n=0  \) for scalars \( a_1,\dots, a_n\in\R \) implies that \( a_1=\dots =a_n=0 \).
 
   \vspace{3mm}
 
@@ -50,73 +50,72 @@ At last, we arrive at our desired criteria for a subset of a vector space to sum
   Let \( V \) be a vector space. A \textbf{basis} for \( V \) is a linearly independent subset \( A\subset V \) such that \( V=\text{span }A \).
 \end{definition}
 
-\emph{`Fun' remark:} The definition we provide above is that of a \emph{Hamel} basis. There are other types of bases. However, this distinction is not relevant for us in the finite dimensional setting, which we will be exclusively working in.
+\emph{`Fun' remark:} The definition we provide above is that of a \emph{Hamel} basis. There are other types of bases. However, this distinction is not relevant for us in the finite dimensional setting, which we will be exclusively working in. The problem arises in infinite dimensional vector spaces. While the Axiom of Choice guarantees the existence of a Hamel basis for an arbitrary vector space, the basis may be uncountable. Seeing that we use bases to describe a vector space in terms of a reduced amount of vectors, having an uncountable basis means that there is still a `large amount of information' needed to describe the vector space. This will not be a problem for us, however.
 
 \vspace{3mm}
 
-Given a basis \( \qty{v_1,\dots,v_n} \) for a vector space \( V \), the representation of a vector \( v\in V \) in that basis is unique. That is, if \( v=a_1v_1+\dots+a_nv_n \) and \( v=b_1v_1+\dots+b_nv_n \) for constants \( a_i,b_i\in\R \) for \( i=1,\dots, n \), we have that \( a_i=b_i \) for each \( i \). This fact follows from the linear independence of the basis vectors.
+So, we would like to say that the number of elements in a basis quantifies the number of degrees of freedom that the vector space possesses. However, one concern that arises is whether in our definition above that there is a possibility that there are bases with different numbers of elements. Fortunately, the answer is no, as we will show shortly. Before we proceed with the proof of this particular fact, we will first consider an intermediate result that will greatly simplify the later proof.
+\begin{lemma}
+  \label{thm:replace}
+  (Replacement Lemma) Let \( V \) be a vector space. Suppose \( A \) is a linearly independent subset of \( V \) consisting of \( m \) elements and suppose \( B \) is a subset of \( V \) consisting of \( n \) elements such that \( \text{span}\, B=V \). Then
+  \begin{enumerate}[label=(\alph*)]
+  \item There exists a proper subset \( B'\subset B \) consisting of \( n-m \) elements such that \( \text{span}(A\cup B')=V \).
+  \item \( m\leq n \).
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Let \( A=\qty{x_1,\dots,x_m} \) and \( B=\qty{v_1,\dots,v_n} \). We will prove that for each \( k\in\qty{0,\dots,m} \), we have that \( k\leq n \) and that the set \( A_k\cup B'_k \) spans \( V \) where
+  \[ A_k=\qty{x_1,\dots,x_k} \]
+  and
+  \[ B_k'=B\backslash\qty{v_1,\dots,v_k} \]
+  after possibly some relabelling of the vectors \( v_i \).
 
-\vspace{3mm}
+  \vspace{3mm}
 
-So, we would like to say that the number of elements in a basis quantifies the number of degrees of freedom that the vector space possesses. However, one concern that arises is whether in our definition above that there is a possibility that there are bases with different numbers of elements. Fortunately, the answer is no, as we will now show:
+  First, consider the case \( k=0 \). So \( A_0=\emptyset \) and \( B_0'=B\backslash\emptyset=B \). We thus have that \( \text{span}(A_0\cup B_0')=\text{span}\,B=V \) and \( n\geq 0=k \). This proves the claim for \( k=0 \).
+
+  \vspace{3mm}
+
+  Now suppose that the statement holds for some \( k<m \). We will show that the statement must also hold for the \( k+1 \) case. By hypothesis, we have that \( k\leq n \) and
+  \[ \text{span}(A_k\cup B_k')=\text{span}\qty{x_1,\dots,x_k,v_{k+1},\dots,v_n}=V\fstop \]
+
+  Assume for a contradiction that \( k+1>n \). Combined with the fact that \( k\leq n \), we must have that \( k=n \), so that \( B_k'=\emptyset \). Hence,
+  \[ \text{span}(A_k\cup B_k')=\text{span}\,A_k=V\fstop \]
+
+  This implies that the vector \( x_{k+1}\in V \) can be expressed as a nonzero linear combination of the vectors in \( A_k \). This would, however, contradict the linear independence of the set \( A_{k+1} \). We must therefore have that \( k+1\leq n \).
+
+  \vspace{3mm}
+
+  We will now explicitly express \( x_{k+1} \) as a linear combination of the vectors in the set \( A_k\cup B_k' \), noting that now \( B_k'\neq\emptyset \)
+  \[ x_{k+1}=a_{1}x_1+\dots a_{k}x_k+a_{k+1}v_{k+1}+\dots+a_{n}v_n\fstop \]
+
+  Since \( x_{k+1}\neq 0 \), then not all of the coefficients \( a_i \) are zero. In fact, we must have that \( a_i\neq 0 \) for some \( i\geq k+1 \) (if this were not the case, it would follow that \( x_{k+1} \) is a linear combination of the vectors \( x_1,\dots, x_k \), which would contradict the linear independence of the set \( A_{k+1} \)). Without loss of generality, we can assume that \( a_{k+1}\neq 0 \). Hence, we can write
+  \[ v_{k+1}=\frac{1}{a_{k+1}}\qty(x_{k+1}-a_{1}x_1-\dots -a_{k}x_k-a_{k+2}v_{k+2}-\dots a_{n}v_n)\fstop \]
+
+  We'll now demonstrate that the set \( A_{k+1}\cup B_{k+1}' \) spans \( V \). Let \( y\in V \). Writing \( y \) in terms of the spanning set \( A_k\cup B_k'=\qty{x_1,\dots, x_k, v_{k+1},\dots v_n} \) yields
+  \[ y=c_1x_1+\dots+c_kx_k+c_{k+1}v_{k+1}+\dots+c_nv_n \]
+  for some constants \( c_1,\dots,c_n\in\R \). Substituting in our expression for \( v_{k+1} \) gives
+  \[ y=\qty(c_1-\frac{a_{1}}{a_{k+1}})x_1+\dots+ \qty(c_k-\frac{a_{k}}{a_{k+1}})x_k+ \frac{c_{k+1}}{a_{k+1}}x_{k+1}+\qty(c_{k+2}-\frac{a_{k+2}}{a_{k+1}})v_{k+2}+\dots+\qty(c_n-\frac{a_{n}}{a_{k+1}})v_n\fstop \]
+  
+  Hence \( y\in\text{span}\qty{x_1,\dots,x_{k+1},v_{k+2},\dots,v_n}=\text{span}(A_{k+1}\cup B_{k+1}') \). Since the choice of \( y\in V \) was arbitrary, it follows that \( V=\text{span}(A_{k+1}\cup B_{k+1}') \). This completes the proof of the claim for the \( k+1 \) case.
+
+  \vspace{3mm}
+
+  Thus, by induction on \( k \), the claim is proven for all \( k\in\qty{0,\dots m} \). The case \( k=m \) is exactly the statement of the lemma, so we are done.
+\end{proof}
+
+The Replacement Lemma will serve as a nice stepping stone towards an easy proof of the following crucial fact about bases:
+
 \begin{theorem}
   \label{thm:dim}
   Let \( V \) be a vector space. Then every basis of \( V \) has the same number of elements, or are all infinite.
 \end{theorem}
 \begin{proof}
-  Suppose \( \qty{v_1,\dots ,v_n} \) is a basis for \( V \) and suppose for a contradiction that \( \qty{x_1,\dots, x_{n+1}} \) is a linearly independent subset of \( V \). We can write \( x_1 \) as a linear combination of the basis elements
-  \[ x_1=a_{11}v_1+\dots a_{1n}v_n \]
-  where \( a_{1i}\in\R \) for all \( i=1,\dots, n \). Since \(\qty{x_1,\dots, x_{n+1}}  \) is a linearly independent set, then \( x_1\neq 0 \), so that not all of the \( a_{1i} \)'s are zero. Without loss of generality, suppose that \( a_{11}\neq 0 \) (else swap its label with one of the \( a_{1i} \)'s that is nonzero, and also exchange the indices of the corresponding basis vectors accordingly). Then we can rearrange the above expression to solve for \( v_1 \)
-  \[ v_1=\frac{1}{a_{11}}\qty(x_1-a_{12}v_2-\dots-a_{1n}v_n)\fstop \]
-  
-  It follows that the set \( \qty{x_1,v_2,\dots v_n} \) is a basis for \( V \). To see this, let \( y\in V \). Then \( y=c_1v_1+\dots +c_nv_n \) for constants \( c_1,\dots,c_n\in\R \) (since the \( v_i \)'s form a basis for \( V \)). Thus, we have that
-  \[ y=\frac{c_1}{a_{11}}x_1+\qty(c_2-\frac{a_{12}}{a_{11}})v_2+\dots+\qty(c_n-\frac{a_{1n}}{a_{11}})v_n\fstop \]
-  
-  So \( y \) can be written as a linear combination of the vectors \( x_1,v_2,\dots,v_n \), i.e.\ \( y\in\text{span}\qty{x_1,v_2,\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, we have that \( V=\text{span}\qty{x_1,v_2,\dots,v_n} \). Linear independence of this set follows from the linear independence of the original basis. Indeed, consider the following vector equation
-  \[ k_1x_1+k_2v_2+\dots+k_nv_n=0 \]
-  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_1 \) in terms of the original basis gives
-  \begin{align*}
-    0&= k_1\qty(a_{11}v_1+\dots a_{1n}v_n)+k_2v_2+\dots+k_nv_n\\
-    &= k_1a_{11}v_1+\qty(k_1a_{12}+k_2)v_2+\dots+\qty(k_1a_{1n}+k_n)v_n\fstop
-  \end{align*}
-  
-  Now, by linear independence of \( \qty{v_1,\dots,v_n} \), all of the coefficients in the above equation must vanish. In particular, we see that \( k_1a_{11}=0 \), which implies that \( k_1=0 \) since \( a_{11}\neq 0 \) by assumption. Then, since \( k_1a_{1i}+k_i=0 \) for all \( i=2,\dots, n \), we must have that \( k_i=0 \) as well. Hence, \( \qty{x_1,v_2,\dots, v_n} \) is linearly independent, and our claim is proven.
+  Let \( B_1,B_2\subset V \) be bases for \( V \). Suppose that \( B_1 \) has infinitely many elements. Assume for a contradiction that \( B_2 \) has finitely many elements, say \( n\in\N \). Take any subset \( A_1\subset B_1 \) consisting of \( n \) vectors. Since \( A_1 \) is linearly independent and \( \text{span}\,B_2=V \), then by part (a) of the Replacement Lemma, we have that \( \text{span}\,A_1=V \). Then any \( x\in B_1\backslash A_1 \) can be written as a linear combination of the vectors in \( A_1 \). This implies that the set \( A_1\cup\qty{x} \) is linearly dependent, which contradicts the fact that it is contained in the linearly independent set \( B_1 \). We therefore must have that \( B_2 \) is also an infinite set. This means that if \( V \) has at least one basis with infinitely many elements, then every basis of \( V \) also has infinitely many elements.
 
   \vspace{3mm}
 
-  What have we achieved? We have just replaced one of the basis vectors (namely \( v_1 \)) with one of the vectors from the linearly independent set (namely \( x_1 \)), and after the dust cleared we still have a basis for \( V \). We will continue this process, gradually replacing all of the \( v_i \)'s with an \( x_i \) until we have a basis consisting of only \( x_i \)'s. We will prove that this process will work via induction.
-
-  \vspace{3mm}
-
-  Suppose we have replaced \( j \) of the basis vectors, and we have that \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) is a basis for \( V \) (after possibly some relabelling of the vectors). We will show that we will obtain a basis by replacing one of the remaining \( v_i \)'s with \( x_{j+1} \). The argument will follow quite similarly to our first replacement process. Write \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \)
-  \[ x_{j+1}=a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n\fstop \]
-  
-  Since \( x_{j+1}\neq 0 \), then not all of the coefficients \( a_{j+1,i} \) are zero. In fact, we must have that \( a_{j+1,i}\neq 0 \) for some \( i\geq j+1 \) (if this were not the case, then it follows that \( x_{j+1} \) is a linear combination of the vectors \( x_1,\dots, x_j \), which contradicts the linear independence of the \( x_i \)'s). Without loss of generality, we'll take \( a_{j+1,j+1}\neq 0 \). Hence, we can write
-  \[ v_{j+1}=\frac{1}{a_{j+1,j+1}}\qty(x_{j+1}-a_{j+1,1}x_1-\dots -a_{j+1,j}x_j-a_{j+1,j+2}v_{j+2}-\dots a_{j+1,n}v_n)\fstop \]
-  
-  We'll now demonstrate that \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \) is a basis for \( V \). Let \( y\in V \). Writing \( y \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields
-  \[ y=c_1x_1+\dots+c_jx_j+c_{j+1}v_{j+1}+\dots+c_nv_n \]
-  for some constants \( c_1,\dots,c_n\in\R \). Substituting in our expression for \( v_{j+1} \) gives
-  \[ y=\qty(c_1-\frac{a_{j+1,1}}{a_{j+1,j+1}})x_1+\dots\qty(c_j-\frac{a_{j+1,j}}{a_{j+1,j+1}})x_j+\frac{c_{j+1}}{a_{j+1,j+1}}x_{j+1}+\qty(c_{j+2}-\frac{a_{j+1,j+2}}{a_{j+1,j+1}})v_{j+2}+\dots+\qty(c_n-\frac{a_{j+1,n}}{a_{j+1,j+1}})v_n\fstop \]
-  
-  Hence \( y\in\text{span}\qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \). Since the choice of \( y\in V \) was arbitrary, it follows that \( V=\text{span}\qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \).
-
-  \vspace{3mm}
-
-  Now we'll demonstrate linear independence. Consider the following vector equation:
-  \[ k_1x_1+\dots+k_{j+1}x_{j+1}+k_{j+2}v_{j+2}+\dots+k_nv_n=0 \]
-  for constants \( k_1,\dots,k_n\in\R \). Expanding \( x_{j+1} \) in terms of the basis \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \) yields
-  \begin{align*}
-    0&= k_1x_1+\dots+k_{j+1}\qty(a_{j+1,1}x_1+\dots a_{j+1,j}x_j+a_{j+1,j+1}v_{j+1}+\dots+a_{j+1,n}v_n)+k_{j+2}v_{j+2}+\dots+k_nv_n\\
-    &= \qty(k_1+k_{j+1}a_{j+1,1})x_1+\dots+\qty(k_j+k_{j+1}a_{j+1,j})x_j+k_{j+1}a_{j+1,j+1}v_{j+1}+\qty(k_{j+2}+k_{j+1}a_{j+1,j+2})v_{j+2}+\\
-    &\hspace{6mm}\dots+\qty(k_n+k_{j+1}a_{j+1,n})v_n\fstop
-  \end{align*}
-
-  By linear independence of \( \qty{x_1,\dots, x_j, v_{j+1},\dots v_n} \), all of the above coefficients must vanish. In particular, consider the \( j+1 \) coefficient: \( k_{j+1}a_{j+1,j+1}=0 \). From this, we conclude that \( k_{j+1}=0 \) since \( a_{j+1,j+1}\neq 0 \), and hence looking at the remaining coefficients we must have \( k_i=0 \) for all \( i=1,\dots, n \), thus demonstrating the linear independence of \( \qty{x_1,\dots,x_{j+1},v_{j+2},\dots,v_n} \), and hence proving that it is a basis for \( V \).
-
-  \vspace{3mm}
-
-  By induction on the finite set \( \qty{1,\dots,n} \), we can carry out our replacement procedure and end up with the fact that \( \qty{x_1,\dots,x_n} \) forms a basis for \( V \). Now, since \( x_{n+1}\in V \), we can write it as a nonzero linear combination of the basis vectors \( x_1,\dots,x_n \). However, this contradicts the linear independence of the set \( \qty{x_1,\dots,x_{n+1}} \). We conclude that no linearly independent set can have any more vectors than any basis of \( V \), if there exists a finite basis for \( V \). Since bases are linearly independent sets, then no finite basis can have any more vectors than any other basis. So if there exists a finite basis for \( V \), then every basis for \( V \) must also be finite and have the same number of elements. The only other possibility is that every basis of \( V \) contains infinitely many elements.
+  Now suppose that both \( B_1 \) and \( B_2 \) are finite bases for \( V \) with \( m \) and \( n \) elements respectively. Considering \( B_1 \) as a linearly independent set and \( B_2 \) as a spanning set for \( V \), we obtain from part (b) of the Replacement Lemma that \( m\leq n \). Reciprocally, considering \( B_2 \) as the linearly independent set and \( B_1 \) as the spanning set, we obtain \( n\leq m \). This shows that \( m=n \), so that every finite basis of \( V \) have the same number of elements.
 \end{proof}
 
 This justifies the following definition:
@@ -128,12 +127,39 @@ We will only consider finite dimensional vector spaces, that is, vector spaces i
 
 \vspace{3mm}
 
+Given a basis \( \qty{v_1,\dots,v_n} \) for a finite dimensional vector space \( V \), the representation of a vector \( v\in V \) in this particular basis is \emph{unique}. That is, if \( v=a_1v_1+\dots+a_nv_n \) and \( v=b_1v_1+\dots+b_nv_n \) for constants \( a_i,b_i\in\R \) for \( i=1,\dots, n \), we have that \( a_i=b_i \) for each \( i \). To see this, take the difference of the two expressions
+\[ 0=(a_1-b_1)v_1+\dots+(a_n-b_n)v_n\fstop \]
+
+By linear independence of the basis vectors, we conclude that \( a_i-b_i=0 \) for each \( i \), and the result follows.
+
+\vspace{3mm}
+
 One key advantage of working in finite dimensional spaces is that things all turn out to be significantly simpler. One easy consequence of the previous theorem is that in an \( n \)-dimensional vector space, if we have a linearly independent set consisting of \( n \) elements, it must actually span the entire space and is thus automatically a basis.
 \begin{corollary}
   Let \( V \) be an \( n \)-dimensional vector space and let \( \qty{v_1,\dots,v_n} \) be a linearly independent set. Then \( \qty{v_1,\dots,v_n} \) is a basis for \( V \).
 \end{corollary}
 \begin{proof}
-  Suppose for a contradiction that \( \text{span}\qty{v_1,\dots,v_n}\neq V \). So there exists a \( x\in V \) such that \( x \) is not a linear combination of the \( v_i \)'s. Hence, \( \qty{v_1,\dots,v_n,x} \) is a linearly independent set. So we have a linearly independent set consisting of \( n+1 \) elements in an \( n \)-dimensional space. This is impossible, since every basis of \( V \) must contain \( n \) elements and no linearly independent set can have more elements than any basis of \( V \). We must conclude that \( V=\text{span}\qty{v_1,\dots,v_n} \), and hence \( \qty{v_1,\dots,v_n} \) is a basis for \( V \).
+  Suppose for a contradiction that \( \text{span}\qty{v_1,\dots,v_n}\neq V \). So there exists a \( x\in V \) such that \( x \) is not a linear combination of the \( v_i \)'s. Hence, \( \qty{v_1,\dots,v_n,x} \) is a linearly independent set. So we have a linearly independent set consisting of \( n+1 \) elements in an \( n \)-dimensional space. This is impossible, since every basis of \( V \) must contain \( n \) elements by \Cref{thm:dim} and no linearly independent set can have more elements than any basis of \( V \) by the Replacement Lemma. We must conclude that \( V=\text{span}\qty{v_1,\dots,v_n} \), and hence \( \qty{v_1,\dots,v_n} \) is a basis for \( V \).
+\end{proof}
+
+Similarly, in an \( n \)-dimensional vector space, if we have a subset of \( V \) consisting of \( n \) elements that spans \( V \), it must be linearly independent and hence a basis. The idea is that if it were linearly dependent, then the set contains `redundant' information that can be removed without affecting the span. However, this would produce a spanning set with fewer elements than the dimension of the space - an impossibility.
+
+\begin{corollary}
+  \label{thm:span-basis}
+  Let \( V \) be an \( n \)-dimensional vector space and suppose \( \qty{v_1,\dots,v_n}\subset V \) spans \( V \). Then \( \qty{v_1,\dots,v_n} \) is a basis for \( V \).
+\end{corollary}
+\begin{proof}
+  Suppose for a contradiction that \( \qty{v_1,\dots,v_n} \) is a linearly dependent set. Then there exist constants \( a_1,\dots,a_n\in\R \) not all zero such that
+  \[ a_1v_1+\dots+a_nv_n=0\fstop \]
+
+  Without loss of generality, suppose that \( a_n\neq 0 \), so that
+  \[ v_n=-\frac{1}{a_n}\qty(a_1v_1+\dots+a_{n-1}v_{n-1})\fstop \]
+
+  Thus, \( v_n\in\text{span}\qty{v_1,\dots,v_{n-1}} \) and hence
+  \[ \text{span}\qty{v_1,\dots,v_{n-1}}=\text{span}\qty{v_1,\dots,v_n}=V\]
+  i.e.\ we have found a spanning set for \( V \) consisting of \( n-1 \) elements.
+
+  Let \( B \) be a basis for \( V \). Since \( \dim V=n \), then \( B \) is a linearly independent set consisting of \( n \) elements. Thus, by part (b) of the Replacement Lemma, we have that \( n\leq n-1 \), which is absurd. Thus, we must have that \( \qty{v_1,\dots,v_n} \) is linearly independent, and hence a basis for \( V \).
 \end{proof}
 
 Another simplification in the finite dimensional setting is that there actually aren't `that many' different types of finite dimensional vector spaces for each dimension \( n\in\N \) to study; we can easily completely classify every real finite dimensional vector space up to isomorphism - even better: they are all structurally identical to \( \R^n \)!
@@ -223,6 +249,30 @@ In summary, we have proven the following very important result about finite dime
   Let \( V \) and \( W \) be finite dimensional vector spaces. Then \( V \) and \( W \) are isomorphic if and only if \( \dim V=\dim W \).
 \end{theorem}
 
+\subsection*{Exercises}
+\paragraph{1.} Let \( T:V\to W \) be a linear map between vector spaces.
+\begin{enumerate}[label=(\alph*)]
+\item Show that \( \ker T \) is a subspace of \( V \).
+\item Show that \( \mathcal{R}(T) \) is a subspace of \( W \).
+  \item Show that \( T \) is injective if and only if \( \ker T=\qty{0} \).
+
+  \vspace{1mm}
+
+  \emph{Hint:} First show that \( T(x)=T(y) \) if and only if \( T(x-y)=0 \), making use of the linearity of \( T \).
+\end{enumerate}
+
+\paragraph{2.} Consider the set \( P\subset\R^3 \) defined by
+\[ P=\qty{(x,y,z)^T\in\R^3\mid 2x+y-z=0}\fstop \]
+\begin{enumerate}[label=(\alph*)]
+\item Show that \( P \) is a subspace of \( \R^3 \).
+\item Find a basis for \( P \), and hence state \( \dim P \).
+\end{enumerate}
+
+\paragraph{3.} Determine whether the following set of vectors is a linearly independent subset of \( \R^4 \)
+\[ \qty{\mqty(1\\0\\2\\-1), \mqty(4\\-1\\-6\\1), \mqty(3\\-4\\1\\1),\mqty(2\\3\\-5\\-1)}\fstop \]
+
+\newpage
+
 \section{Euclidean Space}
 \label{sec:EuclidSpace}
 Now that we have formulated all of the algebraic structure of the multidimensional spaces we will be working in, we will need to endow some further structure onto these spaces in order to do calculus. Of great importance is the ability to measure distances between points/vectors in our space. At the heart of analysis/calculus is the notion of \emph{limits} and \emph{convergence}. We will also frequently want to find bounds and estimates for quantities that may very well be vector-valued. So what we ultimately want is to prescribe some notion of `length' for vectors, which will in turn naturally define a distance between two vectors (simply take the length of the difference of the two vectors). This is captured by the concept of a vector \emph{norm}.
@@ -249,14 +299,14 @@ Another useful concept from coordinate geometry is the notion of angles. This wi
   A vector space together with an inner product is called an \textbf{inner product space}.
 \end{definition}
 
-By symmetry of the inner product, we can deduce from the definition that \( \ev{x,ay}=a\ev{x,y} \) and \( \ev{x,y+z}=\ev{x,z}+\ev{y,z} \). Hence, an inner product on a vector space is simply a bilinear function (i.e.\ it becomes a linear function of one variable if we fix the value of the other input variable).
+By symmetry of the inner product, we can deduce from the definition that \( \ev{x,ay}=a\ev{x,y} \) and \( \ev{x,y+z}=\ev{x,z}+\ev{y,z} \). Hence, an inner product on a vector space is a bilinear function (i.e.\ it becomes a linear function of one variable if we fix the value of the other input variable).
 
 \vspace{3mm}
 
-You are likely already quite familiar with an inner product on \( \R^n \) from coordinate geometry, more commonly known as the dot product or scalar product. Given elements \( x=(x_1,\dots,x_n)^T\in\R^n \) and \( y=(y_1,\dots,y_n)^T\in\R^n \), we define the dot product as:
+You are likely already quite familiar with an inner product on \( \R^n \) from coordinate geometry, more commonly known as the dot product or scalar product. Given elements \( x=(x_1,\dots,x_n)^T\in\R^n \) and \( y=(y_1,\dots,y_n)^T\in\R^n \), we define the dot product as
 \[ \ev{x,y}=\sum_{i=1}^nx_iy_i\fstop \]
 
-The notation \( x\cdot y \) is more commonly used instead of \( \ev{x,y} \) in this context. It is not too hard to see that the dot product is indeed an inner product on \( \R^n \).
+The notation \( x\cdot y \) is more commonly used instead of \( \ev{x,y} \) in this context. It is not too hard to see that the dot product is indeed an inner product on \( \R^n \). The dot product of two vectors has the geometric interpretation as a value that quantifies how much the vectors point in the same direction: its magnitude is maximised when they are coincident and minimised (in fact, zero) when they are perpendicular.
 
 \vspace{3mm}
 
@@ -336,7 +386,7 @@ We mentioned earlier that once we had a norm on a vector space, this was suffici
 
   \vspace{3mm}
 
-  \emph{Symmetry} Let \( x,y\in V \). Then \( d(x,y)=\norm{x-y}=\norm{-(y-x)}=\abs{-1}\norm{y-x}=d(y,x) \), which follows from the homogeneity of the norm.
+  \emph{Symmetry:} Let \( x,y\in V \). Then \( d(x,y)=\norm{x-y}=\norm{-(y-x)}=\abs{-1}\norm{y-x}=d(y,x) \), which follows from the homogeneity of the norm.
 
   \vspace{3mm}
 
@@ -709,7 +759,7 @@ The property that a vector space is naturally isomorphic to its second dual is r
 Naturally, we can keep playing the game of successively finding the dual space of a dual space, but the results in this section show that this is not necessary. It turns out in the finite dimensional setting that a vector space and its dual are of equal dimension, and are isomorphic. So the study of the dual space of a finite dimensional vector space reduces to the study of the vector space itself.
 
 \section{Topology of Euclidean Space}
-So far, we have mostly concerned ourselves with the algebraic properties of Euclidean space. We will now consider the structure of Euclidean space that makes it amiable to do calculus on. Recall that the Euclidean inner product induces a vector norm, which in turn induces a metric. To add to this already lengthy chain of implications, the metric induces a \emph{topology} on our Euclidean space. A topological space is the most general setting in which one can define the notion of continuity, which is certainly something we would like to have in a calculus setting!
+So far, we have mostly concerned ourselves with the algebraic properties of Euclidean space. We will now consider the structure of Euclidean space that makes it amenable to do calculus on. Recall that the Euclidean inner product induces a vector norm, which in turn induces a metric. To add to this already lengthy chain of implications, the metric induces a \emph{topology} on our Euclidean space. A topological space is the most general setting in which one can define the notion of continuity, which is certainly something we would like to have in a calculus setting!
 
 \vspace{3mm}
 
@@ -759,7 +809,7 @@ Now we address the age-old question of: `once we have a bunch of open sets, how 
   (b) Let \( U_1,\dots,U_k \) be open, and consider the set \( U=U_1\cap\dots\cap U_k \). Let \( x\in U \). For each \( i=1,\dots,k \), \( x\in U_i \), so there exists an \( r_i>0 \) such that \( B(x,r_i)\subset U_i \). Choose \( r=\min\qty{r_1,\dots,r_k}>0 \). Then \( B(x,r)\subset U_i \) for all \( i=1,\dots, k \). Thus, \( B(x,r)\subset U \), and hence \( U \) is open.
 \end{proof}
 
-So arbitrary unions of open sets are open, and \emph{finite} intersections of open sets are open. Infinite intersections of open sets are not necessarily open. For example, consider \( I_n=\qty(-\frac{1}{n},\frac{1}{n}) \), which is an open set in \( \R \) for each \( n\in\N \). But:
+So arbitrary unions of open sets are open, and \emph{finite} intersections of open sets are open. Infinite intersections of open sets are not necessarily open. For example, consider \( I_n=\qty(-\frac{1}{n},\frac{1}{n}) \), which is an open set in \( \R \) for each \( n\in\N \). But
 \[ \bigcap_{n=1}^\infty I_n=\qty{0} \]
 which is \emph{not} open in \( \R \).
 
@@ -1059,6 +1109,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
 
  Let \( E \) be a Euclidean \( n \)-space and \( F \) a Euclidean \( m \)-space. Let \( \overline{e}_1,\dots,\overline{e}_m \) be a basis for \( F \). A multivariable function \( f:E\to F \) can be studied in terms of its real-valued component functions with respect to the basis in \( F \): \( f(x)=f_1(x)\overline{e}_1+\dots+f_m(x)\overline{e}_m \). One nice fact is that \( f \) is continuous if and only if each of the component functions \( f_i:E\to\R \), \( i=1,\dots, m \), are continuous, so that we can simply deal with real-valued functions.
  \begin{proposition}
+   \label{thm:comp-cont}
    A function \( f:E\to F \) is continuous at \( x_0\in E \) if and only if all of its component functions \( f_i:E\to\R \) are continuous at \( x_0 \).
  \end{proposition}
  \begin{proof}
@@ -1659,7 +1710,7 @@ A very useful fact is that limits of functions can be characterised in terms of 
    Let \( V \) be a finite dimensional vector space, and let \( W \) be a subspace of \( V \). Then \( \dim V/W=\dim V-\dim W \).
  \end{proposition}
  \begin{proof}
-   Suppose \( \dim V=n \), \( \dim W=k\leq n \), \( \qty{w_1,\dots, w_k} \) is a basis for \( W \) and \( \qty{v_1,\dots, v_n} \) be a basis for \( V \). By an analogous argument as was used in the proof of \Cref{thm:dim}, we can replace \( k \) of the basis vectors for \( V \) with the basis vectors for \( W \) and obtain (after some relabelling) the following basis\footnote{By the way, this result is often called the `Replacement Lemma'.} for \( V \):
+   Suppose \( \dim V=n \), \( \dim W=k\leq n \), \( \qty{w_1,\dots, w_k} \) is a basis for \( W \) and \( \qty{v_1,\dots, v_n} \) be a basis for \( V \). By part (a) of the Replacement Lemma (\Cref{thm:replace}) and \Cref{thm:span-basis}, we can replace \( k \) of the basis vectors for \( V \) with the basis vectors for \( W \) and obtain (after some relabelling) the following basis for \( V \):
    \[ \qty{w_1,\dots,w_k,v_{k+1},\dots,v_n}\fstop \]
 
    We claim that \( \qty{v_{k+1}+W,\dots,v_n+W} \) is a basis for \( V/W \).

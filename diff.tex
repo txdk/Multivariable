@@ -398,7 +398,7 @@ You will notice that this coincides with the derivative for \( f \) that we pluc
 We remark that while this is an excellent method for actually computing the derivative, it relies on the assumption that \( f \) is actually differentiable. Just like with directional derivatives, the partial derivatives of a multivariable function can exist without the function itself actually being differentiable. The existence of the partial derivatives is a necessary condition for differentiability, but not sufficient. At the very least, with what we know now, we can check the differentiability of a function by computing a candidate for the derivative using the partial derivative method, and then directly checking against the definition for differentiability. This is still somewhat awkward, and indeed we will later resolve this inconvenience by using a nice result to establish a criterion for a function to be differentiable based on the behaviour of its partial derivatives. This will be carried out in \Cref{sec:C1}.
 
 \section{Properties of the Derivative}
-In this section, we'll begin to tackle some easy facts about the derivative. All of these are actually generalised versions of their counterparts in one-variable calculus. Namely, the uniqueness of the derivative, differentiability implying continuity, and how differentiation behaves on sums and products of scalar functions. We'll delay the discussion of differentiation of compositions of functions and the Chain Rule for \Cref{sec:Chain-rule}, as it deserves its very own section.
+In this section, we'll begin to tackle some easy facts about the derivative. All of these are actually generalised versions of their counterparts in one-variable calculus. Namely, the uniqueness of the derivative, differentiability implying continuity, and how differentiation behaves on sums of vector-valued functions and on products of scalar functions. We'll delay the discussion of differentiation of compositions of functions and the Chain Rule for \Cref{sec:Chain-rule}, as it deserves its very own section.
 
 \vspace{3mm}
 
@@ -710,22 +710,157 @@ When expressing functions in different coordinate systems, it is common to adopt
 \section{Mappings of Class \( \mathcal{C}^1\)}
 \label{sec:C1}
 \begin{definition}
-  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^1}\)} (or simply, \( \mathcal{C}^1 \)) if it is differentiable on \( U \) and its derivative map \( \D f:U\to L(E,F) \) is continuous on \( U \).
+  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^1}\)} if it is differentiable on \( U \) and its derivative map \( \D f:U\to L(E,F) \) is continuous on \( U \).
 \end{definition}
 
 \begin{theorem}
+  \label{thm:scalar-C1}
   A scalar function \( f:U\to \R \) is \( \mathcal{C}^1 \) if and only if all of the partial derivatives of \( f \) with respect to the coordinates of an orthonormal basis in \( E \) exist and are continuous on \( U \).
 \end{theorem}
+\begin{proof}
+  (\( \implies \)) Suppose \( f \) is \( \mathcal{C}^1 \). So \( f \) is differentiable and its derivative map \( \D f:U\to E^* \) is continuous. Recall that \( \D f \) has the following representation in terms of its partial derivative mappings
+  \[ \D f(x)=\sum_{i=1}^n{\pdv{f}{x_i}}(x)\,v_i^* \]
+  where \( v_i^*:E\to\R \) is the dual basis vector corresponding to the \( i^{\text{th}} \) coordinate.
+
+  \vspace{3mm}
+
+  Let \( k\in\qty{1,\dots,n} \) and let \( x_0\in U \). Then for all \( x\in U \), we have that
+  \begin{align*}
+   0&\leq\abs{{\pdv{f}{x_k}}(x)-{\pdv{f}{x_k}}(x_0)}\\
+    &\leq \norm{{\pdv{f}{x_k}}(x)-{\pdv{f}{x_k}}(x_0)}_\infty\\
+    &=\norm{\D f(x)-\D f(x_0)}\fstop
+  \end{align*}
+
+  Thus, by taking the limit as \( x\to x_0 \) in the above inequality, we see that \( \norm{\D f(x)-\D f(x_0)}\to 0 \) since \( \D f \) is continuous at \( x_0 \), and thus by the Squeeze Theorem we have that
+  \[ \lim_{x\to x_0}\abs{{\pdv{f}{x_k}}(x)-{\pdv{f}{x_k}}(x_0)}=0 \]
+  which shows that \( \pdv{f}{x_k} \) is continuous at \( x_0 \).
+
+  \vspace{3mm}
+
+  (\( \impliedby \)) Let \( \qty{e_1,\dots,e_n} \) be an orthonormal basis on \( E \) and suppose that all of the partial derivative mappings of \( f \) with respect to the coordinates of \( \qty{e_1,\dots,e_n} \) exist and are continuous on \( U \).
+
+  Let \( x_0=\sum_{i=1}^na_ie_i\in U \).
+
+  Let \( \epsilon>0 \).
+
+  By continuity of the partial derivatives, for each \( i\in\qty{1,\dots,n} \), there exists a \( \delta_i>0 \) such that for all\footnote{By \( B_\infty(x_0,\delta_i) \), we mean the open ball with centre \( x_0 \) and radius \( \delta_i \) constructed from the metric induced by the maximum norm.} \( x\in B_\infty(x_0,\delta_i) \), we have
+  \[ \abs{\pdv{f(x)}{x_i}-\pdv{f(x_0)}{x_i}}<\frac{\epsilon}{n}\fstop \]
+
+  Choose \( \delta=\min_{i\in\qty{1,\dots, n}}\delta_i \), and let \( x=\sum_{i=1}^nb_ie_i\in B_\infty(x_0,\delta) \). Now, for each \( k\in\qty{1,\dots,n-1} \), we define the point \( x_k\in E \) by
+  \[ x_k=\sum_{i=k+1}^na_ie_i+\sum_{i=1}^kb_ie_i \]
+  i.e.\ the finite sequence \( x_0,x_1,x_2,\dots,x_{n-1},x_n=x \) gradually replaces the coordinates of \( x_0 \) one component at a time with that of \( x \). We have that \( x_k\in B_\infty(x_0,\delta) \) for each \( k \), since
+  \[ \norm{x_k-x_0}_\infty=\max_{i\in\qty{1,\dots,k}}\abs{b_i-a_i}\leq\max_{i\in\qty{1,\dots,n}}\abs{b_i-a_i}=\norm{x-x_0}_\infty<\delta\fstop \]
+
+  Observe that we can express \( f(x)-f(x_0) \) as the following telescoping sum
+  \[ f(x)-f(x_0)=\sum_{i=1}^nf(x_i)-f(x_{i-1})\fstop \]
+
+  For each \( k\in\qty{1,\dots,n} \), we consider the restriction of \( f \) to the line segment connecting \( x_{k-1} \) and \( x_k \), which defines a one-variable function \( g_k:[0,b_k-a_k]\to\R \) by\footnote{Without loss of generality, we assume that \( a_k<b_k \). If \( b_k<a_k \), we construct \( g_k \) on the interval \( [b_k-a_k,0] \). When we apply the Mean Value Theorem, we pick up a minus sign from both the numerator and denominator, which cancel, giving us the same expression as before.}
+  \[ g_k(t)=f(x_0+te_k)\fstop \]
+
+  We see that \( g_k \) is a differentiable one-variable function on \( [0,b_k-a_k] \), since the derivative is simply given by the partial derivative of \( f \) in the \( k^{\text{th}} \) coordinate
+  \[ g_k'(t)=\eval{\pdv{f(x)}{x_k}}_{x=x_0+te_k}\fstop \]
+
+  Hence, by the Mean Value Theorem from one-variable calculus, there exists a \( c_k\in [0,b_k-a_k] \) such that
+  \[ g_k'(c_k)=\frac{g_k(b_k-a_k)-g_k(0)}{b_k-a_k} \]
+  i.e.\ we have that
+  \[ {\pdv{f(x_0+c_k e_k)}{x_k}}(b_k-a_k)=f(x_k)-f(x_{k-1})\fstop \]
+
+  Putting this all together, we have that
+  \begin{align*}
+    f(x)-f(x_0)&=\sum_{i=1}^n{\pdv{f(x_0+c_i e_i)}{x_i}}(b_i-a_i)\\
+    &=\sum_{i=1}^n{\pdv{f(x_0+c_i e_i)}{x_i}}v_i^*(x-x_0)\\
+    &= \sum_{i=1}^n\qty[{\pdv{f(x_0)}{x_i}}-\qty({\pdv{f(x_0)}{x_i}}-{\pdv{f(x_0+c_i e_i)}{x_i}})]v_i^*(x-x_0)\\
+    &= [\D f(x_0)](x-x_0)+R(x)
+  \end{align*}
+  where
+  \[ R(x)=\sum_{i=1}^n\qty({\pdv{f(x_0+c_i e_i)}{x_i}}-{\pdv{f(x_0)}{x_i}})(b_i-a_i)\fstop \]
+
+  Taking absolute values and applying the triangle inequality, we have that
+  \begin{align*}
+    \abs{R(x)}&\leq\sum_{i=1}^n\abs{{\pdv{f(x_0+c_i e_i)}{x_i}}-{\pdv{f(x_0)}{x_i}}}\abs{b_i-a_i}\\
+    &\leq\sum_{i=1}^n\abs{{\pdv{f(x_0+c_i e_i)}{x_i}}-{\pdv{f(x_0)}{x_i}}}\norm{x-x_0}_\infty\\
+    &<\epsilon\norm{x-x_0}_\infty
+  \end{align*}
+  i.e.\ we have that
+  \[ \frac{\abs{R(x)}}{\norm{x-x_0}_\infty}<\epsilon\fstop \]
+
+  This shows that \( f \) is differentiable at \( x_0 \), with derivative
+  \[ \D f(x_0)=\sum_{i=1}^n{\pdv{f(x_0)}{x_i}}v_i^*\fstop \]
+
+  Since the choice of \( x_0\in U \) was arbitrary, it follows that \( f \) is differentiable on \( U \). Furthermore, since all of the partial derivative maps are continuous functions on \( U \), it follows that \( \D f \) is continuous because it a sum of continuous maps. Hence, \( f \) is \( \mathcal{C}^1 \).
+\end{proof}
 
 \begin{theorem}
   A mapping \( f:U\to F \) is \( \mathcal{C}^1 \) if and only if all of the partial derivatives of \( f \) with respect to the coordinates of an orthonormal basis in \( E \) exist and are continuous on \( U \).
 \end{theorem}
-\section{Higher Order Derivatives}
-Mappings of Class \( \mathcal{C}^k \) and \( \mathcal{C}^\infty \).
+\begin{proof}
+  (\( \implies \)) Suppose \( f \) is \( \mathcal{C}^1 \). Thus, \( f \) is differentiable, and its derivative \( \D f:U\to L(E,F) \) is continuous. This implies that all of the component functions (with respect to some orthonormal basis) \( f_i:U\to\R \) are differentiable scalar functions by \Cref{thm:comp-diff}, and the components of the derivative \( \D f_i:U\to E^* \) are continuous mappings by \Cref{thm:comp-cont}. Thus, each of the component functions \( f_i \) are \( \mathcal{C}^1 \). We then apply \Cref{thm:scalar-C1} to conclude that for each \( i\in\qty{1,\dots,m} \), the partial derivative mappings
+  \[ \pdv{f_i}{x_j}:U\to\R \]
+  exist and are continuous for each \( j=1,\dots, n \).
 
-Swapping order of partial derivatives.
+  \vspace{3mm}
+
+  (\( \impliedby \)) Suppose that all of the partial derivative mappings of \( f \) with respect to the coordinates of an orthonormal basis in \( E \) exist and are continuous on \( U \). We can apply \Cref{thm:scalar-C1} to conclude that the component function \( f_i:U\to\R \) is \( \mathcal{C}^1 \) for each \( i\in\qty{1,\dots,m} \). So each \( f_i \) is differentiable, and each component of the derivative \( \D f_i:U\to E^* \) is continuous. Thus, by \Cref{thm:comp-diff}, we see that \( f \) is differentiable, and from \Cref{thm:comp-cont}, we see that \( \D f:U\to L(E,F) \) is continuous. This shows that \( f \) is \( \mathcal{C}^1 \).
+\end{proof}
+\section{Higher Order Derivatives}
+\begin{definition}
+  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^k}\)} (for some \( k\in\N \)) if it is \( k \)-times differentiable on \( U \) and its derivative mappings \( \D^i f:U\to L(E,F) \) are continuous on \( U \) for all orders \( i \) up to \( k \) (i.e.\ for all \( 1\leq i\leq k \)).
+\end{definition}
+
+\begin{theorem}
+  (Clairaut-Schwarz Theorem) Suppose \( f:U\to\R \) is \( \mathcal{C}^2 \). Then
+  \[ \pdv[2]{f}{x_i}{x_j}=\pdv[2]{f}{x_j}{x_i} \]
+  for all \( i,j\in\qty{1,\dots, n} \).
+\end{theorem}
+
+\begin{definition}
+  A mapping \( f:U\to F \) is said to be of \textbf{class \(\vb*{\mathcal{C}^\infty}\)} or \textbf{smooth} if it is \( \mathcal{C}^k \) for all \( k\in\N \).
+\end{definition}
 \section{Taylor's Theorem}
-\section{Location of Extrema}
+\section{Optimisation}
+\begin{definition}
+  Let \( f:U\to F \) be differentiable. A point \( x_0\in U \) is called a \textbf{critical point} of \( f \) if \( \D f(x_0)=0 \).
+\end{definition}
+
+\begin{definition}
+  Let \( f:U\to\R \) be a scalar function.
+  \begin{enumerate}[label=(\alph*)]
+  \item A point \( x_0\in U \) is called a \textbf{local minimum} of \( f \) if there exists a neighbourhood \( A \) of \( x_0 \) such that \( f(x_0)\leq f(x) \) for all \( x\in A \).
+  \item A point \( x_0\in U \) is called a \textbf{local maximum} of \( f \) if there exists a neighbourhood \( A \) of \( x_0 \) such that \( f(x)\leq f(x_0) \) for all \( x\in A \).
+  \item A point \( x_0\in U\) is called a \textbf{local extremum} if it is either a local minimum or local maximum.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Let \( f:U\to\R \) be differentiable, and suppose \( x_0\in U \) is a local extremum. Then \( x_0 \) is a critical point of \( f \).
+\end{theorem}
+
+\begin{definition}
+  Let \( V \) be a (real) vector space. A mapping \( g:V\cross V\to\R \) is called a \textbf{bilinear form} if for all \( x,y,z\in V \) and \( a\in\R \), we have
+  \begin{enumerate}[label=(\alph*)]
+  \item \( g(x+y,z)=g(x,z)+g(y,z) \).
+  \item \( g(ax,y)=ag(x,y) \).
+  \item \( g(x,y+z)=g(x,y)+g(x,z) \).
+  \item \( g(x,ay)=ag(x,y) \).
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Let \( V \) be a vector space. A bilinear form \( g:V\cross V\to\R \) is called \textbf{symmetric} if \( g(x,y)=g(y,x) \) for all \( x,y\in V \).
+\end{definition}
+
+\begin{definition}
+  Let \( V \) be a vector space and let \( g:V\cross V\to\R \) be a symmetric bilinear form. The \textbf{quadratic form} associated with \( g \) is the mapping \( Q:V\to\R \) defined by
+  \[ Q(x)=g(x,x)\fstop \]
+\end{definition}
+
+\begin{definition}
+  Let \( V \) be a vector space, and let \( Q:V\to\R \) be a quadratic form.
+  \begin{enumerate}[label=(\alph*)]
+  \item We say that \( Q \) is \textbf{positive definite} if \( Q(x)>0 \) for all \( x\in V\backslash\qty{0} \).
+  \item We say that \( Q \) is \textbf{negative definite} if \( Q(x)<0 \) for all \( x\in V\backslash\qty{0} \).
+  \end{enumerate}
+\end{definition}
 
 %%% Local Variables: 
 %%% mode: latex
